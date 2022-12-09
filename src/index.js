@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 const App = () => {
     return (
-        <div>
+        <>
             <img src={require('./react-logo.png')} alt="react-logo" width='40px'/>
             <h1>Fun facts about React</h1>
             <ul>
@@ -15,7 +15,7 @@ const App = () => {
                   <li>Powers thousands of enterprise apps, includign mobile apps</li>
                 </b>
             </ul>
-        </div>
+        </>
     );
 };
 
