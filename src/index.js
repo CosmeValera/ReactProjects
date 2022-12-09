@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+const App = () => {
+  return (
+    <div>
+      <h1>Cosme valera</h1>
+      <ul>
+        <li>Menu</li>
+        <li>Contact</li>
+        <li>About</li>
+      </ul>
+    </div>
+  );
+}
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 root.render(<div><App /></div>);
-// root.render(<App />);
