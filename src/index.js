@@ -1,23 +1,51 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './App.css';
 
-const App = () => {
-    return (
-        <>
-            <img src={require('./react-logo.png')} alt="react-logo" width='40px'/>
-            <h1>Fun facts about React</h1>
-            <ul>
-                <b>
-                  <li>Was first released in 2013</li>
-                  <li>Was originally created by Jordan Walke</li>
-                  <li>Has well over 100K starts on GitHub</li>
-                  <li>Is mantained by Facebook</li>
-                  <li>Powers thousands of enterprise apps, includign mobile apps</li>
-                </b>
-            </ul>
-        </>
-    );
-};
+function Header() {
+  return (
+    <header> 
+      <nav className='nav'>
+        <img className="nav-logo" src={require('./react-logo.png')} alt='logo-react'/>
+        <ul className='nav-items'>
+          <li>Pricing</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+    </header>
+  );
+}
 
-const root = ReactDOM.createRoot(document.querySelector("#root"));
-root.render(<App />);
+function MainContent() {
+  return (
+    <div>
+      <h1>Why I love working with react: </h1>
+      <ol>
+        <li>Because React seems entertaining</li>
+        <li>Because it requires another mindset
+          to work with</li>
+      </ol>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer>
+      <small>© 2022 Valera Development. All rights reserved.</small>
+    </footer>
+  );
+}
+
+function Page() {
+  return (
+    <div>
+      <Header />
+      <MainContent />
+      <Footer />
+    </div>
+  );
+}
+
+ReactDOM.render(<Page />, document.querySelector("#root"));
