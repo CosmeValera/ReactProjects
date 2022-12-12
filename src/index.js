@@ -1,23 +1,39 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+/**
+Challenge:
 
-const App = () => {
-    return (
-        <>
-            <img src={require('./react-logo.png')} alt="react-logo" width='40px'/>
-            <h1>Fun facts about React</h1>
-            <ul>
-                <b>
-                  <li>Was first released in 2013</li>
-                  <li>Was originally created by Jordan Walke</li>
-                  <li>Has well over 100K starts on GitHub</li>
-                  <li>Is mantained by Facebook</li>
-                  <li>Powers thousands of enterprise apps, includign mobile apps</li>
-                </b>
-            </ul>
-        </>
-    );
-};
+Part 2:
+- Add a 'header` element with a nested `nav` element. Inside the `nav`,
+  include a `img` element with the image of the React logo inside
+  (src="./react-logo.png") and make sure to set the width to something
+  more manageable so it doesn't take up the whole screen
+- Add an `h1` with some text describing the page. (E.g. "Reasons
+  I'm excited to learn React"). Place it above the ordered list.
+- Add a footer after the list that says:
+    "© 20xx <last name here> development. All rights reserved."
+*/
 
-const root = ReactDOM.createRoot(document.querySelector("#root"));
-root.render(<App />);
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function Page() {
+  return (
+    <div>
+      <header>
+        <nav>
+          <img src={require('./react-logo.png')} alt='logo-react' width='40px'/>
+        </nav>
+      </header>
+      <h1>Why I love working with react: </h1>
+      <ol>
+        <li>Because React seems entertaining</li>
+        <li>Because it requires another mindset
+          to work with</li>
+      </ol>
+      <footer>
+        <small>© 2022 Valera Development. All rights reserved.</small>
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.render(<Page />, document.querySelector("#root"));
