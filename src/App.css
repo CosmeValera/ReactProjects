@@ -1,3 +1,11 @@
+:root {
+  --body-margin: 8px;
+}
+
+.shadow {
+    box-shadow: 0px 8px 5px -1px #ccc;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -15,6 +23,14 @@
 
 .nav-logo {
   width: 60px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: calc(100vw - (var(--body-margin) * 2));
+  height: 25px;
+  background-color: rgb(255, 167, 167);
 }
 
 /* .App {
