@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap';
-// import "style.css";
+import "./style.css";
 import App from "./App";
 
 // /**
