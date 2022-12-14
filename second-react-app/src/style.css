@@ -51,12 +51,19 @@ Hint: you'll need to use the following properties:
     font-family: Inter;
     flex-grow: 1;
     background-image: url(images/react-icon-large.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 175px;
 }
 
 .main__header {
     font-size: 48px;
     margin: 48px 12px;
     letter-spacing: -0.05em;
+}
+
+.main__list {
+    max-width: 500px;
 }
 
 .main__list > li {
