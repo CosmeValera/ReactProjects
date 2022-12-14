@@ -32,6 +32,17 @@ html, body, div#root {
     font-weight: 600;
 }
 
+/* Challenge: Place the gray react logo in the background
+
+Don't use an 'img' element, but rather set it as the 
+'background-image' of the 'main' element.main
+Hint: you'll need to use the following properties:
+- background-image
+- background-repeat
+- background-position
+
+(Or the shorthand 'background' property with values for all those other properties) */
+
 /* MAIN */
 .main {
     background-color: #282D35;
@@ -39,7 +50,7 @@ html, body, div#root {
     padding: 20px;
     font-family: Inter;
     flex-grow: 1;
-    /* height: calc(100vh - 119px); */
+    background-image: url(images/react-icon-large.png);
 }
 
 .main__header {
@@ -51,4 +62,11 @@ html, body, div#root {
 .main__list > li {
     margin: 22px;
     font-size: 18px;
+}
+
+.main__list > li::marker {
+    display: list-item;
+    align-items: center;
+    font-size: 1.4em;
+    color: #61DAFB;
 }
