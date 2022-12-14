@@ -1,3 +1,30 @@
-h1 {
-    background-color: aquamarine;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+    background: #21222A;
+    color: #DEEBF8;
+    font-family: Inter;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    color: #61DAFB;
+}
+
+.navbar-left h2 {
+    padding-left: 10px;
+}
+.navbar-left h3 {
+    font-weight: 600;
 }

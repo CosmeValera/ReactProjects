@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 function Main() {
-    return (
-        <h1>Here goes main</h1>
+    return(
+        <h1>Main Component</h1>
     );
 }
 
