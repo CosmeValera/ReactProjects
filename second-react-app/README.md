@@ -1,4 +1,4 @@
-My first React App. To execute it, clone the code, install the dependencies and execute:
+My Second React App. To execute it, clone the code, install the dependencies and execute:
 ### `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
