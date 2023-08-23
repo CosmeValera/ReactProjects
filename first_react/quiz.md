@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 1. Why do we need to `import React from "react"` in our files?
 To be able to use the syntax of jsx, where we combine HTML and JS.
 
@@ -24,7 +23,6 @@ e.g. array.forEach(obj => { ... });
 
 5. What does it mean for something to be "composable"?
 I think it refers to be able to replicate the same component in several places.
-=======
 <!-- To have a merge done with squash commits you switch to master and type ```git merge --squash <feature_branch>``` -->
 
 Quiz!
@@ -57,4 +55,3 @@ ReactDOM.render (Header(), document.getElementById("root"))
 ```
 
 Ok so in the render part, it should be <Header /> instead of Header(), because it is a component now.
->>>>>>> fun_fact
