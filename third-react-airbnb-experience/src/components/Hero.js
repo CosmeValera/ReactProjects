@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Main() {
+function Hero() {
     return(
         <div>
-            <h1>Main goes here!</h1>
+            <h1>Hero goes here!</h1>
         </div>
     );
 }
 
-export default Main;
+export default Hero;
