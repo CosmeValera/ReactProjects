@@ -2,7 +2,7 @@ These are my React projects.
 
 ## Usage
 
-To launch one React project you will need to follow the following steps:
+To launch one React project you will need to follow the next steps:
 1. Clone the code:
 ```
 git clone git@github.com:CosmeValera/react-learning.git
