@@ -4,8 +4,10 @@
 
 body {
     margin: 0;
+    font-family: Poppins;
 }
 
+/* Nav */
 nav {
     height: 70px;
     display: flex;
@@ -13,3 +15,34 @@ nav {
     padding: 10px 16px;
     box-shadow: 0px 3px 7px rgba(0,0,0,0.1);
 }
+
+.nav--logo {
+    max-width: 120px;
+}
+/* END: Nav */
+
+/* Hero */
+.stack-of-images-container {
+    display: flex;
+    justify-content: center;
+}
+.stack-of-images {
+    width: 80%;
+    margin: 25px;
+}
+
+.text-container h1 {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    margin-left: 3rem;
+}
+.text-container p {
+    font-weight: 300;
+    margin-right: 12rem;
+    margin-left: 3rem;
+    line-height: 1.2rem;
+    margin-top: 0;
+}
+
+
+/* END: Hero */
