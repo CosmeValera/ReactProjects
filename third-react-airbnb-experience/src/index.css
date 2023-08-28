@@ -16,6 +16,15 @@ nav {
     box-shadow: 0px 3px 7px rgba(0,0,0,0.1);
 }
 
+
+.bold {
+    font-weight: bold;
+}
+
+.gray {
+    color: grey;
+}
+
 .nav--logo {
     max-width: 120px;
 }
@@ -43,6 +52,38 @@ nav {
     line-height: 1.2rem;
     margin-top: 0;
 }
-
-
 /* END: Hero */
+
+/* Card */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 3rem;
+}
+
+.card-image {
+    /* align-self: center; */
+    max-width: 240px;
+    margin-bottom: 0px;
+    border-radius: 9px;
+}
+
+.card-rating, .card-text, .card-price {
+    display: flex;
+    align-items: center;
+}
+
+.card-rating *, .card-text *, .card-price * {
+    margin: 5px 0px 0px 0px;
+    padding: 0;
+}
+.card-star {
+    height: 20px;
+    width: 20px;
+}
+.card-rating * {
+    margin: 5px 0px 0px 0px;
+}
+/* END: Card */
