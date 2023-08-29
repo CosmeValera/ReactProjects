@@ -21,12 +21,21 @@ export default function Contact(props) {
     )
 }
 
+
 /* 
-{
-    img: "./images/mr-whiskerson.png", 
-    name: "Mr. Whiskerson", 
-    phone: "(212) 555-1234", 
+//DESTRUCTURING props 
+const person = {
+    img: "./images/mr-whiskerson.png",
+    name: "Mr. Whiskerson",
+    phone: "(800) 555-1234",
     email: "mr.whiskaz@catnap.meow"
 }
 
+const {img, name} = person
+console.log(name)
+
+// In this case for instance you could use this->
+export default function Contact({img, name, phone, email}) {
+    // now you use here img, name phone and email
+}
 */
