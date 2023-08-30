@@ -60,6 +60,10 @@ export default function App() {
             <Joke setup="How did the hacker escape the police?" punchline="He just ransomware!"/>
             <Joke setup="What's the best thing about Switzerland?" punchline="I don't know, but the flag is a big plus!"/>
             <Joke punchline=" It’s hard to explain puns to kleptomaniacs because they always take things literally."/>
+            <Joke punchline=" It’s hard to explain puns to kleptomaniacs because they always take things literally."
+                isPun={false}
+                upvotes={3}
+                comments={[{author: "", body: "", title: ""}]}/>
         </>
     );
 }
