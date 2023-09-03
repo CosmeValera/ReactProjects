@@ -4,86 +4,87 @@
 
 body {
     margin: 0;
-    font-family: Poppins;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Nav */
 nav {
     height: 70px;
     display: flex;
-    background-color: white;
-    padding: 10px 16px;
-    box-shadow: 0px 3px 7px rgba(0,0,0,0.1);
+    padding: 20px 36px;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
 }
-
 
 .bold {
     font-weight: bold;
 }
 
 .gray {
-    color: grey;
+    color: #918E9B;
 }
 
 .nav--logo {
-    max-width: 120px;
-}
-/* END: Nav */
-
-/* Hero */
-.stack-of-images-container {
-    display: flex;
-    justify-content: center;
-}
-.stack-of-images {
-    width: 80%;
-    margin: 25px;
+    max-width: 100px;
 }
 
-.text-container h1 {
-    font-weight: 600;
-    margin-bottom: 0.8rem;
-    margin-left: 3rem;
+section {
+    padding: 20px;
 }
-.text-container p {
-    font-weight: 300;
-    margin-right: 12rem;
-    margin-left: 3rem;
-    line-height: 1.2rem;
-    margin-top: 0;
-}
-/* END: Hero */
 
-/* Card */
-
-.card {
+.hero {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
-    margin-left: 3rem;
 }
 
-.card-image {
-    /* align-self: center; */
-    max-width: 240px;
-    margin-bottom: 0px;
+.hero--photo {
+    max-width: 400px;
+    align-self: center;
+}
+
+.hero--header {
+    margin-bottom: 16px;
+}
+
+.hero--text {
+    margin-top: 0;
+}
+
+.cards-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+}
+
+.card {
+    width: 175px;
+    font-size: 12px;
+    flex: 0 0 auto;         /* ADD */
+    display: flex;          /* ADD */
+    flex-direction: column; /* ADD */
+}
+
+.card--image {
+    width: 100%;
     border-radius: 9px;
+    margin-bottom: 9px;
 }
 
-.card-rating, .card-text, .card-price {
+/* ADD */
+.card--title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card--stats {
     display: flex;
     align-items: center;
 }
 
-.card-rating *, .card-text *, .card-price * {
-    margin: 5px 0px 0px 0px;
-    padding: 0;
+.card--star {
+    height: 14px;
 }
-.card-star {
-    height: 20px;
-    width: 20px;
+
+/* ADD */
+.card--price {
+    margin-top: auto;
 }
-.card-rating * {
-    margin: 5px 0px 0px 0px;
-}
-/* END: Card */

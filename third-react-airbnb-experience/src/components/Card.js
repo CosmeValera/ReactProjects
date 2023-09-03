@@ -11,7 +11,7 @@ export function Card(props) {
                 <span className="gray"> {props.location}</span>
             </div>
             <div className="card-text">
-                <p>{props.description}</p>
+                <p>{props.title}</p>
             </div>
             <div className="card-price">
                 <p><span className="bold">From ${props.price}</span> / person</p>

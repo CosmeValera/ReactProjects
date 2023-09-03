@@ -12,16 +12,18 @@ function App() {
             rating = {card.stats.rating}
             reviewCount = {card.stats.reviewCount}
             location = {card.location}
-            description = {card.description}
+            title = {card.title}
             price = {card.price}
         />
     );
     // <Hero />
     return (
-        <>
+        <div>
             <Navbar />
-            {cards}
-        </>
+            <section className="cards-list">
+                {cards}
+            </section>
+        </div>
     );
 }
 
