@@ -1,10 +1,7 @@
 import React from 'react';
 import stackOfImages from '../images/stack_of_images.png';
-/*
-Challenge: Build the Hero component.
-Check the Figma file for the design specifics.
-*/
-function Hero() {
+
+export function Hero() {
     return(
         <div>
             <div className='stack-of-images-container'>
@@ -21,5 +18,3 @@ function Hero() {
         </div>
     );
 }
-
-export default Hero;
