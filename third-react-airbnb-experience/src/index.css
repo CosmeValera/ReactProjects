@@ -58,9 +58,10 @@ section {
 .card {
     width: 175px;
     font-size: 12px;
-    flex: 0 0 auto;         /* ADD */
-    display: flex;          /* ADD */
-    flex-direction: column; /* ADD */
+    flex: 0 0 auto;         
+    display: flex;          
+    flex-direction: column;
+    position: relative;
 }
 
 .card--image {
@@ -69,7 +70,6 @@ section {
     margin-bottom: 9px;
 }
 
-/* ADD */
 .card--title {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -84,7 +84,16 @@ section {
     height: 14px;
 }
 
-/* ADD */
 .card--price {
     margin-top: auto;
+}
+
+.card--badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background-color: white;
+    padding: 5px 7px;
+    border-radius: 2px;
+    font-weight: bold;
 }

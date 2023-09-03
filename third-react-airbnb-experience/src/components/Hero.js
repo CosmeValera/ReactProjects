@@ -4,7 +4,7 @@ export function Hero() {
     return(
         <div>
             <div className='stack-of-images-container'>
-                <img src="../images/airbnb-logo.png" className='stack-of-images'></img>
+                <img src="../images/stack_of_images.png" className='stack-of-images' alt=''></img>
             </div>
             <div className='text-container'>
                 <h1>
