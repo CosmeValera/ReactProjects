@@ -1,11 +1,10 @@
 import React from 'react';
-import stackOfImages from '../images/stack_of_images.png';
 
 export function Hero() {
     return(
         <div>
             <div className='stack-of-images-container'>
-                <img src={stackOfImages} className='stack-of-images'></img>
+                <img src="../images/airbnb-logo.png" className='stack-of-images'></img>
             </div>
             <div className='text-container'>
                 <h1>
