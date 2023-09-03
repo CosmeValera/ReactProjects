@@ -11,14 +11,16 @@ function App() {
             <Navbar />
             <Card 
                 image = "katie-zaferes.png"
+                imageStar = "star.png"
                 rating = "5.0"
                 reviewCount = {6}
                 country = "USA"
                 title = "Life lessons with Katie Zaferes"
                 price = {136}
-            />
+                />
             <Card 
-                image = "marcos.png"
+                image = "photography.png"
+                imageStar = "star.png"
                 rating = "5.0"
                 reviewCount = {30}
                 country = "USA"
