@@ -11,19 +11,19 @@ function App() {
             <Navbar />
             <Card 
                 image = "katie-zaferes.png"
-                rate = "5.0"
-                position = "6"
+                rating = "5.0"
+                reviewCount = {6}
                 country = "USA"
-                description = "Life lessons with Katie Zaferes"
-                price = "136"
+                title = "Life lessons with Katie Zaferes"
+                price = {136}
             />
             <Card 
                 image = "marcos.png"
-                rate = "5.0"
-                position = "30"
+                rating = "5.0"
+                reviewCount = {30}
                 country = "USA"
-                description = "Learn wedding photography"
-                price = "126"
+                title = "Learn wedding photography"
+                price = {126}
             />
         </div>
     );
