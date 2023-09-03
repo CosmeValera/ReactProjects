@@ -39,7 +39,7 @@ return: ["<p>Bulbasaur</p>", "<p>Charmander</p>", "<p>Squirtle</p>"]
 const pokemon = ["Bulbasaur", "Charmander", "Squirtle"]
 // -->          ["<p>Bulbasaur</p>", "<p>Charmander</p>", "<p>Squirtle</p>"]
 // Your code here
-const result = pokemon.map((pokemon) => "<p>"+pokemon+"</p>")
+const result = pokemon.map(pokemon => "<p>"+pokemon+"</p>")
 console.log(result);
 
 }
