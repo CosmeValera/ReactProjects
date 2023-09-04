@@ -1,4 +1,5 @@
 import React from "react";
+import { Header } from "./components/Header.jsx";
 
 /**
  * Challenge: Build the Header component
@@ -6,8 +7,8 @@ import React from "react";
 export default function App() {
     return (
       <>
-        <h1>Hello world!</h1>
-        <img src="../img/troll-face.png" alt="" />
+        <Header />
+        <h1>Main content</h1>
       </>
     )
 }
