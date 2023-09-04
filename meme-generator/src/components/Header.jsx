@@ -3,11 +3,14 @@ import React from "react";
 export function Header() {
     return (
         <header>
-            <img src="../img/troll-face.png" alt="" />
-            <h1>Meme Generator</h1>
-            <aside>
-                <p>React Course - Project 3</p>
-            </aside>
+            <header className="header">
+                <img
+                    src="./images/troll-face.png" 
+                    className="header--image"
+                />
+                <h2 className="header--title">Header component</h2>
+                <h4 className="header--project">React Course - Project 3</h4>
+            </header>
         </header>
     );
 }
