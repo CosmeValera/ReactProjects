@@ -53,8 +53,15 @@ main {
     grid-column: 1 / -1;
     background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
     color: white;
+    font-weight: bold;
     font-family: "Karla", sans-serif;
     border-radius: 5px;
     border: none;
     cursor: pointer;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+    margin-top: 34px;
 }
