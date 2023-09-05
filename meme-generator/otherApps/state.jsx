@@ -63,7 +63,8 @@ export default function App() {
     const [isGoingOut, setIsGoingOut] = React.useState(true);
     
     function handleClick() {
-        setIsGoingOut(prevValue => prevValue ? false : true)   
+        // setIsGoingOut(prevValue => prevValue ? false : true)   
+        setIsGoingOut(prevValue => !prevValue)   
     }
     
     return (
@@ -75,3 +76,9 @@ export default function App() {
         </div>
     )
 }
+
+
+//  function addItem() {
+//  setThingsArray(prevValue => {
+//      return [...prevValue, `Thing ${prevValue.length + 1}`]
+//  })
