@@ -82,3 +82,4 @@ export default function App() {
 //  setThingsArray(prevValue => {
 //      return [...prevValue, `Thing ${prevValue.length + 1}`]
 //  })
+
