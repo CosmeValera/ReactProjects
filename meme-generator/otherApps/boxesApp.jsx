@@ -65,3 +65,69 @@ export default [
 .filled {
     background: greenyellow;
 }
+
+// Using Box, and style
+export default function Box(props) {
+    const styles = {
+        backgroundColor: props.on ? "#222" : "none"
+    }
+    return <div style={styles} className="box"></div>
+}
+
+
+
+// PART 4 and 5
+
+// APP
+import React from "react"
+import boxes from "./boxes"
+import Box from "./Box"
+
+export default function App() {
+    const [squares, setSquares] = React.useState(boxes)
+    
+    function toggle(id) {
+        /**
+         * Challenge: use setSquares to update the
+         * correct square in the array.
+         * 
+         * Make sure not to directly modify state!
+         * 
+         * Hint: look back at the lesson on updating arrays
+         * in state if you need a reminder on how to do this
+         */
+    }
+    
+    const squareElements = squares.map(square => (
+        <Box 
+            key={square.id} 
+            id={square.id}
+            on={square.on} 
+            toggle={toggle}
+        />
+    ))
+    
+    return (
+        <main>
+            {squareElements}
+        </main>
+    )
+}
+
+// BOX
+import React from "react"
+
+export default function Box(props) {
+    const styles = {
+        backgroundColor: props.on ? "#222222" : "transparent"
+    }
+    
+    return (
+        <div 
+            style={styles} 
+            className="box"
+            onClick={()=>props.toggle(props.id)}
+        >
+        </div>
+    )
+}
