@@ -94,6 +94,15 @@ export default function App() {
             return newSquares;
         })
     }
+
+    // THIS IS A BETTTER WAY TO DO IT-> more declarative
+    // function toggle(id) {
+    //     setSquares(prevSquares => {
+    //         return prevSquares.map((square) => {
+    //             return square.id === id ? {...square, on: !square.on} : square
+    //         })
+    //     })
+    // }
     
     const squareElements = squares.map(square => (
         <Box 
