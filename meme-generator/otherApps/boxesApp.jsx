@@ -87,15 +87,12 @@ export default function App() {
     const [squares, setSquares] = React.useState(boxes)
     
     function toggle(id) {
-        /**
-         * Challenge: use setSquares to update the
-         * correct square in the array.
-         * 
-         * Make sure not to directly modify state!
-         * 
-         * Hint: look back at the lesson on updating arrays
-         * in state if you need a reminder on how to do this
-         */
+        setSquares(prevSquares => {
+            const newSquares = [...prevSquares];
+            const selectedSquare = newSquares.find(square => square.id === id);
+            selectedSquare.on = !selectedSquare.on;
+            return newSquares;
+        })
     }
     
     const squareElements = squares.map(square => (
