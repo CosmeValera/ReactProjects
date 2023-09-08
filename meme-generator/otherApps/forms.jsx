@@ -8,10 +8,10 @@ export default function Form() {
             email: "", 
             comments: "", 
             isFriendly: true,
-            employment: ""
+            employment: "",
+            favColor: ""
         }
     )
-    console.log(formData.employment)
     
     function handleChange(event) {
         const {name, value, type, checked} = event.target
@@ -23,8 +23,14 @@ export default function Form() {
         })
     }
     
+    function handleSubmit(event) {
+        event.preventDefault()
+        // submitToApi(formData)
+        console.log(formData)
+    }
+    
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 placeholder="First Name"
@@ -65,7 +71,6 @@ export default function Form() {
             
             <fieldset>
                 <legend>Current employment status</legend>
-                
                 <input 
                     type="radio"
                     id="unemployed"
@@ -98,8 +103,28 @@ export default function Form() {
                 />
                 <label htmlFor="full-time">Full-time</label>
                 <br />
-                
             </fieldset>
+            <br />
+            
+            <label htmlFor="favColor">What is your favorite color?</label>
+            <br />
+            <select 
+                id="favColor" 
+                value={formData.favColor}
+                onChange={handleChange}
+                name="favColor"
+            >
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="indigo">Indigo</option>
+                <option value="violet">Violet</option>
+            </select>
+            <br />
+            <br />
+            <button>Submit</button>
         </form>
     )
 }
