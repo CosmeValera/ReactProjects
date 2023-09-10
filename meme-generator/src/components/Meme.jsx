@@ -23,10 +23,14 @@ export function Meme() {
     function handleChange(event) {
         const {name, value} = event.target;
         console.log(meme)
-        setMeme((prevMeme) => {return {
+        // setMeme((prevMeme) => {return {
+        //     ...prevMeme,
+        //     [name]: value
+        // }})
+        setMeme(prevMeme => ({
             ...prevMeme,
             [name]: value
-        }})
+        }))
 
     }
     
