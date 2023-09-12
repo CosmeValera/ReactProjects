@@ -20,12 +20,16 @@ export function Meme() {
     const [allMemes, setAllMemes] = React.useState(memesData)
     
 
+    /*
+        If here, you typed this: `setAllMemes(data.data.memes);`
+        Then you would write this: `const memesArray = allMemes;` in getMemeImage().
+    */
     React.useEffect(()=> {
         fetch("https://api.imgflip.com/get_memes")
         .then(result=> result.json())
         .then(result=> {
             console.log("effect ran")
-            setAllMemes((prevAllMemes) => result);
+            setAllMemes(result);
             })
     }, []);
     
