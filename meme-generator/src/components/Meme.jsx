@@ -29,23 +29,44 @@ export function Meme() {
             })
     }, []);
     
+    /*
+      // USE EFFECT 2nd option, only changing the value of data.data.memes
+    */
+    // React.useEffect(() => {
+    //     fetch("https://api.imgflip.com/get_memes")
+    //         .then(res => res.json())
+    //         .then((data) => {
+    //             console.log(data.data.memes)
+    //             // Update only the memes array within data.data
+    //             setAllMemes((prevAllMemes) => ({
+    //             ...prevAllMemes,
+    //             data: {
+    //                 ...prevAllMemes.data,
+    //                 memes: data.data.memes,
+    //             },                
+    //             }));
+    //         });
+    // }, [])
+    
 
     function handleChange(event) {
         const {name, value} = event.target;
         console.log(meme)
-        // setMeme((prevMeme) => {return {
-        //     ...prevMeme,
-        //     [name]: value
-        // }})
         setMeme(prevMeme => ({
             ...prevMeme,
             [name]: value
         }))
 
+        /**SECOND WAY OF DOING IT */
+        // setMeme((prevMeme) => {return {
+        //     ...prevMeme,
+        //     [name]: value
+        // }})
     }
     
     function getMemeImage() {
         const memesArray = allMemes.data.memes
+        console.log(memesArray)
         const randomNumber = Math.floor(Math.random() * memesArray.length)
         const url = memesArray[randomNumber].url
         setMeme(prevMeme => ({
