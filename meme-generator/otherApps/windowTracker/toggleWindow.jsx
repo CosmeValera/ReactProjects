@@ -1,16 +1,10 @@
 import React from "react"
-import WindowTracker from "./WindowTracker"
+import WindowTracker from "./WindowTracker.jsx"
 
 export default function App() {
     
-    const [isShow, setIsShow] = React.useState(false);
+    const [isShow, setIsShow] = React.useState(true);
     
-    /**
-     * Challenge:
-     * 1. Create state called `show`, default to `true`
-     * 2. When the button is clicked, toggle `show`
-     * 3. Only display `<WindowTracker>` if `show` is `true`
-     */
     function handleClick() {
         setIsShow(prevIsShow => !prevIsShow)
     }
