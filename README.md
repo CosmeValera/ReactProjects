@@ -23,11 +23,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ### Meme Generator:
 ![](images/meme-generator.png)
 **Learned**: 
-- UseState
-- UseEffect
+- State (useState is a hook for handling state in React)
+- Side Effects (useEffect is a hook for handling side effects in React)
 - Forms
-- Events (onClick, onMouseOver...)
+- Event Listeners (onClick, onMouseOver...)
 - Fetch and call to API
+- Conditional rendering
 
 ---
 
