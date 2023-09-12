@@ -1,8 +1,31 @@
-# React + Vite
+## Add Standard Lintern:
+1. Type in the terminal:
+```
+npm install standard -D
+```
+2. Add in the package.json:
+```
+"eslintConfig": {
+"extends": "./node_modules/standard/eslintrc.json"
+}
+```
+3. To run the lintern, type in the terminal:
+```
+npm run lint
+```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Deploy in Netlify
+To deploy our project we are going to build it first and then drop the /dist files in netlify. Here's how:
+1. Build the project
+```
+npm run build
+```
+2. Open the following URL:
 
-Currently, two official plugins are available:
+https://app.netlify.com/drop/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. Drop the dist folder inside the web:
+
+![](images/netlify-drop.png)
+
+Enjoy your deployed app!! 😀
