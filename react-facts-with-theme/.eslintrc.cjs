@@ -16,5 +16,11 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    
+    // Disable all other ESLint rules
+    // Set them all to "off" or "0"
+    'no-unused-vars': 'off',
+    'react/prop-types' : 'off',
+    'react/no-deprecated' : 'off'
   },
 }
