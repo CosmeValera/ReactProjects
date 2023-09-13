@@ -16,7 +16,7 @@ npm run lint
 
 ## Deploy in Netlify
 To deploy our project we are going to build it first and then drop the /dist files in netlify. Here's how:
-1. Build the project
+1. Build the project:
 ```
 npm run build
 ```
