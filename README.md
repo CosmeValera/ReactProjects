@@ -1,8 +1,6 @@
-These are my `React` projects.
-
 ## 🚀 Getting Started
 
-To launch one `React` project you will need to follow the next steps:
+To launch one React project you will need to follow the next steps:
 1. Clone the code:
 ```
 git clone git@github.com:CosmeValera/react-learning.git
@@ -24,8 +22,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ![](images/meme-generator.png)
 
 **Learned**: 
-- [x] State (useState is a hook for handling state in `React`)
-- [x] Side Effects (useEffect is a hook for handling side effects in `React`)
+- [x] State (`useState` is a hook for handling state in React)
+- [x] Side Effects (`useEffect` is a hook for handling side effects in React)
 - [x] Forms
 - [x] Event Listeners (onClick, onMouseOver...)
 - [x] Fetch and call to API
@@ -50,7 +48,7 @@ npm create vite@latest
 ![](images/second-react-app.png)
 
 **Learned**: 
-- [x] Create `React` components
+- [x] Create React components
 - [x] How React DOM works
 - [x] Create project from scratch 
 ```
@@ -59,7 +57,7 @@ npx create-react-app my-react-app
 
 ---
 
-## Other things I learned
+## ➕ Other things I learned
 ### Add Standard Lintern:
 1. Type in the terminal:
 ```
@@ -77,7 +75,7 @@ npm run lint
 ```
 
 ### Deploy in Netlify
-To deploy our project we are going to build it first and then drop the /dist files in netlify. Here's how:
+To deploy our project we are going to build it first and then drop the /dist files in `Netlify`. Here's how:
 1. Build the project
 ```
 npm run build
