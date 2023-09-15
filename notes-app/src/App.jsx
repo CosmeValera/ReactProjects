@@ -3,6 +3,8 @@ import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
 import Split from "react-split"
 import {nanoid} from "nanoid"
+import { onSnapshot } from "firebase/firestore"
+import { notesCollection } from "./firebase"
 
 export default function App() {
 
@@ -17,8 +19,13 @@ export default function App() {
         || notes[0]
 
     React.useEffect(() => {
-        localStorage.setItem("notes", JSON.stringify(notes));
-    }, [notes]);
+        const unsubscribe = onSnapshot(notesCollection, function(snapshot) {
+            // Sync up our local notes array with the snapshot data
+            console.log("THINGS ARE CHANGING!")
+        })
+        return unsubscribe
+    }, [])
+    
     
     function createNewNote() {
         const newNote = {
