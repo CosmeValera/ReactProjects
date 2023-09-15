@@ -27,6 +27,23 @@ export default function App() {
         setCurrentNoteId(newNote.id)
     }
 
+    /* OTHER OPTION */
+    // function updateNote(text) {
+    //     // Put the most recently-modified note at the top
+    //     setNotes(oldNotes => {
+    //         const newArray = []
+    //         for(let i = 0; i < oldNotes.length; i++) {
+    //             const oldNote = oldNotes[i]
+    //             if(oldNote.id === currentNoteId) {
+    //                 newArray.unshift({ ...oldNote, body: text })
+    //             } else {
+    //                 newArray.push(oldNote)
+    //             }
+    //         }
+    //         return newArray
+    //     })
+    // }
+    
     function reorderNotes() {
         for (let i = notes.length - 1; i >= 1; i--) {
             let currentNote = notes[i];
@@ -48,6 +65,24 @@ export default function App() {
         reorderNotes();
     }
     
+    /**
+     * Challenge: complete and implement the deleteNote function
+     * 
+     * Hints: 
+     * 1. What array method can be used to return a new
+     *    array that has filtered out an item based 
+     *    on a condition?
+     * 2. Notice the parameters being based to the function
+     *    and think about how both of those parameters
+     *    can be passed in during the onClick event handler
+     */
+    
+    function deleteNote(event, noteId) {
+        event.stopPropagation()
+        // Your code here
+    }
+    
+
     function findCurrentNote() {
         return notes.find(note => {
             return note.id === currentNoteId
