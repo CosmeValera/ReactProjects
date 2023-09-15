@@ -6,7 +6,7 @@ import Split from "react-split"
 import {nanoid} from "nanoid"
 
 export default function App() {
-    
+
     const [notes, setNotes] = React.useState(
         () => JSON.parse(localStorage.getItem("notes")) || []
     )
@@ -26,6 +26,17 @@ export default function App() {
         setNotes(prevNotes => [newNote, ...prevNotes])
         setCurrentNoteId(newNote.id)
     }
+
+    function reorderNotes() {
+        for (let i = notes.length - 1; i >= 1; i--) {
+            let currentNote = notes[i];
+            let previousNote = notes[i - 1];
+            if (notes[i].id === currentNoteId) {
+                notes[i - 1] = currentNote;
+                notes[i] =  previousNote;
+            }
+        }
+    }
     
     function updateNote(text) {
         setNotes(oldNotes => oldNotes.map(oldNote => {
@@ -33,6 +44,8 @@ export default function App() {
                 ? { ...oldNote, body: text }
                 : oldNote
         }))
+        
+        reorderNotes();
     }
     
     function findCurrentNote() {
