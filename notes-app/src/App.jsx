@@ -33,12 +33,22 @@ export default function App() {
             setCurrentNoteId(notes[0]?.id)
         }
     }, [notes])
-
-    console.log(currentNoteId)
     
+    /**
+     * Challenge:
+     * 1. Add createdAt and updatedAt properties to the notes
+     *    When a note is first created, set the `createdAt` and `updatedAt`
+     *    properties to `Date.now()`. Whenever a note is modified, set the
+     *    `updatedAt` property to `Date.now()`.
+     * 
+     * 2. TBA
+     */
+
     async function createNewNote() {
         const newNote = {
-            body: "# Type your markdown note's title here"
+            body: "# Type your markdown note's title here",
+            createdAt: Date.now(),
+            updatedAt: Date.now()
         }
         const newNoteRef = await addDoc(notesCollection, newNote)
         setCurrentNoteId(newNoteRef.id)
@@ -46,7 +56,11 @@ export default function App() {
 
     async function updateNote(text) {
         const docRef = doc(db, "notes", currentNoteId);
-        await setDoc(docRef, { body: text}, {merge: true});
+        await setDoc(
+            docRef,
+            { body: text, updatedAt: Date.now() },
+            { merge: true }
+        );
     }
 
     async function deleteNote(noteId) {
