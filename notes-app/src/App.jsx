@@ -16,6 +16,8 @@ export default function App() {
         notes.find(note => note.id === currentNoteId) 
         || notes[0]
 
+    const sortedNotes = [...notes].sort((a, b) => b.updatedAt - a.updatedAt);
+
     React.useEffect(() => {
         const unsubscribe = onSnapshot(notesCollection, function(snapshot) {
             // Sync up our local notes array with the snapshot data
@@ -34,16 +36,6 @@ export default function App() {
         }
     }, [notes])
     
-    /**
-     * Challenge:
-     * 1. Add createdAt and updatedAt properties to the notes
-     *    When a note is first created, set the `createdAt` and `updatedAt`
-     *    properties to `Date.now()`. Whenever a note is modified, set the
-     *    `updatedAt` property to `Date.now()`.
-     * 
-     * 2. TBA
-     */
-
     async function createNewNote() {
         const newNote = {
             body: "# Type your markdown note's title here",
@@ -79,7 +71,7 @@ export default function App() {
                 className="split"
             >
                 <Sidebar
-                    notes={notes}
+                    notes={sortedNotes}
                     currentNote={currentNote}
                     setCurrentNoteId={setCurrentNoteId}
                     newNote={createNewNote}
