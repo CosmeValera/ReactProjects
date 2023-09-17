@@ -3,16 +3,14 @@ import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
 import Split from "react-split"
 import {nanoid} from "nanoid"
-import { onSnapshot, addDoc } from "firebase/firestore"
-import { notesCollection } from "./firebase"
+import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore"
+import { db, notesCollection } from "./firebase"
 
 export default function App() {
 
     const [notes, setNotes] = React.useState([])
 
-    const [currentNoteId, setCurrentNoteId] = React.useState(
-        (notes[0]?.id) || ""
-    )
+    const [currentNoteId, setCurrentNoteId] = React.useState("")
 
     const currentNote = 
         notes.find(note => note.id === currentNoteId) 
@@ -29,6 +27,14 @@ export default function App() {
         })
         return unsubscribe
     }, [])
+
+    React.useEffect(()=> {
+        if (!currentNoteId) {
+            setCurrentNoteId(notes[0]?.id)
+        }
+    }, [notes])
+
+    console.log(currentNoteId)
     
     async function createNewNote() {
         const newNote = {
@@ -38,47 +44,14 @@ export default function App() {
         setCurrentNoteId(newNoteRef.id)
     }
 
-    /* OTHER OPTION */
-    // function updateNote(text) {
-    //     // Put the most recently-modified note at the top
-    //     setNotes(oldNotes => {
-    //         const newArray = []
-    //         for(let i = 0; i < oldNotes.length; i++) {
-    //             const oldNote = oldNotes[i]
-    //             if(oldNote.id === currentNoteId) {
-    //                 newArray.unshift({ ...oldNote, body: text })
-    //             } else {
-    //                 newArray.push(oldNote)
-    //             }
-    //         }
-    //         return newArray
-    //     })
-    // }
-    
-    function reorderNotes() {
-        for (let i = notes.length - 1; i >= 1; i--) {
-            let currentNote = notes[i];
-            let previousNote = notes[i - 1];
-            if (notes[i].id === currentNoteId) {
-                notes[i - 1] = currentNote;
-                notes[i] =  previousNote;
-            }
-        }
-    }
-    
-    function updateNote(text) {
-        setNotes(oldNotes => oldNotes.map(oldNote => {
-            return oldNote.id === currentNoteId
-                ? { ...oldNote, body: text }
-                : oldNote
-        }))
-        
-        reorderNotes();
+    async function updateNote(text) {
+        const docRef = doc(db, "notes", currentNoteId);
+        await setDoc(docRef, { body: text}, {merge: true});
     }
 
-    function deleteNote(event, noteId) {
-        event.stopPropagation()
-        setNotes(prevNotes => prevNotes.filter((note) => note.id !== noteId))
+    async function deleteNote(noteId) {
+        const docRef = doc(db, "notes", noteId);
+        await deleteDoc(docRef)
     }
     
     return (
@@ -98,14 +71,10 @@ export default function App() {
                     newNote={createNewNote}
                     deleteNote={deleteNote}
                 />
-                {
-                    currentNoteId && 
-                    notes.length > 0 &&
-                    <Editor 
-                        currentNote={currentNote} 
-                        updateNote={updateNote} 
-                    />
-                }
+                <Editor 
+                    currentNote={currentNote} 
+                    updateNote={updateNote} 
+                />
             </Split>
             :
             <div className="no-notes">
