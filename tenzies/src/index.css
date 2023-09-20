@@ -31,7 +31,7 @@ p {
   margin-top: 0;
 }
 
-.die-container {
+.dice-container {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
   gap: 20px;
