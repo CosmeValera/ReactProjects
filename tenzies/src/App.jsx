@@ -4,19 +4,6 @@ import Die from "./components/Die";
 import { nanoid } from "nanoid";
 
 export default function App() {
-/**
- * Challenge: Create a function `holdDice` that takes
- * `id` as a parameter. For now, just have the function
- * console.log(id).
- * 
- * Then, figure out how to pass that function down to each
- * instance of the Die component so when each one is clicked,
- * it logs its own unique ID property. (Hint: there's more
- * than one way to make that work, so just choose whichever
- * you want)
- * 
- */
-
   const [dice, setDice] = React.useState(allNewDice())
 
   function allNewDice() {
@@ -35,11 +22,24 @@ export default function App() {
   }
 
   const diceElements = dice.map((die) => {
-    return <Die value={die.value} isHeld={die.isHeld} key={die.id}/>
+    return <Die value={die.value} key={die.id} isHeld={die.isHeld} holdDice={() => holdDice(die.id)}/>
   })
 
   function rollDice() {
     setDice(allNewDice())
+  }
+
+  function holdDice(id) {
+    const die = dice.find(value => value.id === id);
+    setDice(prevDice => {
+      return prevDice.map((die)=> {
+        if (die.id === id) {
+          return { ...die, isHeld: !die.isHeld}
+        }
+        return die;
+      })
+    })
+    console.log(dice)
   }
   
   return (
