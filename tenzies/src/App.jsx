@@ -1,16 +1,21 @@
 import React from "react";
 
 import Die from "./components/Die";
+import { nanoid } from "nanoid";
 
 export default function App() {
-  /**
-   * Challenge: Create a `Roll Dice` button that will re-roll
-   * all 10 dice
-   * 
-   * Clicking the button should generate a new array of numbers
-   * and set the `dice` state to that new array (thus re-rendering
-   * the array to the page)
-   */
+/**
+ * Challenge: Create a function `holdDice` that takes
+ * `id` as a parameter. For now, just have the function
+ * console.log(id).
+ * 
+ * Then, figure out how to pass that function down to each
+ * instance of the Die component so when each one is clicked,
+ * it logs its own unique ID property. (Hint: there's more
+ * than one way to make that work, so just choose whichever
+ * you want)
+ * 
+ */
 
   const [dice, setDice] = React.useState(allNewDice())
 
@@ -19,14 +24,18 @@ export default function App() {
 
     for (let i = 0; i < 10; i ++) {
       const randomNumber = Math.floor(Math.random() * 6) + 1
-      numbers.push(randomNumber)
+      numbers.push({
+        value: randomNumber,
+        isHeld: true,
+        id: nanoid()
+      })
     }
     
     return numbers
   }
 
-  const diceElements = dice.map((die, index) => {
-    return <Die value={die} key={index}/>
+  const diceElements = dice.map((die) => {
+    return <Die value={die.value} isHeld={die.isHeld} key={die.id}/>
   })
 
   function rollDice() {
