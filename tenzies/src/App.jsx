@@ -17,7 +17,7 @@ export default function App() {
       setTenzies(true)
     }
   }, [dice]);
-  
+
   function generateNewDie() {
     return {
         value: Math.ceil(Math.random() * 6),
@@ -42,13 +42,18 @@ export default function App() {
   })
 
   function rollDice() {
-    setDice(prevDice => {
-      return prevDice.map((die)=> {
-        return die.isHeld ? 
+    if (tenzies) {
+      setDice(allNewDice())
+      setTenzies(false)
+    } else {
+      setDice(prevDice => {
+        return prevDice.map((die)=> {
+          return die.isHeld ? 
           die :
           generateNewDie()
+        })
       })
-    })
+    }
   }
 
   function holdDice(id) {
