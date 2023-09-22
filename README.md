@@ -5,11 +5,38 @@ To launch one React project you will need to follow the next steps:
 ```
 git clone git@github.com:CosmeValera/react-learning.git
 ```
-2. Install the dependencies:
+2. Open your terminal and navigate to the root directory:
+```
+cd ReactProjects
+```
+
+3. Navigate to a project directory (these 3 are `Vite`):
+```
+cd tenzies
+```
+or
+```
+cd meme-generator
+```
+or
+```
+cd notes-app
+```
+4. Install the dependencies:
 ```
 npm i
 ```
-3. Start the project:
+
+5. Start `Vite` project:
+```
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+Or
+
+5. Start `create-react-app` project:
 ```
 npm start
 ```
@@ -56,7 +83,22 @@ npx create-react-app my-react-app
 ```
 
 ---
+## 📒➕ Other Projects
+### Notes App
+![](images/notes.png)
+**Learned**: 
+- [x] Debouncing effect
+- [x] Firebase
+- [x] Local Storage
+### Tenzies
+![](images/tenzies.png)
+**Learned**: 
+- [x] React Confetti
+```
+npm install react-confetti
+```
 
+---
 ## ➕ Other things I learned
 ### Add Standard Lintern:
 1. Type in the terminal:
@@ -92,4 +134,4 @@ Enjoy your deployed app!! 😀
 
 ---
 
-###### I'm following this tutorial-> https://www.youtube.com/watch?v=bMknfKXIFA8&t=6703s
+###### Tutorial-> https://www.youtube.com/watch?v=bMknfKXIFA8
