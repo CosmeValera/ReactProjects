@@ -5,6 +5,17 @@ import { nanoid } from "nanoid";
 
 export default function App() {
   const [dice, setDice] = React.useState(allNewDice())
+  const [tenzies, setTenzies] = React.useState(false)
+  
+  React.useEffect(()=> {
+    console.log("Dice state changed")
+    const held = dice.every((die) => die.isHeld)
+    const allSameValue = dice.every((die) => die.value === dice[0].value)
+
+    if (held && allSameValue) {
+      setTenzies(true)
+    }
+  }, [dice]);
 
   function generateNewDie() {
     return {
@@ -12,7 +23,7 @@ export default function App() {
         isHeld: false,
         id: nanoid()
     }
-}
+  }
 
   function allNewDice() {
     const numbers = []
@@ -49,7 +60,6 @@ export default function App() {
         return die;
       })
     })
-    console.log(dice)
   }
 
   /* OTHER OPTION */
