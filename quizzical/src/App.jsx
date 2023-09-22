@@ -1,13 +1,22 @@
 import React from "react"
 
-import Navbar from './components/Nabvar'
-import Main from './components/Main'
+import Menu from './components/Menu'
+import Quiz from './components/Quiz'
 
 export default function App() {
+  const [isQuiz, setIsQuiz] = React.useState(false);
+
+  function toggleQuizState() {
+    setIsQuiz(prevIsQuiz => !prevIsQuiz)
+  }
+
   return (
     <>
-      <Navbar />
-      <Main />
+      { 
+        isQuiz 
+        ? <Quiz toggleQuizState={toggleQuizState}/>
+        : <Menu toggleQuizState={toggleQuizState}/>
+      }
     </>
   )
 }
