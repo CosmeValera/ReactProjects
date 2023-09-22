@@ -1,5 +1,13 @@
+import React from "react"
+
+import Navbar from './components/Nabvar'
+import Main from './components/Main'
+
 export default function App() {
   return (
-    <h1>Quizzical</h1>
+    <>
+      <Navbar />
+      <Main />
+    </>
   )
 }
