@@ -15,18 +15,16 @@ body {
   text-align: center;
 }
 
-.blue-dot {
-  position: absolute;
-  top: -5vw;
-  right: -10vw;
-  width: 20vw;
-  /* z-index: -1; */
-}
-
 .yellow-dot {
   position: absolute;
-  bottom: -5vw;
-  left: -10vw;
-  width: 20vw;
-  /* z-index: -1; */
+  top: -100px;
+  right: -180px;
+  width: 400px;
+}
+
+.blue-dot {
+  position: absolute;
+  bottom: -200px;
+  left: -250px;
+  width: 600px;
 }
