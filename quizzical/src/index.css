@@ -1,30 +1,19 @@
 body {
   margin: 0;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 #root {
-  box-sizing: border-box;
-  overflow: hidden;
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #F5F7FB;
   display: flex;
   place-items: center;
   justify-content: center;
   text-align: center;
+  font-family: Karla, sans-serif;
 }
 
-.yellow-dot {
-  position: absolute;
-  top: -100px;
-  right: -180px;
-  width: 400px;
-}
-
-.blue-dot {
-  position: absolute;
-  bottom: -200px;
-  left: -250px;
-  width: 600px;
+button {
+  font-family: Inter, sans-serif;
 }

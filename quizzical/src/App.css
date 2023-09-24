@@ -1,0 +1,28 @@
+.yellow-dot {
+    position: absolute;
+    top: -100px;
+    right: -180px;
+    width: 400px;
+}
+  
+.blue-dot {
+    position: absolute;
+    bottom: -200px;
+    left: -250px;
+    width: 600px;
+}
+
+.btn-primary {
+    background-color: #4d5b9e;
+    border: none;
+    color: white;
+    border-radius: 15px;
+    font-size: 1em;
+    cursor: pointer;
+    height: 50px;
+    width: 180px;
+}
+
+.btn-primary:active {
+    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.75);
+}
