@@ -11,18 +11,18 @@ body {
   overflow: hidden;
 }
 
-.menu-container {
-  position: relative;
-}
-
 .blue-dot {
   position: absolute;
   top: 0;
   right: 0;
+  width: 20vw;
+  z-index: -1;
 }
 
 .yellow-dot {
   position: absolute;
   bottom: 0;
   left: 0;
+  width: 20vw;
+  z-index: -1;
 }

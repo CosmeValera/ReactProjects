@@ -17,6 +17,9 @@ export default function App() {
         ? <Quiz toggleQuizState={toggleQuizState}/>
         : <Menu toggleQuizState={toggleQuizState}/>
       }
+      
+      <img src="./../../public/img/blue-blob.svg" className="blue-dot" alt="blue dot"/>
+      <img src="./../../public/img/yellow-blob.svg" className="yellow-dot" alt="yellow dot"/>
     </>
   )
 }
