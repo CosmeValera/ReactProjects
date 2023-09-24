@@ -1,28 +1,32 @@
 body {
-  box-sizing: border-box;
   margin: 0;
-  display: flex;
-  place-items: center;
+  overflow: hidden;
+}
+
+#root {
+  box-sizing: border-box;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
   background-color: #F5F7FB;
+  display: flex;
+  place-items: center;
   justify-content: center;
   text-align: center;
-  overflow: hidden;
 }
 
 .blue-dot {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -5vw;
+  right: -10vw;
   width: 20vw;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .yellow-dot {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: -5vw;
+  left: -10vw;
   width: 20vw;
-  z-index: -1;
+  /* z-index: -1; */
 }
