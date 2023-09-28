@@ -16,13 +16,10 @@ export default function App() {
       { 
         isQuiz 
         ? <Quiz toggleQuizState={toggleQuizState}/>
-        : <div>
-          <Menu toggleQuizState={toggleQuizState}/>
-          <img src="./../../public/img/blue-blob.svg" className="blue-dot" alt="blue dot"/>
-          <img src="./../../public/img/yellow-blob.svg" className="yellow-dot" alt="yellow dot"/>
-        </div>
+        : <Menu toggleQuizState={toggleQuizState}/>
       }
-      
+      <img src="./../../public/img/blue-blob.svg" className="blue-dot" alt="blue dot"/>
+      <img src="./../../public/img/yellow-blob.svg" className="yellow-dot" alt="yellow dot"/>
     </main>
   )
 }
