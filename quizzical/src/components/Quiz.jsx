@@ -18,6 +18,13 @@ export default function Quiz(props) {
             setData(resultJson.results)
         })
     }, []);
+    
+    /**
+     * Next things to do:
+     * 1. change p for correct and incorrect answers to button
+     * 2. add styles to the buttons (same ::active effect)
+     * 3. randomize order, shouldn't always be the correct answer first
+     */
 
     const questionsToAnswer = data.map((questionInstance, index) => {
         const { question, correct_answer, incorrect_answers } = questionInstance;
