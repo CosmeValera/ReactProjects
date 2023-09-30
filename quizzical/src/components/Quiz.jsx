@@ -19,18 +19,20 @@ export default function Quiz(props) {
         })
     }, []);
 
-    const questionsToAnswer = data.map(question => {
+    const questionsToAnswer = data.map(questionInstance => {
+        const incorrectAnswers = questionInstance.incorrect_answers.map((incorrectAnswer) => {
+            return <p>{he.decode(incorrectAnswer)}</p>
+        }) 
         return <>
-            <h3>{he.decode(data[0].question)}</h3>
-            <p>{he.decode(data[0].correct_answer)}</p>
-            <p>{he.decode(data[0].incorrect_answers[0])}</p>
+            <h3>{he.decode(questionInstance.question)}</h3>
+            <p>{he.decode(questionInstance.correct_answer)}</p>
+            { incorrectAnswers }
         </>
     });
 
     return (
         <>
-        {questionsToAnswer}
-
+            {questionsToAnswer}
             <button className="btn-primary" onClick={props.toggleQuizState}>Back</button>
         </>
     )
