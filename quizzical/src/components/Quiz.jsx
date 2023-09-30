@@ -20,13 +20,14 @@ export default function Quiz(props) {
     }, []);
 
     const questionsToAnswer = data.map(questionInstance => {
-        const incorrectAnswers = questionInstance.incorrect_answers.map((incorrectAnswer) => {
-            return <p>{he.decode(incorrectAnswer)}</p>
-        }) 
+        const { question, correct_answer, incorrect_answers } = questionInstance;
+
         return <>
-            <h3>{he.decode(questionInstance.question)}</h3>
-            <p>{he.decode(questionInstance.correct_answer)}</p>
-            { incorrectAnswers }
+            <h3>{he.decode(question)}</h3>
+            <p>{he.decode(correct_answer)}</p>
+            {incorrect_answers.map((incorrectAnswer) => (
+                <p>{he.decode(incorrectAnswer)}</p>
+            ))}
         </>
     });
 
