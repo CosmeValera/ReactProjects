@@ -12,24 +12,24 @@ export default function Quiz(props) {
     }])
 
     React.useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=1')
+        fetch('https://opentdb.com/api.php?amount=5')
         .then(result=> result.json())
         .then(resultJson => {
             setData(resultJson.results)
         })
     }, []);
 
-    // let questionContainer = A`
-    //     <h3>{he.decode(data[0].question)}</h3>
-    //     <p>{he.decode(data[0].correct_answer)}</p>
-    //     <p>{he.decode(data[0].incorrect_answers[0])}</p>
-    // `
-
-    return (
-        <>
+    const questionsToAnswer = data.map(question => {
+        return <>
             <h3>{he.decode(data[0].question)}</h3>
             <p>{he.decode(data[0].correct_answer)}</p>
             <p>{he.decode(data[0].incorrect_answers[0])}</p>
+        </>
+    });
+
+    return (
+        <>
+        {questionsToAnswer}
 
             <button className="btn-primary" onClick={props.toggleQuizState}>Back</button>
         </>
