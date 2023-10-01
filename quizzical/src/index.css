@@ -8,9 +8,9 @@ body {
   min-height: 100vh;
   background-color: #F5F7FB;
   display: flex;
-  place-items: center;
-  justify-content: center;
-  text-align: center;
+  /* place-items: center; */
+  /* justify-content: center; */
+  /* text-align: center; */
   font-family: Karla, sans-serif;
 }
 

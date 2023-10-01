@@ -1,6 +1,8 @@
 import React from "react";
 import he from "he";
 
+import "./Quiz.css";
+
 export default function Quiz(props) {
     const [data, setData] = React.useState([{
         "category": "",
@@ -18,7 +20,7 @@ export default function Quiz(props) {
             setData(resultJson.results)
         })
     }, []);
-    
+
     /**
      * Next things to do:
      * 1. change p for correct and incorrect answers to button
@@ -35,15 +37,16 @@ export default function Quiz(props) {
             {incorrect_answers.map( (incorrectAnswer, i) => (
                 <p key={`${index}-${i}`}>{ he.decode(incorrectAnswer) }</p>
             ))}
+            <hr/>
         </div>
     });
 
     return (
-        <main>
+        <>
             <div className="questions-container">
                 {questionsToAnswer}
             </div>
             <button className="btn-primary" onClick={props.toggleQuizState}>Back</button>
-        </main>
+        </>
     )
 }
