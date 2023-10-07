@@ -46,7 +46,7 @@ export default function Quiz(props) {
             <div className="questions-container">
                 {questionsToAnswer}
             </div>
-            <button className="btn-primary" onClick={props.toggleQuizState}>Back</button>
+            <button className="btn-primary btn-back" onClick={props.toggleQuizState}>Back</button>
         </>
     )
 }

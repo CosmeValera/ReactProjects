@@ -1,5 +1,6 @@
 main {
     z-index: 1;
+    width: 100vw;
 }
 
 .yellow-dot {

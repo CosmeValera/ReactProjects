@@ -1,17 +1,15 @@
 body {
   margin: 0;
-  overflow: hidden;
-  box-sizing: border-box;
 }
 
 #root {
+  box-sizing: border-box;
   min-height: 100vh;
   background-color: #F5F7FB;
   display: flex;
-  /* place-items: center; */
-  /* justify-content: center; */
-  /* text-align: center; */
   font-family: Karla, sans-serif;
+  position: absolute; /* IMPORTANT-> position absolute; so the dots take it as reference */
+  overflow: hidden;
 }
 
 button {
