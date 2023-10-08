@@ -1,3 +1,18 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+#root {
+    box-sizing: border-box;
+    min-height: 100vh;
+    background-color: #F5F7FB;
+    display: flex;
+    font-family: Karla, sans-serif;
+    position: absolute; /* IMPORTANT-> position absolute; so the dots take it as reference */
+    overflow: hidden;
+}
+
 main {
     z-index: 1;
     width: 100vw;
@@ -15,6 +30,11 @@ main {
     bottom: -200px;
     left: -250px;
     width: 600px;
+}
+
+
+button {
+    font-family: Inter, sans-serif;
 }
 
 .btn-primary {
