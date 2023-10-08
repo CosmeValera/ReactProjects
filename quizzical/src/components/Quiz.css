@@ -2,10 +2,6 @@
     margin: 3rem 3rem;
 }
 
-.btn-back {
-    margin: 0rem 3rem;
-}
-
 .btn-option {
     background-color: #F5F7FB;
     border: 1px solid #4D5B9E;
@@ -26,4 +22,10 @@
     cursor: pointer;
     padding: 5px 18px;
     margin: 0px 10px 10px 0px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
