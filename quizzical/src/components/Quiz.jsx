@@ -31,14 +31,16 @@ export default function Quiz(props) {
     const questionsToAnswer = data.map((questionInstance, index) => {
         const { question, correct_answer, incorrect_answers } = questionInstance;
         
-        return <div className="question-container" key={index}>
-            <h3>{he.decode(question)}</h3>
-            <button className="btn-option btn-selected">{he.decode(correct_answer)}</button>
-            {incorrect_answers.map( (incorrectAnswer, i) => (
-                <button className="btn-option" key={`${index}-${i}`}>{ he.decode(incorrectAnswer) }</button>
-            ))}
+        return <>
+            <div className="question-container" key={index}>
+                <h3>{he.decode(question)}</h3>
+                <button className="btn-option btn-selected">{he.decode(correct_answer)}</button>
+                {incorrect_answers.map( (incorrectAnswer, i) => (
+                    <button className="btn-option" key={`${index}-${i}`}>{ he.decode(incorrectAnswer) }</button>
+                ))}
+            </div>
             <hr/>
-        </div>
+        </>
     });
 
     return (

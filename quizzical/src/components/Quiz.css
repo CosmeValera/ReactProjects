@@ -1,6 +1,9 @@
 .questions-container {
     margin: 3rem 3rem;
 }
+.question-container {
+    margin: 20px 0px;
+}
 
 .btn-option {
     background-color: #F5F7FB;
