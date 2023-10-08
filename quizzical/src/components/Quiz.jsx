@@ -33,9 +33,9 @@ export default function Quiz(props) {
         
         return <div className="question-container" key={index}>
             <h3>{he.decode(question)}</h3>
-            <p>{he.decode(correct_answer)}</p>
+            <button className="btn-option btn-selected">{he.decode(correct_answer)}</button>
             {incorrect_answers.map( (incorrectAnswer, i) => (
-                <p key={`${index}-${i}`}>{ he.decode(incorrectAnswer) }</p>
+                <button className="btn-option" key={`${index}-${i}`}>{ he.decode(incorrectAnswer) }</button>
             ))}
             <hr/>
         </div>

@@ -5,3 +5,25 @@
 .btn-back {
     margin: 0rem 3rem;
 }
+
+.btn-option {
+    background-color: #F5F7FB;
+    border: 1px solid #4D5B9E;
+    color: #293264;
+    border-radius: 15px;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding: 5px 18px;
+    margin: 0px 10px 10px 0px;
+}
+
+.btn-option.btn-selected {
+    background-color: #D6DBF5;
+    border: 1px solid #D6DBF5;
+    color: #293264;
+    border-radius: 15px;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding: 5px 18px;
+    margin: 0px 10px 10px 0px;
+}
