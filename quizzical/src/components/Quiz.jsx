@@ -21,6 +21,15 @@ export default function Quiz(props) {
         })
     }, []);
 
+    function buttonSelected(evt) {
+        const button = evt.currentTarget;
+        const questionContainer = button.parentNode;
+        questionContainer.querySelectorAll("button").forEach((button) => {
+            button.classList.remove("btn-selected")
+        });
+        button.classList.add("btn-selected");
+    }
+
     /**
      * Next things to do:
      * 1. change p for correct and incorrect answers to button
@@ -34,9 +43,9 @@ export default function Quiz(props) {
         return <>
             <div className="question-container" key={index}>
                 <h3>{he.decode(question)}</h3>
-                <button className="btn-option btn-selected">{he.decode(correct_answer)}</button>
+                <button className="btn-option btn-selected" onClick={buttonSelected}>{he.decode(correct_answer)}</button>
                 {incorrect_answers.map( (incorrectAnswer, i) => (
-                    <button className="btn-option" key={`${index}-${i}`}>{ he.decode(incorrectAnswer) }</button>
+                    <button className="btn-option" onClick={buttonSelected} key={`${index}-${i}`}>{ he.decode(incorrectAnswer) }</button>
                 ))}
             </div>
             <hr/>
@@ -45,9 +54,9 @@ export default function Quiz(props) {
 
     return (
         <>
-            <div className="questions-container">
+            <section className="questions-container">
                 {questionsToAnswer}
-            </div>
+            </section>
             <div className="btn-container">
                 <button className="btn-primary btn-check-answers" onClick={props.toggleQuizState}>Check answers</button>
             </div>
