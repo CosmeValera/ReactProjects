@@ -1,0 +1,18 @@
+microfrontend:
+Para hacer este proyecto de Agregador (Aggregator), vamos a usar un microfrontend, los microfrontends es como los microbackends, 
+es un pequeño frontend que hace algo tiene una funcionalidad y puede usarse en diferentes proyectos.
+El codigo que tenemos es de un proyecto anterior que tenìa la misma intenciòn pero on un proyecto de escritorio remoto, pero que no salió bien.
+Serìa una página grande con distintos microfrontends, y cada microfrontend serìa una url diferente.
+
+Prueba de concepto con la pantalla que nos han pasado en local.
+Lo vamos hacer en local primero y luego usaremos docker, kubernetes o lo que sea.
+
+G2-> Galileo 2nd generation
+ESA-> European Space Agency (La NASA europea)
+EUSPA-> agencia de la union europea para el espacio. (es otra empresa para lo mismo pero esta se encarga mas en burocratico)
+feature-> en SAFE, una feature contiene dentro varias User Stories.
+
+(orden de validacion de este proyecto)
+ESA (valida) -> EUSPA (si ESA valida, ellos tambien) -> operadores (valida)
+
+Aprender microfrontends
