@@ -12,7 +12,6 @@ export default class SafeComponent extends React.Component {
     componentDidCatch() {}
 
     render() {
-        console.log(this.state.hasError)
         if (this.state.hasError) {
             return <h1>Something went wrong.</h1>
         }
