@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
-@Controller('authorized')
-export class AuthorizedController {
+@Controller('cart')
+export class CartController {
   constructor() {}
 
   @Get()
