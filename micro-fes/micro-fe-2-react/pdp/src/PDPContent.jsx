@@ -17,6 +17,7 @@ export default function PDPContent() {
     if (!product) {
         return null;
     }
+    console.log("hlaa")
 
     return (
         <div className="grid grid-cols-2 gap-5">

@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Routes, Switch } from "react-router-dom";
+
 
 import "./index.scss";
 
@@ -9,14 +11,19 @@ import Footer from "home/Footer";
 import PDPContent from "./PDPContent";
 
 const App = () => (
-  <div className="text-3xl mx-auto max-w-6xl">
-    <SafeComponent>
+  <Router>
+    <div className="text-3xl mx-auto max-w-6xl">
       <Header/>
-    </SafeComponent>
-    <div className="my-10">
-      <PDPContent />
+      <div className="my-10">
+        <PDPContent />
+        {/* <Switch> */}
+        <Routes>
+          <Route path="/product/:id" component={PDPContent} />
+        </Routes>
+        {/* </Switch> */}
+      </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
+  </Router>
 );
 ReactDOM.render(<App />, document.getElementById("app"));
