@@ -15,10 +15,9 @@ const App = () => (
     <div className="text-3xl mx-auto max-w-6xl">
       <Header/>
       <div className="my-10">
-        <PDPContent />
         {/* <Switch> */}
         <Routes>
-          <Route path="/product/:id" component={PDPContent} />
+          <Route path="/product/:id" element={<PDPContent />} />
         </Routes>
         {/* </Switch> */}
       </div>
