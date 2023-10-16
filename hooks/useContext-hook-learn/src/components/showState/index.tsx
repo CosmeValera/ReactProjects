@@ -1,6 +1,11 @@
-import { useMyContext } from "../../application/provider"
+import { useMyContext } from "../../application/provider";
 
 export default function ShowState() {
     const [state, setState] = useMyContext();
-    return ( <p>{state.name}</p>)
+    return (
+        <>
+            <p>{state.name}</p>
+            <p>{state.surnames}</p>
+        </>
+    );
 }
