@@ -50,6 +50,34 @@ export default function MiniCart() {
                                     </div>
                                 </React.Fragment>
                             ))}
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div>
+                                {currency.format(
+                                    items.reduce((sum, v)=> sum + v.quantity * v.price, 0)
+                                )}
+                            </div>
+                        </div>
+                        <div className="flex">
+                            <div className="flex-grow">
+                                <button 
+                                    id="clearcart" 
+                                    className="bg-white border border-green-800 text-green-800 py-2 px-5 rounded-md text-sm"
+                                    onClick={clearCart}
+                                >
+                                    Clear Cart
+                                </button>
+                            </div>
+                            <div className="flex-grow">
+                                <button 
+                                    id="clearcart" 
+                                    className="bg-green-900 text-white py-2 px-5 rounded-md text-sm"
+                                    onClick={clearCart}
+                                >
+                                    Checkout
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </>
