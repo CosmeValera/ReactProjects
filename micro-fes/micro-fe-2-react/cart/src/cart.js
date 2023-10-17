@@ -1,11 +1,55 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BehaviorSubject } from "rxjs";
 
 const API_SERVER = "http://localhost:8080";
 
 export const jwt = new BehaviorSubject(null);
+export const cart = new BehaviorSubject(null);
 
-export const login = function(username, password) {
+export const getCart = function () {
+    fetch(`${API_SERVER}/cart`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt.value}`,
+        },
+    })
+        .then((res) => res.json())
+        .then((res) => {
+            cart.next(res);
+            return res;
+        });
+};
+
+export const addToCart = function (id) {
+    fetch(`${API_SERVER}/cart`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt.value}`,
+        },
+        body: JSON.stringify({ id }),
+    })
+        .then((res) => res.json())
+        .then(() => {
+            getCart();
+        });
+};
+
+export const clearCart = function () {
+    fetch(`${API_SERVER}/cart`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt.value}`,
+        },
+    })
+        .then((res) => res.json())
+        .then(() => {
+            getCart();
+        });
+};
+
+export const login = function (username, password) {
     return fetch(`${API_SERVER}/auth/login`, {
         method: "POST",
         headers: {
@@ -19,10 +63,10 @@ export const login = function(username, password) {
         .then((res) => res.json())
         .then((data) => {
             jwt.next(data.access_token);
-            // getCart();
+            getCart();
             return data.access_token;
-        })
-}
+        });
+};
 
 export function useLoggedIn() {
     const [loggedIn, setLoggedIn] = useState(!!jwt.value);
@@ -30,7 +74,7 @@ export function useLoggedIn() {
         setLoggedIn(!!jwt.value);
         return jwt.subscribe((c) => {
             setLoggedIn(!!jwt.value);
-          });
+        });
     }, []);
     return loggedIn;
 }
