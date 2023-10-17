@@ -30,7 +30,7 @@ export default function CartContent() {
                 <div></div>
                 <div></div>
                 <div></div>
-                <div className="text-right">
+                <div id="grand_total" className="text-right">
                     {currency.format(
                         items.reduce((sum, v) => sum + v.quantity * v.price, 0)
                     )}
