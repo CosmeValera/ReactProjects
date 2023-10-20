@@ -50,4 +50,8 @@ const App = () => {
   );
 };
 ReactDOM.render(<App />, document.getElementById("app"));
-``` 
+```
+
+---
+
+🔗 To find more information go to the Readme of micro-fe-2-react: https://github.com/CosmeValera/ReactProjects/tree/master/micro-fes/micro-fe-2-react
