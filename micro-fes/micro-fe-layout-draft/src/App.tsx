@@ -10,12 +10,15 @@ import "./index.scss";
 import OverlayConfirmDialog from "./components/OverlayConfirmDialog";
 import PanelPassThrough from './components/PanelPassThrough';
 import FormAutoComplete from './components/FormAutoComplete';
+import FormCalendar from './components/FormCalendar';
+
 
 const App = () => (
   <PrimeReactProvider>
     {/* FORM */}
     <FormAutoComplete />
-    
+    <FormCalendar />
+
     <OverlayConfirmDialog />
     <PanelPassThrough />
   </PrimeReactProvider>
