@@ -8,10 +8,12 @@ import 'primereact/resources/primereact.css';
 
 import "./index.scss";
 import BasicDemo from "./components/BasicDemo";
+import PanelPassThrough from './components/PanelPassThrough';
 
 const App = () => (
   <PrimeReactProvider>
     <BasicDemo />
+    <PanelPassThrough />
   </PrimeReactProvider>
 );
 ReactDOM.render(<App />, document.getElementById("app"));
