@@ -8,3 +8,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: rgb(240, 150, 150);
 }
+
+.container > *:not(:last-child) {
+  margin-bottom: 25px; /* Adjust the margin value as needed */
+}

@@ -6,25 +6,19 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.css';
 
 import "./index.scss";
-import OverlayConfirmDialog from "./components/OverlayConfirmDialog";
-import PanelPassThrough from './components/PanelPassThrough';
-import FormAutoComplete from './components/FormAutoComplete';
-import FormCalendar from './components/FormCalendar';
+import FormAutoComplete from './components/Form/FormAutoComplete';
+import FormCalendar from './components/Form/FormCalendar';
+import FormCascadeSelect from './components/Form/FormCascadeSelect';
 
 
 const App = () => (
   <PrimeReactProvider>
-    <div className='pb-2'>
-
-      {/* FORM */}
+    {/* FORM */}
+    <div className='container'>
       <FormAutoComplete/>
       <FormCalendar />
-
-      {/* <OverlayConfirmDialog />
-      <PanelPassThrough /> */}
+      <FormCascadeSelect />
     </div>
-    
-    <FormCalendar />
   </PrimeReactProvider>
 );
 ReactDOM.render(<App />, document.getElementById("app"));
