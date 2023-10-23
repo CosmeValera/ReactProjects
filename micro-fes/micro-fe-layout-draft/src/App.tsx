@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { PrimeReactProvider } from 'primereact/api';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
-import 'primeflex/primeflex.css';                                   // css utility
 import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.css';
 
@@ -15,12 +14,17 @@ import FormCalendar from './components/FormCalendar';
 
 const App = () => (
   <PrimeReactProvider>
-    {/* FORM */}
-    <FormAutoComplete />
-    <FormCalendar />
+    <div className='pb-2'>
 
-    <OverlayConfirmDialog />
-    <PanelPassThrough />
+      {/* FORM */}
+      <FormAutoComplete/>
+      <FormCalendar />
+
+      {/* <OverlayConfirmDialog />
+      <PanelPassThrough /> */}
+    </div>
+    
+    <FormCalendar />
   </PrimeReactProvider>
 );
 ReactDOM.render(<App />, document.getElementById("app"));
