@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PrimeReactProvider } from 'primereact/api';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
+import 'primereact/resources/themes/arya-green/theme.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.css';
 
