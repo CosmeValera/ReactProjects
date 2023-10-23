@@ -6,12 +6,13 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.css';
 
 import "./index.scss";
+import TabMenu from './components/draftlayout/TabMenu';
 
-const App = () => (
+const DraftLayout = () => (
   <PrimeReactProvider>
     <div className='container'>
-      
+      <TabMenu />
     </div>
   </PrimeReactProvider>
 );
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<DraftLayout />, document.getElementById("app"));
