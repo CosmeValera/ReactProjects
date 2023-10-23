@@ -57,10 +57,89 @@ import Scrollbar from './components/panel/Scrollbar';
 import Splitter from './components/panel/Splitter';
 import TabView from './components/panel/TabView';
 import ToolBar from './components/panel/ToolBar';
+import ConfirmDialog from './components/overlay/ConfirmDialog';
+import ConfirmPopUp from './components/overlay/ConfirmPopUp';
+import Dialog from './components/overlay/Dialog';
+import OverlayPanel from './components/overlay/OverlayPanel';
+import Sidebar from './components/overlay/Sidebar';
+import Tooltip from './components/overlay/Tooltip';
+import FileUpload from './components/file/FileUpload';
+import BreadCrumb from './components/menu/BreadCrumb';
+import ContextMenu from './components/menu/ContextMenu';
+import Dock from './components/menu/Dock';
+import MegaMenu from './components/menu/MegaMenu';
+import Menu from './components/menu/Menu';
+import MenuBar from './components/menu/MenuBar';
+import PanelMenu from './components/menu/PanelMenu';
+import Steps from './components/menu/Steps';
+import TabMenu from './components/menu/TabMenu';
+import TieredMenu from './components/menu/TieredMenu';
+import Chart from './components/chart/Chart';
+import Message from './components/message/Message';
+import Messages from './components/message/Messages';
+import Toast from './components/message/Toast';
+import Carousel from './components/media/Carousel';
+import Galleria from './components/media/Galleria';
+import Image from './components/media/Image';
+import Avatar from './components/misc/Avatar';
+import Badge from './components/misc/Badge';
+import Block from './components/misc/Block';
+import Chip from './components/misc/Chip';
+import Inplace from './components/misc/Inplace';
+import ScrollTop from './components/misc/ScrollTop';
+import Skeleton from './components/misc/Skeleton';
+import ProgressBar from './components/misc/ProgressBar';
+import ProgressSpinner from './components/misc/ProgressSpinner';
+import Ripple from './components/misc/Ripple';
+import StyleClass from './components/misc/StyleClass';
+import Tag from './components/misc/Tag';
+import Terminal from './components/misc/Terminal';
 
 const App = () => (
   <PrimeReactProvider>
     <div className='container'>
+      <h1 className='text-center'>Misc: </h1>
+      <Terminal />
+      <Tag />
+      <StyleClass />
+      {/* <Ripple /> */}
+      <ProgressSpinner />
+      <ProgressBar />
+      <Skeleton />
+      <ScrollTop />
+      <Inplace />
+      <Chip />
+      <Block />
+      <Badge />
+      <Avatar />
+      <h1 className='text-center'>Media: </h1>
+      <Image />
+      <Galleria />
+      <Carousel />
+      <h1 className='text-center'>Message: </h1>
+      <Toast />
+      <Messages />
+      <Message />
+      <h1 className='text-center'>Menu: </h1>
+      <TieredMenu />
+      <TabMenu />
+      <Steps />
+      <PanelMenu />
+      <MenuBar />
+      <Menu />
+      <MegaMenu />
+      <Dock />
+      <ContextMenu />
+      <BreadCrumb />
+      <h1 className='text-center'>File: </h1>
+      <FileUpload />
+      <h1 className='text-center'>Overlay: </h1>
+      <Tooltip />
+      <Sidebar />
+      <OverlayPanel />
+      <Dialog />
+      <ConfirmPopUp />
+      <ConfirmDialog/>
       <h1 className='text-center'>Panel: </h1>
       <ToolBar/>
       <TabView/>
