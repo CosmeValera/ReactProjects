@@ -7,12 +7,16 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.css';
 
 import "./index.scss";
-import BasicDemo from "./components/BasicDemo";
+import OverlayConfirmDialog from "./components/OverlayConfirmDialog";
 import PanelPassThrough from './components/PanelPassThrough';
+import FormAutoComplete from './components/FormAutoComplete';
 
 const App = () => (
   <PrimeReactProvider>
-    <BasicDemo />
+    {/* FORM */}
+    <FormAutoComplete />
+    
+    <OverlayConfirmDialog />
     <PanelPassThrough />
   </PrimeReactProvider>
 );
