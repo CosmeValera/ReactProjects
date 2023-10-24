@@ -32,3 +32,10 @@ Then we have to add it in our index.css or index.scss:
 ```scss
 @import 'primeflex/primeflex.css'; 
 ```
+
+---
+
+To import everything:
+```bash
+npm i primereact primeicons primeflex sass sass-loader
+```
