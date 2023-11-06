@@ -38,7 +38,7 @@ export default function LogIn () {
 }
 ```
 
-## showState:
+## ShowState:
 ```tsx
 import { useMyContext } from "../../application/provider"
 
@@ -46,4 +46,24 @@ export default function ShowState() {
     const [state, setState] = useMyContext();
     return ( <p>{state.name}</p>)
 }
+```
+
+## Main:
+```tsx
+import Provider from './application/provider'
+import LogIn from './components/login/index'
+import ShowState from './components/showState/index'
+
+import './App.css'
+
+function App() {
+  return (
+    <Provider>
+      <LogIn />
+      <ShowState />
+    </Provider>
+  )
+}
+
+export default App
 ```
