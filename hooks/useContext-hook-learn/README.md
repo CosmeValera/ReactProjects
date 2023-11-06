@@ -16,7 +16,7 @@ export default function Provider (props: { children: ReactNode }) {
 
 export const AppContext = createContext(undefined);
 export const useMyContext = () => {
-    useContext(AppContext);
+    return useContext(AppContext);
 }
 ```
 
