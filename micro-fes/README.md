@@ -1,4 +1,4 @@
-### README: micro-fe1-solidjs-and-react
+### README: micro-fe-1-solidjs-and-react
 
 Practicing microfrontends. 
 
