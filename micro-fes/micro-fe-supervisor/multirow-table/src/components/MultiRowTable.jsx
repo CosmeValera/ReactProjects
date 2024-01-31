@@ -1,32 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Tag } from 'primereact/tag';
+import { CustomerService } from '../service/CustomerService';
 
-export default function MultiRowTable() {
+export default function ExpandableRowGroupDemo() {
     const [customers, setCustomers] = useState([]);
+    const [expandedRows, setExpandedRows] = useState([]);
 
-    const data = {
-        id: 1000,
-        name: 'James Butt',
-        country: {
-            name: 'Algeria',
-            code: 'dz'
-        },
-        company: 'Benton, John B Jr',
-        date: '2015-09-13',
-        status: 'unqualified',
-        verified: true,
-        activity: 17,
-        representative: {
-            name: 'Ioni Bowcher',
-            image: 'ionibowcher.png'
-        },
-        balance: 70663
-    };
-
-    useState(() => {
-        setCustomers(data);
-    }, []);
+    useEffect(() => {
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const headerTemplate = (data) => {
         return (
@@ -93,15 +77,19 @@ export default function MultiRowTable() {
         }
     };
 
-
     return (
-        <DataTable value={[customers]} rowGroupMode="subheader" groupRowsBy="representative.name"
-            sortMode="single" sortField="representative.name" sortOrder={1}>
-            <Column field="name" header="Name" style={{ width: '20%' }} />
-            <Column field="country.name" header="Country" style={{ width: '20%' }} />
-            <Column field="company" header="Company" style={{ width: '20%' }} />
-            <Column field="status" header="Status" style={{ width: '20%' }} />
-            <Column field="date" header="Date" style={{ width: '20%' }} />
-        </DataTable>
+        <div className="card">
+            <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1}
+                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" style={{ width: '20%' }}></Column>
+                <Column field="country" header="Country" body={countryBodyTemplate} style={{ width: '20%' }}></Column>
+                <Column field="company" header="Company" style={{ width: '20%' }}></Column>
+                <Column field="status" header="Status" body={statusBodyTemplate} style={{ width: '20%' }}></Column>
+                <Column field="date" header="Date" style={{ width: '20%' }}></Column>
+            </DataTable>
+        </div>
     );
 }
+        
