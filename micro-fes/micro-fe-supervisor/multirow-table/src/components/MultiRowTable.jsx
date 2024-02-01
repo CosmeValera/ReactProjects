@@ -15,8 +15,8 @@ export default function ExpandableRowGroupDemo() {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} className="ml-2" />
-                <span className="vertical-align-middle ml-2 font-bold line-height-3">{data.representative.name}</span>
+                <img alt={data.country.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} className="ml-2" />
+                <span className="vertical-align-middle ml-2 font-bold line-height-3">{data.country.name}</span>
             </React.Fragment>
         );
     };
@@ -25,7 +25,7 @@ export default function ExpandableRowGroupDemo() {
         return (
             <React.Fragment>
                 <td colSpan={5}>
-                    <div className="flex justify-content-end font-bold w-full">Total Customers: {calculateCustomerTotal(data.representative.name)}</div>
+                    <div className="flex justify-content-end font-bold w-full">Total Customers: {calculateCustomerTotal(data.country.name)}</div>
                 </td>
             </React.Fragment>
         );
@@ -49,7 +49,7 @@ export default function ExpandableRowGroupDemo() {
 
         if (customers) {
             for (let customer of customers) {
-                if (customer.representative.name === name) {
+                if (customer.country.name === name) {
                     total++;
                 }
             }
@@ -79,8 +79,8 @@ export default function ExpandableRowGroupDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}
+            <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="country.name"
+                    sortMode="single" sortField="country.name" sortOrder={1}
                     expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" style={{ width: '20%' }}></Column>
