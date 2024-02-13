@@ -10,11 +10,18 @@ export const handlers = [
         ])
     }),
     http.post('/api/messages', async ({ request }) => {
-        const requestBody = await request.json()
-        console.log(requestBody)
-        return HttpResponse.json({
-            content: requestBody.content,
-            createdAt: new Date().toLocaleString
-        })
+        const authToken = request.headers.get('Authorization');
+        if (!authToken) {
+            return HttpResponse.json({ msg: "Unathorized"}, { status: 401 })
+        }
+        const requestBody = await request.json();
+        console.log(requestBody);
+        return HttpResponse.json(
+            {
+                content: requestBody.content,
+                createdAt: new Date().toLocaleString
+            },
+            { status: 201 }
+        );
     })
 ]

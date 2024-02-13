@@ -18,7 +18,8 @@ function App() {
     e.preventDefault();
     fetch('/api/messages', { method: "POST",
       headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: "123"
       },
       body: JSON.stringify({ content })
     })
