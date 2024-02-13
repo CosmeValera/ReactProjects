@@ -1,4 +1,4 @@
-# MSW
+# MSW with React
 
 ## 🧠 Why?
 Mock Service Worker (MSW) is an API mocking library for browser and Node.js. With MSW, you can intercept outgoing requests, observe them, and respond to them using mocked responses.
@@ -7,6 +7,12 @@ Mock Service Worker (MSW) is an API mocking library for browser and Node.js. Wit
 ```bash
 npm install msw --save-dev
 ```
+
+## Initialize MSW
+```bash
+npx msw init ./public --save
+```
+
 
 
 ---
