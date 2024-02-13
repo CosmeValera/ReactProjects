@@ -1,8 +1,13 @@
-# React + Vite
+# MSW
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🧠 Why?
+Mock Service Worker (MSW) is an API mocking library for browser and Node.js. With MSW, you can intercept outgoing requests, observe them, and respond to them using mocked responses.
 
-Currently, two official plugins are available:
+## How to install?
+```bash
+npm install msw --save-dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+---
+###### I'm following this tutorial-> https://www.youtube.com/watch?v=pP8FQnv6o7A&ab_channel=AnsontheDeveloper
