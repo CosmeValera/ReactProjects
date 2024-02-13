@@ -8,5 +8,13 @@ export const handlers = [
                 name: "anson",
             }
         ])
+    }),
+    http.post('/api/messages', async ({ request }) => {
+        const requestBody = await request.json()
+        console.log(requestBody)
+        return HttpResponse.json({
+            content: requestBody.content,
+            createdAt: new Date().toLocaleString
+        })
     })
 ]
