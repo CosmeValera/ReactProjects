@@ -9,7 +9,7 @@ Playwright is an E2E testing framework. It offers robust cross-browser support, 
 
 ![Playwright Test for VSCode](readme_images/playwright_extension.png)
 
-- Create new Playwright project using:
+- Create a new Playwright project using:
 ```
 Ctrl + Shift + P -> and type 'Install Playwright'
 ```
