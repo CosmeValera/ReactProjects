@@ -12,15 +12,15 @@ cd ReactProjects
 
 3. Navigate to a project directory (these 3 are `Vite`):
 ```
-cd tenzies
+cd learning-react/tenzies/
 ```
 or
 ```
-cd meme-generator
+cd learning-react/meme-generator/
 ```
 or
 ```
-cd notes-app
+cd learning-react/notes-app/
 ```
 4. Install the dependencies:
 ```
@@ -46,7 +46,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ## 📒 Projects (From Most Recent to Oldest)
 
 ### Meme Generator:
-![](images/meme-generator.png)
+![](learning-react-images/meme-generator.png)
 
 **Learned**: 
 - [x] State (`useState` is a hook for handling state in React)
@@ -59,7 +59,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ---
 
 ### AirBnb Experience:
-![](images/airbnb-app.png)
+![](learning-react-images/airbnb-app.png)
 
 **Learned**: 
 - [x] Props
@@ -72,7 +72,7 @@ npm create vite@latest
 ---
 
 ### Facts about React:
-![](images/second-react-app.png)
+![](learning-react-images/second-react-app.png)
 
 **Learned**: 
 - [x] Create React components
@@ -85,13 +85,13 @@ npx create-react-app my-react-app
 ---
 ## 📒➕ Other Projects
 ### Notes App
-![](images/notes.png)
+![](learning-react-images/notes.png)
 **Learned**: 
 - [x] Debouncing effect
 - [x] Firebase
 - [x] Local Storage
 ### Tenzies
-![](images/tenzies.png)
+![](learning-react-images/tenzies.png)
 **Learned**: 
 - [x] React Confetti
 ```
@@ -128,7 +128,7 @@ https://app.netlify.com/drop/
 
 3. Drop the dist folder inside the web:
 
-![](images/netlify-drop.png)
+![](learning-react-images/netlify-drop.png)
 
 Enjoy your deployed app!! 😀
 
