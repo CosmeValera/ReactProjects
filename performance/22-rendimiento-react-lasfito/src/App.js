@@ -30,7 +30,7 @@ const Bravo = () => {
       <div className="grid grid-rows-2 md:grid-cols-2 md:gap-4 md:grid-rows-1">
         <CharlieMemo />
         {/* <CharlieUseMemo /> */}
-        <Fetch />
+        <Fetch hijo={<Fetch2 />} />
       </div>
     </VisualComponent>
   );
@@ -73,15 +73,15 @@ const CharlieJr = () => {
   );
 };
 
-const Fetch = () => {
+const Fetch = (props) => {
   const [counter, setCounter] = useState(0);
 
   return (
-    <VisualComponent title="Fetch">
+    <VisualComponent title="Fetch" metodo="props">
       <h4 className="-mt-2 mb-1 font-thin"> {counter}</h4>
 
       <Button onClick={() => setCounter(counter + 1)}>Fetch Api</Button>
-      <Fetch2 />
+      {props.hijo}
     </VisualComponent>
   );
 };
@@ -121,3 +121,6 @@ export default function App() {
 //    componente. useMemo solo se actualizará cuando alguna de sus dependencias haya cambiado.
 // 3. useMemo puede recibir funciones y memorizar el resultado de estas, React.memo solo
 //    memoriza componentes de React.
+//
+// In general memo/useMemo are recommended only for heavy components with a lot of logic.
+// A reccomended approach for lighter components is to use props.
