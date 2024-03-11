@@ -92,3 +92,18 @@ plugins: [
 ],
 ```
 Now we put the index.html in `src` instead of in `build`. And now with this configuration an index.html will be created in `build`.
+
+### 🧃 Creating a Webpack Environment
+`package.json`:
+```js
+"dev": "webpack serve --mode=development",
+```
+
+Now with the command:
+```js
+npm run dev
+```
+
+It will be recompiling each time it detects a change.
+
+Now we have our working webpack environment! 🥳🥳
