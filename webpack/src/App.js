@@ -11,7 +11,7 @@ const App = () => {
 
     return (
         <div className="container">
-            <h1>Hello Midu!</h1>
+            <h1>Hello caching!</h1>
             <button onClick={handleClick}> Press this </button>
             <div>{counter}</div>
         </div>

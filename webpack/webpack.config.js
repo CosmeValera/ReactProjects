@@ -23,22 +23,29 @@ ruleForJavaScript = {
 
 const rules = [ruleForJavaScript, ruleForStyles]
 
-module.exports = {
-    //entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'build')
-    },
-    plugins: [
-        new HtmlWebpackPlugin({ template: 'src/index.html' })
-    ],
-    module: { rules },
-    devServer: {
-        open: true, // abrir el navegador al arrancar
-        port: 4345,
-        client: {
-            overlay: false, // mostrar los errores de compilacion en el navegador
+module.exports = (env, argv) => {
+    const {mode} = argv
+    const isProduction = mode === 'production'
+
+    return {
+        output: {
+            filename: isProduction
+            ? '[name].[contenthash].js'
+            : 'main.js',
+            path: path.resolve(__dirname, 'build')
         },
-        // compress: true 
-    },
-    devtool: 'source-map'
+        plugins: [
+            new HtmlWebpackPlugin({ template: 'src/index.html' })
+        ],
+        module: { rules },
+        devServer: {
+            open: true, // abrir el navegador al arrancar
+            port: 4345,
+            client: {
+                overlay: false, // mostrar los errores de compilacion en el navegador
+            },
+            // compress: true 
+        },
+        devtool: 'source-map'
+    }
 }

@@ -4,6 +4,8 @@
 - Entry point
 - Loaders
 - Plugins
+- Source Map
+- Development vs Production
 
 ### 🚀 Getting Started
 
@@ -136,3 +138,53 @@ npm run build
 ```
 
 Now the code is minimized
+
+### 🪵 Create configuration for 🧪 development and 🛠️ production
+`webpack.config.js` in addition to return an object it can also be a function that returns an object.
+
+```js
+module.exports = (env, argv) => {
+    const {mode} = argv
+    const isProduction = mode === 'production'
+
+    return {
+        output: {
+            filename: isProduction
+            ? '[name].[contenthash].js'
+            : 'main.js',
+            path: path.resolve(__dirname, 'build')
+        },
+        plugins: [
+            new HtmlWebpackPlugin({ template: 'src/index.html' })
+        ],
+        module: { rules },
+        devServer: {
+            open: true, // abrir el navegador al arrancar
+            port: 4345,
+            client: {
+                overlay: false, // mostrar los errores de compilacion en el navegador
+            },
+            // compress: true 
+        },
+        devtool: 'source-map'
+    }
+}
+```
+
+1.
+```js
+const {mode} = argv
+const isProduction = mode === 'production'
+```
+Now we can assign one value or other to the configuration object regarding if it's development or production.
+
+2.
+```js
+output: {
+    filename: isProduction
+    ? '[name].[contenthash].js'
+    : 'main.js',
+    path: path.resolve(__dirname, 'build')
+},
+```
+With this value in the filename we will be caching the values of our `main.js` files, so each time that we execute: `npm run build` we will create and cache in our `build` folder a new `main.1234asdf.js` file where `1234asdf` is a generic hash value (This hashes are created automatically)
