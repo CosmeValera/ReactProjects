@@ -35,3 +35,44 @@ With this, when packing if webpack finds a file that **ends** in **.js**, then i
 ```bash
 npm install --save-dev @babel/core babel-loader @babel/preset-react
 ```
+
+### 📎 HTML
+To see the code manually in our `build` folder, add a file `index.html`:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./main.js"></script>
+</body>
+</html>
+```
+
+And with this command we can see the page in the web:
+```bash
+npx servor build
+```
+
+### 🖍️ CSS Loader
+
+
+We will need a loader for the css, to be able to add an import for `.css` files directly to the `.js` file:
+
+We will add this CSS loader: 
+```js
+ruleForStyles = {
+    test: /\.css$/,
+    use: ['style-loader', 'css-loader']
+}
+```
+In this case we have 2: 'style-loader', 'css-loader'. Webpack reads the loaders from left to the right. In this case it starts with the style-loader and then the css-loader. The style-loader understands the css, and the css-loader understands the imports like url() and so on inside the css, that's why we need both.
+
+Also we need to install them:
+```bash
+npm i style-loader css-loader --save-dev
+```
