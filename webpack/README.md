@@ -1,5 +1,10 @@
 ## 📦 Webpack
 
+### 🟠 Main ideas
+- Entry point
+- Loaders
+- Plugins
+
 ### 🚀 Getting Started
 
 ```bash
@@ -14,8 +19,7 @@ node build/main.js
 Execute the packed file.
 
 ### 🔫 Loaders
-1. 
-`webpack.config.js`:
+1. `webpack.config.js`:
 ```js
 module: {
     rules: [
@@ -60,7 +64,6 @@ npx servor build
 
 ### 🖍️ CSS Loader
 
-
 We will need a loader for the css, to be able to add an import for `.css` files directly to the `.js` file:
 
 We will add this CSS loader: 
@@ -76,3 +79,16 @@ Also we need to install them:
 ```bash
 npm i style-loader css-loader --save-dev
 ```
+
+### 🧩 Plugins
+Let's install the `html-webpack-plugin`:
+```bash
+npm install html-webpack-plugin --save-dev
+```
+`webpack.config.js`:
+```js
+plugins: [
+    new HtmlWebpackPlugin({ template: 'src/index.html' })
+],
+```
+Now we put the index.html in `src` instead of in `build`. And now with this configuration an index.html will be created in `build`.
