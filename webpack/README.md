@@ -119,3 +119,20 @@ module.exports = {
     devtool: 'source-map'
 }
 ```
+
+### 🐜 Minimize code
+Change the build command to use production mode: 
+`package.json:`
+```json
+"scripts": {
+    "build": "webpack --mode=production",
+    "dev": "webpack serve --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+```bash
+npm run build
+```
+
+Now the code is minimized
