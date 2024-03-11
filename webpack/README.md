@@ -107,3 +107,15 @@ npm run dev
 It will be recompiling each time it detects a change.
 
 Now we have our working webpack environment! 🥳🥳
+
+
+### 🗺️ Source map
+The trade off is that it will take more time to generate the build, but with this we will be able to see the exact line of where we made the error.
+
+`webpack.config.js`:
+```js
+module.exports = {
+    ...,
+    devtool: 'source-map'
+}
+```

@@ -31,5 +31,14 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({ template: 'src/index.html' })
     ],
-    module: { rules }
+    module: { rules },
+    devServer: {
+        open: true, // abrir el navegador al arrancar
+        port: 4345,
+        client: {
+            overlay: false, // mostrar los errores de compilacion en el navegador
+        },
+        // compress: true 
+    },
+    devtool: 'source-map'
 }
