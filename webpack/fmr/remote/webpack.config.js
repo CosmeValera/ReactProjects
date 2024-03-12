@@ -2,6 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 // const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 // const { MFLiveReloadPlugin } = require("@module-federation/fmr");
+const path = require('path');
 
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
@@ -15,10 +16,10 @@ module.exports = (_, argv) => ({
 
   devServer: {
     port: 7024,
-    historyApiFallback: true,
-    devMiddleware: {
-      writeToDisk: true,
-    },
+    // devMiddleware: {
+    //   writeToDisk: true,
+    // },
+    watchFiles: [path.resolve(__dirname, '.')],
   },
 
   module: {

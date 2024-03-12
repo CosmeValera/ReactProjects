@@ -14,9 +14,8 @@ module.exports = (_, argv) => ({
 
   devServer: {
     port: 7023,
-    historyApiFallback: true,
     // liveReload: true,
-    watchFiles: [path.resolve(__dirname, '..')],
+    watchFiles: [path.resolve(__dirname, '.')],
   },
 
   module: {
