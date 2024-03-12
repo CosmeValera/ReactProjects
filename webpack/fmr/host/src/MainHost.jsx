@@ -6,7 +6,7 @@ export default function MainHost() {
             <div>Name: host</div>
             <div>Framework: react</div>
             <div>Language: JavaScript</div>
-            <div>CSS: Empty CSS</div>
+            <div>CSS: Empty asdfS</div>
         </>
     );
 }

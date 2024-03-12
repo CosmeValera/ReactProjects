@@ -6,7 +6,7 @@ const MainRemote = () => (
     <div>Name: remote</div>
     <div>Framework: react</div>
     <div>Language: JavaScriipt</div>
-    <div>CSS: Empty CSS</div>
+    <div>CSS: Empty aaddds</div>
   </div>
 );
 
