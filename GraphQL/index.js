@@ -9,7 +9,7 @@ const people = [
         id: "3d594650-3436-11e9-bc57-8b80ba54c431"
     },
     {
-        name: "Youseff",
+        name: "Youssef",
         phone: "044-1234567",
         street: "Avenida Fullstack",
         city: "Mataro",
@@ -35,13 +35,18 @@ const typeDefs = gql`
     type Query {
         personCount: Int!
         allPeople: [Person]!
+        findPerson(name: String!): Person
     }
 `
 
 const resolvers = {
     Query: {
         personCount: () => people.length,
-        allPeople: () => people
+        allPeople: () => people,
+        findPerson: (root, args) => {
+            const {name} = args
+            return people.find(person => person.name === name)
+        }
     }
 }
 
