@@ -24,13 +24,15 @@ const people = [
 ]
 
 const typeDefs = gql`
+    type Address {
+        street: String!
+        city: String!
+    }
+
     type Person {
         name: String!
         phone: String
-        street: String!
-        city: String!
-        address: String!
-        check: String!
+        address: Address!
         id: ID!
     }
 
@@ -51,8 +53,12 @@ const resolvers = {
         },
     },
     Person: {
-        address: (root) => `${root.street}, ${root.city}`,
-        check: () => "midu"
+        address: (root) => {
+            return {
+                street: root.street,
+                city: root.city
+            }
+        }
     }
 }
 
