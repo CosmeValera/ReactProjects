@@ -188,3 +188,33 @@ output: {
 },
 ```
 With this value in the filename we will be caching the values of our `main.js` files, so each time that we execute: `npm run build` we will create and cache in our `build` folder a new `main.1234asdf.js` file where `1234asdf` is a generic hash value (This hashes are created automatically)
+
+### 🎋 Example:
+```js
+module.exports = (env, argv) => {
+    const {mode} = argv
+    const isProduction = mode === 'production'
+
+    return {
+        output: {
+            filename: isProduction
+            ? '[name].[contenthash].js'
+            : 'main.js',
+            path: path.resolve(__dirname, 'build')
+        },
+        plugins: [
+            new HtmlWebpackPlugin({ template: 'src/index.html' })
+        ],
+        module: { rules },
+        devServer: {
+            open: true, // abrir el navegador al arrancar
+            port: 4345,
+            client: {
+                overlay: false, // mostrar los errores de compilacion en el navegador
+            },
+            // compress: true 
+        },
+        devtool: 'source-map'
+    }
+}
+```
