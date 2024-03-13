@@ -29,6 +29,8 @@ const typeDefs = gql`
         phone: String
         street: String!
         city: String!
+        address: String!
+        check: String!
         id: ID!
     }
 
@@ -46,7 +48,11 @@ const resolvers = {
         findPerson: (root, args) => {
             const {name} = args
             return people.find(person => person.name === name)
-        }
+        },
+    },
+    Person: {
+        address: (root) => `${root.street}, ${root.city}`,
+        check: () => "midu"
     }
 }
 
