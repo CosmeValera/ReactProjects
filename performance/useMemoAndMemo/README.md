@@ -1,3 +1,5 @@
+You can see self-explanatory code in `src/App.js` with examples of memo and useMemo. Anyway here's a brief explanation.
+
 ## EXPLANATION memo vs useMemo:
 React.memo es un componente de alto nivel (o H.O.C — High Order Component en inglés), por lo tanto, siempre recibirá un componente de React como primer argumento, lo memorizará y utilizará las props para condicionar su renderizado. Por su parte, useMemo es un hook de React que recibe una función.
 
