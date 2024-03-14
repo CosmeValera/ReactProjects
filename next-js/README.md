@@ -55,7 +55,8 @@ npm run dev --turbo
 ```
 ### CSS Modules:
   1. Create a file ending with `.module.css`. For instance:
-```scss
+```css
+/* home.module.css */
 .shape {
     height: 0;
     width: 0;
@@ -66,9 +67,47 @@ npm run dev --turbo
 ```
   2. Import it:
 ```tsx
-<import styles from './ui/home.module.css';
+import styles from './ui/home.module.css';
 ```
   3. Use it like this:
 ```html
 <div className={styles.shape}></div>
 ```
+### Styled Components:
+1. Install Styled Components package:
+```bash
+npm install styled-components
+```
+2. Import `styled` from `styled-components`:
+```tsx
+import styled from 'styled-components';
+```
+3. Create a styled component by calling styled and passing the HTML element name or a component:
+```tsx
+const StyledButton = styled.button`
+  /* CSS styles */
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+```  
+4. Use the styled component like any other React component:
+```tsx
+const App = () => {
+  return (
+    <div>
+      <StyledButton>Click Me</StyledButton>
+    </div>
+  );
+};
+```
+
+### CSS Modules vs Styled Components:
+Both are similar in offering scoped css for your React components.
+
+**Differences:** 
+
+- **CSS Modules** might be preferable if you prefer to keep your styles separate from your components and want to use regular CSS syntax. It's a good fit for teams familiar with traditional CSS workflows.
+
+- **Styled Components** might be a better choice if you want to keep styles tightly coupled with your components, prefer writing CSS in JavaScript, or need advanced features like dynamic styling based on props. But you will need to install a new dependency.
