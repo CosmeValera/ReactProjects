@@ -85,6 +85,7 @@ In the case of Apollo Client for instance, you don't have to use Apollo Server. 
 
 ### Fetch
 This is the basic approach using fetch:
+
 ![graphql-react-basic](readme-img/graphql-react-basic.png)
 
 ### Apollo Client
