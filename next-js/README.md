@@ -24,7 +24,7 @@ npm run dev
 npm run dev --turbo
 ```
 
-## Files
+## 📄 Files
 ### Configuration files
 - `tsconfig.json`
 - `prettier.config.js`

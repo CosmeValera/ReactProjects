@@ -5,7 +5,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <h1>Header</h1>
+        <div style={{border: "1px solid black"}}>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
