@@ -16,12 +16,10 @@ npm i graphql apollo-server
 
 ## 🤔 Explanation
 We have to look at the following aspects in `index.js`:
-- Data
-- Type Definitions: 
-  - Define the tables
-- Resolvers
-  - Add methods
-- Server
+- **Data**
+- **Type Definitions**:  Define the tables
+- **Resolvers**: Add methods
+- **Server**
 
 ### Data:
 ![Data](readme-img/Data.png)
@@ -66,7 +64,7 @@ It is important to distinguish the structure of the information that comes from 
 This is an example of the second case: **2. GraphQL**, using apollo:
 ![Apollo example](readme-img/Apollo.png)
 
-## Mutations
+## 🧌 Mutations
 A Mutation is a GraphQL Operation that allows you to insert new data or modify the existing data on the server-side. You can think of GraphQL Mutations as the equivalent of POST , PUT , PATCH and DELETE requests in REST.
 
 This is how we add one:
@@ -74,3 +72,28 @@ This is how we add one:
 ![mutation-type-defs](readme-img/mutation-type-defs.png)
 ### Resolvers
 ![mutation-resolvers](readme-img/mutation-resolvers.png)
+
+## ⚛️ Add GraphQl in your React App
+There are several options:
+- fetch
+- clients:
+  - Apollo Client
+  - Relay
+  - urql
+
+In the case of Apollo Client for instance, you don't have to use Apollo Server. It's up to you.
+
+### Fetch
+This is the basic approach using fetch:
+![graphql-react-basic](readme-img/graphql-react-basic.png)
+
+### Apollo Client
+#### Code
+![graphql-react-apollo-client-code-1](readme-img/graphql-react-apollo-client-code-1.png)
+![graphql-react-apollo-client-code-2](readme-img/graphql-react-apollo-client-code-2.png)
+#### Response
+![graphql-react-apollo-client-response](readme-img/graphql-react-apollo-client-response.png)
+
+[Apollo Client documentation](https://www.apollographql.com/docs/react)
+
+##### More information about how to add GraphQl in your React App-> https://www.youtube.com/watch?v=sVFocedf-iU&ab_channel=midudev
