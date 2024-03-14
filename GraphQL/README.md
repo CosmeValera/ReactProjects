@@ -65,3 +65,12 @@ It is important to distinguish the structure of the information that comes from 
 ```
 This is an example of the second case: **2. GraphQL**, using apollo:
 ![Apollo example](readme-img/Apollo.png)
+
+## Mutations
+A Mutation is a GraphQL Operation that allows you to insert new data or modify the existing data on the server-side. You can think of GraphQL Mutations as the equivalent of POST , PUT , PATCH and DELETE requests in REST.
+
+This is how we add one:
+### Type definitions
+![mutation-type-defs](readme-img/mutation-type-defs.png)
+### Resolvers
+![mutation-resolvers](readme-img/mutation-resolvers.png)
