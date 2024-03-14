@@ -41,10 +41,10 @@ npm run dev --turbo
 - `public/`
 
 ### Main App (`/app`)
-- `app/lib/`: Libraries
+- `app/lib/`: Fetching, tools...
 - `app/ui/`: UI components
 - `app/layout`: Routes
-- `app/page.tsx`: An example page. Usually we will have a `/pages/` folder that will contain out Next.js pages.
+- `app/page.tsx`: An example page. Usually we will have a `/pages/` folder that will contain our Next.js pages.
 
 ## 🖌️ CSS
 ### General:
