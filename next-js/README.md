@@ -14,4 +14,13 @@ npx create-next-app@latest
 npx create-next-app@latest nextjs-dashboard --use-npm --example "https://github.com/vercel/next-learn/tree/main/dashboard/starter-example"
 ```
 
+### Execute it
+1. **Normal**
+```bash
+npm run dev
+```
+2. **Turbo** (Faster, but experimental)
+```bash
+npm run dev --turbo
+```
 
