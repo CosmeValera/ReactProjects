@@ -45,3 +45,30 @@ npm run dev --turbo
 - `app/ui/`: UI components
 - `app/layout`: Routes
 - `app/page.tsx`: An example page. Usually we will have a `/pages/` folder that will contain out Next.js pages.
+
+## 🖌️ CSS
+### General:
+  - `nextjs-dashboard\app\ui\global.css`
+### Tailwind:
+```html
+<body className='bg-gray-300'>
+```
+### CSS Modules:
+  1. Create a file ending with `.module.css`. For instance:
+```scss
+.shape {
+    height: 0;
+    width: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 30px solid black;
+}
+```
+  2. Import it:
+```tsx
+<import styles from './ui/home.module.css';
+```
+  3. Use it like this:
+```html
+<div className={styles.shape}></div>
+```
