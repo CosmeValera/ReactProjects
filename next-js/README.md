@@ -1,7 +1,7 @@
 # Next.js
 The React Framework.
 
-We will be followin this [YT Video](https://www.youtube.com/watch?v=jMy4pVZMyLM&ab_channel=midulive), that follows the [docu](https://nextjs.org/learn/dashboard-app/getting-started).
+We will be following this [YT Video](https://www.youtube.com/watch?v=jMy4pVZMyLM&ab_channel=midulive), that follows the [docu](https://nextjs.org/learn/dashboard-app/getting-started).
 
 ## 🚀 Getting Started
 ### Initialize a Next.js App
@@ -111,3 +111,31 @@ Both are similar in offering scoped css for your React components.
 - **CSS Modules** might be preferable if you prefer to keep your styles separate from your components and want to use regular CSS syntax. It's a good fit for teams familiar with traditional CSS workflows.
 
 - **Styled Components** might be a better choice if you want to keep styles tightly coupled with your components, prefer writing CSS in JavaScript, or need advanced features like dynamic styling based on props. But you will need to install a new dependency.
+
+### CSS Modules in a React App:
+Unlike Next.js, React does not inherently offer built-in support for CSS Modules out of the box. Therefore, we'll need to implement the following steps:
+- Same steps as in `CSS Modules` section up there.
+- Add configuration in your `webpack.config.js`:
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(css|s[ac]ss)$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true, // Enable CSS Modules
+              localIdentName: '[name]__[local]--[hash:base64:5]', // Custom naming convention for CSS Modules
+            },
+          },
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+};
+
+```
