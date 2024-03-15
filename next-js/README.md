@@ -139,3 +139,25 @@ module.exports = {
 };
 
 ```
+## Next.js components
+Next.js has some components to enhance web performance.
+
+### Image
+```ts
+import Image from 'next/image';
+```
+```ts
+<Image src="/hero-desktop.png" width={1000} height={760} alt="Screenshots of the dashboard"/>
+```
+The `Image` component in Next.js offers superior image optimization compared to the standard `img` tag. Additionally, the `Image` component allows developers to specify the width and height attributes directly within the component, helping to prevent layout shifts by reserving space for the image before it's fully loaded.
+
+### Link
+```ts
+import Link from 'next/link';
+```
+```html
+<Link href="/login" className="flex ..."> 
+    <span>Log in</span>
+</Link>
+```
+Using this `Link` component introduces code splitting, which enhances performance. Code splitting means that when you click on a navigation button, Next.js only loads the necessary files for that particular page or component. This results in faster navigation and reduced initial load times for your application, making the user experience smoother and more efficient.
