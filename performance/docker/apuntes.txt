@@ -1,0 +1,97 @@
+DOCKER:
+
+Imagen (Plantilla):
+Las imagenes son plantillas, y se utilizan para crear contenedores ya que estas nunca van a cambiar, esto permite crear contenedores con diferentes capas de imágenes las cuales se van a superponer sobre otras. Las imágenes suelen definirse mediante archivos Dockerfile.
+
+Contenedor (Instancia):
+Un contenedor es una instancia en tiempo de ejecución de una imagen. Es una entidad liviana y portátil que encapsula una aplicación y sus dependencias, asegurando que se ejecute de manera consistente en cualquier entorno donde se implemente
+
+------------------------------
+
+Imagen base:
+Una imagen base es una primera capa vacía de la q se parte para construir una Imagen de docker desde cero.
+
+Docker manifest:
+Junto con un conjunto de archivos de capa individuales, una imagen de docker también incluye un archivo adicioinal conocido como manifiesto.
+El manifesto es una descripción de la imagen en formato JSON.
+
+Comandos de docker:
+- docker images
+Listar las imagenes de docker
+- docker pull
+Descargar una imagen docker
+- docker push
+Subir una imagen docker
+- docker build
+Construir una imagen Docker a partir de un archivo Dockerfile
+- docker tag
+Etiquetar una imagen Docker con un nombre y una versión específicos
+- docker rmi
+Eliminar una imagen docker
+- docker history
+Ver el historial de capas de una imagen Docker
+- docker save
+Guardar una imagen Docker en un archivo tar
+- docker load
+Cargar una imagen Docker desde un archivo tar
+
+Registros Docker:
+Los registros Docker sirven para almacenar las diversas imágenes Docker que utilicemos en nuestro sistema.
+Algunos de estos repositorios son:
+- Docker Cloud
+- Docker Hub
+- Github Docker
+- Registro privado
+
+Volumenes Docker:
+Son una característica del tiempo de ejecución del contenedor Docker, permiten compartir información entre el contenedor y el host entre otras cosas.
+Linux: Se guardan en /var/lib/docker/volumes
+Windows: Se almacenan en C:\ProgramData\Docker
+
+Dockerfile:
+Dockerfile es un archivo de texto simple que incluye una serie de instrucciones que se necesitan ejecutar de manera consecutiva para cumplir con los procesos necesarios para la acreación de una nueva imagen.
+Con el comando docker build, se puede crear la imagen del Dockerfile.
+
+Dockerfile opciones:
+- FROM
+Primera instrucción. Establece la imagen sobre la q ocurriran los siguientes pasos, si se quiere vacía se pone-> FROM scratch
+- ENV
+Indica las variables de entorno que se necesitan en el proceso de construcción de una imagen
+- USER
+Para cambiar el usuario y su pertenencia a un grupo
+- RUN
+Ejecuta una instrucción incluida en la línea de comandos
+- ADD
+Tareas relacionadas con la copia de ficheros, directorios y archivos de una imagen
+- EXPOSE
+Definición de las asignaciones referentes a los puertos
+
+
+------------------------------
+
+Ejemplo de crear y ejecutar un contenedor de Docker:
+- Bajar imagen de postgres
+docker pull postgres
+docker pull postgres:bullseye
+- Crear un contenedor con nombre postgres en base a esa imagen
+docker run --name postgres -e POSTGRES_PASSWORD=password -d postgres:bullseye
+- Ver logs
+docker logs postgres
+
+Docker Exec:
+// Con esto abrimos una terminal sh del postgres q tenemos en el contenedor
+docker exec -it postgres sh
+psql -U postgres
+CREATE TABLE example (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50)
+);
+INSERT INTO example (name) VALUES ('John');
+SELECT * FROM example;
+
+Docker STOP y crear con ejecución en background:
+// Creamos un nuevo docker parado
+docker run -d postgres:bullseye
+// Viendo sus logs vemos q le falta la password, lo volvemos a crear ahora bien, borramos el anterior.
+docker run --name post -e POSTGRES_PASSWORD=password -d postgres:bullseye
+docker stop post
