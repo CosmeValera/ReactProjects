@@ -2,25 +2,42 @@ Hace falta un servidor de snmp para que reciba las peticiones.
 Lo que estoy haciendo aqui con el js, es la parte de cliente.
 En vez de montarmelo en el ordenador, pues puedo hace las peticiones desde ansible hacia el cmcf, le puedo haceer un snmpwalk.
 
-Hay que hacer un walk con ciertas credenciales hacia esa dirección para que me devuelva valor.
+Hay que hacer un walk con ciertas credenciales hacia esa dirección para que me devuelva valor. Hay snmpwalk, snmpget, snmpset.
+
+// Files:
+/home/cosme/snmp/first-attempt-snmp/app.js
+/etc/snmp/snmpd.conf
+
+// Simple examples:
+snmpwalk -v 2c -c public localhost // Get all SNMP objects
+snmpwalk -v 2c -c public localhost -O n // Get them with their numbers
+snmpwalk -v 2c -c public localhost .1.3.6.1.2.1.25.6.3.1.1.157 // Get 1 object
+// Complex Example: (fdf-sv:17101, rcspl:161)
+snmpwalk -v 3 -u cmcfopsSHA -A cmcfops1235HA -a SHA -l AuthNoPriv fdf-sv:17101
 
 
-// Si le pones -O n, te muestra los numeros
-// El puerto se puede cambiar a fdf-sv17101
+// Instalación en Linux de un daemon como servidor. El install no se si era snmpd o snmp.
+zypper search snmpd
+zypper install snmpd
+snmpd start // Esto no hace nada creo
 
-snmpwalk -v 3 -u cmcfopsSHA -A cmcfops1235HA -a SHA -l AuthNoPriv rcspl:161
+------------------
 
+// Start deamon
+snmpd -D
+snmpd -f -D // as foreground
 
+// See processes
+ps -eafl|grep snmpd
 
+// Kill snmpd
+ps -eafl|grep snmpd
+kill -9 <id_process>
 
+// Edit conf, to allow snmp requests from windows
+vim /etc/snmp/snmpd.conf
 
-Para instalarte el este, usa un linux, y te instalas un snmp y lo usas como deamon.
-
-
-sudo zypper search snmp
-sudo zypper *Cet-snmp
-sudo zypper snmpd start
-snmpwalk
-
-
-En MOBA entrar al FDF, que hay tienen montado un servidor de snmp
+"
+rocommunity public 127.0.0.1 // SUSE IP
+rocommunity public 172.19.160.1 // WINDOWS IP
+"
