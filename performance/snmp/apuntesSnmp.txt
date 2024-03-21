@@ -14,8 +14,6 @@ snmpwalk -v 3 -u cmcfopsSHA -A cmcfops1235HA -a SHA -l AuthNoPriv rcspl:161
 
 
 
-
-
 Para instalarte el este, usa un linux, y te instalas un snmp y lo usas como deamon.
 
 

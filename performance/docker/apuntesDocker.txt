@@ -95,3 +95,5 @@ docker run -d postgres:bullseye
 // Viendo sus logs vemos q le falta la password, lo volvemos a crear ahora bien, borramos el anterior.
 docker run --name post -e POSTGRES_PASSWORD=password -d postgres:bullseye
 docker stop post
+
+Node Docker:
