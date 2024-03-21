@@ -3,11 +3,11 @@ var snmp = require("net-snmp");
 
 // Define the IP address and SNMP community string of the device you want to interact with
 // var target = "192.168.56.1";
-var target = "localhost"; // Change this to the IP address of your SNMP-enabled device
+var target = "172.19.168.20"; // Change this to the IP address of your SNMP-enabled device
 var community = "public"; // Change this to the SNMP community string of your device
 
 // Define the OIDs (Object Identifiers) you want to query
-var oids = ["1.3.6.1.2.1.1.5.0", "1.3.6.1.2.1.1.6.0"]; // These are example OIDs, replace them with the ones you need
+var oids = ['1.3.6.1.2.1.25.6.3.1.1.157']; // These are example OIDs, replace them with the ones you need
 
 // Create an SNMP session to the target device
 var session = snmp.createSession(target, community);
