@@ -1,0 +1,28 @@
+Hace falta un servidor de snmp para que reciba las peticiones. 
+Lo que estoy haciendo aqui con el js, es la parte de cliente.
+En vez de montarmelo en el ordenador, pues puedo hace las peticiones desde ansible hacia el cmcf, le puedo haceer un snmpwalk.
+
+Hay que hacer un walk con ciertas credenciales hacia esa dirección para que me devuelva valor.
+
+
+// Si le pones -O n, te muestra los numeros
+// El puerto se puede cambiar a fdf-sv17101
+
+snmpwalk -v 3 -u cmcfopsSHA -A cmcfops1235HA -a SHA -l AuthNoPriv rcspl:161
+
+
+
+
+
+
+
+Para instalarte el este, usa un linux, y te instalas un snmp y lo usas como deamon.
+
+
+sudo zypper search snmp
+sudo zypper *Cet-snmp
+sudo zypper snmpd start
+snmpwalk
+
+
+En MOBA entrar al FDF, que hay tienen montado un servidor de snmp
