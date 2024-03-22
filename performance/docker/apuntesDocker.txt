@@ -103,6 +103,23 @@ docker stop post
 DockerIgnore:
 .dockerIgnore // 'node_modules', para ignorar la carpeta node_modules al hacer el build
 
-Node Docker:
+Node Docker (Docker Build):
 docker build --tag node-docker .
 docker images // Debe salir la imagen node-docker que acabamos de crear
+
+Docker tag:
+docker tag node-docker:latest node-docker:v1.0.0
+// Now we have 2 images
+
+Untag:
+docker rmi node-docker:v1.0.0
+
+Run our node-docker image:
+docker run node-docker // Con esto falla
+docker run --publish 8000:8000 node-docker // Esto hace q este corriendo en el puerto 8000. 
+docker run -dp 8000:8000 node-docker // Ejecuta en background
+
+Restart docker container:
+docker restart b123adfsaom // Quizás hace falta pararlo primero con docker stop b123adfsaom
+
+YAML:
