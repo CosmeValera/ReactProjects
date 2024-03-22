@@ -18,6 +18,8 @@ El manifesto es una descripción de la imagen en formato JSON.
 Comandos de docker:
 - docker images
 Listar las imagenes de docker
+- docker ps -a
+Listar contenedores
 - docker pull
 Descargar una imagen docker
 - docker push
@@ -28,6 +30,8 @@ Construir una imagen Docker a partir de un archivo Dockerfile
 Etiquetar una imagen Docker con un nombre y una versión específicos
 - docker rmi
 Eliminar una imagen docker
+- docker rm
+Eliminar un contenedor docker
 - docker history
 Ver el historial de capas de una imagen Docker
 - docker save
@@ -49,7 +53,7 @@ Linux: Se guardan en /var/lib/docker/volumes
 Windows: Se almacenan en C:\ProgramData\Docker
 
 Dockerfile:
-Dockerfile es un archivo de texto simple que incluye una serie de instrucciones que se necesitan ejecutar de manera consecutiva para cumplir con los procesos necesarios para la acreación de una nueva imagen.
+Dockerfile es un archivo de texto simple que incluye una serie de instrucciones que se necesitan ejecutar de manera consecutiva para cumplir con los procesos necesarios para la creación de una nueva imagen.
 Con el comando docker build, se puede crear la imagen del Dockerfile.
 
 Dockerfile opciones:
@@ -96,4 +100,9 @@ docker run -d postgres:bullseye
 docker run --name post -e POSTGRES_PASSWORD=password -d postgres:bullseye
 docker stop post
 
+DockerIgnore:
+.dockerIgnore // 'node_modules', para ignorar la carpeta node_modules al hacer el build
+
 Node Docker:
+docker build --tag node-docker .
+docker images // Debe salir la imagen node-docker que acabamos de crear
