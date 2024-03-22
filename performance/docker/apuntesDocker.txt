@@ -122,4 +122,8 @@ docker run -dp 8000:8000 node-docker // Ejecuta en background
 Restart docker container:
 docker restart b123adfsaom // Quizás hace falta pararlo primero con docker stop b123adfsaom
 
-YAML:
+YAML: YAML Ain't Markup Language™
+
+Docker Compose: 
+Es una herramienta que nos permitirá definir y ejecutar aplicaciones Docker empleando varios contenedores.
+Con Compose haremos uso de un fichero de texto con la extensión YAML en el que realizaremos la onfiguración de los servicios (imágenes), redes y volúmenes para persistencia de datos que requieren nuestras aplicaciones.
