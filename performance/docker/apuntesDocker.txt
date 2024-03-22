@@ -122,8 +122,17 @@ docker run -dp 8000:8000 node-docker // Ejecuta en background
 Restart docker container:
 docker restart b123adfsaom // Quizás hace falta pararlo primero con docker stop b123adfsaom
 
-YAML: YAML Ain't Markup Language™
+-------------------
 
 Docker Compose: 
 Es una herramienta que nos permitirá definir y ejecutar aplicaciones Docker empleando varios contenedores.
 Con Compose haremos uso de un fichero de texto con la extensión YAML en el que realizaremos la onfiguración de los servicios (imágenes), redes y volúmenes para persistencia de datos que requieren nuestras aplicaciones.
+
+YAML: YAML Ain't Markup Language™
+
+Crear Volumen:
+docker volume create mongodb
+docker volume create mongodb_config
+docker network create mongodb
+docker run -it --rm -d -v mongodb:/data/db -v mongodb_config:/data/configdb -p 27017:27017 --network mongodb --name mongodb mongo
+docker ps // Aquí debería salir. Hemos creado dos volumenes de mongo y los hemos juntado con network. Y luego con run los ejecutamos
