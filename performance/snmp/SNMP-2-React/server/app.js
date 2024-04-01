@@ -1,7 +1,18 @@
 const express = require('express');
+const cors = require('cors');
 const snmp = require('net-snmp');
 
 const app = express();
+app.use(express.json());
+
+const corsOptions = {
+    origin: '*',
+};
+app.use(cors(corsOptions));
+
+///////////////
+// FUNCTIONS //
+///////////////
 
 const oidMapping = {
   hrSystemUptime: '1.3.6.1.2.1.25.1.1.0',
@@ -159,7 +170,7 @@ const snmpResponse = (objectName, callback) => {
         if (snmp.isVarbindError(varbinds[i])) {
           console.error("SNMP Varbind Error:", snmp.varbindError(varbinds[i]));
         } else {
-          snmpData += varbinds[i].oid + " = " + varbinds[i].value + '\n';
+          snmpData += varbinds[i].oid + " = " + varbinds[i].value;
         }
       }
       callback(null, snmpData);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import fetchSnmpObject from './services/snmpService'
 
 function SnmpTree() {
     const [mibObjects, setMibObjects] = useState([]);
@@ -17,8 +18,13 @@ function SnmpTree() {
         });
     };
 
-    const objectClicked = (objectName) => {
-        return console.log("Cliked", objectName)
+    const objectClicked = async (objectName) => {
+        try {
+            const result = await fetchSnmpObject(objectName);
+            alert(JSON.stringify(result));
+        } catch (error) {
+            console.error('Error fetching SNMP object:', error);
+        }
     }
 
     const mappedObjects = () => {
