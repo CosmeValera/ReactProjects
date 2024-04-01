@@ -7,6 +7,9 @@ Hay que hacer un walk con ciertas credenciales hacia esa dirección para que me 
 // Files:
 /home/cosme/snmp/first-attempt-snmp/app.js
 /etc/snmp/snmpd.conf
+/var/lib/net-snmp/snmpd.conf
+
+vim /etc/snmp/snmpd.conf
 
 // Simple examples:
 snmpwalk -v 2c -c public localhost // Get all SNMP objects
@@ -27,9 +30,6 @@ snmpd start // Esto no hace nada creo
 snmpd -D
 snmpd -f -D // as foreground
 
-// See processes
-ps -eafl|grep snmpd
-
 // Kill snmpd
 ps -eafl|grep snmpd
 kill -9 <id_process>
@@ -41,3 +41,58 @@ vim /etc/snmp/snmpd.conf
 rocommunity public 127.0.0.1 // SUSE IP
 rocommunity public 172.19.160.1 // WINDOWS IP
 "
+
+
+------------------
+
+# SNMPv3
+
+## Security levels: 
+NoAuthNoPriv
+  -> Same as using 1 or 2c
+AuthNoPriv
+  -> Middle Security level
+  -> Username + password Auth
+  -> Messages not encrypted
+AuthPriv
+  -> Highest Security level
+  -> Username + password Auth
+  -> Privacy password
+
+## Example authNoPriv
+snmpwalk -v 3 -u cmcfops -A cmcfops123 -a MD5 -l authNoPriv fdf-sv:17101  .1.3.6.1.2.1.1
+
+-v 3: Specifies the SNMP version to be used. In this case, it's version 3.
+-u cmcfops: This parameter specifies the SNMPv3 username to be used for authentication.
+-A cmcfops123: This parameter specifies the authentication password to be used with the authentication protocol specified by the -a parameter.
+-a MD5: This parameter specifies the authentication protocol to be used. In this case, it's MD5, a cryptographic hash function used for authentication. Can be SHA or MD5, SHA is more secure but more costly than MD5.
+-l authNoPriv: This parameter specifies the security level. authNoPriv means authentication without privacy, which means the SNMP messages will be authenticated but not encrypted.
+- fdf-sv:17101: This is the hostname or IP address of the SNMP agent (network device) and its SNMP port number. In this case, it's fdf-sv with port 17101.
+
+## Example authPriv (IN CMCF)
+snmpwalk -v 3 -u cmcfops -A cmcfops123 -a MD5 -x AES -X privPassword -l authPriv fdf-sv:17101 .1.3.6.1.2.1.25.6.3.1.1.157
+
+-x AES: This parameter specifies the privacy protocol to be used. AES (Advanced Encryption Standard) is the best encryption algorithms supported by SNMPv3, there is also DES, but it's more costly and slower than AES.
+-X privPassword: This parameter specifies the privacy password to be used with the privacy protocol specified by the -x parameter. It's necessary for encrypting SNMP messages.
+-l authPriv: This parameter specifies the security level. authPriv means authentication with privacy, indicating that SNMP messages will be both authenticated and encrypted.
+
+
+---------------
+
+# Create v3 user:
+// With snmpd stopped
+net-snmp-create-v3-user -rw -A cosmecosme -X cosmecosme -a SHA -x AES cosme
+// Test it with snmpget
+snmpget -v 3 -u cosme -A cosmecosme -a SHA -c public -O n -l AuthNoPriv localhost .1.3.6.1.2.1.25.6.3.1.1.157
+
+# snmpset:
+// We will need write access
+snmpset -v 2c -c public localhost .1.3.6.1.2.1.25.3.8.1.8 i 12345
+snmpset -v 3 -u cosme -A cosmecosme -a SHA -l AuthNoPriv -c mysecret localhost .1.3.6.1.2.1.25.3.8.1.8.1 x "00 00 01 01 00 00 00 00"
+
+
+# Find the mib file
+vim /usr/share/snmp/mibs/HOST-RESOURCES-MIB.txt
+
+# Translate variable from mib_name to oid
+snmptranslate -On -IR -Td -m +ALL hrFSLastFullBackupDate

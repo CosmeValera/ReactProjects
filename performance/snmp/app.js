@@ -1,13 +1,14 @@
-// Importing the net-snmp module
+// This File run with Node does the same as: 
+// snmpget -v 2c -c public -O n localhost .1.3.6.1.2.1.25.3.8.1.8.1
+// snmpget -v 3 -u cosme -A cosmecosme -a SHA -c public -O n -l AuthNoPriv localhost .1.3.6.1.2.1.25.3.8.1.8.1
+
 var snmp = require("net-snmp");
 
-// Define the IP address and SNMP community string of the device you want to interact with
 // var target = "192.168.56.1";
 var target = "172.19.168.20"; // Change this to the IP address of your SNMP-enabled device
 var community = "public"; // Change this to the SNMP community string of your device
 
-// Define the OIDs (Object Identifiers) you want to query
-var oids = ['1.3.6.1.2.1.25.6.3.1.1.157']; // These are example OIDs, replace them with the ones you need
+var oids = ['1.3.6.1.2.1.25.6.3.1.1.157'];
 
 // Create an SNMP session to the target device
 var session = snmp.createSession(target, community);
