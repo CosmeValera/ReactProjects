@@ -3,11 +3,6 @@ const snmp = require('net-snmp');
 
 const app = express();
 
-app.listen(4001, () => {
-  console.log('Server is running on port 4001');
-});
-
-
 const oidMapping = {
   hrSystemUptime: '1.3.6.1.2.1.25.1.1.0',
   hrSystemDate: '1.3.6.1.2.1.25.1.2.0',
@@ -94,9 +89,19 @@ const oidMapping = {
   hrSWInstalledDate: '1.3.6.1.2.1.25.6.3.1.5.1',
 };
 
-app.get('/', async (req, res) => {
-  // await getAll(req, res);
-  await getOne(req, res);
+const getOne = (async (req, res) => {
+  const objectName = req.params.name;
+  if (!objectName || !oidMapping[objectName]) {
+    return res.status(400).send('Invalid object name');
+  }
+
+  snmpResponse(objectName, (error, snmpData) => {
+    if (!error) {
+      let result = {}
+      result[objectName] = snmpData
+      res.send(result);
+    }
+  });
 });
 
 const getAll = (async (req, res) => {
@@ -128,17 +133,6 @@ const getAll = (async (req, res) => {
     console.error("An error occurred while fetching SNMP data:", error);
     res.status(500).send('Error fetching SNMP data');
   }
-});
-
-const getOne = (async (req, res) => {
-  const objectName = 'hrStorageAllocationUnits'
-  snmpResponse(objectName, (error, snmpData) => {
-    if (!error) {
-      let result = {}
-      result[objectName] = snmpData
-      res.send(result);
-    }
-  });
 });
 
 const snmpResponse = (objectName, callback) => {
@@ -174,3 +168,15 @@ const snmpResponse = (objectName, callback) => {
     session.close();
   });
 };
+
+////////////////////
+// EXPRESS SERVER //
+////////////////////
+
+app.get('/', getAll);
+
+app.get('/:name', getOne);
+
+app.listen(4001, () => {
+  console.log('Server is running on port 4001');
+});
