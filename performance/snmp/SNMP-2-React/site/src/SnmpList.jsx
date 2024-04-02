@@ -3,7 +3,7 @@ import fetchSnmpObject from './services/snmpService';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 
-function SnmpTree() {
+function SnmpList() {
     const [mibObjects, setMibObjects] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
     const [dialogContent, setDialogContent] = useState('');
@@ -81,11 +81,11 @@ function SnmpTree() {
     return (
         <>
             <Toast ref={errorToast} />
-            <h1>SNMP Tree</h1>
+            <h1>SNMP Objects List</h1>
             {mappedObjects()}
             {renderDialog()}
         </>
     );
 }
 
-export default SnmpTree;
+export default SnmpList;
