@@ -144,3 +144,59 @@ docker run -it --rm -d --network mongodb --name rest-server -p 8000:8000 -e CONN
 
 // Lanzamos comando Docker Compose:
 docker compose -f docker-compose.dev.yml up --build
+
+
+--------------
+--------------
+Dockerfile and docker-compose.yml example:
+--
+Dockerfile:
+'
+# syntax=docker/dockerfile:1
+
+From node:18-alpine
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json", "./"]
+
+RUN npm install --production
+
+COPY . .
+
+CMD [ "node", "server.js" ]
+'
+
+--
+docker-compose.yml:
+'
+version: '3.0'
+
+services:
+  notes:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+      - 9229:9229
+    environment:
+      - SERVER_PORT=8000
+      - CONNECTIONSTRING=mongodb://mongo:27017/notes
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: npm run debug
+
+  mongo:
+    image: mongo:4.2.8
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+
+volumes:
+  mongodb:
+  mongodb_config:
+'
