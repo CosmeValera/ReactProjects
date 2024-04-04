@@ -30,3 +30,9 @@ Rundeck:
 So, while both Ansible and Rundeck can be used for automation and executing tasks on remote machines, Ansible is more focused on configuration management and operates in a push model, while Rundeck provides a centralized platform for managing and executing operations tasks with a web-based interface.
 # END: Difference Ansible and Rundeck #
 #######################################
+
+🚀 Getting Started
+# Create container to run Rundeck
+docker run -d --name rundeck -p 4440:4440 -v data:/home/rundeck/server/data rundeck/rundeck:4.14.0
+# Open browser
+localhost:4440
