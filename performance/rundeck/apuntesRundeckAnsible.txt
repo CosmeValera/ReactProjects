@@ -11,6 +11,12 @@ Rundeck is great for orchestrating procedures.
 - Steps are the individual actions that make up the workflow. For instance, you can execute commands, scripts or plugins.
 - Nodes are the remotes endpoints against which a step executes. For instance, physical machines, virtual machines, containers, databases...
 
+🚀 Getting Started
+# Create container to run Rundeck
+docker run -d --name rundeck -p 4440:4440 -v data:/home/rundeck/server/data rundeck/rundeck:4.14.0
+# Open browser
+localhost:4440
+
 ##################################
 # Difference Ansible and Rundeck #
 Ansible:
@@ -31,8 +37,9 @@ So, while both Ansible and Rundeck can be used for automation and executing task
 # END: Difference Ansible and Rundeck #
 #######################################
 
-🚀 Getting Started
-# Create container to run Rundeck
-docker run -d --name rundeck -p 4440:4440 -v data:/home/rundeck/server/data rundeck/rundeck:4.14.0
-# Open browser
-localhost:4440
+
+#######################################
+#######################################
+#######################################
+
+Ansible:
