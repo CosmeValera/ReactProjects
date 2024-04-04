@@ -9,6 +9,7 @@ Rundeck is great for orchestrating procedures.
 - Projects are workspaces inside your Rundeck.
 - Jobs are the workflows that you define and execute.
 - Steps are the individual actions that make up the workflow. For instance, you can execute commands, scripts or plugins.
+- Nodes are the remotes endpoints against which a step executes. For instance, physical machines, virtual machines, containers, databases...
 
 ##################################
 # Difference Ansible and Rundeck #
