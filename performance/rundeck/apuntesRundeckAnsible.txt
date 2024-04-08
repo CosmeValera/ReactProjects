@@ -178,3 +178,54 @@ Playbook.yml:
 			line: 'nameserver {{ dns_server }}'
 '
 - variable types: String, Number, Boolean, List, Dictionary.
+- Variable precedence: Playbook > Host > Group. 
+These are just 3, the 22 precedence relations can be found in the docu: https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#understanding-variable-precedence
+
+Registering Variables:
+1.
+' 
+---
+- name: Check /etc/hosts file
+  hosts: all
+  tasks:
+  -	shell: cat /etc/hosts
+	register: result
+  - debug:
+	var: result
+'
+In this example, with the keyword register, we store result, and then use this result in the debug module ot obtain more details about how it went.
+
+2. 
+'
+$ ansible-playbook -i inventory playbook.yml -v
+'
+On the other hand, having the playbook normal, but making the script call with -v (verbose). Will also increase the amount of detail. But the detail won't be as specific as in using register. Options-> -v, -vv, -vvv.
+
+Variable scoping:
+1. Variables defined for a group of groups, a group, or a host, are considered to be host scoped.
+2. Variables scroped in a play, ar play scoped. 
+3. Global variables are globally scoped.
+
+Magic variables:
+Code A:
+'
+web1 ansible_host=172.20.1.100
+web2 ansible_host=172.20.1.101 dns_server=10.5.5.4
+web3 ansible_host=172.20.1.102
+'
+In code A. the variable for the dns_server is only available for host web2. However there is a way to be able to use the variables of other hosts. IN this case with this playbook, when instead of using '{{ dns_server }}', you use '{{ hostvars['web2'].dns_server }}', you will be able to access the variable of the host web2. Like in the following example->
+'
+---
+- name: Print dns server
+  hosts: all
+  tasks:
+  - debug:
+	msg: '{{ hostvars['web2'].dns_server }}'
+'.
+In addition to 'hostvars', there are more magic variables like: groups, group_names, inventory_hostname...
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html#information-about-ansible-magic-variables
+And also there are 2 options to write it, both mean the same:
+1. '{{ hostvars['web2'].ansible_facts.processor }}'
+2. '{{ hostvars['web2'][ansible_facts][processor] }}'
+
+Ansible Facts:
