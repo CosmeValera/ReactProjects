@@ -84,3 +84,97 @@ YAML:
 			- name: task2
 			  firstStep: echo adios
 			
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
+
+Ansible Advanced:
+Ansible works with multiple servers, for this it uses SSH.
+The information about this servers is stored in the inventory file. Which by default is in 'etc/ansible/hosts'. It looks like this->
+'
+server1.company.com
+server2.company.com
+
+[mail]
+server3.company.com
+server4.company.com
+'
+You can also put an alias to the ansible connection, and it would look like this: 'web ansible_host=server1.company.com'
+The inventory parameters are:
+'
+ansible_connection - ssh/winrm/localhost
+ansible_port - 22/5986
+ansible_user - root/administrator
+ansible_ssh_pass - Password (in windows-> ansible_password)
+'.
+So one full line may look like this:'web ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=P@#'
+And an inventory file could look like this (ini):
+'
+# Sample Inventory File
+
+# Web Servers
+web_node1 ansible_host=web01.xyz.com ansible_connection=winrm ansible_user=administrator ansible_password=Win$Pass
+web_node2 ansible_host=web02.xyz.com ansible_connection=winrm ansible_user=administrator ansible_password=Win$Pass
+web_node3 ansible_host=web03.xyz.com ansible_connection=winrm ansible_user=administrator ansible_password=Win$Pass
+
+# DB Servers
+sql_db1 ansible_host=sql01.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+sql_db2 ansible_host=sql02.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+
+[db_nodes]
+sql_db1
+sql_db2
+
+[web_nodes]
+web_node1
+web_node2
+web_node3
+
+[boston_nodes]
+sql_db1
+web_node1
+
+[dallas_nodes]
+sql_db2
+web_node2
+web_node3
+
+[us_nodes:children]
+boston_nodes
+dallas_nodes
+'
+
+And an inventory file could look like this (YAML):
+'
+all:
+	children:
+		webservers:
+			children:
+				webserver_us:
+					hosts:
+						server1_us.com:
+							ansible_host: 192.168.8.101
+						server2_us.com:
+							ansible_host: 192.168.8.102
+				webserver_eu:
+					hosts:
+						server1_eu.com:
+							ansible_host: 10.12.0.101
+						server2_eu.com:
+							ansible_host: 10.12.0.102
+'
+
+Ansible variables:
+- Stores information that varies with each host
+- Can be set in the inventory file, or in a variables file.
+Playbook.yml:
+'
+-   name: Add DNS server to resolv.conf
+	hosts: localhost
+	vars:
+		dns_server: 10.1.250.10
+	tasks:
+	  - lineinfile:
+			path: /etc/resolv.conf
+			line: 'nameserver {{ dns_server }}'
+'
+- variable types: String, Number, Boolean, List, Dictionary.
