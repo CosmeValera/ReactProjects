@@ -17,7 +17,9 @@ docker run -d --name rundeck -p 4440:4440 -v data:/home/rundeck/server/data rund
 # Open browser
 localhost:4440
 
-##################################
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
+
 # Difference Ansible and Rundeck #
 Ansible:
 - Ansible is a configuration management tool that focuses on automation.
@@ -35,11 +37,50 @@ Rundeck:
 
 So, while both Ansible and Rundeck can be used for automation and executing tasks on remote machines, Ansible is more focused on configuration management and operates in a push model, while Rundeck provides a centralized platform for managing and executing operations tasks with a web-based interface.
 # END: Difference Ansible and Rundeck #
-#######################################
 
-
-#######################################
-#######################################
-#######################################
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
 
 Ansible:
+- Focused in automation
+- Yaml and Python based
+- Agentless
+- SSH
+- PUSH model
+
+YAML:
+	Key Value Pair:
+		Fruit: Apple
+		Vegetable: Carrot
+	
+	Array/Lists:
+		Fruits:
+			- Orange
+			- Apple
+		
+	Dictionary/Map:
+		Banana:
+			Calories: 106
+			Fat: 0.4g
+	
+	Object:
+		- Car: Toyota
+		  Speed: 100
+			
+	---
+	List of Dictionary:
+		Fruits:
+			- Banana:
+			    Calories: 106
+			    Fat: 0.4g
+			- Grape:
+				Calories: 106
+				Fat: 0.4g
+				
+	Objects list:
+		Tasks:
+			- name: task1
+			  firstStep: echo hola
+			- name: task2
+			  firstStep: echo adios
+			
