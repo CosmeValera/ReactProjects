@@ -229,3 +229,16 @@ And also there are 2 options to write it, both mean the same:
 2. '{{ hostvars['web2'][ansible_facts][processor] }}'
 
 Ansible Facts:
+Ansible facts are data related to your remote systems, including operating systems, IP addresses... 
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html#ansible-facts
+'
+---
+- name: Print hello message
+  hosts: all
+  tasks:
+  - debug:
+    var: ansible_facts
+'
+And this will response with the facts of the hosts.
+If you add the line: 'gather_facts: no'. It won't show any facts.
+In 'etc/ansible/ansible.cfg' You can see the configuration. And by default: 'gathering = implicit'
