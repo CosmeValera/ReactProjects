@@ -362,3 +362,78 @@ Now another example using register and conditionals.
 	  body: Httpd Service is down
 	when: result.stdout.find('down') != -1
 '
+
+Conditionals and facts:
+'
+  - name: Install Nginx on ubuntu
+    apt: 
+	- name: nginx=1.18.0
+	  state: present
+    when: ansible_facts['os_family'] == 'Debian'
+'
+
+Conditionals and vars:
+'
+  - name: Deploy configuration files
+    template:
+		src: "{{ app_env }}_config.j2"
+		dest: "/etc/myapp/config.conf"
+	vars:
+		app_env: production
+'
+
+Loops:
+A code without loops to create users.
+'
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+    - user: name=joe         state=present
+	- user: name=george      state=present
+	- user: name=kirian      state=present
+'
+
+A code with loops to create users.
+'
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+    - user: name='{{ item }}'         state=present
+	loop:
+	  - joe
+	  - george
+	  - kirian
+'
+
+Loops with 2 keys:
+'
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+    - user: name='{{ item.name }}' state=present uid='{{item.uid}}'
+	loop:
+	  - name: joe
+	    uid: 1010
+	  - name: george
+	    uid: 1011
+	  - name: kirian
+	    uid: 1012
+'
+
+Loops using With_*; :
+'
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+    - user: name='{{ item }}' state=present
+	with_items:
+	  - joe
+	  - george
+	  - kirian
+'
+In this case, with_items and loop are the same. But the loop directive is more recent so it's more recommended. 
+There are more 'with' directives, like: with_items, with_file, with_url, with_mongodb.
