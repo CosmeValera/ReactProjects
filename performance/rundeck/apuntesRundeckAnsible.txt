@@ -165,7 +165,7 @@ all:
 
 Ansible variables:
 - Stores information that varies with each host
-- Can be set in the inventory file, or in a variables file.
+- Can be set in the inventory file, in any playbook, or in a variables file.
 Playbook.yml:
 '
 -   name: Add DNS server to resolv.conf
@@ -301,6 +301,7 @@ Ansible lint:
 - To execute it, run: 'ansible-lint <your_script.yml>'
 
 
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
 Conditionals:
 We use when directive to make conditions. Also 'and' and 'or'.
 '
@@ -437,3 +438,31 @@ Loops using With_*; :
 '
 In this case, with_items and loop are the same. But the loop directive is more recent so it's more recommended. 
 There are more 'with' directives, like: with_items, with_file, with_url, with_mongodb.
+
+
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
+Ansible MODULES:
+- System (User, group, hostname)
+- Commands (Command, expect, raw)
+- Files (Acl, Archive, File, Template)
+- Database (Mongodb, Mysql, Postgresql, vertica)
+- Cloud (Amazon, Azure, Docker, VmWare)
+- Windows (Win_copy, Win_command, Win_path)
+- More ()
+
+Command Module:
+'
+-
+  name: Play 1
+  hosts: localhost
+  tasks:
+	- name: Execute command 'date'
+	  command: date
+	- name: Display resolv.conf contents
+	  command: cat /etc/resolv.cong
+	- name: Display resolv.conf contents with chdir parameter
+	  command: cat resolv.conf chdir=/etc
+	- name: Create folder, check if exists first
+	  command: mkdir /folder creates=/folder
+'
+free_form->
