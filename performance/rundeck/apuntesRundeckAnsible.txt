@@ -466,3 +466,58 @@ Command Module:
 	  command: mkdir /folder creates=/folder
 '
 free_form->
+'
+-
+  name: Play 1
+  hosts: localhost
+  tasks:
+	- name: Run a script on a remote server
+	  script: /some/local/script.sh -arg1 -arg2
+'
+Service->
+'
+- name: Play 1
+  hosts: localhost
+  tasks:
+    - name: Start the database service
+	  service: name=postgresql state=started
+'
+or 
+
+'
+- name: Play 1
+  hosts: localhost
+  tasks:
+    - name: Start the database service
+	  service:
+	    name=postgresql
+		state=started
+'
+
+Why is it started and not start?
+Because we are not telling Ansible to start the server. We are telling ansible to ensure that the server is started.
+If http is not already started-> start it. 
+If http is already started-> do nothing.
+
+This is called Idempotency. It means that doing something once or repeating the action multiple times have the same result.
+
+lineinfile:
+'
+- name: Add DNS server to resolv.conf
+  hosts: localhost
+  tasks:
+    - lineinfile:
+	  path: /etc/resolv.conf
+	  line: 'nameserver 10.1.250.10'
+'
+This is also idempotent. It will add the line only once, so it checks first that the lines does not already exist
+
+Ansible PLUGINS:
+- A piece of code that modifies the functionaility of Ansible
+- Enhance various aspects of Ansible
+- Flexible and Powerful way to customize
+- Options:
+  - Inventory Plugin (Dynamic Inventory Plugin)
+  - Module Plugin (AWS)
+  - Action Plugin (Load balancing rules, SSL certificates, Health Checks...)
+  - Callback Plugin
