@@ -520,4 +520,10 @@ Ansible PLUGINS:
   - Inventory Plugin (Dynamic Inventory Plugin)
   - Module Plugin (AWS)
   - Action Plugin (Load balancing rules, SSL certificates, Health Checks...)
-  - Callback Plugin
+  - Callback Plugin (Provide hooks into Ansible's execution lifecycle)
+  - Lookup Plugin
+  - Filter Plugin
+  - Connection Plugin
+  
+#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
+Ansible Handlers:
