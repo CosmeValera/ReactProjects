@@ -527,3 +527,109 @@ Ansible PLUGINS:
   
 #.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$#.@-$
 Ansible Handlers:
+In comparison with tasks, handlers have this properties->
+- Efficiency: Handlers ensure that actions are only taken when necessary, reducing unnecesary executions. For instance if several tasks require a service restart, using a handler ensure that the service is restarted only once, after all relevant tasks have completed.
+- Readibility: Using them we separate the tasks that makes changes to the tasks that respond to those changes.
+- Idempotence: An script can be run multiple times w/o causing unintended side effects.
+
+Example:
+'
+- name: Deploy Applications
+  hosts: application_servers
+  tasks:
+    - name: Copy Application Code
+	  copy:
+	    src: app_code/
+		dest: /opt/application/
+	  notify: Restart Application Service
+  handlers:
+    - name: Restart Application Service
+	  service:
+	    name: application_service
+		state: restarted
+'
+This Ansible playbook deploys application code to application_servers, notifying the handler to restart the application_service after copying the code (if the code is updated).
+
+Ansible roles:
+A role is a group of tasks together. For instance, there can be a java role, mysql role, nginx role etc.
+They are useful for->
+- Organize
+- Re-use
+- Share
+
+A mysql role for instance->
+- Install pre-requisites
+- Install mysql packages
+- Configure mysql service
+- Configure database and users
+mysql-role.yaml:
+'
+- name: Install and configure mysql
+  hosts: db-server
+  tasks:
+    - name: Install pre-requisites
+	  yum: name=pre-req-packages state=present
+	- name: Install MySQL packages
+	  yum: name=mysql state=present
+	- name: Install Service
+	  yum: name=mysql state=started
+	- name: Configure Database
+	  yum: name=db1 state=present
+'
+mysql-role-importer.yaml:
+'
+- name: Install and Configure mysql
+  hosts: db_servers
+  roles:
+    - mysql
+'
+
+Ansible Galaxy:
+Ansible Galaxy is like an app store for Ansible. It's a platform where you can find, share, and download pre-built Ansible content, such as roles, collections, and playbooks, created by the community. It makes it easy to discover and reuse automation solutions, saving time and effort in managing IT infrastructure.
+'ansible-galaxy', is like 'npm', but for collections and roles instead of Node packages.
+e.g:
+ansible-galaxy collection install network.juniper
+
+Ansible Collection:
+A collection in Ansible is like a toolbox for managing IT infrastructure. It contains various tools (such as playbooks, roles, modules, and plugins) organized into a single package. Just as a toolbox keeps different tools organized for different tasks, a collection helps manage and share automation resources efficiently.
+'
+---
+- hosts: localhost
+  collections: amazon.aws
+  tasks:
+    - name: Launch an EC2 instance
+      ec2_instance:
+        name: my-instance
+        region: us-west-1
+'
+To install a collection from a requirements file like this:
+'
+---
+collections:
+  - name: community.general
+    version: '1.0.0'
+  - name: amazon.aws
+    version: '1.2.1'
+'
+Execute this command: 
+ansible-galaxy collection install -r requirements.yml
+
+Code example (1. install a collection, 2. execute a custom module)->
+'
+---
+- hosts: localhost
+  tasks:
+    - name: Install the networking_tools collection
+      ansible.builtin.ansible_galaxy_collection:
+        name: company_xyz.networking_tools
+        source: https://galaxy.ansible.com
+
+- hosts: switches
+  collections:
+    - company_xyz.networking_tools
+  tasks:
+    - name: Configure VLAN 10
+      configure_vlan:
+        vlan_id: 10
+        vlan_name: Admin_VLAN
+'
