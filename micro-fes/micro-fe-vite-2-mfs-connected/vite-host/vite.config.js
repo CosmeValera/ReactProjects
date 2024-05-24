@@ -9,7 +9,8 @@ export default defineConfig({
     federation({
       name: "vite-host",
       remotes: {
-        remote_app: "http://localhost:4173/assets/remoteEntry.js",
+        vite_remote_app: "http://localhost:4173/assets/remoteEntry.js",
+        // webpack_remote_app: "http://localhost:5175/remoteEntry.js"
       },
       shared: ["react"],
     }),

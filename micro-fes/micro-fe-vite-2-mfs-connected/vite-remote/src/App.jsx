@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <h1>Remote</h1>
+      <h1>VITE Remote</h1>
     </>
   )
 }

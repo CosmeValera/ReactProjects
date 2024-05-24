@@ -1,20 +1,26 @@
 import React, { Suspense } from 'react'
 
-const MicrofrontendRemoteApp = React.lazy(() =>
-  import('remote_app/RemoteApp')
-)
-// import RemoteApp from "remote_app/RemoteApp"
-
 import './App.css'
+
+//** VITE REMOTE APP **//
+const MicrofrontendViteRemoteApp = React.lazy(() =>
+  import('vite_remote_app/RemoteApp')
+)
+// import ViteRemoteApp from "vite_remote_app/ViteRemoteApp"
+
+//** WEBPACK REMOTE APP **//
+// import WebpackRemoteApp from "webpack_remote_app/WebpackRemoteApp"
 
 function App() {
   return (
     <>
       <h1>HOST</h1>
       <Suspense fallback={<p> Loading remote... </p>}>
-        <MicrofrontendRemoteApp />
+        <MicrofrontendViteRemoteApp />
       </Suspense>
-      {/* <RemoteApp /> */}
+      {/* <ViteRemoteApp /> */}
+
+      {/* <WebpackRemoteApp /> */}
     </>
   )
 }
