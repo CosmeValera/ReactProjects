@@ -633,3 +633,32 @@ Code example (1. install a collection, 2. execute a custom module)->
         vlan_id: 10
         vlan_name: Admin_VLAN
 '
+
+String manipulation (Jinja2):
+'
+The name is {{ my_name }} => The name is Bond
+The name is {{ my_name | upper}} => The name is BOND
+The name is {{ my_name | lower}} => The name is bond
+The name is {{ my_name | title}} => The name is Bond
+The name is {{ my_name | replace("Bond", "Bourne")}} => The name is Bourne
+
+{{ [1, 2, 3] | min }} => 1
+{{ [1, 2, 3, 2] | unique }} => 1, 2, 3
+{{ [1, 2, 3, 4] | union( [4, 5] ) }} => 1, 2, 3, 4, 5
+{{ 100 | random }} => Random number
+'
+
+Loop (Jinja2):
+'
+{% for number in [0,1,2,3,4] %}
+	{{ number }}
+{% endfor %}
+'
+Conditions (Jinja2):
+'
+{% for number in [0,1,2,3,4] %}
+	{% if number == 2 %}
+		{{ number }}
+	{% endif %}
+{% endfor %}
+'
