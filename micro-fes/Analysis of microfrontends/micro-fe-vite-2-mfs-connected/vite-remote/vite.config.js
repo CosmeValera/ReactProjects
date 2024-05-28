@@ -4,6 +4,12 @@ import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
 
 export default defineConfig({
+  server: {
+    port: 5174,
+  },
+  preview: {
+    port: 5174,
+  },
   plugins: [
     react(),
     federation({
