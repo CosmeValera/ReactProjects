@@ -1,6 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const Dotenv = require('dotenv-webpack');
+
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
@@ -39,11 +39,21 @@ module.exports = (_, argv) => ({
     ],
   },
 
+  target: "es2020",
+  experiments: {
+    outputModule: true
+  },
+
   plugins: [
     new ModuleFederationPlugin({
       name: "webpack_host",
+      library: {
+        type: "module"
+      },
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        remote: "http://localhost:4001/assets/remoteEntry.js"
+      },
       exposes: {},
       shared: {
         ...deps,
@@ -58,8 +68,8 @@ module.exports = (_, argv) => ({
       },
     }),
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
-    }),
-    new Dotenv()
+      template: "./index.ejs",
+      inject: false
+    })
   ],
 });
