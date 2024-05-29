@@ -5,6 +5,7 @@
 ```bash
 npm create vite@latest
 npm add @originjs/vite-plugin-federation -D 
+npm add @vitejs/plugin-react -D 
 npm i
 ```
 
