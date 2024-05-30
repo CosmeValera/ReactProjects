@@ -14,6 +14,9 @@ module.exports = (_, argv) => ({
   devServer: {
     port: 4002,
     historyApiFallback: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
   },
 
   module: {
@@ -51,10 +54,10 @@ module.exports = (_, argv) => ({
         type: "module"
       },
       filename: "remoteEntry.js",
-      remotes: {
-        remote: "http://localhost:4001/assets/remoteEntry.js"
+      remotes: {},
+      exposes: {
+        "./WebpackApp": "./src/WebpackApp",
       },
-      exposes: {},
       shared: {
         ...deps,
         react: {

@@ -7,10 +7,15 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "vite-remote",
+      name: "vite-host",
       filename: "remoteEntry.js",
-      exposes: {
-        "./App": "./src/App",
+      exposes: { },
+      remotes: {
+        webpack_remote: {
+          external: 'http://localhost:4002/remoteEntry.js',
+          format: 'esm',
+          from: 'webpack'
+        }
       },
       shared: ["react", "react-dom"],
     })
