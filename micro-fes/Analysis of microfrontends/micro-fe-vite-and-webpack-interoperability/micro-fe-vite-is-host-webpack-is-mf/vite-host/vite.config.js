@@ -13,7 +13,7 @@ export default defineConfig({
       remotes: {
         webpack_remote: {
           external: 'http://localhost:4002/remoteEntry.js',
-          format: 'esm',
+          format: 'var',
           from: 'webpack'
         }
       },

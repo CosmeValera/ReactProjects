@@ -1,11 +1,21 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const path = require('path');
 
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
     publicPath: "http://localhost:4002/",
+    chunkLoading: false,
+    // path: path.resolve(__dirname, 'dist'),
+    // module: true, // Disable for CJ
+    // library: {
+    //   type: "var",
+    //   name: "webpack_host"
+    // },
   },
+  target: 'web',
+  // target: 'es2020', // Disable for CJ
 
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
@@ -42,16 +52,11 @@ module.exports = (_, argv) => ({
     ],
   },
 
-  target: "es2020",
-  experiments: {
-    outputModule: true
-  },
-
   plugins: [
     new ModuleFederationPlugin({
       name: "webpack_host",
       library: {
-        type: "module"
+        type: "var", name: "webpack_host"
       },
       filename: "remoteEntry.js",
       remotes: {},
@@ -63,10 +68,12 @@ module.exports = (_, argv) => ({
         react: {
           singleton: true,
           requiredVersion: deps.react,
+          eager: true,
         },
         "react-dom": {
           singleton: true,
           requiredVersion: deps["react-dom"],
+          eager: true,
         },
       },
     }),
