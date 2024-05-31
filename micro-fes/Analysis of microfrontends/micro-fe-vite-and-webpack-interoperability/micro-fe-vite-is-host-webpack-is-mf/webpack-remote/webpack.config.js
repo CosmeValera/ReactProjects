@@ -4,8 +4,16 @@ const path = require('path');
 
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
+
+  mode: "development",
+  cache: false,
+  target: 'web',
+  devtool: false,
+  entry: path.resolve(__dirname, "./src/index.js"),
+  
   output: {
     publicPath: "http://localhost:4002/",
+    libraryExport: 'index',
     chunkLoading: false,
     // path: path.resolve(__dirname, 'dist'),
     // module: true, // Disable for CJ
@@ -14,7 +22,6 @@ module.exports = (_, argv) => ({
     //   name: "webpack_host"
     // },
   },
-  target: 'web',
   // target: 'es2020', // Disable for CJ
 
   resolve: {
@@ -54,17 +61,16 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "webpack_host",
-      library: {
-        type: "var", name: "webpack_host"
-      },
+      name: "webpack_remote",
+      // library: {
+      //   type: "var", name: "webpack_remote"
+      // },
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
         "./WebpackApp": "./src/WebpackApp",
       },
       shared: {
-        ...deps,
         react: {
           singleton: true,
           requiredVersion: deps.react,
@@ -78,8 +84,7 @@ module.exports = (_, argv) => ({
       },
     }),
     new HtmlWebPackPlugin({
-      template: "./index.ejs",
-      inject: false
+      template: "./index.html"
     })
   ],
 });

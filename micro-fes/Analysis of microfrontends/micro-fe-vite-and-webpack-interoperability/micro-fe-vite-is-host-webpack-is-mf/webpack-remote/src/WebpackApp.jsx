@@ -4,7 +4,7 @@ import "./index.css";
 
 const WebpackApp = () => (
   <div className="container">
-    <div><b>WEBPACK REMOTE PROJECsT</b></div>
+    <div><b>WEBPAsdCK sasdREMOTE PROgJssEszssCsTgsd</b></div>
   </div>
 );
 
