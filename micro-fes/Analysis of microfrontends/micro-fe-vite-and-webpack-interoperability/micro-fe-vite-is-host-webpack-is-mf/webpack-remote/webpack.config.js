@@ -5,24 +5,12 @@ const path = require('path');
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
 
-  mode: "development",
-  cache: false,
   target: 'web',
-  devtool: false,
-  entry: path.resolve(__dirname, "./src/index.js"),
-  
+
   output: {
     publicPath: "http://localhost:4002/",
-    libraryExport: 'index',
     chunkLoading: false,
-    // path: path.resolve(__dirname, 'dist'),
-    // module: true, // Disable for CJ
-    // library: {
-    //   type: "var",
-    //   name: "webpack_host"
-    // },
   },
-  // target: 'es2020', // Disable for CJ
 
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
@@ -62,9 +50,6 @@ module.exports = (_, argv) => ({
   plugins: [
     new ModuleFederationPlugin({
       name: "webpack_remote",
-      // library: {
-      //   type: "var", name: "webpack_remote"
-      // },
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
