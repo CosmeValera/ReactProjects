@@ -4,7 +4,7 @@ import "./index.css";
 
 const WebpackApp = () => (
   <div className="container">
-    <div><b>WEBPAsdCK sasdREMOTE PROgJssEszssCsTgsd</b></div>
+    <div><b>[WEBPACK REMOTE] HMR CONSEGUIDO!!!</b></div>
   </div>
 );
 
