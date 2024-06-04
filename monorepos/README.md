@@ -11,3 +11,15 @@ npx create-nx-workspace@latest nxapp
 ```bash
 npx create-turbo@latest turboapp
 ```
+
+## 🚀 Getting started
+Install all dependencies:
+```bash
+npm i
+```
+<small>Common dependencies will be installed in the root `node_modules`</small>
+
+Run all apps:
+```bash
+npm run dev
+```
