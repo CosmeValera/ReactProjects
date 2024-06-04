@@ -1,1 +1,4 @@
-asadf
+Monorepo
+A monorepo is a repository that stores all the projects under the root.
+
+
