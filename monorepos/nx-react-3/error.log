@@ -1,0 +1,9 @@
+
+ NX   self-signed certificate in certificate chain
+
+Pass --verbose to see the stacktrace.
+
+
+(node:21740) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[33mThe CJS build of Vite's Node API is deprecated. See https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
