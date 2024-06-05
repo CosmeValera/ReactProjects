@@ -1,3 +1,0 @@
-packages:
-  - 'packages/*'
-shamefully-hoist: false # OPTIONAL
