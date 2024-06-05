@@ -1,4 +1,14 @@
 Monorepo
-A monorepo is a repository that stores all the projects under the root.
+A monorepo is a single repository that stores the code for multiple projects. This approach is used to manage and develop projects in a centralized way.
 
 
+Characteristics of workspaces:
+- Organizational System: Workspaces are an organizational system within monorepos that allow for the management of multiple packages or projects in a cohesive manner.
+- Automatic Symlinking: Workspaces automatically create symbolic links (symlinks) between packages, making them available as if they were installed in the node_modules directory of each project.
+- Optimized Dependencies with Hoisting: Dependency hoisting is a process where dependencies are moved to a higher level in the directory structure to reduce duplication and improve efficiency.
+
+Dependency Hoisting
+- Default Behavior: Dependency hoisting typically occurs by default in most monorepo tools (like Yarn Workspaces or Lerna). This means that if multiple projects within the monorepo depend on the same version of a package, the package will be "hoisted" to a common node_modules directory at the root of the monorepo.
+- Single Dependency Hoisting: Even if a dependency is used by only one project, it may still be hoisted to the root-level node_modules directory to maintain consistency and simplify dependency management.
+- Preventing Hoisting: To prevent a dependency from being hoisted, you must explicitly configure the tool to keep it at the project level. This can be done by specifying the dependency as non-hoistable in the tool's configuration file.
+- Version Conflicts: If different projects require different versions of the same dependency, hoisting will not occur for that dependency. Instead, each project will maintain its own version to avoid conflicts.
