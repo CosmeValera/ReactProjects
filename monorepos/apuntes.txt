@@ -12,3 +12,18 @@ Dependency Hoisting
 - Single Dependency Hoisting: Even if a dependency is used by only one project, it may still be hoisted to the root-level node_modules directory to maintain consistency and simplify dependency management.
 - Preventing Hoisting: To prevent a dependency from being hoisted, you must explicitly configure the tool to keep it at the project level. This can be done by specifying the dependency as non-hoistable in the tool's configuration file.
 - Version Conflicts: If different projects require different versions of the same dependency, hoisting will not occur for that dependency. Instead, each project will maintain its own version to avoid conflicts.
+
+What if two packages require two different versions of the same dependency?
+YARN:
+In yarn you can set the nohoist option.
+With the nohoist option we can set the dependencies that we do not want to share, these dependencies will be in the node_modules of each packages that has it.
+
+PNPM:
+- Default (shamefully-hoist: false): Dependencies are installed in a nested structure specific to each package, avoiding conflicts.
+- With shamefully-hoist: true: Dependencies are hoisted to the root node_modules, but pnpm still manages to avoid conflicts by maintaining some level of nesting and using a central store with symlinks.
+To use pnpm in a monorepo, you need to add a file `pnpm-workspace.yaml` like this:
+'
+packages:
+  - 'packages/*' 
+shamefully-hoist: true # OPTIONAL
+'
