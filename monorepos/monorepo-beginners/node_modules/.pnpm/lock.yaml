@@ -1,0 +1,34 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .: {}
+
+  packages/module-a:
+    dependencies:
+      '@monorepo-beginners/module-b':
+        specifier: ^1.0.0
+        version: 1.1.0
+
+  packages/module-b: {}
+
+packages:
+
+  '@monorepo-beginners/module-b@1.1.0':
+    resolution: {integrity: sha512-1/1vEUuhSVTclv0umufKE3DSZmEZ1T4ul86qI74gH/NAgz4XCx3xMPd7Ts4nEP1kMudZyi6GTMwAJW2ECZLeHw==}
+    hasBin: true
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
+snapshots:
+
+  '@monorepo-beginners/module-b@1.1.0':
+    dependencies:
+      lodash: 4.17.21
+
+  lodash@4.17.21: {}

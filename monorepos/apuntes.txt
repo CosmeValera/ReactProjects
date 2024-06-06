@@ -45,3 +45,29 @@ npm --workspaces --if-present run start
 It does not support no-hoist, however it does deal with different versions of the same dependency in its own way (e.g: module-a-> react.18, module-b-> react.16. In root node_modules is installed react.18, and in module-b node_modules is installed react.16)
 
 PNPM:
+To use pnpm in a monorepo, you need to add a file `pnpm-workspace.yaml` like this:
+'
+packages:
+  - 'packages/*' 
+shamefully-hoist: true # OPTIONAL
+'
+
+In module-a.package.json, you have to change the version to 'workspace:*' to have symlink, like in here:
+'
+"dependencies": {
+	"@monorepo-beginners/module-b": "workspace:*"
+},
+'
+
+To not use cd, do it like this (1, 2, N):
+pnpm -F "@monorepo-beginners/module-a" run start
+pnpm -F "@monorepo-beginners/module-a" -F "@monorepo-beginners/module-b" run start
+pnpm -F "@monorepo-beginners/*" run start
+
+Regarding dependencies, pnpm uses a virtual store, in the root node_modules, so even thought it seems like it has a tree with all the dependencies in the root, actually there's just one copy of each one.
+
+However there's the possibility to enable hoisting with pnpm. You have to create a '.npmrc' file, with content:
+'
+node-linker=hoisted
+'
+But for most use cases, it's just as advantageous to use the symlinking pattern. 
