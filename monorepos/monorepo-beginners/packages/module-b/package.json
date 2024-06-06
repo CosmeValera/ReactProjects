@@ -8,8 +8,5 @@
   },
   "scripts": {
     "build": "node ./index.js"
-  },
-  "devDependencies": {
-    "react": "^16"
   }
 }

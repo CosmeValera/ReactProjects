@@ -43,3 +43,5 @@ npm --workspaces run build
 npm --workspaces --if-present run start
 
 It does not support no-hoist, however it does deal with different versions of the same dependency in its own way (e.g: module-a-> react.18, module-b-> react.16. In root node_modules is installed react.18, and in module-b node_modules is installed react.16)
+
+PNPM:
