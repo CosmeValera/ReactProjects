@@ -27,3 +27,8 @@ packages:
   - 'packages/*' 
 shamefully-hoist: true # OPTIONAL
 '
+
+Abandon cd (YARN):
+We can use the command "yarn workspace <workspace>" to start, build or install things in the repo without the need of using cd.
+"yarn workspace module-a build"
+"yarn workspace module-b add react"

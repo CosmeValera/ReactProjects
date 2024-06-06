@@ -8,5 +8,8 @@
   },
   "bin": {
     "mdb": "./index.js"
+  },
+  "scripts": {
+    "build": "node ./index.js"
   }
 }

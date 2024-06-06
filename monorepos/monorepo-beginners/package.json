@@ -15,6 +15,7 @@
     ]
   },
   "scripts": {
-    "start": "mdb"
+    "start": "mdb",
+    "build": "node ./index.js"
   }
 }
