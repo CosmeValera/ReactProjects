@@ -1,7 +1,7 @@
 Monorepo
 A monorepo is a single repository that stores the code for multiple projects. This approach is used to manage and develop projects in a centralized way.
 
-
+---
 Characteristics of workspaces:
 - Organizational System: Workspaces are an organizational system within monorepos that allow for the management of multiple packages or projects in a cohesive manner.
 - Automatic Symlinking: Workspaces automatically create symbolic links (symlinks) between packages, making them available as if they were installed in the node_modules directory of each project.
@@ -13,6 +13,7 @@ Dependency Hoisting
 - Preventing Hoisting: To prevent a dependency from being hoisted, you must explicitly configure the tool to keep it at the project level. This can be done by specifying the dependency as non-hoistable in the tool's configuration file.
 - Version Conflicts: If different projects require different versions of the same dependency, hoisting will not occur for that dependency. Instead, each project will maintain its own version to avoid conflicts.
 
+---
 What if two packages require two different versions of the same dependency?
 YARN:
 In yarn you can set the nohoist option.
@@ -32,3 +33,13 @@ Abandon cd (YARN):
 We can use the command "yarn workspace <workspace>" to start, build or install things in the repo without the need of using cd.
 "yarn workspace module-a build"
 "yarn workspace module-b add react"
+
+---
+YARN vs NPM vs PNPM:
+
+NPM (1, N, --if-present):
+npm --workspace=@monorepo-beginners/module-a run start
+npm --workspaces run build
+npm --workspaces --if-present run start
+
+It does not support no-hoist, however it does deal with different versions of the same dependency in its own way (e.g: module-a-> react.18, module-b-> react.16. In root node_modules is installed react.18, and in module-b node_modules is installed react.16)
