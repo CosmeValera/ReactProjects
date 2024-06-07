@@ -106,3 +106,20 @@ Since lerna will be installed locally in our repo, but it's not installed global
 ' yarn lerna init --packages "packages/*" '.
 
 Lerna was deprecated but it's now maintained by the NX people.
+
+The command will create the file 'lerna.json'. Regarding the version, you can set it or you can put "version": "independent".
+   
+To avoid duplication we will change the packages property to workspaces. It will look something like this:
+{
+  "version": "0.0.0",
+  "useWorkspaces": true,
+  "npmClient": "yarn"
+}
+
+*useWorkspaces seems deprecated. Use packages then xd. 
+
+!IMPORTANT
+***Lerna seems to have a lot of things deprecated anyway. So I think it is better not to use.
+!END: IMPORTANT
+
+Let's use a Lerna command:
