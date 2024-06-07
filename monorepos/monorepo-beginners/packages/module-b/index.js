@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-console.log('I am module-b!!!!????');
+console.log('I am module-bs!!!!????');
