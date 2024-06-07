@@ -134,3 +134,5 @@ npm login && npm publish
 2. Lerna flavoured
 npm login && npm run lerna publish
 
+
+I tried lerna but didn't work for publishing (maybe needs to be in its own Github repo), also it seems half deprecated. I don't recommend
