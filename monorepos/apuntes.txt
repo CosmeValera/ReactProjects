@@ -97,3 +97,12 @@ it shouuld be:
 'yarn add lerna -DW'.
 
 Since lerna will be installed locally in our repo, but it's not installed globally, we can not make use of it through the terminal, but we can put it in our package.json scripts.
+
+  "scripts": {
+    "start": "mdb",
+    "lerna": "lerna"
+  },
+  
+' yarn lerna init --packages "packages/*" '.
+
+Lerna was deprecated but it's now maintained by the NX people.
