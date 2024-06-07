@@ -88,3 +88,12 @@ Non-Scoped Package (module-a):
 
 ---
 LERNA:
+It's generally considered bad practice to install dependencies at the root of the monorepo. This is because if you have a module that depends on a particular dependency, but it's not defined in that module package.json file. When the module is published and downloaded by another user, then the module could fail due to that dependency not being installed. The exception to this rule is dev dependencies.
+Since dev dependencies are supposed to only be used during development and not meant to be used by the published version we should not run into this problem.
+
+It is for this reason, that when trying to install something in my monorepo, instead of:
+'yarn add lerna',
+it shouuld be:
+'yarn add lerna -DW'.
+
+Since lerna will be installed locally in our repo, but it's not installed globally, we can not make use of it through the terminal, but we can put it in our package.json scripts.
