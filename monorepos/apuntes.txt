@@ -127,3 +127,10 @@ yarn lerna run build
 
 Or in parallel:
 yarn lerna run build --parallel
+
+To publish:
+1. Standard
+npm login && npm publish
+2. Lerna flavoured
+npm login && npm run lerna publish
+
