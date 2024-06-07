@@ -73,4 +73,18 @@ node-linker=hoisted
 But for most use cases, it's just as advantageous to use the symlinking pattern. 
 
 ---
+SCOPED PACKAGE vs NON-SCOPED PACKAGE:
+
+Scoped Package (@monorepo-beginners/module-a):
+
+- Namespace Management: Helps avoid naming conflicts by creating a unique namespace under monorepo-beginners.
+- Organizational Clarity: Indicates the package is part of a larger organization or project.
+- Visibility Control: Can be private by default but can be set to public using publishConfig.
+
+Non-Scoped Package (module-a):
+- Public by Default: Non-scoped packages are always public unless explicitly restricted.
+- No Organizational Context: Doesn't provide an immediate context of ownership or association with a specific organization.
+- Potential Naming Conflicts: Needs a globally unique name in the npm registry, which can be challenging.
+
+---
 LERNA:
