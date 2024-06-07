@@ -71,3 +71,6 @@ However there's the possibility to enable hoisting with pnpm. You have to create
 node-linker=hoisted
 '
 But for most use cases, it's just as advantageous to use the symlinking pattern. 
+
+---
+LERNA:
