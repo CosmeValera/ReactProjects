@@ -123,3 +123,7 @@ To avoid duplication we will change the packages property to workspaces. It will
 !END: IMPORTANT
 
 Let's use a Lerna command:
+yarn lerna run build
+
+Or in parallel:
+yarn lerna run build --parallel
