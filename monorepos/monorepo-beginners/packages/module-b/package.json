@@ -1,5 +1,5 @@
 {
-  "name": "@monorepo-beginners/module-b",
+  "name": "@monorepo-beginners/module-b-csm",
   "version": "0.3.0",
   "main": "index.js",
   "license": "MIT",
@@ -15,5 +15,5 @@
   "scripts": {
     "build": "node ./index.js"
   },
-  "gitHead": "19b76aa1b60f7eae62c88dacba6f933bcfe57cf7"
+  "gitHead": "817f30ac71e7434dd11c756624b81313050a7790"
 }

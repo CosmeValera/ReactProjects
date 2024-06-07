@@ -1,3 +1,3 @@
-console.log('I am module-as');
+console.log('I am module-asds');
 
 require('@monorepo-beginners/module-b');
