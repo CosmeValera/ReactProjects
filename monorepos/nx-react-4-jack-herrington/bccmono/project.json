@@ -1,0 +1,9 @@
+{
+  "name": "bccmono",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "./src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project bccmono --web",
+  "targets": {}
+}
