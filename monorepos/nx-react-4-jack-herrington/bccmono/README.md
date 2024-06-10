@@ -8,6 +8,14 @@
 
 `yarn build`
 
+## Create component
+
+`nx g @nrwl/react:lib mycomps`
+
+## Create a shared component
+
+`nx g @nrwl/react:component carousel --directory mycomps/src/lib/carousel`
+
 ## Running tasks
 
 To execute tasks with Nx use the following syntax:

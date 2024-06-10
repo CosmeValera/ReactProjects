@@ -6,6 +6,7 @@ import NxWelcome from './nx-welcome';
 export function App() {
   return (
     <div>
+      <p>Holi</p>
       <NxWelcome title="bccmono" />
     </div>
   );
