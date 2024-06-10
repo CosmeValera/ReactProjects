@@ -16,6 +16,22 @@
 
 `nx g @nrwl/react:component carousel --directory mycomps/src/lib/carousel`
 
+## Storybook
+### Install Storybook
+`yarn add --dev @nrwl/storybook`
+### Storybook configuration
+`nx g @nx/react:storybook-configuration --directory mycomps/src/lib/carousel`
+### Run Storybook
+`nx run mycomps:storybook`
+
+---
+---
+---
+---
+---
+ 👇 DEFAULT 👇
+-
+---
 ## Running tasks
 
 To execute tasks with Nx use the following syntax:
