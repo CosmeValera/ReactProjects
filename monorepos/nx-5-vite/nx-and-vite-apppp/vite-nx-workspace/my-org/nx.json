@@ -1,0 +1,15 @@
+{
+  "npmScope": "my-org",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": "*",
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "my-vite-app-1": {},
+    "my-vite-app-2": {}
+  }
+}

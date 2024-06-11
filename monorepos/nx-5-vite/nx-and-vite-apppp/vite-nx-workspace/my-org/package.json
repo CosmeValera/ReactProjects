@@ -1,0 +1,18 @@
+{
+  "name": "vite-nx-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nx run-many --target=serve",
+    "build": "nx run-many --target=build"
+  },
+  "devDependencies": {
+    "nx": "latest",
+    "vite": "^4.0.0",
+    "@vitejs/plugin-react": "^3.0.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
