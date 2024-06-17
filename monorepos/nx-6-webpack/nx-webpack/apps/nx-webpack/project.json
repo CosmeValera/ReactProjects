@@ -1,0 +1,9 @@
+{
+  "name": "nx-webpack",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nx-webpack/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project nx-webpack --web",
+  "targets": {}
+}
