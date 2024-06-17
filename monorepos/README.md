@@ -14,6 +14,8 @@ npx create-nx-workspace@latest nxapp
 npx create-turbo@latest turboapp
 ```
 
+---
+
 ## 🚀 Getting started (NX)
 ### Install all dependencies:
 ```bash
@@ -48,6 +50,7 @@ npx nx run sccf-tc-spacon-mf:test
 ```
 <small>Change sccf-tc-spacon-mf* with the app you want to test!</small>
 
+---
 
 ## Monorepo vs Polyrepo
 
