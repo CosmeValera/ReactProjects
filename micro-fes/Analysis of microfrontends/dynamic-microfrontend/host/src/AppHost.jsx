@@ -4,12 +4,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 import MainHost from "./MainHost";
-import RemoteApp from "remote/MainRemote";
+import DynamicRemoteApp from "./DynamicRemoteApp";
 
 const AppHost = () => (
   <div className="container">
     <MainHost />
-    <RemoteApp />
+    <DynamicRemoteApp name="remote/MainRemote"/>    
   </div>
 );
 
