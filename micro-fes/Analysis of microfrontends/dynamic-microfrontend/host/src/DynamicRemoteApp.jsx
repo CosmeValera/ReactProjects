@@ -3,7 +3,7 @@ import React, {Suspense} from "react";
 
 const moduleMap = {
   "remote/MainRemote": () => import("remote/MainRemote"),
-//   "remote/tcSpacon": () => import("sccf_tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain"),
+  "remote/SecondaryRemote": () => import("remote/SecondaryRemote")
   // Add other modules here if needed
 };
 

@@ -45,8 +45,6 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         remote: "remote@http://localhost:7024/remoteEntry.js",
-        sccf_tc_spacon_mission_interface_microfrontend:
-          'sccf_tc_spacon_mission_interface_microfrontend@http://localhost:3002/remoteEntry.js',
       },
       exposes: {},
       shared: {
