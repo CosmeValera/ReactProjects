@@ -1,0 +1,699 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.5.3",
+  "deps": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.11.2",
+    "tslib": "^2.3.0",
+    "@babel/core": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
+    "@module-federation/enhanced": "~0.2.3",
+    "@nx/eslint": "19.5.3",
+    "@nx/eslint-plugin": "19.5.3",
+    "@nx/jest": "19.5.3",
+    "@nx/js": "19.5.3",
+    "@nx/react": "19.5.3",
+    "@nx/web": "19.5.3",
+    "@nx/webpack": "19.5.3",
+    "@nx/workspace": "19.5.3",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@svgr/webpack": "^8.0.1",
+    "@swc-node/register": "~1.9.1",
+    "@swc/cli": "~0.3.12",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
+    "@testing-library/react": "15.0.6",
+    "@types/jest": "^29.4.0",
+    "@types/node": "18.16.9",
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "babel-jest": "^29.4.1",
+    "eslint": "~8.57.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "jest": "^29.4.1",
+    "jest-environment-jsdom": "^29.4.1",
+    "nx": "19.5.3",
+    "prettier": "^2.6.2",
+    "react-refresh": "^0.10.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "10.9.1",
+    "typescript": "~5.5.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "pathMappings": {
+    "cart/Module": [
+      "apps/cart/src/remote-entry.ts"
+    ],
+    "shop/Module": [
+      "apps/shop/src/remote-entry.ts"
+    ]
+  },
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
+      }
+    },
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ],
+  "fileMap": {
+    "projectFileMap": {
+      "app-2": [
+        {
+          "file": "apps/app-2/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/app-2/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/app-2/jest.config.ts",
+          "hash": "13473809181591922431"
+        },
+        {
+          "file": "apps/app-2/project.json",
+          "hash": "5883197483432386493"
+        },
+        {
+          "file": "apps/app-2/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/app-2/src/app/app.spec.tsx",
+          "hash": "12225389607167535266",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/app-2/src/app/app.tsx",
+          "hash": "503612021072002183"
+        },
+        {
+          "file": "apps/app-2/src/app/nx-welcome.tsx",
+          "hash": "12096868160512100491"
+        },
+        {
+          "file": "apps/app-2/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/app-2/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/app-2/src/index.html",
+          "hash": "3279040812147461537"
+        },
+        {
+          "file": "apps/app-2/src/main.tsx",
+          "hash": "4731961929376199421",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/app-2/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/app-2/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/app-2/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/app-2/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/app-2/webpack.config.js",
+          "hash": "7984075483285170098",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ],
+      "shell": [
+        {
+          "file": "apps/shell/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/shell/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/shell/jest.config.ts",
+          "hash": "5990511012536023163"
+        },
+        {
+          "file": "apps/shell/module-federation.config.ts",
+          "hash": "16237006831086512556",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        },
+        {
+          "file": "apps/shell/project.json",
+          "hash": "13236080516643126971"
+        },
+        {
+          "file": "apps/shell/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/shell/src/app/app.spec.tsx",
+          "hash": "4856903990764613969",
+          "deps": [
+            "npm:@testing-library/react",
+            "npm:react-router-dom"
+          ]
+        },
+        {
+          "file": "apps/shell/src/app/app.tsx",
+          "hash": "14849317153122633999",
+          "deps": [
+            "npm:react",
+            "npm:react-router-dom",
+            [
+              "shop",
+              "dynamic"
+            ],
+            [
+              "cart",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "apps/shell/src/app/nx-welcome.tsx",
+          "hash": "5267155925086583714"
+        },
+        {
+          "file": "apps/shell/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/shell/src/bootstrap.tsx",
+          "hash": "763379880219152615",
+          "deps": [
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-router-dom"
+          ]
+        },
+        {
+          "file": "apps/shell/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/shell/src/index.html",
+          "hash": "10696969017639770100"
+        },
+        {
+          "file": "apps/shell/src/main.ts",
+          "hash": "14701344671644104227"
+        },
+        {
+          "file": "apps/shell/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/shell/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/shell/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/shell/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/shell/webpack.config.prod.ts",
+          "hash": "16875563876163335079",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        },
+        {
+          "file": "apps/shell/webpack.config.ts",
+          "hash": "9568967468834018836",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ],
+      "app-4": [
+        {
+          "file": "apps/app-4/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/app-4/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/app-4/jest.config.ts",
+          "hash": "14411544365551330438"
+        },
+        {
+          "file": "apps/app-4/project.json",
+          "hash": "13897087058889891596"
+        },
+        {
+          "file": "apps/app-4/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/app-4/src/app/app.spec.tsx",
+          "hash": "7863645739691583285",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/app-4/src/app/app.tsx",
+          "hash": "8990686826878571719"
+        },
+        {
+          "file": "apps/app-4/src/app/nx-welcome.tsx",
+          "hash": "12096868160512100491"
+        },
+        {
+          "file": "apps/app-4/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/app-4/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/app-4/src/index.html",
+          "hash": "5499681972765708258"
+        },
+        {
+          "file": "apps/app-4/src/main.tsx",
+          "hash": "4731961929376199421",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/app-4/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/app-4/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/app-4/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/app-4/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/app-4/webpack.config.js",
+          "hash": "3857852980365276791",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ],
+      "app-1": [
+        {
+          "file": "apps/app-1/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/app-1/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/app-1/jest.config.ts",
+          "hash": "2513776080038953137"
+        },
+        {
+          "file": "apps/app-1/project.json",
+          "hash": "17969193943487708517"
+        },
+        {
+          "file": "apps/app-1/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/app-1/src/app/app.spec.tsx",
+          "hash": "10170748710156880272",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/app-1/src/app/app.tsx",
+          "hash": "14935512274186279650"
+        },
+        {
+          "file": "apps/app-1/src/app/nx-welcome.tsx",
+          "hash": "9395375607492089148"
+        },
+        {
+          "file": "apps/app-1/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/app-1/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/app-1/src/index.html",
+          "hash": "11343774923214986469"
+        },
+        {
+          "file": "apps/app-1/src/main.tsx",
+          "hash": "4731961929376199421",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/app-1/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/app-1/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/app-1/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/app-1/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/app-1/webpack.config.js",
+          "hash": "5254281328642765618",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ],
+      "shop": [
+        {
+          "file": "apps/shop/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/shop/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/shop/jest.config.ts",
+          "hash": "8294224025769952064"
+        },
+        {
+          "file": "apps/shop/module-federation.config.ts",
+          "hash": "5421381214453443821",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        },
+        {
+          "file": "apps/shop/project.json",
+          "hash": "14184947345426928625"
+        },
+        {
+          "file": "apps/shop/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/shop/src/app/app.spec.tsx",
+          "hash": "1296838464685829491",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/shop/src/app/app.tsx",
+          "hash": "15428577559828281428"
+        },
+        {
+          "file": "apps/shop/src/app/nx-welcome.tsx",
+          "hash": "15142590264736890099"
+        },
+        {
+          "file": "apps/shop/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/shop/src/bootstrap.tsx",
+          "hash": "4731961929376199421",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/shop/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/shop/src/index.html",
+          "hash": "13431531073038208989"
+        },
+        {
+          "file": "apps/shop/src/main.ts",
+          "hash": "10018980967429810802"
+        },
+        {
+          "file": "apps/shop/src/remote-entry.ts",
+          "hash": "16889477869301519830"
+        },
+        {
+          "file": "apps/shop/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/shop/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/shop/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/shop/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/shop/webpack.config.prod.ts",
+          "hash": "3215656518859184930"
+        },
+        {
+          "file": "apps/shop/webpack.config.ts",
+          "hash": "10004600247982823625",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ],
+      "cart": [
+        {
+          "file": "apps/cart/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/cart/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/cart/jest.config.ts",
+          "hash": "7538731453864127537"
+        },
+        {
+          "file": "apps/cart/module-federation.config.ts",
+          "hash": "7427574614747433651",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        },
+        {
+          "file": "apps/cart/project.json",
+          "hash": "3582725727649089208"
+        },
+        {
+          "file": "apps/cart/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/cart/src/app/app.spec.tsx",
+          "hash": "15478066845474338067",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/cart/src/app/app.tsx",
+          "hash": "8221214486357944133"
+        },
+        {
+          "file": "apps/cart/src/app/nx-welcome.tsx",
+          "hash": "7532484412841693496"
+        },
+        {
+          "file": "apps/cart/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/cart/src/bootstrap.tsx",
+          "hash": "4731961929376199421",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/cart/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/cart/src/index.html",
+          "hash": "8207554694931913252"
+        },
+        {
+          "file": "apps/cart/src/main.ts",
+          "hash": "10018980967429810802"
+        },
+        {
+          "file": "apps/cart/src/remote-entry.ts",
+          "hash": "16889477869301519830"
+        },
+        {
+          "file": "apps/cart/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/cart/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/cart/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/cart/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/cart/webpack.config.prod.ts",
+          "hash": "3215656518859184930"
+        },
+        {
+          "file": "apps/cart/webpack.config.ts",
+          "hash": "10004600247982823625",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ]
+    },
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "18315524891129148814"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "17107242987988535020"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "14688272390704683536"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "4934098906304722861"
+      },
+      {
+        "file": "README.md",
+        "hash": "1601407559755731617"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "3494843969422251966"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": "nx.json",
+        "hash": "4254126727539777086"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "6515784170952550754"
+      },
+      {
+        "file": "package.json",
+        "hash": "13839142085426646302"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "14397330996811171443"
+      }
+    ]
+  }
+}
