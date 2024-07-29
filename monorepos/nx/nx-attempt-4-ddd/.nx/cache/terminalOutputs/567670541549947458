@@ -1,0 +1,26 @@
+[1m[34m[ Module Federation Manifest Plugin ]: Manifest will use absolute path resolution via its host at runtime, reason: publicPath='auto'[39m[22m
+[31mUnable to compile federated types, Error: compile TS failed, the original command is 'npx tsc --project C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\apps\cart\node_modules\.federation\tsconfig.c1fa8ddc-9d90-48cf-bc6e-1f500fcf2439.json'[39m
+Error: ENOENT: no such file or directory, open 'C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\apps\cart\dist\@mf-types.zip'
+[90m    at Object.openSync (node:fs:573:18)[39m
+[90m    at Object.readFileSync (node:fs:452:35)[39m
+    at _GenerateTypesPlugin.<anonymous> [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4m@module-federation[24m\dts-plugin\dist\index.js:2470:140[90m)[39m
+    at Generator.next (<anonymous>)
+    at fulfilled [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4m@module-federation[24m\dts-plugin\dist\index.js:54:24[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+  errno: [33m-4058[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'C:\\Users\\covr\\OneDrive - gmv.com\\Desktop\\Cosme (Local)\\ReactProjects\\monorepos\\nx\\nx-attempt-4-ddd\\apps\\cart\\dist\\@mf-types.zip'[39m
+}
+Entrypoint [1mmain[39m[22m 69.2 KiB (272 KiB) = [1m[32mmain.js[39m[22m 1 auxiliary asset
+Entrypoint [1mstyles[39m[22m 69 KiB (272 KiB) = [1m[32mstyles.css[39m[22m 119 bytes [1m[32mstyles.js[39m[22m 68.9 KiB 2 auxiliary assets
+Entrypoint [1mcart[39m[22m 69.7 KiB (274 KiB) = [1m[32mremoteEntry.js[39m[22m 1 auxiliary asset
+chunk (runtime: cart, main, styles) [1m[32m485.js[39m[22m (id hint: vendors) 134 KiB [1m[32m[rendered][39m[22m [1m[33mreused as split chunk (cache group: defaultVendors)[39m[22m
+chunk (runtime: cart, main, styles) [1m[32m552.js[39m[22m 6.95 KiB [1m[32m[rendered][39m[22m
+chunk (runtime: cart, main, styles) 42 bytes [1m[33mreused as split chunk (cache group: default)[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 165 KiB (javascript) 84 bytes (share-init) 10.7 KiB (runtime) [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: main) [1m[32m794.js[39m[22m 2.58 KiB (javascript) 42 bytes (consume-shared) [1m[32m[rendered][39m[22m
+chunk (runtime: styles) [1m[32mstyles.css[39m[22m, [1m[32mstyles.js[39m[22m (styles) 165 KiB (javascript) 80 bytes (css/mini-extract) 84 bytes (share-init) 10.3 KiB (runtime) [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: cart) [1m[32m__federation_expose_Module.js[39m[22m (__federation_expose_Module) 1.71 KiB [1m[32m[rendered][39m[22m
+chunk (runtime: cart) [1m[32mremoteEntry.js[39m[22m (cart) 165 KiB (javascript) 84 bytes (share-init) 10.6 KiB (runtime) [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (45a12f0e658ea218)

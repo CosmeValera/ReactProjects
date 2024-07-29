@@ -10,28 +10,33 @@ const Cart = React.lazy(() => import('cart/Module'));
 
 export function App() {
   return (
-    <React.Suspense fallback={null}>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
+    <>
+      <Cart />
+      <Shop />
+    </>
 
-        <li>
-          <Link to="/shop">Shop</Link>
-        </li>
+    // <React.Suspense fallback={null}>
+    //   <ul>
+    //     <li>
+    //       <Link to="/">Home</Link>
+    //     </li>
 
-        <li>
-          <Link to="/cart">Cart</Link>
-        </li>
-      </ul>
-      <Routes>
-        <Route path="/" element={<NxWelcome title="shell" />} />
+    //     <li>
+    //       <Link to="/shop">Shop</Link>
+    //     </li>
 
-        <Route path="/shop" element={<Shop />} />
+    //     <li>
+    //       <Link to="/cart">Cart</Link>
+    //     </li>
+    //   </ul>
+    //   <Routes>
+    //     <Route path="/" element={<NxWelcome title="shell" />} />
 
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </React.Suspense>
+    //     <Route path="/shop" element={<Shop />} />
+
+    //     <Route path="/cart" element={<Cart />} />
+    //   </Routes>
+    // </React.Suspense>
   );
 }
 
