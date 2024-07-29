@@ -689,7 +689,7 @@
               },
               "production": {
                 "buildTarget": "shell:build:production",
-                "hmr": false
+                "hmr": true
               }
             },
             "parallelism": true
@@ -903,7 +903,7 @@
               },
               "production": {
                 "buildTarget": "cart:build:production",
-                "hmr": false
+                "hmr": true
               }
             },
             "parallelism": true
@@ -1117,7 +1117,7 @@
               },
               "production": {
                 "buildTarget": "shop:build:production",
-                "hmr": false
+                "hmr": true
               }
             },
             "parallelism": true
@@ -12743,6 +12743,11 @@
       }
     ],
     "shell": [
+      {
+        "source": "shell",
+        "target": "npm:webpack",
+        "type": "static"
+      },
       {
         "source": "shell",
         "target": "npm:@nx/webpack",

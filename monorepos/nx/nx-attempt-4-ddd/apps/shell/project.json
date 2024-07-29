@@ -59,7 +59,7 @@
         },
         "production": {
           "buildTarget": "shell:build:production",
-          "hmr": false
+          "hmr": true
         }
       }
     },

@@ -59,7 +59,7 @@
         },
         "production": {
           "buildTarget": "cart:build:production",
-          "hmr": false
+          "hmr": true
         }
       }
     },

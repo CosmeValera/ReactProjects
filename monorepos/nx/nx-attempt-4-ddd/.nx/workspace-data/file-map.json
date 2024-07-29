@@ -160,120 +160,6 @@
           ]
         }
       ],
-      "shell": [
-        {
-          "file": "apps/shell/.babelrc",
-          "hash": "13020124393823981135"
-        },
-        {
-          "file": "apps/shell/.eslintrc.json",
-          "hash": "11012487992710232822"
-        },
-        {
-          "file": "apps/shell/jest.config.ts",
-          "hash": "5990511012536023163"
-        },
-        {
-          "file": "apps/shell/module-federation.config.ts",
-          "hash": "16237006831086512556",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        },
-        {
-          "file": "apps/shell/project.json",
-          "hash": "13236080516643126971"
-        },
-        {
-          "file": "apps/shell/src/app/app.module.css",
-          "hash": "8887387885984320532"
-        },
-        {
-          "file": "apps/shell/src/app/app.spec.tsx",
-          "hash": "4856903990764613969",
-          "deps": [
-            "npm:@testing-library/react",
-            "npm:react-router-dom"
-          ]
-        },
-        {
-          "file": "apps/shell/src/app/app.tsx",
-          "hash": "14849317153122633999",
-          "deps": [
-            "npm:react",
-            "npm:react-router-dom",
-            [
-              "shop",
-              "dynamic"
-            ],
-            [
-              "cart",
-              "dynamic"
-            ]
-          ]
-        },
-        {
-          "file": "apps/shell/src/app/nx-welcome.tsx",
-          "hash": "5267155925086583714"
-        },
-        {
-          "file": "apps/shell/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/shell/src/bootstrap.tsx",
-          "hash": "763379880219152615",
-          "deps": [
-            "npm:react",
-            "npm:react-dom",
-            "npm:react-router-dom"
-          ]
-        },
-        {
-          "file": "apps/shell/src/favicon.ico",
-          "hash": "9303420814833116677"
-        },
-        {
-          "file": "apps/shell/src/index.html",
-          "hash": "10696969017639770100"
-        },
-        {
-          "file": "apps/shell/src/main.ts",
-          "hash": "14701344671644104227"
-        },
-        {
-          "file": "apps/shell/src/styles.css",
-          "hash": "5195668842064076916"
-        },
-        {
-          "file": "apps/shell/tsconfig.app.json",
-          "hash": "15147195313780277677"
-        },
-        {
-          "file": "apps/shell/tsconfig.json",
-          "hash": "9850153468027031608"
-        },
-        {
-          "file": "apps/shell/tsconfig.spec.json",
-          "hash": "11378287594513225419"
-        },
-        {
-          "file": "apps/shell/webpack.config.prod.ts",
-          "hash": "16875563876163335079",
-          "deps": [
-            "npm:@nx/webpack",
-            "npm:@nx/react"
-          ]
-        },
-        {
-          "file": "apps/shell/webpack.config.ts",
-          "hash": "9568967468834018836",
-          "deps": [
-            "npm:@nx/webpack",
-            "npm:@nx/react"
-          ]
-        }
-      ],
       "cart": [
         {
           "file": "apps/cart/.babelrc",
@@ -296,7 +182,7 @@
         },
         {
           "file": "apps/cart/project.json",
-          "hash": "3582725727649089208"
+          "hash": "11235946929974166763"
         },
         {
           "file": "apps/cart/src/app/app.module.css",
@@ -315,7 +201,7 @@
         },
         {
           "file": "apps/cart/src/app/nx-welcome.tsx",
-          "hash": "7532484412841693496"
+          "hash": "3558636854942423844"
         },
         {
           "file": "apps/cart/src/assets/.gitkeep",
@@ -367,106 +253,6 @@
         },
         {
           "file": "apps/cart/webpack.config.ts",
-          "hash": "10004600247982823625",
-          "deps": [
-            "npm:@nx/webpack",
-            "npm:@nx/react"
-          ]
-        }
-      ],
-      "shop": [
-        {
-          "file": "apps/shop/.babelrc",
-          "hash": "13020124393823981135"
-        },
-        {
-          "file": "apps/shop/.eslintrc.json",
-          "hash": "11012487992710232822"
-        },
-        {
-          "file": "apps/shop/jest.config.ts",
-          "hash": "8294224025769952064"
-        },
-        {
-          "file": "apps/shop/module-federation.config.ts",
-          "hash": "5421381214453443821",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        },
-        {
-          "file": "apps/shop/project.json",
-          "hash": "14184947345426928625"
-        },
-        {
-          "file": "apps/shop/src/app/app.module.css",
-          "hash": "8887387885984320532"
-        },
-        {
-          "file": "apps/shop/src/app/app.spec.tsx",
-          "hash": "1296838464685829491",
-          "deps": [
-            "npm:@testing-library/react"
-          ]
-        },
-        {
-          "file": "apps/shop/src/app/app.tsx",
-          "hash": "15428577559828281428"
-        },
-        {
-          "file": "apps/shop/src/app/nx-welcome.tsx",
-          "hash": "15142590264736890099"
-        },
-        {
-          "file": "apps/shop/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/shop/src/bootstrap.tsx",
-          "hash": "4731961929376199421",
-          "deps": [
-            "npm:react",
-            "npm:react-dom"
-          ]
-        },
-        {
-          "file": "apps/shop/src/favicon.ico",
-          "hash": "9303420814833116677"
-        },
-        {
-          "file": "apps/shop/src/index.html",
-          "hash": "13431531073038208989"
-        },
-        {
-          "file": "apps/shop/src/main.ts",
-          "hash": "10018980967429810802"
-        },
-        {
-          "file": "apps/shop/src/remote-entry.ts",
-          "hash": "16889477869301519830"
-        },
-        {
-          "file": "apps/shop/src/styles.css",
-          "hash": "5195668842064076916"
-        },
-        {
-          "file": "apps/shop/tsconfig.app.json",
-          "hash": "15147195313780277677"
-        },
-        {
-          "file": "apps/shop/tsconfig.json",
-          "hash": "9850153468027031608"
-        },
-        {
-          "file": "apps/shop/tsconfig.spec.json",
-          "hash": "11378287594513225419"
-        },
-        {
-          "file": "apps/shop/webpack.config.prod.ts",
-          "hash": "3215656518859184930"
-        },
-        {
-          "file": "apps/shop/webpack.config.ts",
           "hash": "10004600247982823625",
           "deps": [
             "npm:@nx/webpack",
@@ -549,6 +335,227 @@
         {
           "file": "apps/app-4/webpack.config.js",
           "hash": "3857852980365276791",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ],
+      "shop": [
+        {
+          "file": "apps/shop/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/shop/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/shop/jest.config.ts",
+          "hash": "8294224025769952064"
+        },
+        {
+          "file": "apps/shop/module-federation.config.ts",
+          "hash": "5421381214453443821",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        },
+        {
+          "file": "apps/shop/project.json",
+          "hash": "11325419842924842429"
+        },
+        {
+          "file": "apps/shop/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/shop/src/app/app.spec.tsx",
+          "hash": "1296838464685829491",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/shop/src/app/app.tsx",
+          "hash": "15428577559828281428"
+        },
+        {
+          "file": "apps/shop/src/app/nx-welcome.tsx",
+          "hash": "15142590264736890099"
+        },
+        {
+          "file": "apps/shop/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/shop/src/bootstrap.tsx",
+          "hash": "4731961929376199421",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/shop/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/shop/src/index.html",
+          "hash": "13431531073038208989"
+        },
+        {
+          "file": "apps/shop/src/main.ts",
+          "hash": "10018980967429810802"
+        },
+        {
+          "file": "apps/shop/src/remote-entry.ts",
+          "hash": "16889477869301519830"
+        },
+        {
+          "file": "apps/shop/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/shop/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/shop/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/shop/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/shop/webpack.config.prod.ts",
+          "hash": "3215656518859184930"
+        },
+        {
+          "file": "apps/shop/webpack.config.ts",
+          "hash": "10004600247982823625",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        }
+      ],
+      "shell": [
+        {
+          "file": "apps/shell/.babelrc",
+          "hash": "13020124393823981135"
+        },
+        {
+          "file": "apps/shell/.eslintrc.json",
+          "hash": "11012487992710232822"
+        },
+        {
+          "file": "apps/shell/compilation-plugin.ts",
+          "hash": "5832083729883680823",
+          "deps": [
+            "npm:webpack"
+          ]
+        },
+        {
+          "file": "apps/shell/jest.config.ts",
+          "hash": "5990511012536023163"
+        },
+        {
+          "file": "apps/shell/module-federation.config.ts",
+          "hash": "16237006831086512556",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        },
+        {
+          "file": "apps/shell/project.json",
+          "hash": "699415685289258256"
+        },
+        {
+          "file": "apps/shell/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/shell/src/app/app.spec.tsx",
+          "hash": "4856903990764613969",
+          "deps": [
+            "npm:@testing-library/react",
+            "npm:react-router-dom"
+          ]
+        },
+        {
+          "file": "apps/shell/src/app/app.tsx",
+          "hash": "14724671593517896516",
+          "deps": [
+            "npm:react",
+            "npm:react-router-dom",
+            [
+              "shop",
+              "dynamic"
+            ],
+            [
+              "cart",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "apps/shell/src/app/nx-welcome.tsx",
+          "hash": "5267155925086583714"
+        },
+        {
+          "file": "apps/shell/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/shell/src/bootstrap.tsx",
+          "hash": "763379880219152615",
+          "deps": [
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-router-dom"
+          ]
+        },
+        {
+          "file": "apps/shell/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/shell/src/index.html",
+          "hash": "10696969017639770100"
+        },
+        {
+          "file": "apps/shell/src/main.ts",
+          "hash": "14701344671644104227"
+        },
+        {
+          "file": "apps/shell/src/styles.css",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/shell/tsconfig.app.json",
+          "hash": "15147195313780277677"
+        },
+        {
+          "file": "apps/shell/tsconfig.json",
+          "hash": "9850153468027031608"
+        },
+        {
+          "file": "apps/shell/tsconfig.spec.json",
+          "hash": "11378287594513225419"
+        },
+        {
+          "file": "apps/shell/webpack.config.prod.ts",
+          "hash": "17073612164562756774",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:@nx/react"
+          ]
+        },
+        {
+          "file": "apps/shell/webpack.config.ts",
+          "hash": "13807248398211320841",
           "deps": [
             "npm:@nx/webpack",
             "npm:@nx/react"

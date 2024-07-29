@@ -10,10 +10,12 @@ const Cart = React.lazy(() => import('cart/Module'));
 
 export function App() {
   return (
-    <>
+    <React.Suspense fallback={null}>
+      <Cart />
       <Cart />
       <Shop />
-    </>
+      {/* <NxWelcome title="shell" /> */}
+    </React.Suspense>
 
     // <React.Suspense fallback={null}>
     //   <ul>

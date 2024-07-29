@@ -1,0 +1,35 @@
+
+[7m[1m[36m NX [39m[22m[27m [1mStarting module federation dev-server for [1mshell[22m[1m with 2 remotes[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mBuilding 2 static remotes...[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mBuilt 2 static remotes[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mStarting static remotes proxies...[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mStatic remotes proxies started successfully[22m
+
+[1m[33mCould not find a version for "webpack" in the root "package.json" when collecting shared packages for the Module Federation setup. The package will not be shared.[39m[22m
+[1m[34m[ Module Federation Manifest Plugin ]: Manifest will use absolute path resolution via its host at runtime, reason: publicPath='auto'[39m[22m
+Unhandled Rejection Error:  Error: listen EADDRINUSE: address already in use :::4201
+[90m    at Server.setupListenHandle [as _listen2] (node:net:1898:16)[39m
+[90m    at listenInCluster (node:net:1946:12)[39m
+[90m    at Server.listen (node:net:2044:7)[39m
+    at Function.listen [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4mexpress[24m\lib\application.js:635:24[90m)[39m
+    at startRemoteProxies [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4m@nx[24m\webpack\src\utils\module-federation\start-remote-proxies.js:15:42[90m)[39m
+    at moduleFederationDevServer [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4m@nx[24m\react\src\executors\module-federation-dev-server\module-federation-dev-server.impl.js:198:51[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at getLastValueFromAsyncIterableIterator [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4mnx[24m\src\utils\async-iterator.js:15:19[90m)[39m
+    at iteratorToProcessStatusCode [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4mnx[24m\src\command-line\run\run.js:38:25[90m)[39m
+    at handleErrors [90m(C:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\ReactProjects\monorepos\nx\nx-attempt-4-ddd\[39mnode_modules\[4mnx[24m\src\utils\params.js:22:24[90m)[39m {
+  code: [32m'EADDRINUSE'[39m,
+  errno: [33m-4091[39m,
+  syscall: [32m'listen'[39m,
+  address: [32m'::'[39m,
+  port: [33m4201[39m
+}
+[36mshell Process(20680) uncaughtException, mf server will exit...[39m

@@ -1,31 +1,31 @@
 {
   "run": {
     "command": "nx run-many --target=build --projects=shop,cart --configuration=development",
-    "startTime": "2024-07-29T07:24:04.022Z",
-    "endTime": "2024-07-29T07:24:21.487Z",
+    "startTime": "2024-07-29T11:59:06.891Z",
+    "endTime": "2024-07-29T11:59:07.856Z",
     "inner": false
   },
   "tasks": [
-    {
-      "taskId": "shop:build:development",
-      "target": "build",
-      "projectName": "shop",
-      "hash": "15717026665390710750",
-      "startTime": "2024-07-29T07:24:04.036Z",
-      "endTime": "2024-07-29T07:24:21.486Z",
-      "params": "",
-      "cacheStatus": "cache-miss",
-      "status": 0
-    },
     {
       "taskId": "cart:build:development",
       "target": "build",
       "projectName": "cart",
       "hash": "567670541549947458",
-      "startTime": "2024-07-29T07:24:04.048Z",
-      "endTime": "2024-07-29T07:24:21.487Z",
+      "startTime": "2024-07-29T11:59:06.985Z",
+      "endTime": "2024-07-29T11:59:07.762Z",
       "params": "",
-      "cacheStatus": "cache-miss",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "shop:build:development",
+      "target": "build",
+      "projectName": "shop",
+      "hash": "15717026665390710750",
+      "startTime": "2024-07-29T11:59:06.927Z",
+      "endTime": "2024-07-29T11:59:07.855Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
       "status": 0
     }
   ]
