@@ -11,6 +11,7 @@ const Cart = React.lazy(() => import('cart/Module'));
 export function App() {
   return (
     <React.Suspense fallback={null}>
+      SHELLkadfkds
       <Cart />
       <Cart />
       <Shop />
