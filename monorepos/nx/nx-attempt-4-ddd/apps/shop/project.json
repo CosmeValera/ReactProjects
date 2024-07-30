@@ -50,7 +50,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "shop:build",
-        "hmr": true,
+        "hmr": false,
+        "liveReload": true,
         "port": 4201
       },
       "configurations": {

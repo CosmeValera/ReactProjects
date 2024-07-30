@@ -45,22 +45,24 @@
         }
       }
     },
-    "serve": {
+    "serve-with-hmr-remotes": {
       "executor": "@nx/react:module-federation-dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "shell:build",
-        "hmr": true,
-        "port": 4200
-      },
       "configurations": {
+        "production": {
+          "buildTarget": "shell:build:production"
+        },
         "development": {
           "buildTarget": "shell:build:development"
-        },
-        "production": {
-          "buildTarget": "shell:build:production",
-          "hmr": true
         }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200",
+        "devRemotes": [
+          "shop",
+          "cart"
+        ]
       }
     },
     "serve-static": {
