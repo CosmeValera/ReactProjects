@@ -26,7 +26,9 @@
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
-          "vendorChunk": true
+          "vendorChunk": true,
+          "cache": true,
+          "parallel": true
         },
         "production": {
           "fileReplacements": [
