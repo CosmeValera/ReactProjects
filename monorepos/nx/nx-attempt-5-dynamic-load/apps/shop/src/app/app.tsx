@@ -6,7 +6,7 @@ import NxWelcome from './nx-welcome';
 export function App() {
   return (
     <div>
-      <NxWelcome title="nx-attempt-5-dynamic-load" />
+      <NxWelcome title="shop" />
     </div>
   );
 }
