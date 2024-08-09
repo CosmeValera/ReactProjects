@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-attempt-5-dynamic-load/load-remote-module": [
+      "@microfrontends/load-remote-module": [
         "libs/load-remote-module/src/index.ts"
       ],
       "blog/Module": ["apps/blog/src/remote-entry.ts"],

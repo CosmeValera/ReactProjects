@@ -1,6 +1,6 @@
 {
   "name": "load-remote-module",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/load-remote-module/src",
   "projectType": "library",
   "tags": [],
@@ -9,10 +9,10 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/load-remote-module",
-        "main": "load-remote-module/src/index.ts",
-        "tsConfig": "load-remote-module/tsconfig.lib.json",
-        "assets": ["load-remote-module/*.md"]
+        "outputPath": "dist/libs/load-remote-module",
+        "main": "libs/load-remote-module/src/index.ts",
+        "tsConfig": "libs/load-remote-module/tsconfig.lib.json",
+        "assets": ["libs/load-remote-module/*.md"]
       }
     }
   }
