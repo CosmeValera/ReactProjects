@@ -5,35 +5,28 @@ import { ModuleFederationConfig } from '@nx/webpack';
 
 import baseConfig from './module-federation.config';
 
-const prodConfig: ModuleFederationConfig = {
+const config: ModuleFederationConfig = {
   ...baseConfig,
-  /*
-   * Remote overrides for production.
-   * Each entry is a pair of a unique name and the URL where it is deployed.
-   *
-   * e.g.
-   * remotes: [
-   *   ['app1', 'http://app1.example.com'],
-   *   ['app2', 'http://app2.example.com'],
-   * ]
-   *
-   * You can also use a full path to the remoteEntry.js file if desired.
-   *
-   * remotes: [
-   *   ['app1', 'http://example.com/path/to/app1/remoteEntry.js'],
-   *   ['app2', 'http://example.com/path/to/app2/remoteEntry.js'],
-   * ]
-   */
-  remotes: [
-    ['cart', 'http://localhost:4201/'],
-    ['blog', 'http://localhost:4202/'],
-    ['shop', 'http://localhost:4203/'],
-  ],
 };
 
-// Nx plugins for webpack to build config object from Nx options and context.
-export default composePlugins(
-  withNx(),
-  withReact(),
-  withModuleFederation(prodConfig)
-);
+const coreLibraries = new Set([
+  'react',
+  'react-dom',
+  'react-router-dom',
+  '@microfrontends/load-remote-module',
+]);
+
+module.exports = withModuleFederation({
+  ...config,
+  shared: (libraryName, defaultConfig) => {
+    if (coreLibraries.has(libraryName)) {
+      return {
+        ...defaultConfig,
+        eager: true,
+      };
+    }
+
+    // Returning false means the library is not shared.
+    return false;
+  },
+});

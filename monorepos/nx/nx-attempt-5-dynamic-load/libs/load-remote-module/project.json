@@ -1,7 +1,7 @@
 {
   "name": "load-remote-module",
   "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "load-remote-module/src",
+  "sourceRoot": "libs/load-remote-module/src",
   "projectType": "library",
   "tags": [],
   "targets": {

@@ -2,7 +2,9 @@
   "name": "@nx-attempt-5-dynamic-load/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "npx nx serve host"
+  },
   "private": true,
   "dependencies": {
     "react": "18.3.1",
