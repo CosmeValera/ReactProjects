@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nx-attempt-5-dynamic-load/load-remote-module": [
+        "load-remote-module/src/index.ts"
+      ],
       "blog/Module": ["apps/blog/src/remote-entry.ts"],
       "cart/Module": ["apps/cart/src/remote-entry.ts"],
       "shop/Module": ["apps/shop/src/remote-entry.ts"]
