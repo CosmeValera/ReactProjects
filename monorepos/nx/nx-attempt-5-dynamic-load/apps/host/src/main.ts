@@ -1,4 +1,4 @@
-import { setRemoteDefinitions } from '@microfrontends/load-remote-module';
+import { setRemoteDefinitions } from './app/load-remote-module';
 import('./bootstrap');
 
 fetch('/assets/module-federation.manifest.json')

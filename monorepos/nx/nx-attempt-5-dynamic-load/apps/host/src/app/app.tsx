@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { loadRemoteModule } from '@microfrontends/load-remote-module';
+import { loadRemoteModule } from './load-remote-module';
 
 const Cart = React.lazy(() => loadRemoteModule('cart', './Module'));
 
