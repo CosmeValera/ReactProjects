@@ -16,8 +16,24 @@ pnpm --filter web run dev
 ```
 <small>`web` is the name of the project</small>
 
+Add dependency to a project:
+```sh
+pnpm --filter web add tailwindcss
+```
 
-### DEFAULT README BELOW 👇👇
+Add dependency to all project:
+```sh
+pnpm --workspace-root add tailwindcss  # Or
+pnpm -w add tailwindcss
+```
+
+
+---
+---
+---
+### 👇 DEFAULT README BELOW 👇
+---
+---
 
 # Turborepo starter
 
