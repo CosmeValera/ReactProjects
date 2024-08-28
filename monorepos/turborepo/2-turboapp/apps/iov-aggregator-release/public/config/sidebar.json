@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Example",
+    "items": [
+      {
+        "name": "ExampleRemote",
+        "component": "grafana_remote/ExampleRemote",
+        "url": "http://localhost:3001/remoteEntry.js",
+        "customProps": {}
+      }
+    ]
+  },
+  {
+    "name": "Satellite",
+    "items": [
+      {
+        "name": "Single-satellite monitoring",
+        "component": "satellite_remote/SatellitePicked",
+        "url": "http://localhost:3002/remoteEntry.js",
+        "customProps": {}
+      },
+      {
+        "name": "Fleet Monitoring",
+        "component": "satellite_remote/FleetMonitoring",
+        "url": "http://localhost:3002/remoteEntry.js",
+        "customProps": {}
+      }
+    ]
+  },
+  {
+    "name": "Grafana",
+    "items": [
+      {
+        "name": "FDF - Graph",
+        "component": "grafana_remote/GrafanaRemote",
+        "url": "http://localhost:3001/remoteEntry.js",
+        "customProps": { "src": "http://localhost:6060/d-solo/fdmjva7j6u9z4c/demo-db?orgId=1&from=1716428249431&to=1716447799545&panelId=1" }
+      },
+      {
+        "name": "FDF - Stat",
+        "component": "grafana_remote/GrafanaRemote",
+        "url": "http://localhost:3001/remoteEntry.js",
+        "customProps": { "src": "http://localhost:6060/d-solo/fdmjva7j6u9z4c/demo-db?orgId=1&from=1716428249431&to=1716447799545&panelId=2" }
+      },
+      {
+        "name": "FDF - Gauge",
+        "component": "grafana_remote/GrafanaRemote",
+        "url": "http://localhost:3001/remoteEntry.js",
+        "customProps": { "src": "http://localhost:6060/d-solo/fdmjva7j6u9z4c/demo-db?orgId=1&from=1716428249431&to=1716447799545&panelId=3" }
+      }
+    ]
+  }
+]
