@@ -7,7 +7,8 @@ npx create-turbo@latest
 Run all projects with either command:
 ```sh
 npm run dev  # or
-pnpm dev
+pnpm run dev  # or with Turbo
+pnpm turbo run dev
 ```
 
 Run one project:
