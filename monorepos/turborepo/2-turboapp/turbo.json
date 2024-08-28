@@ -1,18 +1,13 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
+  "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
+    "start": {
+      "dependsOn": [],
+      "outputs": []
+    },
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
+      "outputs": ["apps/webpack-app/dist/**"]
     }
   }
 }
