@@ -1,3 +1,24 @@
+# Turborepo
+Create a turborepo:
+```sh
+npx create-turbo@latest
+```
+
+Run all projects with either command:
+```sh
+npm run dev  # or
+pnpm dev
+```
+
+Run one project:
+```sh
+pnpm --filter web run dev
+```
+<small>`web` is the name of the project</small>
+
+
+### DEFAULT README BELOW 👇👇
+
 # Turborepo starter
 
 This is an official starter Turborepo.
