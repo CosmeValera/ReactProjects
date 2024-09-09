@@ -17,9 +17,24 @@ client.connect()
     process.exit(1); // Exit the process if connection fails
   });
 
-// Define a simple route
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+// Define a route to show tweets
+app.get('/', async (req, res) => {
+  try {
+    const result = await client.query('SELECT * FROM tweets');
+    const rows = result.rows;
+
+    // Generate HTML table
+    let html = '<h1>Tweets</h1><table border="1"><tr><th>ID</th><th>Tweet Content</th></tr>';
+    rows.forEach(row => {
+      html += `<tr><td>${row.id}</td><td>${row.tweet_content}</td></tr>`;
+    });
+    html += '</table>';
+
+    res.send(html);
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.status(500).send('An error occurred while fetching data.');
+  }
 });
 
 // Start the server
