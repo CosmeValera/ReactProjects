@@ -3,12 +3,17 @@
 
 Here are some basic PostgreSQL commands that you can use once you are inside a database:
 
-1. Show All Tables
+1. Enter a SQL session:
+```sh
+psql -U username -d database_name
+```
 
-```sql
+2. Show All Tables
+
+```sh
 \dt
 ```
-2. Create a Table
+3. Create a Table
 
 ```sql
 CREATE TABLE tweets (
@@ -16,25 +21,26 @@ CREATE TABLE tweets (
   tweet_content VARCHAR(256)
 );
 ```
-**id:** A column with a serial type to automatically increment.
+
+**id:** A column with a serial type to automatically increment. |
 **name:** A column with a maximum length of 100 characters.
 
-3. Delete (Drop) a Table
+4. Delete (Drop) a Table
 
 ```sql
 DROP TABLE table_name;
 ```
-4. Select All Rows from a Table
+5. Select All Rows from a Table
 
 ```sql
 SELECT * FROM table_name;
 ```
-5. Show Table Structure
+6. Show Table Structure
 
 ```sql
 \d table_name
 ```
-6. Insert Data into a Table
+7. Insert Data into a Table
 
 ```sql
 INSERT INTO tweets 
@@ -42,18 +48,21 @@ INSERT INTO tweets
   ('SCC 2024 had Magnus Carlsen as the winner'),
   ('Alireza was second');
 ```
-1. Update Data in a Table
+8. Update Data in a Table
 
 ```sql
-UPDATE example_table SET name = 'Jane Doe' WHERE id = 1;
+UPDATE tweets
+SET tweet_content = 'Hikaru was third' 
+WHERE id = 4;
 ```
-8. Delete Data from a Table
+9. Delete Data from a Table
 
 ```sql
-DELETE FROM example_table WHERE id = 1;
+DELETE FROM tweets
+WHERE id = 4;
 ```
-9. Exit the PostgreSQL Prompt
+10. Exit the PostgreSQL Prompt
 
-```sql
+```sh
 \q
 ```
