@@ -1,7 +1,7 @@
 # POSTGRESQL
 
 
-Here are some basic PostgreSQL commands to connect to a database and some others once you are inside:
+Here are some basic PostgreSQL commands to connect to a database and some others once you are inside.
 
 ## 📡 Connect to database
 1. Enter a postgreSQL session
