@@ -1,6 +1,6 @@
 const express = require('express');
 const pg = require('pg');
-require('dotenv').config(); // To load .env variables
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
