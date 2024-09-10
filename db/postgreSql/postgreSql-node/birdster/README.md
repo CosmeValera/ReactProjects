@@ -1,9 +1,14 @@
-# POSTGRESQL
+# 🐘 PostgreSQL
 
 
 Here are some basic PostgreSQL commands to connect to a database and some others once you are inside.
 
-## 📡 Connect to database
+## 📡 Connect to a database
+0. Connect to a docker terminal <small>*(When using Docker)*</small>
+```sh
+docker exec -it aggregator_postgres /bin/bash
+```
+
 1. Enter a postgreSQL session
 ```sh
 psql -U username  # Or
@@ -19,6 +24,7 @@ psql -U username -d database_name
 ```sh
 \c database_name
 ```
+
 
 ## 🗄️ Inside a database
 
