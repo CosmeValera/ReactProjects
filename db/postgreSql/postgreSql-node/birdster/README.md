@@ -102,3 +102,8 @@ In PostgreSQL, a **schema** is like a "database" in other DBMS, and a **database
 ```sh
 \di
 ```
+
+5. Set the pager off
+```sh
+\pset pager off  # off | on | always
+```
