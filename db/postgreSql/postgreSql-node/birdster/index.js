@@ -17,11 +17,11 @@ client.connect()
     process.exit(1); // Exit the process if connection fails
   });
 
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
 // Define a route to show tweets
 app.get('/', async (req, res) => {
   try {
@@ -37,9 +37,9 @@ app.get('/', async (req, res) => {
     ];
 
     // Generate HTML for each table
-    let html = '';
+    let html = '<body style="background: #252525; color: #F6F6F6;">';
     tables.forEach(table => {
-      html += `<h1>${table.title}</h1><table border="1"><tr>`;
+      html += `<h1>${table.title}</h1><table border="1" style="color: #F6F6F6;"><tr>`;
       table.columns.forEach(column => {
         html += `<th>${column}</th>`;
       });
@@ -54,6 +54,7 @@ app.get('/', async (req, res) => {
       html += `</table>`;
     });
 
+    html += '</body>';
     res.send(html);
   } catch (err) {
     console.error('Error executing query', err);

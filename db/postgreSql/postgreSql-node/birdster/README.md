@@ -43,12 +43,14 @@ CREATE TABLE tweets (
 ```sql
 DROP TABLE table_name;
 ```
-4. Select All Rows from a Table
+4. Select All Rows from a Table (more in `seed.sql`)
 
 ```sql
 SELECT * FROM table_name;
 ```
-5. Show Table Structure
+<small>**Sub-select** and **join** queries in `seed.sql`.</small>
+
+1. Show Table Structure
 
 ```sql
 \d table_name
