@@ -1,8 +1,26 @@
-<dependencies>
-    <!-- PostgreSQL JDBC driver -->
-    <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>42.2.24</version>
-    </dependency>
-</dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project Metadata -->
+    <groupId>com.example</groupId> <!-- Replace with your desired group ID -->
+    <artifactId>birdster-java</artifactId> <!-- Replace with your desired artifact ID -->
+    <version>1.0.0</version> <!-- Replace with your desired version -->
+
+    <!-- Java Version -->
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source> <!-- Adjust to your Java version -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <!-- Dependencies -->
+    <dependencies>
+        <!-- PostgreSQL JDBC Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.24</version>
+        </dependency>
+    </dependencies>
+</project>
