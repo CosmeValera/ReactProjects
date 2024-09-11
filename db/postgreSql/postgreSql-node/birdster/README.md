@@ -56,7 +56,7 @@ SELECT * FROM table_name;
 ```
 <small>**Sub-select** and **join** queries in `seed.sql`.</small>
 
-1. Show Table Structure
+5. Show Table Structure
 
 ```sql
 \d table_name
