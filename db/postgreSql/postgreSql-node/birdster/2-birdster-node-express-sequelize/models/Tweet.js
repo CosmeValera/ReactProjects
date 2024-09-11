@@ -24,6 +24,6 @@ const Tweet = sequelize.define('Tweet', {
 
 // Define associations
 User.hasMany(Tweet, {foreignKey: 'user_id'})
-Tweet.belongsTo(User)
+Tweet.belongsTo(User, {foreignKey: 'user_id'})
 
 module.exports = Tweet;
