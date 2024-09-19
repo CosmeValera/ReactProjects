@@ -6,3 +6,7 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
+
+// http://localhost:3000/users
+// http://localhost:3000/tweets
+// http://localhost:3000/tweets-from/Cosme
