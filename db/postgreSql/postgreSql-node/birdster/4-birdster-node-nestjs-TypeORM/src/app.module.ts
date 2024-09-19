@@ -1,17 +1,24 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { databaseConfig } from './config/database.config';
-import { User } from './models/user.model';
-import { Tweet } from './models/tweet.model';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';  // Entity example
+import { Tweet } from './entities/tweet.entity';
+
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [
-    SequelizeModule.forRoot(databaseConfig),
-    SequelizeModule.forFeature([User, Tweet]),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [User, Tweet],  // Add your entities here
+      synchronize: true, // Set to false in production
+    }),
+    TypeOrmModule.forFeature([User, Tweet]), // Import your entities here
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

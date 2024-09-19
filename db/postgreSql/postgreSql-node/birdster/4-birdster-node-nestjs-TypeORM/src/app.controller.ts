@@ -7,16 +7,16 @@ export class AppController {
 
   @Get('users')
   getUsers() {
-    return this.appService.getAllUsers();
+    return this.appService.findAllUsers();
   }
 
   @Get('tweets')
   getTweets() {
-    return this.appService.getAllTweets();
+    return this.appService.findAllTweets();
   }
 
   @Get('tweets-from/:username')
   getTweetsFromUser(@Param('username') username: string) {
-    return this.appService.getTweetsFromUser(username);
+    return this.appService.findTweetsFromUser(username);
   }
 }

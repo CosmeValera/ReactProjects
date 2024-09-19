@@ -1,25 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from './models/user.model';
-import { Tweet } from './models/tweet.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { Tweet } from './entities/tweet.entity';
 
 @Injectable()
 export class AppService {
   constructor(
-    @InjectModel(User) private userModel: typeof User,
-    @InjectModel(Tweet) private tweetModel: typeof Tweet,
+    @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(Tweet) private tweetRepository: Repository<Tweet>,
   ) {}
 
-  async getAllUsers() {
-    return this.userModel.findAll();
+  async findAllUsers(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
-  async getAllTweets() {
-    return this.tweetModel.findAll({ include: [User] });
+  async findAllTweets(): Promise<Tweet[]> {
+    return this.tweetRepository.find();
   }
 
-  async getTweetsFromUser(username: string) {
-    const user = await this.userModel.findOne({ where: { username } });
-    return this.tweetModel.findAll({ where: { userId: user.id }, include: [User] });
+  async findTweetsFromUser(username: string): Promise<Tweet[]> {
+    const cosme = await this.userRepository.findOne({ where: { username: username } });
+    return this.tweetRepository.find({ where: { user: cosme }, relations: ['user'] });
   }
 }
