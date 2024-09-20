@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  tweets    Tweet[]
+}
+
+model Tweet {
+  id         Int      @id @default(autoincrement())
+  tweetContent String   @map("tweet_content")
+  createdAt   DateTime @default(now()) @map("created_at")
+  user_id     Int
+  user        User     @relation(fields: [user_id], references: [id])
+}
