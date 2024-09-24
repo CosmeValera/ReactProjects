@@ -1,13 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es6",           // Specify ECMAScript target version
-    "module": "commonjs",      // Specify module code generation
-    "outDir": "./dist",        // Redirect output structure to the 'dist' folder
-    "rootDir": "./src",        // Specify the root directory of input files
-    "strict": true,            // Enable all strict type-checking options
-    "esModuleInterop": true     // Enables emit interoperability between CommonJS and ES Modules
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src/**/*.ts"              // Include all TypeScript files in src folder
-  ]
+  "include": ["src"]
 }
