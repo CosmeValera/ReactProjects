@@ -28,3 +28,5 @@ app.use("/trpc", createExpressMiddleware({ router: appRouter }))
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
+export type AppRouter = typeof appRouter
