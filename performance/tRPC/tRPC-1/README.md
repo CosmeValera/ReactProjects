@@ -1,4 +1,4 @@
-# tRPC
+# TRPC
 ## 🧠 What?
 tRPC is a framework for building type-safe APIs in TypeScript, enabling direct client-server communication without REST or GraphQL. It shares types between the client and server, ensuring both are always in sync, making development faster and more reliable.
 
@@ -9,9 +9,10 @@ tRPC is a framework for building type-safe APIs in TypeScript, enabling direct c
 npm i @trpc/server
 ```
 
-### Express example
+### Server code:
 ```ts
 import express from 'express';
+import cors from 'cors';
 import { initTRPC } from "@trpc/server";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 
@@ -36,11 +37,15 @@ const appRouter = t.router({
   })
 });
 
+app.use(cors({ origin: "*" }))
+
 app.use("/trpc", createExpressMiddleware({ router: appRouter }))
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
+export type AppRouter = typeof appRouter
 ```
 
 ## Frontend
@@ -49,3 +54,39 @@ app.listen(port, () => {
 ```sh
 npm i @trpc/client
 ```
+
+### Client code:
+```ts
+import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
+import { AppRouter } from "../../server/src/index"
+
+const client = createTRPCProxyClient<AppRouter>({
+  links: [httpBatchLink({
+    url: "http://localhost:3000/trpc"
+  })]
+})
+
+async function main() {
+  const result = await client.sayHi.query()
+  console.log(result)
+}
+
+main()
+```
+
+## Resources
+### Video
+> Web Dev Simplified [VIDEO](https://www.youtube.com/watch?v=UfUbBWIFdJs)
+
+#### Start from Scratch
+
+> Frontend: Use Vite
+> 
+> Backend:
+> 
+> `package.json`: 
+> ```sh
+> "scripts": {
+>    "start": "npx tsx --watch src/index.ts"
+>  },
+> ```
