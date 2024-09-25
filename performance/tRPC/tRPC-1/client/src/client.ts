@@ -1,5 +1,5 @@
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
-import { AppRouter } from "../../server/src/index"
+import { AppRouter } from "../../server/src/api"
 
 const client = createTRPCProxyClient<AppRouter>({
   links: [httpBatchLink({
@@ -8,9 +8,8 @@ const client = createTRPCProxyClient<AppRouter>({
 })
 
 async function main() {
-  const result = await client.logToServer.mutate("Hi from client")
+  const result = await client.getUser.query()
   console.log(result)
-  
 }
 
 main()
