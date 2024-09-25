@@ -8,7 +8,7 @@ const client = createTRPCProxyClient<AppRouter>({
 })
 
 async function main() {
-  const result = await client.users.get.query({userId: "123"})
+  const result = await client.users.update.mutate({userId: "1234", name: "Aska"})
   console.log(result)
 }
 
