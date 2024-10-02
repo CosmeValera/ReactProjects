@@ -52,3 +52,15 @@ upstream myapp1 {
 	server srv3.example.com;
 }
 '
+
+Configuration in nginX is quite Straightforward, and granular.
+
+NginX can also be used as a K8s Ingress controller (Kubernetes)
+
+
+Apache vs NginX:
+Date: 1994 | 2005
+Highly customizable and extensible | Faster and more lightweight
+Good choice for dynamic content handling and legacy support | Best suited for high-performance environments and serving static content
+Hard configuration | Simple configuration
+X | More popular in the container world
