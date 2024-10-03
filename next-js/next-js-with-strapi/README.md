@@ -12,3 +12,10 @@ Run it:
 ```sh
 npm run develop
 ```
+
+Then you have create an admin user in the ui.
+
+After that this is an image of the CMS panel:
+![Strapi](strapi.png)
+
+In `Content Type-Builder` you can create classes, and in `Content Manager` you can insert values of those classes.
