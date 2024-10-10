@@ -6,7 +6,7 @@ Here are some basic PostgreSQL commands to connect to a database and some others
 ## 📡 Connect to a database
 0. Connect to a docker terminal <small>*(When using Docker)*</small>
 ```sh
-docker exec -it aggregator_postgres /bin/bash
+docker exec -it postgres_aggregator /bin/bash
 ```
 
 1. Enter a postgreSQL session
