@@ -44,9 +44,22 @@ It has several kubernetes processes:
 
 ### Node and Pod
 
-Node: Virtual or physical machine
+**Node:** Virtual or physical machine
 
-Pod:
+**Pod:**
 - Is the smallest unit in Kubernetes (it's a node)
 - Abstraction over container
 - Usually 1 Application per Pod
+- Each pod gets its own IP address
+- Pods are ephimeral (They can die easily)
+- New IP address on recreation
+
+### Service and Ingress
+
+**Service:**
+- Permanent IP address
+- Lifecycle of Pod and Service not connected
+- It can be used to be attached to a Pod so that when it dies the IP does not change
+
+**Ingress:**
+- It transforms the URL from the Node url to something like "my-app.com". It acts like DNS
