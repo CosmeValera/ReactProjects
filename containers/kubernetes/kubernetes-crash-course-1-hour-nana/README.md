@@ -29,7 +29,7 @@ It has several Kubernetes processes:
   - Much bigger and more resources
   - Has a Kubelet to manage Pods locally and communicate with the master.
 
-## 🥙 Kubernetes component
+## 🥙 Kubernetes components
 
 ### List
 - Node
@@ -118,3 +118,37 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
 - Databases often require this to control read/write consistency.
 
 > Note: Deploying StatefulSets can be complex, so databases are frequently hosted outside the Kubernetes cluster.
+
+## 🎡 Kubernetes configuration
+We send requests to the master node to configure Kubernetes using:
+- **UI**, **API**, or **CLI**
+
+Configuration files are written in:
+- **YAML** or **JSON**
+
+### YAML example:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: my-app:latest
+        ports:
+        - containerPort: 80
+```
+
+- **replicas:** Defines the number of Pod replicas (2 in this case)
+- **selector** (Deployment's selector): Ensures the Deployment manages Pods with the specified labels(`app: my-app`)
+- **template** (Pod's template): The template in Deployment is the blueprint to create Pods. Describes the Pods, including the container's image (`my-app:latest`) and exposed port(`80`).
