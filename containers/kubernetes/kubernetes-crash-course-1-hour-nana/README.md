@@ -101,18 +101,20 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
 **Deployment**
 - Blueprint for "my-app" Pods
 - You create Deployments, not actual Pods
-- It is an abstraction:
-  - Pods are an abstraction of containers
-  - Deployments are an abstraction of Pods
+- Abstracts the complexity of managing Pods:
+  - Pods abstract containers
+  - Deployments abstract Pods
 
 **StatefulSet**
 
-DB can't be replicated via deployment.
-This is because DB have **state**. We need a mechanism to assure which DB are writing to the store, or which PODS are reading to the store. That's why an additional K8s component is needed: StatefulSet
-
-- For STATEFUL apps
+- Designed for stateful applications where data consistency and order are crucial, such as:
   - MySQL
   - postgreSQL
   - mongoDB
+- Unlike Deployments, StatefulSets ensure that:
+  - Each Pod has a unique, stable identity (e.g., pod-0, pod-1).
+  - Pods are created, deleted, and scaled in a defined order.
+  - Persistent storage is tied to specific Pods.
+- Databases often require this to control read/write consistency.
 
-However, deploying StatefulSet is not easy, for this reason DBs are often hosted outside of Kubernetes cluster
+> Note: Deploying StatefulSets can be complex, so databases are frequently hosted outside the Kubernetes cluster.
