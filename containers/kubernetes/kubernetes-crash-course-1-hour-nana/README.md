@@ -76,3 +76,13 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
   - The actual DNS for `my-app.com` must resolve to the cluster's Ingress Controller or Load Balancer IP.
 
 ### ConfigMap and Secret
+
+**ConfigMap**
+- External Configuration of your application
+- ConfigMap is for non-confidentail data only!
+
+**Secret**
+- Used to store secret data
+  - Passwords, certificates, credentials...
+- They are just like confirMap but meant to use encryption by using third-party tools
+- Reference Secret in Deployment/Pod
