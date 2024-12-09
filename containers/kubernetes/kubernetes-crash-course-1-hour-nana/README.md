@@ -61,11 +61,18 @@ It has several Kubernetes processes:
 ### Service and Ingress
 
 **Service:**
-- Permanent IP address
+- **Permanent** IP address
 - Lifecycle of Pod and Service not connected
-- It can be used to be attached to a Pod so that when it dies the IP does not change
+  - If a Pod dies and is replaced, the Service ensures that the node IP does not change (it redirects to the new Pod)
+- Acts as a **load balancer** for Pods behind it.
 
 **Ingress:**
-- It transforms the URL from the Node url to something like "my-app.com". It acts like DNS
+
+From `http://192.168.1.100:30001` to `https://my-app.com`
+- Provides **external HTTP and HTTPS access** to services within the cluster.
+- Transforms a cluster’s internal service into a user-friendly URL like `my-app.com`.
+- **Acts like a reverse proxy**, routing traffic to the appropriate Service based on rules.
+- While it provides domain-like URLs, it does not replace DNS:
+  - The actual DNS for `my-app.com` must resolve to the cluster's Ingress Controller or Load Balancer IP.
 
 ### ConfigMap and Secret
