@@ -86,3 +86,14 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
   - Passwords, certificates, credentials...
 - They are just like confirMap but meant to use encryption by using third-party tools
 - Reference Secret in Deployment/Pod
+
+### Volume
+- Attaches persistent storage to your Pod, ensuring data is retained even if the Pod restarts or dies.
+- Useful for stateful applications, like databases, where data should not be lost.
+- Storage can be located:
+  - On the local node
+  - Externally, outside the Kubernetes cluster
+
+> Kubernetes doesn't manage data persistance!
+
+### Deployment & StatefulSet
