@@ -97,3 +97,22 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
 > Kubernetes doesn't manage data persistance!
 
 ### Deployment & StatefulSet
+
+**Deployment**
+- Blueprint for "my-app" Pods
+- You create Deployments, not actual Pods
+- It is an abstraction:
+  - Pods are an abstraction of containers
+  - Deployments are an abstraction of Pods
+
+**StatefulSet**
+
+DB can't be replicated via deployment.
+This is because DB have **state**. We need a mechanism to assure which DB are writing to the store, or which PODS are reading to the store. That's why an additional K8s component is needed: StatefulSet
+
+- For STATEFUL apps
+  - MySQL
+  - postgreSQL
+  - mongoDB
+
+However, deploying StatefulSet is not easy, for this reason DBs are often hosted outside of Kubernetes cluster
