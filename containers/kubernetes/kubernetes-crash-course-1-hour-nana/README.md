@@ -9,15 +9,14 @@ It's an orchestration tool, to manage multiple containers.
 
 ## 🗄️ Architecture
 - Master node
-- Several Kubelet (Worker nodes)
-  The worker nodes have the applications running
+- Worker nodes (have the applications running)
 
 ### Master node
-It has several kubernetes processes:
-- API Server (a container): It's the entry point of a K8s cluster
-- Controller Manager: Keeps track of whats happening in the cluster
-- Scheduler: Ensures Pods placement
-- etcd: Kubernetes backing store
+It has several Kubernetes processes:
+- **API Server**: The entry point of a K8s cluster.
+- **Controller Manager**: Tracks cluster state and performs corrective actions.
+- **Scheduler**: Decides where Pods should be placed.
+- **etcd**: A key-value store that holds the cluster's state.
 
 ### Architecture in general
 - Master nodes: 
@@ -28,6 +27,7 @@ It has several kubernetes processes:
 - Worker nodes: 
   - Higher workload
   - Much bigger and more resources
+  - Has a Kubelet to manage Pods locally and communicate with the master.
 
 ## 🥙 Kubernetes component
 
@@ -44,15 +44,19 @@ It has several kubernetes processes:
 
 ### Node and Pod
 
-**Node:** Virtual or physical machine
+**Node:**
+- Virtual or physical machine
+- Nodes can be:
+  - Master nodes (control plane)
+  - Worker nodes (where application Pods run)
 
 **Pod:**
-- Is the smallest unit in Kubernetes (it's a node)
-- Abstraction over container
+- Is the smallest unit in Kubernetes
+- An abstraction over containers
 - Usually 1 Application per Pod
 - Each pod gets its own IP address
-- Pods are ephimeral (They can die easily)
-- New IP address on recreation
+- Pods are **ephemeral** (They can die easily)
+  - If a Pod dies, Kubernetes may replace it with a new Pod, which gets a new IP address.
 
 ### Service and Ingress
 
@@ -63,3 +67,5 @@ It has several kubernetes processes:
 
 **Ingress:**
 - It transforms the URL from the Node url to something like "my-app.com". It acts like DNS
+
+### ConfigMap and Secret
