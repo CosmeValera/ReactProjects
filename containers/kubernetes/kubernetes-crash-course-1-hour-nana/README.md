@@ -237,3 +237,32 @@ In a **minikube** setup, kubectl enables you to communicate not only with the ma
 - And much more
 
 > Note: Kubectl isn’t just for Minikube. It’s the primary tool to interact with any Kubernetes cluster setup, whether it’s Minikube or a production-grade cluster.
+
+---
+
+### 🚀 Setting Up Minikube
+**Download**
+- Download Minikube: [Click here](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download)
+- Download Docker: [Click here](https://docs.docker.com/get-started/get-docker/)
+
+### Start Minikube
+1. Open your terminal or WSL
+
+2. Run the following command to start Minikube with Docker as the driver:
+   ```sh
+   minikube start --driver docker
+   ```
+
+3. Check Minikube's status:
+sh
+Copy code: 
+   ```sh
+   minikube status
+   ```
+
+**Verify Kubectl**
+
+When Minikube is installed, **kubectl** is also included as a dependency. Verify it’s working by running:
+```sh
+kubectl get node
+```
