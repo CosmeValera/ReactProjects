@@ -119,7 +119,7 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
 
 > Note: Deploying StatefulSets can be complex, so databases are frequently hosted outside the Kubernetes cluster.
 
-## 🎡 Kubernetes configuration
+## 🛠️ Kubernetes configuration
 We send requests to the master node to configure Kubernetes using:
 - **UI**, **API**, or **CLI**
 
@@ -198,3 +198,16 @@ Kubernetes continously compares the **desired state**(from YAML files) with the 
 The Status data is stored in **etcd**, Kubernetes' key-value store.
 - **etcd** holds the cluster's current state for all components.
 - Kubernetes uses this data to track and manage the state of the cluster.
+
+## 🧰 Minikube and kubectl
+### Minikube and Kubectl
+
+**Minikube:**
+
+A tool to run Kubernetes locally on your machine. It creates a small, single-node Kubernetes cluster, perfect for learning and testing.
+
+**kubectl:**
+
+The command-line tool to interact with Kubernetes clusters. Use it to deploy applications, manage resources, and inspect the cluster's state.
+
+### Cluster Setup
