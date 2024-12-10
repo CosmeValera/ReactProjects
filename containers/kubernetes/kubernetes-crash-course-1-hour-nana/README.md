@@ -144,11 +144,15 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: my-app:latest
+        image: my-image
+        env:
+          - name: SOME_ENV
+            value: $SOME_ENV
         ports:
         - containerPort: 80
 ```
 
 - **replicas:** Defines the number of Pod replicas (2 in this case)
 - **selector** (Deployment's selector): Ensures the Deployment manages Pods with the specified labels(`app: my-app`)
-- **template** (Pod's template): The template in Deployment is the blueprint to create Pods. Describes the Pods, including the container's image (`my-app:latest`) and exposed port(`80`).
+- **template** (Pod's template): The template in Deployment is the blueprint to create Pods. Describes the Pods, including the container's image (`my-image`), the env variables(`SOME_ENV`) and exposed port(`80`).
+
