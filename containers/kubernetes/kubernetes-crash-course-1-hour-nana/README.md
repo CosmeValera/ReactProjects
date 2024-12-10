@@ -211,3 +211,10 @@ A tool to run Kubernetes locally on your machine. It creates a small, single-nod
 The command-line tool to interact with Kubernetes clusters. Use it to deploy applications, manage resources, and inspect the cluster's state.
 
 ### Cluster Setup
+In a typical **production** cluster setup, you will have
+- Multiple Master and Worker nodes run accross separate virtual or physical machines
+
+However, for local testing, setting up such a complex cluster can be challenging.
+
+**Minikube** simplifies this by running both master and worker processes on a single node.
+This node also has Docker preinstalled, so you can run containers or Pods locally with ease, all in one compact environment.
