@@ -156,3 +156,26 @@ spec:
 - **selector** (Deployment's selector): Ensures the Deployment manages Pods with the specified labels(`app: my-app`)
 - **template** (Pod's template): The template in Deployment is the blueprint to create Pods. Describes the Pods, including the container's image (`my-image`), the env variables(`SOME_ENV`) and exposed port(`80`).
 
+### Parts of a K8s Configuration File:
+
+Examples of `deployment` and `service` files:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels: ...
+spec:
+  replicas: 2
+  selectors: ...
+  template: ...
+```
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector: ...
+  ports: ...
+```
