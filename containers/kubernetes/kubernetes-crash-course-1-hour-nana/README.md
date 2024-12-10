@@ -179,3 +179,22 @@ spec:
   selector: ...
   ports: ...
 ```
+
+Each configuration file has 3 parts:
+1. **Metadata**: Includes information like the component's name and labels.
+2. **Specification:** Defines the desired state, which varies by component type (e.g., replicas for Deployments, ports for Services).
+3. **Status:** Automatically generated and added by Kubernetes.
+
+### How `Status` work
+Kubernetes continously compares the **desired state**(from YAML files) with the **current state**(tracked in `Status`).
+- If there’s a mismatch, Kubernetes attempts to resolve it.
+- Example:
+  - Desired state: 2 replicas in the `Deployment`.
+  - Current status: Only 1 replica is running.
+  - Kubernetes identifies the difference and creates another replica to match the specification.
+
+### Where `Status` Data Comes From
+
+The Status data is stored in **etcd**, Kubernetes' key-value store.
+- **etcd** holds the cluster's current state for all components.
+- Kubernetes uses this data to track and manage the state of the cluster.
