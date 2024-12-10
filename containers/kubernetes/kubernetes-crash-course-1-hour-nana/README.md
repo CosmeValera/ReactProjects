@@ -210,7 +210,7 @@ A tool to run Kubernetes locally on your machine. It creates a small, single-nod
 
 The command-line tool to interact with Kubernetes clusters. Use it to deploy applications, manage resources, and inspect the cluster's state.
 
-### Cluster Setup
+### Cluster Setup (Minikube)
 In a typical **production** cluster setup, you will have
 - Multiple Master and Worker nodes run accross separate virtual or physical machines
 
@@ -218,3 +218,22 @@ However, for local testing, setting up such a complex cluster can be challenging
 
 **Minikube** simplifies this by running both master and worker processes on a single node.
 This node also has Docker preinstalled, so you can run containers or Pods locally with ease, all in one compact environment.
+
+### Kubectl
+It's the **command line tool** for K8s cluster
+
+One of the Master processes, the `Api Server`, is responsible for handling cluster interactions. . You can access the API Server through:
+- UI
+- API
+- **CLI (`Kubectl`)**
+
+Kubectl is the most powerful of these clients.
+
+In a **minikube** setup, kubectl enables you to communicate not only with the master processes but also with the worker processes. This allows you to:
+- Enable pods to run on the node
+- Create and manage pods
+- Create services
+- Destroy pods
+- And much more
+
+> Note: Kubectl isn’t just for Minikube. It’s the primary tool to interact with any Kubernetes cluster setup, whether it’s Minikube or a production-grade cluster.
