@@ -375,13 +375,13 @@ spec:
 
 ### `webapp.yaml:`
 
-Also define a **Deployment** and a **Service**. Similar to the section **`mongo.yaml:`**
+Define both a **Deployment** and a **Service**, similar to **`mongo.yaml:`**
 
 ### **ENV**
 
-Add the environment variables from the secret (`mongo-secret`) and configMap (`mongo-config`) to Mondo Deployment and Webapp Deployment.
+Add environment variables from the secret (`mongo-secret`) and configMap (`mongo-config`) to both MongoDB Deployment and Webapp Deployment.
 
-**1. MONGO DEPLOYMENT ENV**
+**1. MONGO DEPLOYMENT ENV:**
 ```yaml
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
@@ -395,9 +395,9 @@ Add the environment variables from the secret (`mongo-secret`) and configMap (`m
               name: mongo-secret
               key: mongo-password
 ```
-MongoDB configuration file is complete. When it starts a user with those credentials will be created.
+This sets environment variables for MongoDB, pulling values from the `mongo-secret`. When the MongoDB container starts, it uses these credentials to create a user.
 
-**2. WEBAPP DEPLOYMENT ENV**
+**2. WEBAPP DEPLOYMENT ENV:**
 ```yaml
         env:
         - name: USER_NAME
@@ -418,9 +418,9 @@ MongoDB configuration file is complete. When it starts a user with those credent
 ```
 Here we used both `mongo-secret` and `mongo-config`.
 
-The advantage of doing it like this is that if we want to change any environment variable we don't have to change anything in our deployments
+The advantage of doing it like this is that if we want to change any environment variable we don't have to modify anything in our deployments.
 
-**3. Make Webapp Service external**
+**3. Make Webapp Service external:**
 ```yaml
 ---
 apiVersion: v1
@@ -438,7 +438,7 @@ spec:
       nodePort: 30100 # Must set nodePort
 ```
 - `type`: Defines the type of the port, default value is `ClusterIP` which is **internal**. But since we want ot be able to contact it from the browser, we need to use `NodePort` to make it **external**.
--  NodePort range must be between **30000-32676**
--  Requests will have this format: **\<NodeIP>:\<NodePort>**
+- `nodePort`: The port in the range **30000-32676** that will be exposed on the Node.
+- Requests will have this format: `<NodeIP>:<NodePort>`.
 
-With this now we have all the files that we need
+With these configurations, you now have all the necessary files to deploy MongoDB and the Webapp, and expose the Webapp externally.
