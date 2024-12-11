@@ -267,17 +267,19 @@ When Minikube is installed, **kubectl** is also included as a dependency. Verify
 kubectl get node
 ```
 
-## 😼 Deploy a Demo project
-Our project will consist of a MongoDB database and a Web application.
+## 😼 Deploy a Demo Project
+Our demo project will include a MongoDB database and a Web application.
 
-So we will start with these K8s files:
-- ConfigMap (MongoDB Endpoint)
-- Secret (MongoDB User & Password)
-- Deployment (MongoDB Application)
-- Service (Internal Service)
-- Deployment (WebApp Application)
-- Service (External Service)
+### K8s Files Overview
+We will create the following Kubernetes resources:
+- **ConfigMap** (MongoDB Endpoint)
+- **Secret** (MongoDB User & Password)
+- **Deployment** (MongoDB Application)
+- **Service** (Internal Service)
+- **Deployment** (WebApp Application)
+- **Service** (External Service)
 
+### Example Configuration Files
 `mongo-config.yaml:`
 ```yaml
 apiVersion: v1
@@ -287,3 +289,24 @@ metadata:
 data:
   mongo-url: mongo-service
 ```
+
+`mongo-secret.yaml:`
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongo-secret
+type: Opaque
+data:
+  mongo-user: bW9uZ291c2Vy
+  mongo-password: bW9uZ29wYXNzd29yZA==
+```
+> Secrets use Base64-encoded strings. You can generate the encoded values like this:
+> ```sh
+> echo -n mongouser | base64
+> # Output: bW9uZ291c2Vy
+> echo -n mongopassword | base64
+> # Output: bW9uZ29wYXNzd29yZA==
+> ```
+> **Note:** Base64 only encodes the data—it’s not encryption. While it helps obscure values, use Kubernetes-native encryption or external tools to safeguard sensitive information.
+
