@@ -370,3 +370,21 @@ spec:
 - `selector.app`: Must match **Label 3** from the Pod template, ensuring that the Service connects to the correct Pods.
 - `targetPort`: Must match the `containerPort` defined in the Deployment (i.e., `27017`).
 - `port`: This is the port exposed by the Service to other Pods or external consumers. It doesn’t have to match `targetPort`, but we’ve kept it the same for simplicity.
+
+**3. ENV Variables**
+Add the environemnt variables from the secret(`mongo-secret`) and configMap (`mongo-config`).
+
+**3.1 SERVICE**
+```yaml
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-user
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-password
+```
