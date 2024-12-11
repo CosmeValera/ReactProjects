@@ -267,7 +267,7 @@ When Minikube is installed, **kubectl** is also included as a dependency. Verify
 kubectl get node
 ```
 
-## 😼 Deploy a Demo Project
+## 😼 Create a Demo Project (1)
 Our demo project will include a MongoDB database and a Web application.
 
 ### K8s Files Overview
@@ -442,3 +442,27 @@ spec:
 - Requests will have this format: `<NodeIP>:<NodePort>`.
 
 With these configurations, you now have all the necessary files to deploy MongoDB and the Webapp, and expose the Webapp externally.
+
+## 😼 Deploy a Demo Project (2)
+Now that we have the configuration files prepared, we can proceed to create and deploy the components in Kubernetes.
+
+### 1. Verify Minikube Cluster:
+We can check that we have a  Minikube cluster running, but there are no components deployed yet:
+
+```sh
+kubectl get pod
+# Output: No resources found in default namespace.
+```
+
+### 2. Create Components:
+First, apply **ConfigMap** and **Secret** before creating the Deployments.
+
+Use the `apply` command to manage Kubernetes resources from the configuration files (i.e., `kubectl apply -f <file-name.yaml>`):
+
+```sh
+kubectl apply -f mongo-config.yaml
+kubectl apply -f mongo-secret.yaml
+kubectl apply -f mongo.yaml
+kubectl apply -f webapp.yaml
+```
+This will create all the required components for the project.
