@@ -1,5 +1,4 @@
-[](https://www.youtube.com/watch?v=s_o8dwzRlu4)
-# KUBERNETES
+# 🚢 KUBERNETES
 
 ## 🧠 What?
 It's an orchestration tool, to manage multiple containers.
@@ -351,6 +350,7 @@ In this YAML code, the deployment specifies Pods, and each Pod contains a contai
   - **Label 3** (`template.metadata.labels`): Labels the Pods with `app: mongo`, allowing the Deployment to find and manage them.
   ---
   - So, **Label 2** (the `matchLabels`) binds directly to **Label 3**(inside the Pod template), linking the Deployment to the Pods it controls.
+> It is better to use a replica count of 1 in this case, because if you need multiple replicas for MongoDB, it's advisable to use a StatefulSet to preserve the state.
 
 **2. Service:**
 ```yaml
@@ -522,3 +522,54 @@ You can view logs from a pod with the following command (use the `-f` flag to st
 ```sh
 kubectl logs <podName> -f
 ```
+
+## 😼 See Demo Project in Browser (3)
+
+To access the demo project in the browser, we'll obtain the port from the service and the IP from the Minikube machine.
+
+### 1. Get Service Information:
+**Command:**
+```sh
+kubectl get service
+```
+
+**Output:**
+```js
+NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP          23h
+mongo-service    ClusterIP   10.104.1.3     <none>        27017/TCP        33m
+webapp-service   NodePort    10.96.220.85   <none>        3000:30100/TCP   33m
+```
+Here, the webapp-service is exposed on port `30100`.
+
+### 2. Get Minikube IP:
+**Command:**
+```sh
+minikube ip
+
+# Other option; since `kubectl get node` is Minikube 
+kubectl get node -o wide 
+```
+
+**Output:**
+```js
+192.168.49.2
+```
+Here, `192.168.49.2` is the Minikube IP.
+
+### 3. Access the Demo Project:
+Now, combine the Minikube IP and the port to access the demo project:
+```css
+http://192.168.49.2:30100/
+```
+
+### 4. Alternative Access via `curl`:
+If you're running your Kubernetes cluster in **WSL** or can't access it directly from your browser, you can use `curl` to check if the service is deployed:
+```css
+curl http://192.168.49.2:30100/
+```
+
+Enjoy your fully integrated page with a database! 🥳🥳
+
+## Resources:
+- **Kubernetes Crash Course** (1 Hour): [Click here](https://www.youtube.com/watch?v=s_o8dwzRlu4)
