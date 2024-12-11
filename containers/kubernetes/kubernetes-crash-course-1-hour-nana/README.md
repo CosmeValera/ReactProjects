@@ -266,3 +266,22 @@ When Minikube is installed, **kubectl** is also included as a dependency. Verify
 ```sh
 kubectl get node
 ```
+
+## 😼 Deploy a Demo project
+Our project will consist of a MongoDB database and a Web application.
+
+So we will start with these K8s files:
+- ConfigMap (MongoDB Endpoint)
+- Secret (MongoDB User & Pws)
+- Deployment (MongoDB Application)
+- Service (Internal Service)
+- Deployment (WebApp Application)
+- Service (External Service)
+
+`mongo-config.yaml:`
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: game-demo
+```
