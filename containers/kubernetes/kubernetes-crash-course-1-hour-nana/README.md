@@ -395,3 +395,27 @@ Add the environment variables from the secret (`mongo-secret`) and configMap (`m
               name: mongo-secret
               key: mongo-password
 ```
+MongoDB configuration file is complete. When it starts a user with those credentials will be created.
+
+**2. WEBAPP DEPLOYMENT ENV**
+```yaml
+        env:
+        - name: USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-user
+        - name: USER_PWD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-password
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: mongo-url
+```
+Here we used both `mongo-secret` and `mongo-config`.
+
+The advantage of doing it like this is that if we want to change any environment variable we don't have to change anything in our deployments
