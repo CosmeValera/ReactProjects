@@ -315,7 +315,7 @@ data:
 
 Deployment and Service can be defined in two separate files, but since they belong to the same application, we're combining both in one file in this example.
 
-1. Starting with the deployment it looks like this:
+**1. Deployment:**
 
 ```yaml
 apiVersion: apps/v1
@@ -343,11 +343,30 @@ spec:
 
 In this YAML code, the deployment specifies Pods, and each Pod contains a container.
 
-- **Containers** section (`spec.containers`): This part configures the container inside the Pod. It specifies the container name (`mongodb`), the image (`mongo:5.0`), and the port (`27017`), which is the default for MongoDB as per the documentation.
-
-- **Labels** section:
+- **Containers** (`spec.containers`): This part configures the container inside the Pod. It specifies the name (`mongodb`), image (`mongo:5.0`), and port (`27017`), the default for MongoDB.
+- **Labels**:
   - **Label 1** (`metadata.labels`): Labels the Deployment with `app: mongo` for identification.
-  - **Label 2** (`selector.matchLabels`): This binds to Label 3 inside the Pods, ensuring the Deployment manages Pods with the `app: mongo` label.
+  - **Label 2** (`selector.matchLabels`): Binds to Label 3 inside the Pods, ensuring the Deployment manages Pods with the `app: mongo` label.
   - **Label 3** (`template.metadata.labels`): Labels the Pods with `app: mongo`, allowing the Deployment to find and manage them.
   ---
   - So, **Label 2** (the `matchLabels`) binds directly to **Label 3**(inside the Pod template), linking the Deployment to the Pods it controls.
+
+**2. Service:**
+```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+spec:
+  selector:
+    app: mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+```
+- `---`: This YAML separator is used to separate the Deployment and Service configurations within the same file.
+- `selector.app`: Must match **Label 3** from the Pod template, ensuring that the Service connects to the correct Pods.
+- `targetPort`: Must match the `containerPort` defined in the Deployment (i.e., `27017`).
+- `port`: This is the port exposed by the Service to other Pods or external consumers. It doesn’t have to match `targetPort`, but we’ve kept it the same for simplicity.
