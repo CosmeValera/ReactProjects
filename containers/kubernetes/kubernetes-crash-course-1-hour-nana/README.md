@@ -98,25 +98,27 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
 ### Deployment & StatefulSet
 
 **Deployment**
-- Blueprint for "my-app" Pods
-- You create Deployments, not actual Pods
-- Abstracts the complexity of managing Pods:
-  - Pods abstract containers
-  - Deployments abstract Pods
+- A Deployment is the **blueprint** for creating Pods (representing an application, e.g., `my-app`).
+- Deployments abstract away the complexity of managing Pods directly:
+  - **Pods** abstract containers.
+  - **Deployments** abstract Pods.
+- Key features:
+  - **Replicas:** Defines the number of Pod replicas (e.g., 2).
+  - **Selector:** Ensures that the Deployment manages Pods with specific labels (`app: my-app`).
+  - **Template:** The Pod's template defines the container's image, environment variables, and exposed ports.
 
 **StatefulSet**
 
-- Designed for stateful applications where data consistency and order are crucial, such as:
-  - MySQL
-  - postgreSQL
-  - mongoDB
+- **StatefulSets** are designed for **stateful applications**, where data consistency and order are crucial, such as databases.
 - Unlike Deployments, StatefulSets ensure that:
   - Each Pod has a unique, stable identity (e.g., pod-0, pod-1).
   - Pods are created, deleted, and scaled in a defined order.
   - Persistent storage is tied to specific Pods.
-- Databases often require this to control read/write consistency.
+- Common use cases:
+  - **Databases** like MySQL, PostgreSQL, MongoDB.
+  - Ensures **read/write consistency** in databases.
 
-> Note: Deploying StatefulSets can be complex, so databases are frequently hosted outside the Kubernetes cluster.
+> Note: StatefulSets can be more complex to deploy, so databases are often hosted outside the Kubernetes cluster for easier management.
 
 ## 🛠️ Kubernetes configuration
 We send requests to the master node to configure Kubernetes using:
@@ -185,7 +187,7 @@ Each configuration file has 3 parts:
 3. **Status:** Automatically generated and added by Kubernetes.
 
 ### How `Status` work
-Kubernetes continously compares the **desired state**(from YAML files) with the **current state**(tracked in `Status`).
+Kubernetes continously compares the **desired state** (from YAML files) with the **current state** (tracked in `Status`).
 - If there’s a mismatch, Kubernetes attempts to resolve it.
 - Example:
   - Desired state: 2 replicas in the `Deployment`.
