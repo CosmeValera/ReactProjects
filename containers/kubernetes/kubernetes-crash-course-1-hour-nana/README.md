@@ -272,7 +272,7 @@ Our project will consist of a MongoDB database and a Web application.
 
 So we will start with these K8s files:
 - ConfigMap (MongoDB Endpoint)
-- Secret (MongoDB User & Pws)
+- Secret (MongoDB User & Password)
 - Deployment (MongoDB Application)
 - Service (Internal Service)
 - Deployment (WebApp Application)
@@ -283,5 +283,7 @@ So we will start with these K8s files:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: game-demo
+  name: mongo-config
+data:
+  mongo-url: mongo-service
 ```
