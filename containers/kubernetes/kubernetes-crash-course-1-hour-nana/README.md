@@ -466,3 +466,59 @@ kubectl apply -f mongo.yaml
 kubectl apply -f webapp.yaml
 ```
 This will create all the required components for the project.
+
+### 3. Check correct creation
+
+**Command:**
+```sh
+kubectl get all
+```
+
+**Output:**
+```js
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/mongo-deployment-798f55b8-c7nnk      1/1     Running   0          9m22s
+pod/webapp-deployment-655ff6696b-fhr9v   1/1     Running   0          8m53s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP          23h
+service/mongo-service    ClusterIP   10.104.1.3     <none>        27017/TCP        9m22s
+service/webapp-service   NodePort    10.96.220.85   <none>        3000:30100/TCP   8m53s
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mongo-deployment    1/1     1            1           9m22s
+deployment.apps/webapp-deployment   1/1     1            1           8m53s
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/mongo-deployment-798f55b8      1         1         1       9m22s
+replicaset.apps/webapp-deployment-655ff6696b   1         1         1       8m53s
+```
+You should see `Pods`, `Services`, `Deployments` and a replica for each `Deployment`.
+
+To see additional resources such as `ConfigMaps` and `Secrets`, you can use:
+
+```sh
+kubectl get pod | configmap | secret | ...
+```
+
+### 4. Other `kubectl` commands
+
+Also as documentation for `kubectl` commands, use:
+```sh
+kubectl --help
+```
+
+To get more specific help for a particular command, such as **get**:
+```sh
+kubectl get --help
+```
+
+If you want more detailed information than **get** provides, use the **describe** command:
+```sh
+kubectl describe service <service-name>
+```
+
+You can view logs from a pod with the following command (use the `-f` flag to stream logs):
+```sh
+kubectl logs <podName> -f
+```
