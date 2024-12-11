@@ -279,8 +279,9 @@ We will create the following Kubernetes resources:
 - **Deployment** (WebApp Application)
 - **Service** (External Service)
 
-### Example Configuration Files
-**`mongo-config.yaml:`**
+Example Configuration Files:
+
+### `mongo-config.yaml:`
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -290,7 +291,7 @@ data:
   mongo-url: mongo-service
 ```
 
-**`mongo-secret.yaml:`**
+### `mongo-secret.yaml:`
 ```yaml
 apiVersion: v1
 kind: Secret
@@ -311,7 +312,7 @@ data:
 > **Note:** Base64 only encodes the data—it’s not encryption. While it helps obscure values, use Kubernetes-native encryption or external tools to safeguard sensitive information.
 
 
-**`mongo.yaml:`**
+### `mongo.yaml:`
 
 Deployment and Service can be defined in two separate files, but since they belong to the same application, we're combining both in one file in this example.
 
@@ -371,10 +372,16 @@ spec:
 - `targetPort`: Must match the `containerPort` defined in the Deployment (i.e., `27017`).
 - `port`: This is the port exposed by the Service to other Pods or external consumers. It doesn’t have to match `targetPort`, but we’ve kept it the same for simplicity.
 
-**3. ENV Variables**
-Add the environemnt variables from the secret(`mongo-secret`) and configMap (`mongo-config`).
 
-**3.1 SERVICE**
+### `webapp.yaml:`
+
+Also define a **Deployment** and a **Service**. Similar to the section **`mongo.yaml:`**
+
+### **ENV**
+
+Add the environment variables from the secret (`mongo-secret`) and configMap (`mongo-config`) to Mondo Deployment and Webapp Deployment.
+
+**1. MONGO DEPLOYMENT ENV**
 ```yaml
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
