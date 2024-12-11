@@ -280,7 +280,7 @@ We will create the following Kubernetes resources:
 - **Service** (External Service)
 
 ### Example Configuration Files
-`mongo-config.yaml:`
+**`mongo-config.yaml:`**
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -290,7 +290,7 @@ data:
   mongo-url: mongo-service
 ```
 
-`mongo-secret.yaml:`
+**`mongo-secret.yaml:`**
 ```yaml
 apiVersion: v1
 kind: Secret
@@ -310,3 +310,44 @@ data:
 > ```
 > **Note:** Base64 only encodes the data—it’s not encryption. While it helps obscure values, use Kubernetes-native encryption or external tools to safeguard sensitive information.
 
+
+**`mongo.yaml:`**
+
+Deployment and Service can be defined in two separate files, but since they belong to the same application, we're combining both in one file in this example.
+
+1. Starting with the deployment it looks like this:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels: # 1
+    app: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # 2
+      app: mongo
+  template:
+    metadata:
+      labels: # 3
+        app: mongo
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:5.0
+        ports:
+        - containerPort: 27017
+```
+
+In this YAML code, the deployment specifies Pods, and each Pod contains a container.
+
+- **Containers** section (`spec.containers`): This part configures the container inside the Pod. It specifies the container name (`mongodb`), the image (`mongo:5.0`), and the port (`27017`), which is the default for MongoDB as per the documentation.
+
+- **Labels** section:
+  - **Label 1** (`metadata.labels`): Labels the Deployment with `app: mongo` for identification.
+  - **Label 2** (`selector.matchLabels`): This binds to Label 3 inside the Pods, ensuring the Deployment manages Pods with the `app: mongo` label.
+  - **Label 3** (`template.metadata.labels`): Labels the Pods with `app: mongo`, allowing the Deployment to find and manage them.
+  ---
+  - So, **Label 2** (the `matchLabels`) binds directly to **Label 3**(inside the Pod template), linking the Deployment to the Pods it controls.
