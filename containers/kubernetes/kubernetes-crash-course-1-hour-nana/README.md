@@ -419,3 +419,26 @@ MongoDB configuration file is complete. When it starts a user with those credent
 Here we used both `mongo-secret` and `mongo-config`.
 
 The advantage of doing it like this is that if we want to change any environment variable we don't have to change anything in our deployments
+
+**3. Make Webapp Service external**
+```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  type: NodePort # Make it external
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30100 # Must set nodePort
+```
+- `type`: Defines the type of the port, default value is `ClusterIP` which is **internal**. But since we want ot be able to contact it from the browser, we need to use `NodePort` to make it **external**.
+-  NodePort range must be between **30000-32676**
+-  Requests will have this format: **\<NodeIP>:\<NodePort>**
+
+With this now we have all the files that we need
