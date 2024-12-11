@@ -573,5 +573,7 @@ curl http://192.168.49.2:30100/
 
 Enjoy your fully integrated page with a database! 🥳🥳
 
+![Kubernetes image](examples/kubernetes_webapp_image.png)
+
 ## Resources:
 - **Kubernetes Crash Course** (1 Hour): [Click here](https://www.youtube.com/watch?v=s_o8dwzRlu4)
