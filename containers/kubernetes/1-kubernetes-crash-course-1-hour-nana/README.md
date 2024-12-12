@@ -385,7 +385,7 @@ Define both a **Deployment** and a **Service**, similar to **`mongo.yaml:`**
 
 Add environment variables from the secret (`mongo-secret`) and configMap (`mongo-config`) to both MongoDB Deployment and Webapp Deployment.
 
-**1. MONGO DEPLOYMENT ENV:**
+**1. Mongo Deployment ENV:**
 ```yaml
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
@@ -401,7 +401,7 @@ Add environment variables from the secret (`mongo-secret`) and configMap (`mongo
 ```
 This sets environment variables for MongoDB, pulling values from the `mongo-secret`. When the MongoDB container starts, it uses these credentials to create a user.
 
-**2. WEBAPP DEPLOYMENT ENV:**
+**2. Webapp Deployment ENV:**
 ```yaml
         env:
         - name: USER_NAME
@@ -561,17 +561,36 @@ kubectl get node -o wide
 ```
 Here, `192.168.49.2` is the Minikube IP.
 
-### 3. Access the Demo Project:
+### 3. Open the Demo Project:
 Now, combine the Minikube IP and the port to access the demo project:
 ```css
 http://192.168.49.2:30100/
 ```
 
-### 4. Alternative Access via `curl`:
-If you're running your Kubernetes cluster in **WSL** or can't access it directly from your browser, you can use `curl` to check if the service is deployed:
+## 😼 [Alternative] Access Demo Project from WSL (3: Part 2)
+If you cannot access your Kubernetes cluster directly (e.g., it's deployed in **WSL**), you can use `curl` to check if the service is deployed or use `port-forward` to expose the application locally for testing.
+
+### 1. Check with `curl`:
+Obtain the **Service port** and **Node IP** like explained in section: **😼 See Demo Project in Browser (3)**, then run:
+
 ```css
 curl http://192.168.49.2:30100/
 ```
+
+### 2 Access with `port-forward`:
+Service’s `port` is **3000**. Let's map it to a local port (e.g., 8080) with `port-forward` for testing: 
+```sh
+kubectl port-forward service/webapp-service 8080:3000
+```
+> `port-forward` is great for temporary access during testing or debugging. It works with pods or services, but using it with services is recommended as they provide a stable endpoint. For long-term access, it's more standard to use options like `nodePort` or `ingress`.
+
+### 3 Open the Demo Project:
+After setting up `port-forward`, access the project at:
+```css
+http://localhost:8080
+```
+
+## 📷 Image
 
 Enjoy your fully integrated page with a database! 🥳🥳
 
