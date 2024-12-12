@@ -2,39 +2,26 @@
 
 ## 🪱 Local Installation
 
-### Options:
-- Minikube
-- Docker Desktop
-- Microk8s
-- k3s
-- KinD
+**Options:** Minikube, Docker Desktop, Microk8s, k3s, KinD
 
-### Minikube
-- **Standard**
-- Official by Kubernetes people
-- It's the most compatible with K8s
+**Minikube**
+- **Official** Kubernetes tool
+- Most compatible with K8s
 - Uses a VM
-- The one that most resources needs
+- High resource usage
 
-### Docker Desktop
-- **Problems with compatibility**
-- Uses a VM
-- Uses a lot of resources
+**Docker Desktop**
+- **Compatibility issues**
+- High resource usage
 
-### Microk8s
-- **Only for Linux**
-- Supported by K8s
-- It's a binary
+**Microk8s**
+- Linux only
+- Lightweight binary
  
-### k3s
-- **It's a very lightweight binary**
-- Supported by K8s
-- Developed to be used for IoT products
-- People have started using it for CD too
-- It can also run in a container, being similar to KinD
+**k3s**
+- Lightweight binary
+- Designed for IoT, also used for CI/CD
 
-### KinD (K8s in Docker)
-- **It's all k8s running inside a docker container**
-- Supported by K8s
-- The idea is to be used for CI
-- People have started using it for CD too
+**KinD (K8s in Docker)**
+- K8s running inside Docker
+- Designed for CI/CD
