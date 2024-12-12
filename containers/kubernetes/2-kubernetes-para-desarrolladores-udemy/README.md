@@ -30,9 +30,9 @@
 
 **Options:** EKS, AKS, GKE, Digital Ocean, OpenShift, Rancher.
 
-- **EKS**: AWS
-- **AKS**: Azure
 - **GKE**: Google Cloud
+- **AKS**: Azure
+- **EKS**: AWS
 - **Digital Ocean**: Cheapest option
 - **OpenShift**: For datacenters
 - **Rancher**: For datacenters
