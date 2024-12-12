@@ -567,8 +567,10 @@ Now, combine the Minikube IP and the port to access the demo project:
 http://192.168.49.2:30100/
 ```
 
+> **Note**: This will only work if Kubernetes is running locally on your computer. If you're using WSL or another environment, see the next section for alternative instructions.
+
 ## 😼 [Alternative] Access Demo Project from WSL (3: Part 2)
-If you cannot access your Kubernetes cluster directly (e.g., it's deployed in **WSL**), you can use `curl` to check if the service is deployed or use `port-forward` to expose the application locally for testing.
+If you cannot access your Kubernetes cluster directly (e.g., it's deployed in **WSL**), you can use `curl` to quickly check the service or use `port-forward` if you need a more interactive local access.
 
 ### 1. Check with `curl`:
 Obtain the **Service port** and **Node IP** like explained in section: **😼 See Demo Project in Browser (3)**, then run:
@@ -582,7 +584,7 @@ Service’s `port` is **3000**. Let's map it to a local port (e.g., 8080) with `
 ```sh
 kubectl port-forward service/webapp-service 8080:3000
 ```
-> `port-forward` is great for temporary access during testing or debugging. It works with pods or services, but using it with services is recommended as they provide a stable endpoint. For long-term access, it's more standard to use options like `nodePort` or `ingress`.
+> `port-forward` is great for temporary access during **testing or debugging**. It works with pods or services, but using it with services is recommended as they provide a stable endpoint. For long-term access, it's more standard to use options like **`nodePort`** or **`ingress`**.
 
 ### 3 Open the Demo Project:
 After setting up `port-forward`, access the project at:
