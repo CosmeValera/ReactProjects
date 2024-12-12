@@ -1,6 +1,6 @@
 # 🚢 KUBERNETES 2
 
-## 🪱 Local Installation
+## 🖥️ Local Installation
 
 **Options:** Minikube, Docker Desktop, Microk8s, k3s, KinD
 
@@ -25,3 +25,14 @@
 **KinD (K8s in Docker)**
 - K8s running inside Docker
 - Designed for CI/CD
+
+## ☁️ Cloud Installation
+
+**Options:** EKS, AKS, GKE, Digital Ocean, OpenShift, Rancher.
+
+- **EKS**: AWS
+- **AKS**: Azure
+- **GKE**: Google Cloud
+- **Digital Ocean**: Cheapest option
+- **OpenShift**: For datacenters
+- **Rancher**: For datacenters
