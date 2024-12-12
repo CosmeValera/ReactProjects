@@ -52,3 +52,8 @@ kubectl apply -f .
 ```sh
 kubectl delete all --all
 ```
+
+**Forward a port**
+```sh
+kubectl port-forward <pod-name> 8080:80
+```
