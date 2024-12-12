@@ -36,3 +36,19 @@
 - **Digital Ocean**: Cheapest option
 - **OpenShift**: For datacenters
 - **Rancher**: For datacenters
+
+### kubeCtl commands
+**Get all components in the cluster**
+```sh
+kubectl get all
+```
+
+**Apply all files**
+```sh
+kubectl apply -f .
+```
+
+**Delete all files from the cluster**
+```sh
+kubectl delete all --all
+```
