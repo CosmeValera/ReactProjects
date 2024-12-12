@@ -12,9 +12,9 @@ It's an orchestration tool, to manage multiple containers.
 
 ### Master node
 It has several Kubernetes processes:
-- **API Server**: The entry point of a K8s cluster.
+- **API Server**: Entry point for the K8s cluster.
 - **Controller Manager**: Tracks cluster state and performs corrective actions.
-- **Scheduler**: Decides where Pods should be placed.
+- **Scheduler**: Decides where Pods are placed.
 - **etcd**: A key-value store that holds the cluster's state.
 
 ### Architecture in general
@@ -26,7 +26,9 @@ It has several Kubernetes processes:
 - Worker nodes: 
   - Higher workload
   - Much bigger and more resources
-  - Has a Kubelet to manage Pods locally and report status to the master
+  - Components:
+    - **Kubelet:** Manages Pods locally and reports status to the master
+    - **Kube Proxy:** Manages network routing using **iptables** to manage traffic between Pods
 
 ## 🥙 Kubernetes components
 
