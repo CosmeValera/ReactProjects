@@ -22,11 +22,11 @@ It has several Kubernetes processes:
   - Control plane nodes
   - Handful of master processes
   - Much more important
-    - It is absolutely necessary to have a backup of the master
+    - Use **1 master** for testing/dev, **3 or 5 masters** for production for high availability and quorum (must be odd for consensus)
 - Worker nodes: 
   - Higher workload
   - Much bigger and more resources
-  - Has a Kubelet to manage Pods locally and communicate with the master.
+  - Has a Kubelet to manage Pods locally and report status to the master
 
 ## 🥙 Kubernetes components
 
