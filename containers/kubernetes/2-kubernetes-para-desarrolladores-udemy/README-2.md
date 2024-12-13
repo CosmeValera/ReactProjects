@@ -2,7 +2,7 @@
 
 ## 🖥️ Local Installation
 
-**Options:** Minikube, RKE2, KinD, Docker Desktop, Microk8s, k3s
+**Options:** Minikube, RKE2, KinD, Microk8s, k3s
 
 **Minikube**
 - **Official** Kubernetes tool
@@ -19,10 +19,6 @@
 - K8s running inside Docker
 - Designed for CI/CD
 
-**Docker Desktop**
-- **Compatibility issues**
-- High resource usage
-
 **Microk8s**
 - Linux only
 - Lightweight binary
@@ -33,14 +29,16 @@
 
 ## ☁️ Cloud Installation
 
-**Options:** EKS, AKS, GKE, Digital Ocean, OpenShift, Rancher.
+**Options:** EKS, GKE, AKS, OpenShift, Oracle Cloud (OKE), Alibaba Cloud, ArgoCD, KubeSphere
 
+- **EKS**: AWS
 - **GKE**: Google Cloud
 - **AKS**: Azure
-- **EKS**: AWS
-- **Digital Ocean**: Cheapest option
-- **OpenShift**: For datacenters
-- **Rancher**: For datacenters
+- **OpenShift**: Enterprise
+- **Oracle Cloud (OKE):** Oracle
+- **Alibaba Cloud:** Asia-Pacific
+- **ArgoCD**: GitOps
+- **KubeSphere**: Multi-cluster
 
 ## `kubeCtl` commands
 **Get all components in the cluster**
