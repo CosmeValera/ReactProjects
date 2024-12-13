@@ -89,6 +89,16 @@ kubectl exec -it <pod-name|service-name> -- sh
 kubectl get <pod-name|service-name> -oyaml
 ```
 
+**Edit yaml of a component (hot)**
+```sh
+kubectl edit <component-name>
+```
+
+**Delete a component**
+```sh
+kubectl delete <component-name>
+```
+
 ## 🥙🥙 Components
 ### Pods
 > **See `README.md`**
