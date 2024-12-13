@@ -570,7 +570,7 @@ http://192.168.49.2:30100/
 > **Note**: This will only work if Kubernetes is running locally on your computer. If you're using WSL or another environment, see the next section for alternative instructions.
 
 ## 😼 [Alternative] Access Demo Project from WSL (3: Part 2)
-If you cannot access your Kubernetes cluster directly (e.g., it's deployed in **WSL**), you can use `curl` to quickly check the service or use `port-forward` if you need a more interactive local access.
+If you cannot access your Kubernetes cluster directly (e.g., it's deployed in **WSL**), you can use `curl` to quickly check the service or use `port-forward` for a more interactive local access.
 
 ### 1. Check with `curl`:
 Obtain the **Service port** and **Node IP** like explained in section: **😼 See Demo Project in Browser (3)**, then run:
