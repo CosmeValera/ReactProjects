@@ -88,3 +88,19 @@ kubectl exec -it <pod-name|service-name> -- sh
 ```sh
 kubectl get <pod-name|service-name> -oyaml
 ```
+
+## 🥙🥙 Components
+### Pods
+> **See `README.md`**
+
+### ReplicaSet
+- Used for Stateless application
+- It's an abstraction
+  - **ReplicaSet** contains Pods
+  - **Deployment** contains ReplicaSet
+- Provides scaling
+- Handles failure response
+
+> You can create **Pods** and **ReplicaSets** in Kubernetes, but usually, **Deployments** are chosen for managing scaling, rolling updates, and self-healing.
+### Deployment
+> **See `README.md`**
