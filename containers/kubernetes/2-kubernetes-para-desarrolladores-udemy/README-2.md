@@ -1,3 +1,5 @@
+<!-- https://www.udemy.com/course/kubernetes-para-desarrolladores -->
+
 # 🚢 KUBERNETES 2
 
 ## 🖥️ Local Installation
@@ -113,4 +115,49 @@ kubectl delete <component-name>
 
 > You can create **Pods** and **ReplicaSets** in Kubernetes, but usually, **Deployments** are chosen for managing scaling, rolling updates, and self-healing.
 ### Deployment
+> **See `README.md`**
+
+**Commands**
+
+Deployments allow you to manage versions, scaling, and rollback easily.
+
+Let's see a `rollout` example:
+1. Apply a file:
+    ```sh
+    kubectl apply -f deployment.yaml
+    ```
+2. Make changes to the pods in the Deployment file
+3. Reapply the file using `apply` (**Step 1**)
+4. New pods will be create and the old replicaset will have no pods:
+    ```sh
+    kubectl get all
+    ```
+    Example output:
+    ```js
+    NAME                              READY   STATUS    RESTARTS   AGE
+    pod/deployment-787cd94984-4n6sp   1/1     Running   0          100s
+    pod/deployment-787cd94984-5zxqk   1/1     Running   0          91s
+    pod/deployment-787cd94984-vmpgw   1/1     Running   0          96s
+
+    NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+    service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   8m43s
+
+    NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+    deployment.apps/deployment   3/3     3            3           8m29s
+
+    NAME                                    DESIRED   CURRENT   READY   AGE
+    replicaset.apps/deployment-647584586d   0         0         0       8m29s
+    replicaset.apps/deployment-787cd94984   3         3         3       100s
+    ```
+5. Roll back to the previous ReplicaSet (which means new pods will be created):
+    ```sh
+    kubectl rollout undo deployment.apps/deployment
+    ```
+6.  Or restart the version and create a completely new ReplicaSet:
+    ```sh
+    kubectl rollout restart deployment.apps/deployment
+    ```
+> If you are using `port-forward` remember to update the command with the new pod/service.
+
+### Service
 > **See `README.md`**
