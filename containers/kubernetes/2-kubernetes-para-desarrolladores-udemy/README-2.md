@@ -42,17 +42,30 @@
 - **ArgoCD**: GitOps
 - **KubeSphere**: Multi-cluster
 
-## `kubeCtl` commands
-**Get all components in the cluster**
+## `kubectl` commands
+**Get or describe components**
 ```sh
+# Get all resources in the cluster
 kubectl get all
+
+# Get one kind
+kubectl get pod | configmap | secret | ...
 ```
+If you want more detailed information than **get** provides, use the **describe** command:
+```sh
+kubectl describe service <service-name>
+```
+
 
 **Apply all files**
 ```sh
 kubectl apply -f .
 ```
 
+**Delete a component**
+```sh
+kubectl delete <component-name>
+```
 **Delete all files from the cluster**
 ```sh
 # Delete all resources in the cluster
@@ -63,6 +76,12 @@ kubectl delete -f .
 ```
 > **Warning:** Use with caution to avoid accidental data loss
 
+**See logs of a component**
+```sh
+kubectl logs <pod-name|service-name> -f
+```
+> Use the `-f` flag to stream logs
+ 
 **Forward a component** (`port-forward`)
 ```sh
 # Example
@@ -73,12 +92,6 @@ kubectl port-forward service/result 4100:80
 kubectl port-forward <pod-name|service-name> <local-port>:<component-port>
 ```
 
-**See logs of a component**
-```sh
-kubectl logs <pod-name|service-name> -f
-```
-> Use the `-f` flag to stream logs
-> 
 **Enter a component**
 ```sh
 kubectl exec -it <pod-name|service-name> -- sh
@@ -96,12 +109,7 @@ kubectl get <pod-name|service-name> -oyaml
 kubectl edit <component-name>
 ```
 
-**Delete a component**
-```sh
-kubectl delete <component-name>
-```
-
-## 🥙🥙 Components
+## 🥙🥙 Components (2)
 ### Pods
 > **See `README.md`**
 

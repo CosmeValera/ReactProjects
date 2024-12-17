@@ -527,6 +527,8 @@ You can view logs from a pod with the following command (use the `-f` flag to st
 kubectl logs <podName> -f
 ```
 
+> **See `README-2.md`** for more `kubectl` commands
+
 ## 😼 See Demo Project in Browser (3)
 
 To access the demo project in the browser, we'll obtain the port from the service and the IP from the Minikube machine.
