@@ -129,10 +129,13 @@ Let's see a `rollout` example:
 2. Make changes to the pods in the Deployment file
 3. Reapply the file using `apply` (**Step 1**)
 4. New pods will be create and the old replicaset will have no pods:
+
+    **Command:**
     ```sh
     kubectl get all
     ```
-    Example output:
+
+    **Output:**
     ```js
     NAME                              READY   STATUS    RESTARTS   AGE
     pod/deployment-787cd94984-4n6sp   1/1     Running   0          100s
@@ -161,3 +164,6 @@ Let's see a `rollout` example:
 
 ### Service
 > **See `README.md`**
+
+### Ingress
+
