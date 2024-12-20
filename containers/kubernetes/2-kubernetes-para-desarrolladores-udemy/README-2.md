@@ -234,6 +234,27 @@ spec:
                   number: 80
 ```
 
+**Enable Ingress**
+
+The first time you need to enable Ingress in Minikube, run the following command:
+
+```sh
+minikube addons enable ingress
+```
+
+**Verifying Ingress**
+
+To see the ingress resources, `kubectl get all` won't show it. Use this:
+```sh
+kubectl get ingress
+```
+If ingress is enabled, you should be able to see the port:
+```js
+NAME         CLASS    HOSTS         ADDRESS        PORTS   AGE
+my-ingress   <none>   example.com   192.168.49.2   80      8m57s
+```
+
 **Access:**
 - `example.com/app1` → `Service A`.
 - `example.com/app2` → `Service B`.
+
