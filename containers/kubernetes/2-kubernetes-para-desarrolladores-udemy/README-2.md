@@ -175,3 +175,65 @@ Let's see a `rollout` example:
 
 ### Ingress
 
+An Ingress is a proxy in Kubernetes that routes external HTTP/HTTPS requests to internal services based on defined rules, enabling user-friendly URLs like `my-app.com`.
+
+Example with 2 services and 1 Ingress.
+
+**Service A:**
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: app-a
+```
+
+**Service B:**
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+spec:
+  ports:
+    - port: 80
+      targetPort: 8081
+  selector:
+    app: app-b
+```
+
+**Ingress:**
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /app1
+            pathType: Prefix
+            backend:
+              service:
+                name: service-a
+                port:
+                  number: 80
+          - path: /app2
+            pathType: Prefix
+            backend:
+              service:
+                name: service-b
+                port:
+                  number: 80
+```
+
+**Access:**
+- `example.com/app1` → `Service A`.
+- `example.com/app2` → `Service B`.
