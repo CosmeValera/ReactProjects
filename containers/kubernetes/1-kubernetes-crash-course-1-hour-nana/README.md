@@ -85,7 +85,7 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
 **Secret**
 - Used to store secret data
   - Passwords, certificates, credentials...
-- They are just like confirMap but meant to use encryption by using third-party tools
+- They are just like ConfigMap but meant to use encryption by using third-party tools
 - Reference Secret in Deployment/Pod
 
 ### Volume
