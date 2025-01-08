@@ -258,3 +258,4 @@ my-ingress   <none>   example.com   192.168.49.2   80      8m57s
 - `example.com/app1` → `Service A`.
 - `example.com/app2` → `Service B`.
 
+### Volume

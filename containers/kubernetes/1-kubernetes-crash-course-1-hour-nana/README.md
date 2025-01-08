@@ -96,6 +96,8 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
   - Externally, outside the Kubernetes cluster
 
 > Kubernetes doesn't manage data persistance!
+> 
+> Unlike cloud storage with backups or snapshots, local storage has no redundancy. If the backing directory of a volume is deleted, the data is lost permanently.
 
 ### Deployment & StatefulSet
 
@@ -116,6 +118,7 @@ From `http://192.168.1.100:30001` to `https://my-app.com`
   - Each Pod has a unique, stable identity (e.g., pod-0, pod-1).
   - Pods are created, deleted, and scaled in a defined order.
   - Persistent storage is tied to specific Pods.
+- **Volumes** and **StatefulSets** work well together: The persistent storage for each Pod is managed via volumes that are dedicated to specific Pods, ensuring data is consistently stored even if Pods are rescheduled or restarted.
 - Common use cases:
   - **Databases** like MySQL, PostgreSQL, MongoDB.
   - Ensures **read/write consistency** in databases.
