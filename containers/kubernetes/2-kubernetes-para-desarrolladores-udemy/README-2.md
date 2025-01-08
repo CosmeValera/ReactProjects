@@ -259,3 +259,52 @@ my-ingress   <none>   example.com   192.168.49.2   80      8m57s
 - `example.com/app2` → `Service B`.
 
 ### Volume
+Let's create a StatefulSet linked to a PersistentVolumeClaim.
+
+**StatefulSet**
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+spec:
+  serviceName: db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - image: postgres:9.4
+        name: db
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          subPath: data
+          name: data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: db-storage
+          readOnly: false
+```
+
+**Volume**
+```yaml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-storage
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+```
