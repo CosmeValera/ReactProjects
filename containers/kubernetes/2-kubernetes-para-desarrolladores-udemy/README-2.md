@@ -308,3 +308,12 @@ spec:
     requests:
       storage: 10Gi
 ```
+
+To check, run:
+```sh
+kubectl apply -f volume.yaml # Apply file
+
+kubectl get pvc # Show Volume
+
+kubectl get all # Show StatefulSet
+```
