@@ -317,3 +317,5 @@ kubectl get pvc # Show Volume
 
 kubectl get all # Show StatefulSet
 ```
+
+## ⛵ Develpoment cycle using k8s
