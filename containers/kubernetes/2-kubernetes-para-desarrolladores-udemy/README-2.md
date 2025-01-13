@@ -318,53 +318,62 @@ kubectl get pvc # Show Volume
 kubectl get all # Show StatefulSet
 ```
 
-## ⛵ Development cycle using k8s
+## ⛵ Kubernetes (k8s) Development Cycle
 
-### (1) Setting everything up
-1. Files creation:
-   1. Create software for the app
-   2. Create Dockerfile
-   3. Create kubernetes yaml files
+### (1) Initial Setup
+**1. Prepare Required Files**
+   1. **Application Code:** Develop the software for your application
+   2. **Dockerfile:** Write a `Dockerfile` to containerize your application
+   3. **Kubernetes YAML Files:** Create configuration files for your Kubernetes deployment, service, and other required resources (e.g., `deployment.yaml`, `service.yaml`).
 
-**Create Docker image from a Dockerfile:**
 
-```sh
-docker build -t my-user/vote-app:vote .
-```
-- This command builds a Docker image from the Dockerfile in the current directory (.).
-- The image will be tagged as my-user/vote-app:vote.
+**2. Build and Deploy Docker Image**
+1. **Build Docker Images:**
+    ```sh
+    docker build -t my-user/vote-app:vote .
+    ```
+    - This command builds a Docker image from the `Dockerfile` in the current directory (`.`).
+    - The image will be tagged as `my-user/vote-app:vote`.
 
-**Start a container from the image:**
+2. **Run Docker Container:**
+    ```sh
+    docker run -d --name my-user/vote-app-container my-user/vote-app
+    ```
+    - This starts a new container in detached mode (`-d`) using the `my-user/vote-app:vote` image.
+  	- The container will be named `vote-app-container`.
 
-```sh
-docker run -d --name my-user/vote-app-container my-user/vote-app
-```
-- This starts a new Docker container in detached mode (-d) using the my-user/vote-app image.
-- The container will be named my-user/vote-app-container.
+**3. Deploy to Kubernetes**
 
-**Execute k8s:**
+Apply the Kubernetes configuration files:
 ```sh
 kubectl apply -f <k8s-file>
 ```
+Replace `<k8s-file>` with the path to your YAML file (e.g., `deployment.yaml`).
 
-### (2) Cycle for when making a change
+### (2) Making Changes and Redeploying
 
-We need to rebuild the docker build (with a different tag or with the same tag)
+**1. Rebuild the Docker Image**
+
+After making changes to your application:
 ```sh
 docker build -t my-user/vote-app:vote .
 ```
 
-If you have the app in the cloud, you need to push it
+**2. Push the Updated Image (for Cloud Deployments)**
 ```sh
 docker push my-user/vote-app:vote
 ```
 
-Now you need to do pull (or it is done already if you hovae the pull always policy field)
+**3. Pull the Updated Image (if necessary)**
+
+Ensure Kubernetes nodes have the latest image. If the deployment uses the `imagePullPolicy: Always` field, this step is automatic:
 ```sh
 docker pull my-user/vote-app:vote
 ```
 
-However, before applying the files again. We need this command:
+**4. Restart Kubernetes Deployment**
+
+Force a rolling restart to redeploy the updated application:
 ```sh
 kubectl rollout restart vote
 ```
