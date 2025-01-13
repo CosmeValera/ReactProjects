@@ -318,4 +318,53 @@ kubectl get pvc # Show Volume
 kubectl get all # Show StatefulSet
 ```
 
-## ⛵ Develpoment cycle using k8s
+## ⛵ Development cycle using k8s
+
+### (1) Setting everything up
+1. Files creation:
+   1. Create software for the app
+   2. Create Dockerfile
+   3. Create kubernetes yaml files
+
+**Create Docker image from a Dockerfile:**
+
+```sh
+docker build -t my-user/vote-app:vote .
+```
+- This command builds a Docker image from the Dockerfile in the current directory (.).
+- The image will be tagged as my-user/vote-app:vote.
+
+**Start a container from the image:**
+
+```sh
+docker run -d --name my-user/vote-app-container my-user/vote-app
+```
+- This starts a new Docker container in detached mode (-d) using the my-user/vote-app image.
+- The container will be named my-user/vote-app-container.
+
+**Execute k8s:**
+```sh
+kubectl apply -f <k8s-file>
+```
+
+### (2) Cycle for when making a change
+
+We need to rebuild the docker build (with a different tag or with the same tag)
+```sh
+docker build -t my-user/vote-app:vote .
+```
+
+If you have the app in the cloud, you need to push it
+```sh
+docker push my-user/vote-app:vote
+```
+
+Now you need to do pull (or it is done already if you hovae the pull always policy field)
+```sh
+docker pull my-user/vote-app:vote
+```
+
+However, before applying the files again. We need this command:
+```sh
+kubectl rollout restart vote
+```
