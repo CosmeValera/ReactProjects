@@ -377,3 +377,52 @@ Force a rolling restart to redeploy the updated application:
 ```sh
 kubectl rollout restart vote
 ```
+
+### (3) Automating with Skaffold
+Skaffold simplifies the Kubernetes development workflow by automating the build, push, and deploy steps. Here’s how you can use it:
+
+**1. Install Skaffold**
+[Click here](https://skaffold.dev/)
+
+**2. Create a `skaffold.yaml` File**
+
+Define the Skaffold configuration for your project. Here’s an example:
+
+```yaml
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: vote-app
+build:
+  artifacts:
+  - image: my-user/vote-app:vote
+    context: .
+deploy:
+  kubectl:
+    manifests:
+    - k8s/deployment.yaml
+    - k8s/service.yaml
+```
+- Replace `my-user/vote-app:vote` with your image name.
+- Specify the paths to your Kubernetes YAML files under `manifests`.
+
+**3. Run Skaffold**
+```sh
+skaffold dev
+```
+- The `skaffold dev` command watches for changes in your project and triggers the build, push, and deploy steps automatically.
+- Any changes in the source code will be detected, and Skaffold will redeploy the application.
+
+**4. Additional Skaffold Commands**
+- Run without Watching:
+  ```sh
+  skaffold run
+  ```
+  This executes the workflow once without watching for file changes.
+
+- Clean Up Resources:
+  ```sh
+  skaffold delete
+  ```
+  This removes the deployed Kubernetes resources.
+
