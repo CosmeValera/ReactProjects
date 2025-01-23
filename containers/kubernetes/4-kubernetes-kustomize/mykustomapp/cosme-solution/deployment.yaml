@@ -3,17 +3,9 @@ kind: Deployment
 metadata:
   name: mywebapp
   namespace: default
-  labels:
-    app: mywebapp
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: mywebapp
   template:
-    metadata:
-      labels:
-        app: mywebapp
     spec: # Pod spec
       containers:
       - name: mycontainer
