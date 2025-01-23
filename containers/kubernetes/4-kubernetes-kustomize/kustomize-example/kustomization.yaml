@@ -13,3 +13,7 @@ namePrefix:
 
 nameSuffix:
   -v1
+
+configMapGenerator:
+- name: mykustom-map
+  env: config.properties
