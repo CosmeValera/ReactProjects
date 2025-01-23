@@ -4,3 +4,12 @@ resources:
 
 commonLabels:
   app: mywebapp
+
+commonAnnotations:
+  app: mykustom-annotations
+
+namePrefix:
+  kustom-
+
+nameSuffix:
+  -v1
