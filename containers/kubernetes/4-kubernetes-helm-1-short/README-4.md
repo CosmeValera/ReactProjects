@@ -79,3 +79,17 @@ mychart/
 - `values.yaml` ➡️ values for the template files
 - `chart` folder ➡️ chart dependencies
 - `templates` folder ➡️ the actual template files
+
+## Values injection
+
+So, by default this is the command, which uses `values.yaml`:
+```sh
+helm install <chartname>
+```
+But, we can specify the `values.yaml` file:
+```sh
+helm install --values=my-values.yaml <chartname>
+```
+Which will override `values.yaml`, the result is a `.Values` object.
+
+![value-injection](img/value-injection.png)
