@@ -22,10 +22,17 @@ Examples:
 
 ## 2. Templating Engine
 If you have a case where you have a lot of microservices or pods that are the same but only change in a value, instead of having to rewrite all of them one by one, you can use this template system with Helm.
-1. Define a common blueprint
-2. Dynamic valies are replaced by placeholders
 
-Looks like this:
+
+Advantages:
+- It is practical for CI/CD
+- In your Build you can replace the values on the fly
+
+Steps:
+1. Define a common blueprint
+2. Dynamic values are replaced by placeholders
+
+`my-pod.yaml`:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -38,9 +45,14 @@ spec:
     port: {{ .Values.container.port }}
 ```
 
-Advantages:
-- It is practical for CI/CD
-- In your Build you can replace the values on the fly
+`values.yaml` (the file with the values):
+```yaml
+name: my-app
+container:
+  name: my-app-container
+  image: my-app-image
+  port: 9001
+```
 
 ## 3. Same application across different environments
 
