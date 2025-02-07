@@ -13,7 +13,7 @@ Helm Charts solve a critical problem in Kubernetes: **repetitive and error-prone
 - Push them to Helm Repository
 - Download and use existing ones
 
-Examples:
+**Examples:**
 - Database apps
   - `ElasticSearch`
   - `MySQL`
@@ -24,11 +24,11 @@ Examples:
 If you have a case where you have a lot of microservices or pods that are the same but only change in a value, instead of having to rewrite all of them one by one, you can use this template system with Helm.
 
 
-Advantages:
+**Advantages:**
 - It is practical for CI/CD
 - In your Build you can replace the values on the fly
 
-Steps:
+**Steps:**
 1. Define a common blueprint
 2. Dynamic values are replaced by placeholders
 
@@ -57,5 +57,10 @@ container:
 ## 3. Same application across different environments
 
 In this case, instead of deploying all the YAML files, individually in each cluster environment. We can package them up, to make an application that will have all the yaml files. And this chart can be used to redeploy the same application into different kubernetes cluster environments
+
+**Example:**
+```sh
+helm install my-app ./my-chart --values=prod-values.yaml  
+```
 
 ## Helm chart structure
