@@ -1,6 +1,6 @@
 <!-- https://www.youtube.com/watch?v=-ykwb1d0DXU -->
 
-# 🚢 KUBERNETES 3 (HELM)
+# 🚢 KUBERNETES 4 (HELM)
 Helm is a package manager for kubernetes.
 - To package YAML files and distribute them in public and private repositories.
 - Like apt, zypper or homebrew
