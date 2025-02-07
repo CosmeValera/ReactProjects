@@ -6,7 +6,9 @@ Helm is a package manager for kubernetes.
 - Like apt, zypper or homebrew
 
 ## 1. Helm Charts
-- Bundle of YAML Files
+Helm Charts solve a critical problem in Kubernetes: **repetitive and error-prone YAML configuration.** Without them, developers and operators would need to manually write (and rewrite) complex YAML files for common applications like databases or monitoring tools. Helm Charts act as reusable templates, allowing teams to standardize deployments, share configurations, and avoid reinventing the wheel for every project or environment.
+
+- Bundle of YAML Files (*preconfigured for common use cases*)
 - Create your own Helm Charts with Helm
 - Push them to Helm Repository
 - Download and use existing ones
@@ -14,7 +16,6 @@ Helm is a package manager for kubernetes.
 Examples:
 - Database apps
   - `ElasticSearch`
-  - `MongoDB`
   - `MySQL`
 - Monitoring apps
   - `Prometheus`
