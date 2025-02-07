@@ -64,3 +64,18 @@ helm install my-app ./my-chart --values=prod-values.yaml
 ```
 
 ## Helm chart structure
+**Directory Structure:**
+```sh
+mychart/
+  Chart.yaml
+  values.yaml
+  charts/
+  templates/
+  ...  
+```
+
+- Top level `mychart` folder ➡️ name of chart
+- `Chart.yaml` ➡️ meta info about chart
+- `values.yaml` ➡️ values for the template files
+- `chart` folder ➡️ chart dependencies
+- `templates` folder ➡️ the actual template files
