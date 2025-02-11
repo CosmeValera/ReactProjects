@@ -10,6 +10,8 @@ Install Helm: [Click here](https://helm.sh/)
 Helm Charts: [Artifact Hub](https://artifacthub.io/)
 
 ## 🗄️🧩 Install Repository and Chart
+
+### 🗄️ Repository Management
 **Let's add an example repository to Helm: `Bitnami`**
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -36,6 +38,8 @@ helm repo update
 # ...Successfully got an update from the "bitnami" chart repository
 # Update Complete. ⎈Happy Helming!⎈
 ```
+
+### 🧩 Chart Deployment Workflow
 **Let's install a Helm chart from `Bitnami`**
 ```sh
 helm install my-nginx bitnami/nginx
@@ -84,6 +88,7 @@ helm status my-nginx
 
 # This provides detailed information about the Helm release, including its resources and configuration.
 ```
+### 🧹 Cleanup Process
 **Uninstall the Helm release**
 ```sh
 helm uninstall my-nginx
