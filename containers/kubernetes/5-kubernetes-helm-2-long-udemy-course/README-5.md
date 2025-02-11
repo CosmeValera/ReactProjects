@@ -8,3 +8,5 @@ Install Helm: [Click here](https://helm.sh/)
 
 ### Webpage
 Helm Charts: [Artifact Hub](https://artifacthub.io/)
+
+> Helm repositories and charts are not stored in the folder, but in a centralized location
