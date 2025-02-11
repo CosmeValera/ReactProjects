@@ -105,12 +105,29 @@ kubectl get all
 
 ## 🧾 Other commands
 ### 🗄️ Repository Management
+`hub` is to look to all possible charts, in the artefact Hub, while `repo` only looks into the charts contained in your installed repos.
+
 ```sh
-helm search repo bitnami # Show Charts
+helm search hub nginx # Show all charts in hub that contain the keyword nginx
+helm search repo bitnami # Show all my charts in my installed repos, in this case those that contain the keyword bitnami
 ```
 ```sh
-helm search repo bitnami | wc -l # Amount of Charts
+helm search repo bitnami | wc -l # Amount of Charts in bitnami
 ```
+Output:
+```sh
+helm search repo bitnami -o yaml # yaml / json / table (default)
+```
+```sh
+helm search repo bitnami -l # Show all versions, not only latest
+```
+```sh
+helm search repo nginx --version 2.0.11 # When searching for a specific version
+```
+```sh
+helm repo remove elastic # Remove a repo
+```
+
 ```sh
 helm env # Environment variables
 ```
