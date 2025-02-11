@@ -91,7 +91,7 @@ helm uninstall my-nginx
 # Output:
 # release "my-nginx" uninstalled
 ```
-**Confirm that all resources has been removed**
+**Confirm that all resources have been removed**
 ```sh
 kubectl get all
 
