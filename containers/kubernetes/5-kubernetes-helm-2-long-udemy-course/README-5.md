@@ -102,3 +102,16 @@ kubectl get all
 
 # This ensures that all Kubernetes resources related to the release have been deleted.
 ```
+
+
+## 🗄️🧩 Other commands
+### 🗄️ Repository Management
+```sh
+helm search repo bitnami # Show Charts
+```
+```sh
+helm search repo bitnami | wc -l # Amount of Charts
+```
+```sh
+helm env # Environment variables
+```
