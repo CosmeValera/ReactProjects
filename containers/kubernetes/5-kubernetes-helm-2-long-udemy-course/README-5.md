@@ -46,15 +46,13 @@ helm install my-nginx bitnami/nginx
 
 However, before installing a chart, ensure Minikube is running. Helm requires a Kubernetes cluster to deploy applications. If the cluster isn't running, you'll see an error like `Kubernetes cluster unreachable`.
 
-**Start**
+**Before installing a chart, ensure Minikube is running**
 ```sh
 minikube start
+
+kubectl get all # Check
 ```
-**Check that is working**
-```sh
-kubectl get all
-```
-**Install an Nginx chart from the Bitnami repository**
+**Let's install a Helm chart from `Bitnami` <small>(now having a cluster).</small>**
 ```sh
 helm install my-nginx bitnami/nginx
 
