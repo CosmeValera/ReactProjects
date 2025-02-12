@@ -103,31 +103,59 @@ kubectl get all
 # This ensures that all Kubernetes resources related to the release have been deleted.
 ```
 
-## 🧾 Other commands
-### 🗄️ Repository Management
-`hub` is to look to all possible charts, in the artefact Hub, while `repo` only looks into the charts contained in your installed repos.
+## 🧾 Essential Helm Commands
 
-```sh
-helm search hub nginx # Show all charts in hub that contain the keyword nginx
-helm search repo bitnami # Show all my charts in my installed repos, in this case those that contain the keyword bitnami
-```
-```sh
-helm search repo bitnami | wc -l # Amount of Charts in bitnami
-```
-Output:
-```sh
-helm search repo bitnami -o yaml # yaml / json / table (default)
-```
-```sh
-helm search repo bitnami -l # Show all versions, not only latest
-```
-```sh
-helm search repo nginx --version 2.0.11 # When searching for a specific version
-```
-```sh
-helm repo remove elastic # Remove a repo
+### 🔍 Search Operations
+| Command | Description |
+|---------|-------------|
+| `helm search hub nginx` | Search Artifact Hub for Nginx charts |
+| `helm search repo bitnami` | Search local repos for Bitnami charts |
+| `helm search repo nginx --versions` | Show all available versions |
+
+**Examples:**
+```bash
+# Count Bitnami charts
+helm search repo bitnami | wc -l
+
+# Filter output formats
+helm search repo bitnami -o yaml  # YAML format
+helm search repo bitnami -o json  # JSON format
+
+# Find specific chart version
+helm search repo nginx --version 19.0.0
 ```
 
-```sh
-helm env # Environment variables
+### ⚙️ Repository Management
+```bash
+# Remove repository
+helm repo remove elastic
+
+# Show Helm environment variables
+helm env  # Displays paths/cache locations
+```
+
+### 💡 Pro Tips
+1. Always check chart requirements:
+```bash
+helm show chart bitnami/nginx  # Display chart metadata
+```
+
+2. Dry-run installations:
+```bash
+helm install --dry-run my-nginx bitnami/nginx  # Simulate installation
+```
+
+3. View chart values:
+```bash
+helm show values bitnami/nginx  # Display customizable parameters
+```
+
+4. Upgrade releases:
+```bash
+helm upgrade my-nginx bitnami/nginx --version 19.1.0  # Specify version
+```
+
+5. Rollback changes:
+```bash
+helm rollback my-nginx 1  # Revert to revision 1
 ```
