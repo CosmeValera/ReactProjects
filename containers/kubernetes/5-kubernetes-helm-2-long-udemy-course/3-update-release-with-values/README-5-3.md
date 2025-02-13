@@ -96,3 +96,22 @@ If something goes wrong, you can rollback to a previous revision:
 # Rollback to previous revision
 helm rollback apache1 1
 ```
+
+---
+
+## Make a change using the values file
+
+Create a values.yaml file
+```bash
+helm show values bitnami/apache > values.yaml
+```
+Edit the values.yaml file
+```yaml
+replicaCount: 3
+```
+Upgrade the release
+```bash
+helm upgrade apache1 bitnami/apache -f values.yaml
+```
+
+
