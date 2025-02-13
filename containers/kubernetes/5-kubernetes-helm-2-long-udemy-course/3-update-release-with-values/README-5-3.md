@@ -18,6 +18,30 @@ helm upgrade apache1 bitnami/apache --version 9.2.0
 helm upgrade apache1 bitnami/apache --dry-run
 ```
 
+
+## Make a change using the values file
+
+Create a values.yaml file
+```bash
+helm show values bitnami/apache > values.yaml
+```
+Edit the values.yaml file
+```yaml
+replicaCount: 3
+```
+Upgrade the release
+```bash
+helm upgrade apache1 bitnami/apache -f values.yaml
+```
+
+###  🔄 Rollback
+If something goes wrong, you can rollback to a previous revision:
+```bash
+# Rollback to previous revision
+helm rollback apache1 1
+```
+---
+
 ## 🔍 Checking Release Status
 
 ```bash
@@ -88,30 +112,6 @@ helm status apache1
 
 # See release history
 helm history apache1
-```
-
-###  🔄 Rollback
-If something goes wrong, you can rollback to a previous revision:
-```bash
-# Rollback to previous revision
-helm rollback apache1 1
-```
-
----
-
-## Make a change using the values file
-
-Create a values.yaml file
-```bash
-helm show values bitnami/apache > values.yaml
-```
-Edit the values.yaml file
-```yaml
-replicaCount: 3
-```
-Upgrade the release
-```bash
-helm upgrade apache1 bitnami/apache -f values.yaml
 ```
 
 
