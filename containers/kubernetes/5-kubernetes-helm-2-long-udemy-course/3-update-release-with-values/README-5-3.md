@@ -112,6 +112,9 @@ helm status apache1
 
 # See release history
 helm history apache1
+
+# Uninstall the release
+helm uninstall apache1
 ```
 
 
