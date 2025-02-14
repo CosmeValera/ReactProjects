@@ -25,6 +25,16 @@ helm create my-chart
 helm install app-nginx ./my-chart
 ```
 
+#### Other options 
+
+```bash
+# Dry run to see what will be deployed
+helm install --dry-run app-nginx ./my-chart 
+
+# Dry run with debug for more details
+helm install --dry-run --debug app-nginx ./my-chart   
+```
+
 ### Delete a Chart
 
 ```bash
