@@ -18,3 +18,20 @@
 ```bash
 helm create my-chart
 ```
+
+### Deploy a Chart
+
+```bash
+helm install app-nginx ./my-chart
+```
+
+### Delete a Chart
+
+```bash
+helm ls
+helm status app-nginx
+helm delete app-nginx
+```
+
+
+
