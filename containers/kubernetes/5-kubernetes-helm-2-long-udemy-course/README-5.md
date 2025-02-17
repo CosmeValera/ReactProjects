@@ -134,7 +134,25 @@ helm repo remove elastic
 helm env  # Displays paths/cache locations
 ```
 
-### 💡 Pro Tips
+### 📚 Obtain information from releases and charts
+
+1. **`helm get` -> Get information about a release.**
+   - `helm get all` -> Get all information about a release.
+   - `helm get hooks` -> Get hooks about a release.
+   - `helm get manifest` -> Get manifest about a release.
+   - `helm get metadata` -> Get metadata about a release.
+   - `helm get notes` -> Get notes about a release.
+   - `helm get values` -> Get values about a release.
+2. **`helm show` -> Show information about a chart.**
+   - `helm show chart` -> Show chart information.
+   - `helm show values` -> Show values information.
+   - `helm show readme` -> Show readme information.
+   - `helm show notes` -> Show notes information.
+   - `helm show values` -> Show values information.
+
+> More about `helm get` and `helm show` in [README-5-2](2-commands-repos-and-charts/README-5-2.md)
+
+### 💡 General Tips
 1. Always check chart requirements:
 ```bash
 helm show chart bitnami/nginx  # Display chart metadata

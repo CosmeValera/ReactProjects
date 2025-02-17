@@ -43,7 +43,7 @@ helm show [command] <chart_name>
 | `readme` | View chart documentation | To understand installation and configuration |
 | `values` | Display configurable values | To see what can be customized |
 
-### 💡 Pro Tips
+### 💡 Tips
 1. Save outputs to files for reference:
 ```sh
 helm show readme bitnami/apache > apache_readme.md
