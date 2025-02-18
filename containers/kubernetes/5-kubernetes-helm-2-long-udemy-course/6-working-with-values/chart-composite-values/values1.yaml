@@ -1,0 +1,9 @@
+# This can be added after with the `-f` flag
+# helm upgrade mysql1 chart-composite-values/ -f chart-composite-values/values1.yaml
+# helm get manifest mysql1
+
+
+limites:
+    memoria: "100Mi"
+peticiones:
+    memoria: "50Mi"
