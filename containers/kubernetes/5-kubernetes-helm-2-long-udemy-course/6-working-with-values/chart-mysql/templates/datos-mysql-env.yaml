@@ -7,4 +7,4 @@ data:
 kind: ConfigMap
 metadata:
   name: {{.Release.Name}}-datos-mysql-env
-  namespace: default
+  namespace: {{.Values.namespace}}

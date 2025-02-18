@@ -28,23 +28,23 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: datos-mysql-env
+                  name: {{.Release.Name}}-datos-mysql-env
                   key: MYSQL_ROOT_PASSWORD
 
             - name: MYSQL_USER
               valueFrom:
                 configMapKeyRef:
-                  name: datos-mysql-env
+                  name: {{.Release.Name}}-datos-mysql-env
                   key: MYSQL_USER
             
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  name: datos-mysql-env
+                  name: {{.Release.Name}}-datos-mysql-env
                   key: MYSQL_DATABASE
 
             - name: MYSQL_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: datos-mysql-env
+                  name: {{.Release.Name}}-datos-mysql-env
                   key: MYSQL_PASSWORD

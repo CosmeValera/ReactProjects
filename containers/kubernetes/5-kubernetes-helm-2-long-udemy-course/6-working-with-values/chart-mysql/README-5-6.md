@@ -1,3 +1,5 @@
+> FROM notes.txt
+
 You installed a mysql database.
 
 Your database is called "kubernetes" and your username is "usudb" with the password "ipass".
@@ -10,7 +12,7 @@ Once inside the pod, run the following command to connect to the database:
 ```bash
 mysql -u root -p
 ```
-Enter the password "rpass" when prompted.
+Enter the password `rpas` when prompted.
 
 Show databases:
 ```bash
