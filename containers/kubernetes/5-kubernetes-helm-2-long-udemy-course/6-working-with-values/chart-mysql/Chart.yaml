@@ -1,0 +1,11 @@
+apiVersion: v2
+name: chart-mysql
+description: A Helm chart for MySQL
+
+type: application
+
+# Chart version
+version: 0.1.0
+
+# Deployed app version
+appVersion: "1.16.0"
