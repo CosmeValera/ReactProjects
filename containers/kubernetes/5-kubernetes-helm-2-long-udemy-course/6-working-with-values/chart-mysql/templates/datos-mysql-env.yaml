@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  MYSQL_DATABASE: {{.Values.bbdd}}
+  MYSQL_PASSWORD: {{.Values.pass}}
+  MYSQL_ROOT_PASSWORD: {{.Values.rootpass}}
+  MYSQL_USER: {{.Values.usudb}}
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-datos-mysql-env
+  namespace: default
