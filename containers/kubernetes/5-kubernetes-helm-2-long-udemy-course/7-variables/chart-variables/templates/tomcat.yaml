@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: tomcat
+  name: {{ .Release.Name }}-tomcat
   labels:
     estado: "desarrollo"
     responsable: "juan"
 spec:
   containers:
-   {{ $version := "9.0"}}
-   - name: tomcat:{{$version}}
-     image: tomcat:{{$version}}
+   - name: tomcat1
+     {{ if eq .Values.entorno "desarrollo" }}
+     image: tomcat:9.0
+     {{ else }}
+     image: tomcat:10.0
+     {{ end }}
