@@ -8,3 +8,13 @@
         image: httpd:2.2
       {{ end }}
 ```
+
+## OR
+```yaml
+      - name: apache
+      {{- if or (eq .Values.tiposervicio "n") (eq .Values.tiposervicio "c") }}
+        image: httpd:2.4
+      {{ else}}
+        image: httpd:2.2
+      {{ end }}
+```
