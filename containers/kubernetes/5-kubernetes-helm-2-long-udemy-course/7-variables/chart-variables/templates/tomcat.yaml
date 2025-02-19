@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
    - name: tomcat1
-     {{ if eq .Values.entorno "desarrollo" }}
+     {{- if eq .Values.entorno "desarrollo"}}
      image: tomcat:9.0
      {{ else }}
      image: tomcat:10.0
