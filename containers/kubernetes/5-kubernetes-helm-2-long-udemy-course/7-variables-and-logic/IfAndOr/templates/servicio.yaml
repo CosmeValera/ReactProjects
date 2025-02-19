@@ -7,14 +7,14 @@ metadata:
 spec:
   {{- if eq .Values.tiposervicio "n"}}
   type: NodePort
-  {{ else}}
+  {{- else }}
   type: ClusterIP
-  {{ end }}
+  {{- end }}
   ports:
   - port: {{ .Values.puerto }}
     {{- if eq .Values.tiposervicio "n" }}
     nodePort: {{ .Values.nodeport }}
-    {{ end }}
+    {{- end }}
     protocol: TCP
   selector:
      app: apache

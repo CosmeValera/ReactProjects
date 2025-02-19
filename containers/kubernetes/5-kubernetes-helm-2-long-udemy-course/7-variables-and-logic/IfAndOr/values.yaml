@@ -12,7 +12,7 @@ nodeport: 30002
 ##                       c   para ClusterIp  #
 ##############################################
 
-tiposervicio: "c"
+tiposervicio: "n"
 
 ##############################################
 ##  entorno  -->  desarrollo      #

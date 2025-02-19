@@ -16,9 +16,9 @@ spec:
       - name: apache
       {{- if and  (eq .Values.entorno  "desarrollo") ( eq .Values.departamento "RRHH" )  }}
         image: httpd:2.4
-      {{ else}}
+      {{- else }}
         image: httpd:2.2
-      {{ end }}
+      {{- end }}
         ports:
         - containerPort: {{ .Values.puerto}}
 
