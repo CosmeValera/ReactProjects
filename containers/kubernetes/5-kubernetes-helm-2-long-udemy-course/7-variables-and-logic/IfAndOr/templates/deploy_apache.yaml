@@ -1,0 +1,24 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}-apache
+spec:
+  selector:   
+    matchLabels:
+      app: apache
+  replicas: {{ .Values.replicas}} 
+  template:   
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+      - name: apache
+      {{- if and  (eq .Values.entorno  "desarrollo") ( eq .Values.departamento "RRHH" )  }}
+        image: httpd:2.4
+      {{ else}}
+        image: httpd:2.2
+      {{ end }}
+        ports:
+        - containerPort: {{ .Values.puerto}}
+

@@ -1,0 +1,27 @@
+
+## Ejemplo de Valores para If complejo
+#
+replicas: 4
+
+
+puerto: 80
+nodeport: 30002
+
+##############################################
+##  Tipo de servicio --> n   para NodePort   #
+##                       c   para ClusterIp  #
+##############################################
+
+tiposervicio: "c"
+
+##############################################
+##  entorno  -->  desarrollo      #
+##                test
+##                produccion
+##############################################
+
+entorno: desarrollo
+
+departamento: RRHH
+
+
