@@ -7,6 +7,10 @@ HELM functions list: [Click here](https://helm.sh/docs/chart_template_guide/func
 
 
 ## 🛫 Functions
+### Functions explained:
+> [!IMPORTANT]
+> The functions are a way to manipulate the data.
+
 ### Functions example:
 ```yaml
 apiVersion: v1
@@ -45,7 +49,51 @@ data:
 
 
 ## 🪈 Pipelines
-.
+### Pipelines explained:
+> [!IMPORTANT]
+> The pipelines are a way to chain functions together.
+> The result of the previous function is used as the input of the next function.
+
+### Pipelines example:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name}}-config
+  namespace: default
+data:
+  quote: {{ quote .Values.city | upper }}
+  upper: {{ upper .Values.city | repeat 3 }}
+  now: {{ now |  htmlDate }}
+  substr: {{ substr 0 3 .Values.city | repeat 3 }}
+  sum: {{ sub (add 1 2 3) 1 }}
+  print: {{ print "Matt has " .Values.dogs " dogs" | printf "%s -added" }}
+  randInt: {{ randInt 1 10 | printf "%d - random number"  }}
+```
+
+### Pipelines result:
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pr1-config
+  namespace: default
+data:
+  quote: "CALIFORNIA"
+  upper: CALIFORNIACALIFORNIACALIFORNIA
+  now: 2025-02-21
+  substr: CalCalCal
+  sum: 5
+  print: Matt has 7 dogs -added
+  randInt: 2 - random number
+```
+
+
+
+
+
+
+
 
 
 

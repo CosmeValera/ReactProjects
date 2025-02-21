@@ -7,5 +7,8 @@ data:
   quote: {{ quote .Values.city | upper }}
   upper: {{ upper .Values.city | repeat 3 }}
   now: {{ now |  htmlDate }}
-  network: {{ getHostByName "curso" | substr 0 3}}
+  substr: {{ substr 0 3 .Values.city | repeat 3 }}
+  sum: {{ sub (add 1 2 3) 1 }}
+  print: {{ print "Matt has " .Values.dogs " dogs" | printf "%s -added" }}
+  randInt: {{ randInt 1 10 | printf "%d - random number"  }}
   
