@@ -11,6 +11,9 @@ These files are not rendered as a resource, but they can be used in other templa
 
 **include**: Includes a partial.
 
+> [!WARNING]
+> **`template`** also works to include partials, but it's deprecated.
+
 ### Partial example:
 **Partial example**:
 ```yaml

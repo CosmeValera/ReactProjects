@@ -1,0 +1,26 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}-web-sonda
+  {{- template "plantilla1.etiquetas" . }}
+spec:
+  selector:   
+    matchLabels:
+      app: web
+  replicas: 1 
+  template:   
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web-sonda
+        image: apasoft/sonda-web:latest
+        ports:
+        - containerPort: 80
+        livenessProbe:
+            httpGet:
+                path: /sonda.html
+                port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
