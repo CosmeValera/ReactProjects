@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name}}-web-sonda
-  {{- template "plantilla1.etiquetas" . }}
+  {{- include "plantilla1.etiquetas" . }}
 spec:
   selector:   
     matchLabels:
