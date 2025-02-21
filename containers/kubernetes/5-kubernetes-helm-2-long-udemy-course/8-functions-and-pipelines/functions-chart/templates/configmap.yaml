@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name}}-config
+  namespace: default
+data:
+  quote: {{ quote .Values.city }}
+  upper: {{ upper .Values.city }}
+  now: {{ now }}
+  substr: {{ substr 0 3 .Values.city }}
+  sum: {{ add 1 2 3 }}
+  print: {{ print "Matt has " .Values.dogs " dogs" }}
+  randInt: {{ randInt 1 10 }}
+

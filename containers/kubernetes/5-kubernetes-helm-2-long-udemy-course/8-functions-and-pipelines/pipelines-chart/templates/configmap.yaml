@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name}}-config
+  namespace: default
+data:
+  quote: {{ quote .Values.city | upper }}
+  upper: {{ upper .Values.city | repeat 3 }}
+  now: {{ now |  htmlDate }}
+  network: {{ getHostByName "curso" | substr 0 3}}
+  
