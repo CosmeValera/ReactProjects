@@ -241,4 +241,71 @@ In the `volumes` section you have different volumes, and you can mount each one 
 
 ![Different volume types in a Pod](./img/image5.png)
 
+---
+
+As we have seen until now,
+1. Adminst configure storage
+2. and Create Persistent Volumes
+3. K8s developers claim PV using PVC
+
+Thus, k8s developers have to request new storage to the admins, who have to ask for new physical storage to the cloud etc to build the PVs. **And this can end up being tidy, and chaotic.**
+
+**To make this process more efficient**, there is a third K8s persistence component: **StorageClass**
+
 ## 🏫🧑‍🏫 StorageClass
+
+SC provisions Persistent Volumes dynamically when PersistentVolumeClaim claims it. Example:
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: storage-class-name
+provisioner: kubernetes.io/aws-ebs
+parameteres:
+  type: io1
+  iopsPerGB: "10"
+  fsType: ext4
+``` 
+
+- `kind: StorageClass`
+- StorageBackend is defined in the SC component via `provisioner` attribute. 
+  - Each storage backend has its own provisioner
+  - **internal** provisioner - "kubernetes.io"
+  - **external** provisioner
+- Configure `parameters` for storage we want to request for PV
+
+So, the SC is another abstraction level that:
+- abstracts the underlying storage provider
+- abstracts the paramaters for that storage
+
+**Storage Class usage:**
+
+Requested by **PersistentVolumeClaim**, similar to how we **Claim** the **Volumes**, in this case we **Claim** the **SC**. Example of PVC:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc
+spec: 
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: storage-class-name
+```
+
+It's important that in `spec.storageClassName` must be referenced the name of the `StorageClass`.
+
+---
+
+Now, when **1. a pod claims storage via PVC, 2. the PVC requests storage from SC, 3. SC creates a PV that meets the needs of the Claim.**
+
+![full cycle when using a Storage Class](./img/image6.png)
+<small>Small square is the namespace. Big square is the cluster.</small>
+
+
+## 📙 Resource
+- This [video from Nana](https://www.youtube.com/watch?v=0swOh5C3OVM)
