@@ -236,4 +236,9 @@ spec:
         name: bb-configmap
 ```
 
-<!-- ## 🏫🧑‍🏫 StorageClass -->
+## Different volume types in a Pod
+In the `volumes` section you have different volumes, and you can mount each one into a different path inside the container (`containers.volumeMounts` section).
+
+![Different volume types in a Pod](./img/image5.png)
+
+## 🏫🧑‍🏫 StorageClass
