@@ -143,7 +143,6 @@ So the K8s administrator may create the nfs-storage/cloud-storage and the PV com
 
 Following this example, the K8s developer has the role of making their application **claim** the Persistent Volume
 
-<!-- ## 🏫🧑‍🏫 StorageClass -->
 ## 🛄📝 PersistentVolumeClaim
 To do this, there is another Kubernetes component called PersistentVolumeClaim. Example:
 
@@ -162,7 +161,7 @@ spec:
       storage: 10Gi
 ```
 
-How this works, is that the PVC claims volumes with a specific type like the storage, and accessModes. And whatever PersistentVolume that matches this criteria will be used (they need to be created beforehand).
+The way that this works, is that the PVC claims volumes with a specific type like the storage, and accessModes. And whatever PersistentVolume that matches this criteria will be used (they need to be created beforehand).
 
 Not only you need to create the PersistentVolumeClaim file, but you also need to use that PVC in the Pods configuration, like this:
 
@@ -201,3 +200,40 @@ Now the container(or the application inside the container) can read/write to the
 
 ![image 4](./img/image4.png)
 ![image 3](./img/image3.png)
+
+## Why so many abstractions?
+- The admin role is to provision storage resources (PV)
+- And the developer creates claim to PV
+
+This has the advantage for the developer that you deploy the application in the cluster, and you don't know where the actual storage is, it could be in a NFS or in a cloud storage like AWS, but it doesn't matter for you as long as the data is correctly stored and has enough space.
+
+So it makes deploying the application easier for developers
+
+## ConfigMap and Secret
+- Local volumes
+- Not created via PV and PVC
+- Managed by Kubernetes
+
+Steps:
+1) Create ConfigMap and/or Secret component
+2) Mount that into your pod/container
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: busybox-container
+      image: busybox
+      volumeMounts:
+        - name: config-dir
+          mountPath: /etc/config
+  volumes:
+    - name: config-dir
+      configMap:
+        name: bb-configmap
+```
+
+<!-- ## 🏫🧑‍🏫 StorageClass -->
