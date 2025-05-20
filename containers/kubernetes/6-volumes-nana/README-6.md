@@ -18,3 +18,16 @@ However, you don't know from which node will the pod restart in. 2. So the stora
 And, 3. Storage needs to **survive** even if **cluster crashes**.
 
 <small> *Minikube has by default only one node that acts as both master and worker. You can try commands: `kubectl get nodes` and `minikube node add`</small>
+
+### Another use case for persistent storage
+Instead of a database, it can also be used for persistent storage, e.g. `my-app` writes/reads from a file or folder (e.g. about the app configuration, session data, etc).
+
+> About the resilience of the information, whether using just a PV, or also PVCs, there are 2 types.
+> - **Local storage:** data is tied to a specific node. Data will survive a pod fail 👍, but not a node fail 👎 (This violates principles 2 and 3 of *🫙 Storage requirements*)
+> - **Cloud/Network storage:** data resides on a external storage, and different nodes can access it. Data will survive a pod fail 👍, and will survive a node fail 👍. (No violations. Recommended in most scenarios)
+
+<!-- ## 🛄📝 PersistentVolumeClaim
+## 🏫🧑‍🏫 StorageClass -->
+
+## 📦💾 PersistentVolume
+PersistentVolume is a cluster resource, ñik
