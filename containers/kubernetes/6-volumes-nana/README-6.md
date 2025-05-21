@@ -214,6 +214,7 @@ Characteristics:
 - Local volumes
 - Not created via PV and PVC
 - Managed by Kubernetes
+- Namespaced
 
 Steps:
 1) Create ConfigMap and/or Secret component
