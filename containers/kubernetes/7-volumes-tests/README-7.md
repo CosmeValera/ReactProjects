@@ -204,3 +204,35 @@ kubectl get all
 
 > Funciona pero he tenido que cambiar los ficheros, pq lo q salía en el vídeo para el confimgap y el statefulset no levantaba los pods, y cuando los levantaba daba errores. Es lo q está con `03-original.yaml` y `04-original.yaml`. Por eso, los ficheros han cambiado en `03-mongo-configmap.yaml` y `04-mongo-full`. El statefulset ahora usa 'volumeClaimTemplates', initContainer y un script largo, cosa que en el vídeo no se usa, pero bueno. La idea que es automatizar sí que está ocurriendo. Este es el vídeo de ahora: https://www.youtube.com/watch?v=Gp6LNymkw70
 
+---
+```sh
+# kubectl apply -f 01-mongo-simple.yaml
+kubectl apply -f 02-mongo-service.yaml
+kubectl apply -f 03-mongo-configmap.yaml
+kubectl apply -f 04-mongo-full.yaml
+kubectl apply -f 06-node-app-svc.yaml
+kubectl apply -f 05-node-app.yaml
+kubectl get all
+```
+
+```sh
+kubectl delete statefulset.apps/mongo
+kubectl delete service/mongo
+kubectl delete configmap mongo-init
+kubectl delete service/node-mongo
+kubectl delete deployment.apps/node-mongo
+kubectl get all
+```
+
+> It's important to do `docker pull husseingalal/letschat2` and `minikube load husseingalal/letschat2`, so that minikube's containers can access to it.
+> Everything looks up, and should communicate but it is not working xd
+
+
+## Final:
+
+3 differences between Statefulsets and Deployments:
+- Pod names are incremental in Statefulsets: `mongo-0`, `mongo-1` and `mongo-2`
+- Pods are created one by one 
+- And die one by one too
+
+This predicatble, persistent names make the pods easier to discover and configure.
