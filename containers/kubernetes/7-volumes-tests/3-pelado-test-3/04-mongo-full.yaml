@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  serviceName: "mongo"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      initContainers:
+        - name: init-mongodb
+          image: mongo:3.4.1
+          command: ['sh', '-c', 'mkdir -p /data/db && chown -R 999:999 /data/db']
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+      containers:
+        - name: mongodb
+          image: mongo:3.4.1
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+            - name: config
+              mountPath: /scripts
+          command:
+            - bash
+            - -c
+            - |
+              # Start MongoDB with replication enabled
+              mongod --dbpath=/data/db --bind_ip 0.0.0.0 --replSet rs0 &
+              
+              # Wait for MongoDB to be ready
+              echo "[Startup] Waiting for MongoDB to initialize..."
+              until mongo --eval 'db.runCommand({ ping: 1 })' &>/dev/null; do
+                echo "[Startup] Waiting for MongoDB..."
+                sleep 2
+              done
+              
+              # Initialize replica set on primary node (mongo-0)
+              if [[ "$HOSTNAME" == "mongo-0" ]]; then
+                echo "[Startup] Initializing replica set on primary node..."
+                # Wait a bit to ensure the other nodes are starting
+                sleep 10
+                
+                # Initialize the replica set
+                mongo --eval 'rs.initiate({_id: "rs0", members: [{_id: 0, host: "mongo-0.mongo:27017"}]})'
+                
+                # Wait for the replica set to initialize
+                echo "[Startup] Waiting for replica set initialization..."
+                sleep 5
+                
+                # Add the other members
+                mongo --eval 'rs.add("mongo-1.mongo:27017")'
+                mongo --eval 'rs.add("mongo-2.mongo:27017")'
+                
+                echo "[Startup] Replica set initialized."
+              else
+                echo "[Startup] Secondary node ready."
+              fi
+              
+              # Keep the container running
+              wait %1
+      volumes:
+        - name: config
+          configMap:
+            name: "mongo-init"
+            defaultMode: 0777
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

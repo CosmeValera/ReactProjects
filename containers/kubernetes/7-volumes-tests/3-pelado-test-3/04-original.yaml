@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  serviceName: "mongo"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:3.4.1
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              echo "[Startup] Esperando a Mongo inicializar..."
+              until mongo --eval 'db.runCommand({ ping: 1 })' &>/dev/null; do
+                echo "[Startup] Esperando a Mongo..."
+                sleep 2
+              done
+              echo "[Startup] Mongo listo. Ejecutando lógica opcional..."
+              exec docker-entrypoint.sh mongod
+      volumes:
+      - name: config
+        configMap:
+          name: "mongo-init"

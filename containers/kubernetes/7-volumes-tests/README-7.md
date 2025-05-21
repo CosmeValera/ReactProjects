@@ -113,9 +113,9 @@ Hola soy una configmap
 
 ---
 # CAMBIO A `2-pelado-test-2`
+## PVC + Cloud Exercise
 
-## PVC Exercise
-## New case: Configmap
+### New case: Configmap
 ```sh
 kubectl apply -f 01-pvc.yaml
 kubectl apply -f 02-pod.yaml
@@ -140,3 +140,67 @@ NAME                              STATUS    VOLUME   CAPACITY   ACCESS MODES   S
 persistentvolumeclaim/nginx-pvc   Pending                          
             do-block-storage   <unset>                 3m22s
 ```
+
+
+---
+# CAMBIO A `3-pelado-test-3`
+## Statefulset Exercise
+
+```sh
+kubectl apply -f 01-mongo-simple.yaml
+kubectl apply -f 02-mongo-service.yaml
+kubectl get all
+```
+
+```sh
+kubectl delete statefulset.apps/mongo
+kubectl delete service/mongo
+```
+
+La diferencia, entre el Statefulset y el deployment es q aquí los pods se crearon en orden, y también que los nombres son así: `pod/mongo-0`, `pod/mongo-1` y `pod/mongo-2`. Y no con esos hashes tan largos.
+
+Si está bien configurado el service, el ping debería funcionar
+```sh
+user@wsl-machine$ k exec -it pod/mongo-0 -- sh
+
+$ ping mongo-2.mongo
+```
+
+Damos de alta el servicio de mongo ahora:
+```sh
+user@wsl-machine$ k exec -it pod/mongo-0 -- sh
+
+$ mongo
+MongoDB shell version v3.4.1
+connecting to: mongodb://127.0.0.1:27017
+...
+
+> rs.status()
+
+> rs.initiate({_id: "rs0", members: [ { _id: 0, host: "mongo-0.mongo:27017"} ]})
+
+> rs.add("mongo-1.mongo:27017")
+> rs.add("mongo-2.mongo:27017")
+
+> rs.status()
+```
+
+But, now, instead of having to do all of this manually, let's create a ConfigMap to automatize this process:
+
+```sh
+# kubectl apply -f 01-mongo-simple.yaml
+kubectl apply -f 02-mongo-service.yaml
+kubectl apply -f 03-mongo-configmap.yaml
+kubectl apply -f 04-mongo-full.yaml
+kubectl get all
+```
+
+```sh
+kubectl delete statefulset.apps/mongo
+kubectl delete service/mongo
+kubectl delete configmap mongo-init
+kubectl get all
+```
+
+> Funciona pero he tenido que cambiar los ficheros, pq lo q salía en el vídeo para el confimgap y el statefulset no levantaba los pods, y cuando los levantaba daba errores. Es lo q está con `03-original.yaml` y `04-original.yaml`. Por eso, los ficheros han cambiado en `03-mongo-configmap.yaml` y `04-mongo-full`. El statefulset ahora usa 'volumeClaimTemplates', initContainer y un script largo, cosa que en el vídeo no se usa, pero bueno. La idea que es automatizar sí que está ocurriendo. Este es el vídeo de ahora: https://www.youtube.com/watch?v=Gp6LNymkw70
+

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-init
+data:
+  init.sh: |
+    #!/bin/bash
+    set -euo pipefail
+    
+    echo "[Init] Waiting for local MongoDB to be ready..."
+    until /usr/bin/mongo --eval 'db.runCommand({ ping: 1 })' &> /dev/null; do
+      echo "[Init] Connecting to local MongoDB..."
+      sleep 2
+    done
+    echo "[Init] Connected to local MongoDB."
