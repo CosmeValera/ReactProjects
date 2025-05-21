@@ -110,3 +110,33 @@ Te lo cambio de nuevo jeje
 user@wsl-machine$ curl 192.168.49.2:30000
 Hola soy una configmap
 ```
+
+---
+# CAMBIO A `2-pelado-test-2`
+
+## PVC Exercise
+## New case: Configmap
+```sh
+kubectl apply -f 01-pvc.yaml
+kubectl apply -f 02-pod.yaml
+kubectl get all,pvc,pv
+```
+
+```sh
+kubectl delete pod/nginx-01
+kubectl delete pvc nginx-pvc
+```
+
+This is a connection on cloud with Digital Ocean, it will not work straightaway, the pod will look like never ready. You would need to be connected to Digital Ocean for this to work, If not it would look like this:
+```sh
+user@wsl-machine$ kubectl get all,pvc,pv
+NAME           READY   STATUS    RESTARTS   AGE
+pod/nginx-01   0/1     Pending   0          3m21s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   75m
+
+NAME                              STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS       VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/nginx-pvc   Pending                          
+            do-block-storage   <unset>                 3m22s
+```
