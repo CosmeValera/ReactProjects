@@ -210,6 +210,7 @@ This has the advantage for the developer that you deploy the application in the 
 So it makes deploying the application easier for developers
 
 ## ConfigMap and Secret
+Characteristics:
 - Local volumes
 - Not created via PV and PVC
 - Managed by Kubernetes
@@ -244,8 +245,8 @@ In the `volumes` section you have different volumes, and you can mount each one 
 ---
 
 As we have seen until now,
-1. Adminst configure storage
-2. and Create Persistent Volumes
+1. Admins configure storage
+2. and create Persistent Volumes
 3. K8s developers claim PV using PVC
 
 Thus, k8s developers have to request new storage to the admins, who have to ask for new physical storage to the cloud etc to build the PVs. **And this can end up being tidy, and chaotic.**
@@ -306,6 +307,53 @@ Now, when **1. a pod claims storage via PVC, 2. the PVC requests storage from SC
 ![full cycle when using a Storage Class](./img/image6.png)
 <small>Small square is the namespace. Big square is the cluster.</small>
 
-
 ## 📙 Resource
 - This [video from Nana](https://www.youtube.com/watch?v=0swOh5C3OVM)
+
+## EXTRA: 📂 `volumeClaimTemplates` in `StatefulSets`
+
+> The following content was made by ChatGPT
+
+When working with `StatefulSets`, you don’t manually define and reference PVCs for each pod. Instead, you define a `volumeClaimTemplates` section within the `StatefulSet`, and Kubernetes automatically generates a PVC for each pod replica based on that template.
+
+This pattern is particularly useful for use cases like databases, where each pod needs its own persistent storage (rather than sharing a volume like in `Deployment` or `ReplicaSet`). 
+
+The PVCs created this way are automatically named following the format `<claim-name>-<statefulset-name>-<ordinal>`, for example: `data-myapp-0`, `data-myapp-1`, etc.
+
+This removes the need for predefining PVCs or dynamically referencing existing ones. Instead, it's declarative and clean, allowing each pod in the StatefulSet to have its own dedicated, persistent storage. Following the principle that StatefulSets are used for stateful workloads.
+
+**Example** of `volumeClaimTemplates` inside a `StatefulSet`:
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: myapp
+spec:
+  serviceName: "myapp"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: app-container
+        image: my-image
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
+```
+Each replica will have its own PVC named `data-myapp-0`, `data-myapp-1`, `data-myapp-2`, automatically provisioned when the pods are created.
+
