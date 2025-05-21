@@ -198,8 +198,8 @@ Also, if you have several containers inside the pod, you can choose which ones o
 
 Now the container(or the application inside the container) can read/write to the storage. And when the pod dies, and a new one is created, it will have access to the same storage, and see all changes that the previous pods or containers made.
 
-![image 4](./img/image4.png)
 ![image 3](./img/image3.png)
+![image 4](./img/image4.png)
 
 ## Why so many abstractions?
 - The admin role is to provision storage resources (PV)
