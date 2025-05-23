@@ -308,6 +308,14 @@ Now, when **1. a pod claims storage via PVC, 2. the PVC requests storage from SC
 ![full cycle when using a Storage Class](./img/image6.png)
 <small>Small square is the namespace. Big square is the cluster.</small>
 
+> [!TIP]
+>  Minikube comes with a **StorageClass** built by default called `standard`. With this command: `kubectl get storageclass`, you will see something like this:
+> ```sh
+> NAME                 PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE
+> standard (default)   k8s.io/minikube-hostpath   Delete          Immediate
+> ```
+> This is why, if you just create a **PV Claim** with `storageClassName: standard` it will just work, as explained above.
+
 ## 📙 Resource
 - This [video from Nana](https://www.youtube.com/watch?v=0swOh5C3OVM)
 
