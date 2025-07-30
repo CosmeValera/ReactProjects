@@ -1,6 +1,6 @@
 <!-- https://gmv.udemy.com/course/jenkins-masterclass/learn/lecture/23825024#overview -->
 
-# JENKINS
+# 🛠️ JENKINS
 
 ## 🤔 Why jenkins?
 Jenkins is the most popular tool for automatizing CI/CD processes. 
@@ -22,3 +22,8 @@ docker run -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var
 ```
 
 > Links-> [Github page of Jenkins Docker](https://github.com/jenkinsci/docker), [DockerHub page of the Jenkins Docker image](https://hub.docker.com/r/jenkins/jenkins).
+
+### 👷 Setting up our first Jenkins Job
+![Image-1](./1.png)
+![Image-2](./2.png)
+![Image-3](./3.png)
