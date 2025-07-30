@@ -24,6 +24,9 @@ docker run -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var
 > Links-> [Github page of Jenkins Docker](https://github.com/jenkinsci/docker), [DockerHub page of the Jenkins Docker image](https://hub.docker.com/r/jenkins/jenkins).
 
 ### 👷 Setting up our first Jenkins Job
+Click create new Item. Give it a name, and add a shell script in the Build Steps to check that the echo is been applied in the Console Output😊.
+
+![Image-0](./0.png)
 ![Image-1](./1.png)
 ![Image-2](./2.png)
 ![Image-3](./3.png)
