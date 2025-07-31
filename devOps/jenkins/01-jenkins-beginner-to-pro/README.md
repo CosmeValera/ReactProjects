@@ -30,3 +30,32 @@ Click create new Item. Give it a name, and add a shell script in the Build Steps
 ![Image-1](./img/1.png)
 ![Image-2](./img/2.png)
 ![Image-3](./img/3.png)
+
+### ⛓️ Setting up our first pipeline
+We store the content of the pipeline in our [Jenkinsfile](Jenkinsfile).
+
+Which looks like this:
+```py
+pipeline {
+    agent any
+    
+    stages {
+        stage("Clean Up") {
+            steps {
+                deleteDir()
+            }
+        }
+        stage(...) {
+          ...
+        }
+    }
+}
+```
+
+I create a new Pipeline called *My Pipeline* with the script of my Jenkinsfile, and click play. Each stage corresponds a stage in the visualization (test, build...).
+
+![Image-4](./img/4.png)
+![Image-5](./img/5.png)
+
+### Other
+.
