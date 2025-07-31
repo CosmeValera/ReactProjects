@@ -57,5 +57,15 @@ I create a new Pipeline called *My Pipeline* with the script of my Jenkinsfile, 
 ![Image-4](./img/4.png)
 ![Image-5](./img/5.png)
 
+**Useful links:**
+- [Pipeline Syntax](https://www.jenkins.io/doc/book/pipeline/syntax/)
+- [Pipeline Basic Steps](https://www.jenkins.io/doc/pipeline/steps/workflow-basic-steps/)
+
+**Replay**
+
+Also, for debugging *'Replay'* is a good idea to make quick changes to the pipeline.
+
+![Image-6](./img/6.png)
+
 ### Other
 .
