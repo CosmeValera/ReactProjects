@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage("Clean Up") {
+            steps {
+                deleteDir()
+            }
+        }
+        stage("Clone Repo") {
+            steps {
+                // Using a project compatible with Java 17 and Maven 3.8.7
+                sh "git clone https://github.com/spring-guides/gs-maven.git"
+            }
+        }
+        stage("Build") {
+            steps {
+                dir("gs-maven/complete") {
+                    sh "mvn clean compile"
+                }
+            }
+        }
+        stage("Test") {
+            steps {
+                dir("gs-maven/complete") {
+                    sh "mvn test"
+                }
+            }
+        }
+    }
+}
