@@ -26,7 +26,7 @@ docker run -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var
 ### 👷 Setting up our first Jenkins Job
 Click create new Item. Give it a name, and add a shell script in the Build Steps to check that the echo is been applied in the Console Output😊.
 
-![Image-0](./0.png)
-![Image-1](./1.png)
-![Image-2](./2.png)
-![Image-3](./3.png)
+![Image-0](./img/0.png)
+![Image-1](./img/1.png)
+![Image-2](./img/2.png)
+![Image-3](./img/3.png)
