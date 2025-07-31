@@ -24,7 +24,7 @@ docker run -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var
 > Links-> [Github page of Jenkins Docker](https://github.com/jenkinsci/docker), [DockerHub page of the Jenkins Docker image](https://hub.docker.com/r/jenkins/jenkins).
 
 ### 👷 Setting up our first Jenkins Job
-Click create new Item. Give it a name, and add a shell script in the Build Steps to check that the echo is been applied in the Console Output😊.
+Click create new Item. Give it a name, and add a shell script in the Build Steps to check that the echo is been applied in the Console Output 😊.
 
 ![Image-0](./img/0.png)
 ![Image-1](./img/1.png)
@@ -67,5 +67,35 @@ Also, for debugging *'Replay'* is a good idea to make quick changes to the pipel
 
 ![Image-6](./img/6.png)
 
-### Other
-.
+### 😎 Configure pipeline using the jenkinsfile from your repo
+- Definition -> Pipeline script from SCM
+- SCM -> Git
+- Select the Repository Url
+- Select the branch
+- Select the Script path
+
+Now it is configured with one first extra step called "Checkout SCM", it will clone the repo the first time, and then it will pull the branch every time that a change happens, or do nothing if no commit is added.
+
+![Image-7](./img/7.png)
+
+![Image-8](./img/8.png)
+
+### 👌 Polling SCM: automatic build job when a commit happens
+
+Add Poll SCM to make Jenkins check the repo periodically, in case of a new commit, it will run automatically the build job. For how often you want Jenkins to check the repo, you have to define it with a CRON schedule expressions `[1]`.
+
+![Image-9](./img/9.png)
+![alt text](image.png)
+*Commit message: "No change, I updated maven in the container, check if it works in jenkins the POLL SCM"*
+
+> `[1]` **CRON schedule expressions**
+>
+> Visit https://crontab.guru/ to learn about it.
+>
+> **EXAMPLE:**
+> 
+> `H/2 * * * *` means every 2 minutes.
+>
+> The `H` means that it will be at different offset times. 
+> - `2 * * * *`: Every job polls at exactly :00, 00:02, 00:04, 00:06, etc.
+> - `H/2 * * * *`: Each job polls every 2 minutes, but at different offset times 00:01:34, 00:03:34, 00:05:34, etc. `(first number minutes, second number seconds)`
