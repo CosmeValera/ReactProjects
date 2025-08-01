@@ -35,7 +35,7 @@ Click create new Item. Give it a name, and add a shell script in the Build Steps
 We store the content of the pipeline in our [Jenkinsfile](Jenkinsfile).
 
 Which looks like this:
-```py
+```groovy
 pipeline {
     agent any
     
@@ -114,7 +114,7 @@ Add the project repository, the path to the jenkinsfile, and the periodicity of 
 You can configure to check for parameters like this (check folder `/params/`):
 
 **Boolean**
-```py
+```groovy
 pipeline {
   agent any
 
@@ -138,7 +138,7 @@ pipeline {
 
 Ask for user input.
 
-```py
+```groovy
 pipeline {
   agent any
 
@@ -158,7 +158,7 @@ Also, you can check which parameters where used in a specific build, by clicking
 **Choice**
 
 In a similar way with `choice` you can predefine an array of options.
-```py
+```groovy
 pipeline {
   agent any
 
@@ -176,7 +176,7 @@ pipeline {
 
 ### 😊 Variables
 Variables are defined inside an environment block. Like this:
-```py
+```groovy
 pipeline {
   agent any
 
@@ -205,7 +205,7 @@ pipeline {
 Here you can find the specific Jenkins environment variables (like `JOB_NAME`, `BUILD_ID`, `BUILD_NUMBER`, `BUILD_TAG`...): [Environment Variables](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#using-environment-variables).
 
 Example:
-```py
+```groovy
 pipeline {
     agent any
     stages {
