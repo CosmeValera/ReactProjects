@@ -10,7 +10,9 @@ pipeline {
   stages {
     stage("Deployment") {
       steps {
-        echo "Deployment with name: ${deploymentName}, will be done in AZ zone: ${azZone}, and this deployment will occur: ${confirmDeployment}"
+        echo "Deployment with name: ${deploymentName}\n"
+        echo "It will be done in AZ zone: ${azZone}\n"
+        echo "And this deployment will occur: ${confirmDeployment}"
       }
     }
   }

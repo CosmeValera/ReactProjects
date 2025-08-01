@@ -172,3 +172,7 @@ pipeline {
 
 ![19](./img/19.png)
 ![20](./img/20.png)
+
+
+### 😊 Variables
+.
