@@ -85,7 +85,7 @@ Now it is configured with one first extra step called "Checkout SCM", it will cl
 Add Poll SCM to make Jenkins check the repo periodically, in case of a new commit, it will run automatically the build job. For how often you want Jenkins to check the repo, you have to define it with a CRON schedule expressions `[1]`.
 
 ![Image-9](./img/9.png)
-![alt text](image.png)
+![alt text](./img/9.5.png)
 *Commit message: "No change, I updated maven in the container, check if it works in jenkins the POLL SCM"*
 
 > `[1]` **CRON schedule expressions**
@@ -110,5 +110,5 @@ Add the project repository, the path to the jenkinsfile, and the periodicity of 
 ![Image-12](./img/12.png)
 ![Image-13](./img/13.png)
 
-### .
+### 👉 Parameterized Pipelines
 .
