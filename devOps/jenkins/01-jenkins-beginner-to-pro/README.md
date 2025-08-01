@@ -135,4 +135,22 @@ pipeline {
 ![15](./img/15.png)
 
 **String**
-.
+```py
+pipeline {
+  agent any
+
+  parameters {
+    string(defaultValue: "TEST", description: "Which environment to deploy in?", name: "deployEnv")
+  }
+
+  stages {
+    stage("Demo") {
+      steps {
+        echo "string is set to: ${params.deployEnv}"
+      }
+    }
+  }
+}
+```
+![16](./img/16.png)
+![17](./img/17.png)
