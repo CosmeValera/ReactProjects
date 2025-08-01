@@ -99,3 +99,16 @@ Add Poll SCM to make Jenkins check the repo periodically, in case of a new commi
 > The `H` means that it will be at different offset times. 
 > - `2 * * * *`: Every job polls at exactly 00:00, 00:02, 00:04, 00:06, etc.
 > - `H/2 * * * *`: Each job polls every 2 minutes, but at different offset times 00:01:34, 00:03:34, 00:05:34, etc.
+
+
+### ⛓️⛓️ Multi branch pipeline
+Similar to the pipeline job, but it works with all branches.
+
+Add the project repository, the path to the jenkinsfile, and the periodicity of the checks (if you want).
+![Image-10](./img/10.png)
+![Image-11](./img/11.png)
+![Image-12](./img/12.png)
+![Image-13](./img/13.png)
+
+### .
+.
