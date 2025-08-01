@@ -135,6 +135,9 @@ pipeline {
 ![15](./img/15.png)
 
 **String**
+
+Ask for user input.
+
 ```py
 pipeline {
   agent any
@@ -143,14 +146,29 @@ pipeline {
     string(defaultValue: "TEST", description: "Which environment to deploy in?", name: "deployEnv")
   }
 
-  stages {
-    stage("Demo") {
-      steps {
-        echo "string is set to: ${params.deployEnv}"
-      }
-    }
-  }
+  stages {...}
 }
 ```
 ![16](./img/16.png)
 ![17](./img/17.png)
+
+Also, you can check which parameters where used in a specific build, by clicking on **Parameters*.*
+![18](./img/18.png)
+
+**Choice**
+
+In a similar way with `choice` you can predefine an array of options.
+```py
+pipeline {
+  agent any
+
+  parameters {
+    choice(choices: ["TEST", "DEV", "QA", "PRE-PROD", "PROD"], description: "Which environment to deploy in?", name: "deployEnv")
+  }
+  
+  stages {...}
+}
+```
+
+![19](./img/19.png)
+![20](./img/20.png)
