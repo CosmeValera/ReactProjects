@@ -175,4 +175,47 @@ pipeline {
 
 
 ### 😊 Variables
-.
+Variables are defined inside an environment block. Like this:
+```py
+pipeline {
+  agent any
+
+  environment {
+    def myString = "Hello World"
+    def myNumber = 10
+    def myBool = true
+  }
+
+  stages {
+    stage("Demo") {
+      steps {
+        echo "myString: ${myString}, "
+        echo "myNumber: ${myNumber}, "
+        echo "myBool: ${myBool}."
+      }
+    }
+  }
+}
+```
+
+![21](./img/21.png)
+
+**Jenkins Variables**
+
+Here you can find the specific Jenkins environment variables (like `JOB_NAME`, `BUILD_ID`, `BUILD_NUMBER`, `BUILD_TAG`...): [Environment Variables](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#using-environment-variables).
+
+Example:
+```py
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo "Build number ${env.BUILD_NUMBER}"
+            }
+        }
+    }
+}
+```
+
+This will return the build number: 1, 2, 3, 4, 5 and so on. Which could be used as an id (or for the tag of your Docker images, etc)
