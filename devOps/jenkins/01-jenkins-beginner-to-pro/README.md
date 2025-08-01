@@ -97,5 +97,5 @@ Add Poll SCM to make Jenkins check the repo periodically, in case of a new commi
 > `H/2 * * * *` means every 2 minutes.
 >
 > The `H` means that it will be at different offset times. 
-> - `2 * * * *`: Every job polls at exactly :00, 00:02, 00:04, 00:06, etc.
-> - `H/2 * * * *`: Each job polls every 2 minutes, but at different offset times 00:01:34, 00:03:34, 00:05:34, etc. `(first number minutes, second number seconds)`
+> - `2 * * * *`: Every job polls at exactly 00:00, 00:02, 00:04, 00:06, etc.
+> - `H/2 * * * *`: Each job polls every 2 minutes, but at different offset times 00:01:34, 00:03:34, 00:05:34, etc.
