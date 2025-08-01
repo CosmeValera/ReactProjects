@@ -111,4 +111,28 @@ Add the project repository, the path to the jenkinsfile, and the periodicity of 
 ![Image-13](./img/13.png)
 
 ### 👉 Parameterized Pipelines
+You can configure to check for parameters like this (check folder `/params/`):
+
+**Boolean**
+```py
+pipeline {
+  agent any
+
+  parameters {
+    booleanParam(defaultValue: false, description: "Enable service?", name: "myBoolean")
+  }
+
+  stages {
+    stage("Demo") {
+      steps {
+        echo "booleanParam is set to: ${params.myBoolean}"
+      }
+    }
+  }
+}
+```
+![14](./img/14.png)
+![15](./img/15.png)
+
+**String**
 .
