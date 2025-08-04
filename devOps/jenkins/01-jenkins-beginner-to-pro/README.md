@@ -247,4 +247,46 @@ pipeline {
 ```
 
 ### If Statements
-.
+Everything you want to make it programming like in Jenkins you must wrap it inside a `script` block. Like this:
+
+```groovy
+...
+steps {
+  script {
+    if (params.myBoolean == false) {
+      currentBuild.result = "SUCCESS"
+      return
+    }
+  }
+}
+```
+
+**EXAMPLE**
+```groovy
+pipeline {
+  agent any
+
+  parameters {
+    booleanParam(defaultValue: false, description: "Enable service?", name: "myBoolean")
+  }
+
+  stages {
+    stage("Demo") {
+      steps {
+        script {
+          if (params.myBoolean == false) {
+            currentBuild.result = "SUCCESS"
+            return
+          }
+          else {
+            echo "booleanParam is set to: TRUE"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
+### Functions Statements
