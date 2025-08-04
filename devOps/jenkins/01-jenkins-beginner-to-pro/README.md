@@ -288,5 +288,26 @@ pipeline {
 }
 ```
 
-
 ### Functions Statements
+
+Use `def` to define a function.
+
+**EXAMPLE:**
+
+```groovy
+pipeline {
+  agent any
+
+  stages {
+    stage ("DEMO") {
+      steps {
+        myFunc("Hello from my function demo in DEMO stage!", 79)
+      }
+    }
+  }
+}
+
+def myFunc(String myText, int myNumber) {
+  echo "My text is set to ${myText}, and my number is set to ${myNumber}"
+}
+```
