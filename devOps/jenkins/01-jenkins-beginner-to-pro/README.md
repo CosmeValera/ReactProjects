@@ -219,3 +219,32 @@ pipeline {
 ```
 
 This will return the build number: 1, 2, 3, 4, 5 and so on. Which could be used as an id (or for the tag of your Docker images, etc)
+
+## 🤓 Programming with Jenkins
+
+
+### Sleep command
+Use `sleep(<seconds>)` to make Jenkins wait that amount of seconds. This can be useful for example when using kubernetes, to wait for one deployment to be completely deleted before doing the next steps, and so on.
+
+**Example:**
+```groovy
+pipeline {
+    agent any
+    
+    stages {
+       ...
+        stage("Build") {
+            steps {
+                dir("gs-maven/complete") {
+                    sh "mvn clean compile"
+                    sleep(10)
+                }
+            }
+        }
+        ...
+    }
+}
+```
+
+### If Statements
+.
