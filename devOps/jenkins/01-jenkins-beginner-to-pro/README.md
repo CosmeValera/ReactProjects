@@ -311,3 +311,49 @@ def myFunc(String myText, int myNumber) {
   echo "My text is set to ${myText}, and my number is set to ${myNumber}"
 }
 ```
+
+### Variable scope
+Variables defined inside the `env {}` block are pipeline scoped. Variables defined inside a function are that function scoped. To have a global variable, define it out.
+
+It can get a bit tricky sometimes like here: [Stack Overflow example](https://stackoverflow.com/questions/47007305/how-to-access-variables-outside-stages-in-jenkins-file-groovy-function)
+
+**Example cases:**
+```groovy
+global_var = "Global var" // Global var. Important don't add `def` since it limits its scope, and doesn't work with funtions
+
+pipeline {
+    agent any
+    
+    // Pipeline scope - accessible everywhere in pipeline
+    environment {
+        pipeline_var = "pipe"
+    }
+    
+    stages {
+        stage('Example') {
+            // Stage scope - only accessible in this stage
+            environment {
+                STAGE_VAR = "stage-only"
+            }
+            
+            steps {
+                script {
+                    // Function scope - only accessible in this function
+                    def localVar = "function-only"
+                    
+                    ...
+                }
+
+                // Function scope - has to be shared through params
+                myFunc("Some text for the function")
+            }
+        }
+        
+        ...
+    }
+}
+
+def myFunc(String varFuncScoped) {
+  echo "My text is set to: ${varFuncScoped}"
+}
+```
