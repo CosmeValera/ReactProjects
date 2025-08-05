@@ -370,3 +370,44 @@ steps {
   ```
 }
 ~~~
+
+### Job from a job
+With the command `build` and the name of the Jenkins job, jenkins will know that it has to execute the other job.
+
+**EXAMPLE:**
+```groovy
+pipeline {
+    agent any
+    
+    stages {
+      ...
+        stage("Build Remote") {
+            steps {
+                build 'boolPipeline'
+            }
+        }
+    }
+}
+```
+
+### Pass parameters between jobs
+Documentation for the different types of parameters: https://www.jenkins.io/doc/pipeline/steps/pipeline-build-step/.
+
+**EXAMPLE:**
+```groovy
+pipeline {
+    agent any
+    
+    stages {
+      ...
+        stage("Build Remote") {
+            steps {
+                build job: 'boolPipeline', parameters: [[$class: 'BooleanParameterValue', name: 'myBoolean', value: true]]
+            }
+        }
+    }
+}
+.
+```
+![22](./img/22.png)
+![23](./img/23.png)
