@@ -411,3 +411,10 @@ pipeline {
 ```
 ![22](./img/22.png)
 ![23](./img/23.png)
+
+### Plugins
+Jenkins also counts with plenty of plugins, to access to them go to Manage Jenkins -> Plugins. There you can see those that you currently have and in available you can install more
+
+![24](./img/24.png)
+
+🥳 Happy automating!
