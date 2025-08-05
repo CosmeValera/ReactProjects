@@ -357,3 +357,16 @@ def myFunc(String varFuncScoped) {
   echo "My text is set to: ${varFuncScoped}"
 }
 ```
+
+**Multiple lines of bash:**
+
+To have multiple lines of bash use the triple backticks < ``` >;
+
+~~~groovy
+steps {
+  myFunc("Hello from the DEMO stage!")
+  sh```
+  
+  ```
+}
+~~~
