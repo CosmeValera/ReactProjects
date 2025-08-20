@@ -60,3 +60,6 @@ For example, the public address is: `18.185.48.185`. Although if we open it righ
 7. We can now connect to the server (make sure to use **http** in the URL since we are using port 80 for the server!)
 
 ![alt text](image/6.png)
+
+### 🗄️ RDS (Relational Database Service)
+.
