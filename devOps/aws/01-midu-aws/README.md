@@ -26,5 +26,37 @@ Amazon Web Services (AWS) is the world’s most comprehensive and broadly adopte
 
 ## 🥰 Services
 
-### 😊 EC2 (Elastic Cloud Computing)
-x
+### 😊 EC2 (Elastic Compute Cloud)
+
+Example configuration of a demo for EC2
+
+![alt text](image/1.png)
+
+Once the EC2 instance has been launched, we can see it if we go to the instances page:
+
+![alt text](image/2.png)
+
+For example, the public address is: `18.185.48.185`. Although if we open it right now, it doesn't show anything. We will see how to make it work in the next section.
+
+**How to connect to the EC2 machine**
+
+1. Click on the button **Connect**
+2. Go to **SSH client**
+3. Copy the command
+
+![alt text](image/3.png)
+
+4. Apply chmod restrictions to the `.pem` file: 
+   1. `chmod 400 ~/.ssh/cosme-demo-ssh.pem`
+   2. In windows, you might have to copy the `.pem` file into inside the WSL (as you can see in the next picture).
+5. Execute the command to connect with ssh to the EC2 instance.
+
+![alt text](image/4.png)
+
+6. We configure a server with python inside the EC2 instance.
+
+![alt text](image/5.png)
+
+7. We can now connect to the server (make sure to use **http** in the URL since we are using port 80 for the server!)
+
+![alt text](image/6.png)
