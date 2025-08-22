@@ -61,5 +61,26 @@ For example, the public address is: `18.185.48.185`. Although if we open it righ
 
 ![alt text](image/6.png)
 
+---
+
+The following services are 🗄️ **Database services.** And we will see a practical example with **RDS (Relational Database Service).**
+
+### 🗄️ DocumentDB 📚
+**Summary: MongoDB like Database Service.** | - - - - - |
+DocumentDB is a document database service designed to be compatible with MongoDB. It allows developers to store, query, and index JSON-like data at scale.
+
+### 🗄️ DynamoDB ⚡
+**Summary: Key-Value and Document NoSQL Database.** | - - - - - |
+DynamoDB is a NoSQL database. It supports both key-value and document data models. It is very fast; can be used for low-latency games, or real-time analytics apps.
+
+
+### 🗄️ MemoryDB 🤓
+**Summary: Redis like Service.** | - - - - - |
+MemoryDB is a Redis-compatible in-memory database service that stores data in RAM for ultra-fast access, ideal for caching and real-time applications.
+
 ### 🗄️ RDS (Relational Database Service)
+**Summary: Relational DBMS like MySQL**
+
+RDS is a managed relational database service that supports multiple engines like MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server.
+
 .
