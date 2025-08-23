@@ -83,3 +83,37 @@ MemoryDB is a Redis-compatible in-memory database service that stores data in RA
 ![alt text](image/7.png)
 
 ### 🪣 S3 (Simple Storage Service)
+
+S3 inspired MinIO. Both of them are based on buckets and objects. Objects are static files like images, videos, documents, etc.
+
+S3 is very cheap.
+
+Instead of exposing eveything directly from S3, there is another AWS called CloudFront, that acts like a CDN.
+
+![alt text](image/8.png)
+
+Once it's created we can access it, and create our first objects. Click in the bucket, and then in crete folder.
+
+![alt text](image/9.png)
+
+![alt text](image/10.png)
+
+![alt text](image/11.png)
+
+And now we want to add an image to our folder, first we click on upload, and then we drop the image that we want to store:
+
+![alt text](image/12.png)
+
+![alt text](image/13.png)
+
+![alt text](image/14.png)
+
+![alt text](image/15.png)
+
+![alt text](image/16.png)
+
+However, if we click the Object URL directly to open the image, it is not available. We need to add a policy to the bucket to say who to allow to access it and so on, for now we'll say that anyone can access anything:
+
+![alt text](image/17.png)
+
+![alt text](image/18.png)
