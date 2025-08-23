@@ -79,8 +79,7 @@ DynamoDB is a NoSQL database. It supports both key-value and document data model
 MemoryDB is a Redis-compatible in-memory database service that stores data in RAM for ultra-fast access, ideal for caching and real-time applications.
 
 ### 🗄️ RDS (Relational Database Service)
-**Summary: Relational DBMS like MySQL**
 
-RDS is a managed relational database service that supports multiple engines like MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server.
+![alt text](image/7.png)
 
-.
+### 🪣 S3 (Simple Storage Service)
