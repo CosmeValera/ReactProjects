@@ -117,3 +117,37 @@ However, if we click the Object URL directly to open the image, it is not availa
 ![alt text](image/17.png)
 
 ![alt text](image/18.png)
+
+### 🔐 IAM (Identity and Access Management)
+IAM manages who can access what in your AWS account. It controls users, permissions, and security policies. We will use it to gain access to the webpage we will deploy.
+
+Let's create an user, and say that it can do anything he wants with S3. Also, let's give the user permission to access to aws through a terminal.
+
+![alt text](image/19.png)
+
+![alt text](image/20.png)
+
+![alt text](image/21.png)
+
+![alt text](image/22.png)
+
+![alt text](image/23.png)
+
+![alt text](image/24.png)
+
+![alt text](image/25.png)
+
+![alt text](image/26.png)
+
+Now we have the access key and the secret. We can use the terminal with the client of AWS: `aws`. First, we have to install it. And then we add the key and secret from the IAM.
+
+![alt text](image/27.png)
+![alt text](image/28.png)
+![alt text](image/29.png)
+
+Now we can go to one of our repositories, to sync the S3, with one of out `dist` or `public` folder projects. To store our repo built project in S3 of AWS, using this command: `aws s3 sync ./public/ s3://cosme-aws-demo-s3`, where *cosme-aws-demo-s3* is the name of our S3.
+
+![alt text](image/30.png)
+![alt text](image/31.png)
+![alt text](image/32.png)
+![alt text](image/33.png)
