@@ -69,7 +69,7 @@ The following services are 🗄️ **Database services.** And we will see a prac
 **Summary: MongoDB like Database Service.** | - - - - - |
 DocumentDB is a document database service designed to be compatible with MongoDB. It allows developers to store, query, and index JSON-like data at scale.
 
-### 🗄️ DynamoDB ⚡
+### 🗄️ DynamoDB 💾
 **Summary: Key-Value and Document NoSQL Database.** | - - - - - |
 DynamoDB is a NoSQL database. It supports both key-value and document data models. It is very fast; can be used for low-latency games, or real-time analytics apps.
 
@@ -156,6 +156,8 @@ Great, we have our webpage hosted with S3 🥳🥳
 
 🤔 Notice how you need to add `/index.html` at the end of the URL for it to work. Let's optimize this for static website pages like this one. So we don't need to add it.
 
+**Static Webpage Hosting:**
+
 Let's go to properties of the bucket and the last property is for this. Click **Edit** to **Static website hosting**:
 
 ![alt text](image/34.png)
@@ -175,3 +177,19 @@ Notice the `s3-website` part in the correct URL!
 
 ![alt text](image/36.png)
 ![alt text](image/37.png)
+
+**What if we change our project?**
+
+In case we change our project, we simplify it, by adding a `deploy` sript in the `package.json`. For example:
+
+![alt text](image/38.png)
+
+![alt text](image/39.png)
+
+> [!IMPORTANT]
+> Even better. You can automate this `deploy` script, with `Github Actions`, or with `Jenkins`, so that every time you create a commit, or you merge a branch to main/master, it creates a deployment with the new changes.
+> 
+> Example: `"deploy": "zola build && wsl aws s3 sync ./public/ s3://cosme-aws-demo-s3"`
+
+### ⚡Lambda
+.
