@@ -151,3 +151,27 @@ Now we can go to one of our repositories, to sync the S3, with one of out `dist`
 ![alt text](image/31.png)
 ![alt text](image/32.png)
 ![alt text](image/33.png)
+
+Great, we have our webpage hosted with S3 🥳🥳
+
+🤔 Notice how you need to add `/index.html` at the end of the URL for it to work. Let's optimize this for static website pages like this one. So we don't need to add it.
+
+Let's go to properties of the bucket and the last property is for this. Click **Edit** to **Static website hosting**:
+
+![alt text](image/34.png)
+
+Then you have to enable it. Set index.html as the index document. Add an error Document if applicable. And you can add redirection rules if you want.
+
+S3 static website hosting automatically handles directory-style routing. When someone visits `/about`, S3 will automatically look for `/about/index.html`. Redirection rules are useful for more specific cases like redirecting old URLs to new ones, handling custom URL patterns, or complex routing scenarios.
+
+![alt text](image/35.png)
+
+
+It's important to notice, that there is a new url for the static webpage. In this case:
+- Object URL: `https://cosme-aws-demo-s3.s3.eu-central-1.amazonaws.com/`
+- Website URL: `http://cosme-aws-demo-s3.s3-website.eu-central-1.amazonaws.com`
+
+Notice the `s3-website` part in the correct URL!
+
+![alt text](image/36.png)
+![alt text](image/37.png)
