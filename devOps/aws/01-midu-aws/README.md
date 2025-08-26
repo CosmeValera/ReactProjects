@@ -191,5 +191,98 @@ In case we change our project, we simplify it, by adding a `deploy` sript in the
 > 
 > Example: `"deploy": "zola build && wsl aws s3 sync ./public/ s3://cosme-aws-demo-s3"`
 
-### ⚡Lambda
-.
+### ⚡Lambda (Part 1: Code)
+
+Lambdas are just functions. In this case we are going to use them for the backend.
+
+Let's first create as an example a function called 'checkOnline'.
+
+![alt text](image/40.png)
+
+And here we have the lambda page with the information about it, and the code that will be executed.
+
+![alt text](image/41.png)
+
+Let's test it.
+
+![alt text](image/42.png)
+![alt text](image/43.png)
+
+It worked 😊.
+
+It's also important to notice the duration in the response, inside the 'REPORT RequestId' line, since the longer it takes to compute the more expensive it will be. It's always more interesting trying to make lambdas as fast as possible. In this case for example it says: 'Billed Duration: 17 ms'.
+
+We changed the code, to check if an user is online in Twitch (we also changed the theme to monokai in settings->themes->monokai). However, if we execute it right now, it will return the same as before, since the changes haven't been deployed yet. We need to click deploy.
+
+![alt text](image/44.png)
+
+![alt text](image/45.png)
+
+![alt text](image/46.png)
+
+![alt text](image/47.png)
+
+We can see `"body": "{\"online\":true}"`, so it worked. This time it took 2.32 seconds. Another thing to consider is the memory used, this function has a maximum of 128MB, and this function takes up to 84MB, so it's reasonable for now. The limit of 128MB can be increased, but the bigger you make the lambda function's memory the more expensive it will be.
+
+Let's create a new test event where we send as a parameter the value of the user. And in the code we will use `event` to obtain the user, and we will have to deploy it first and then we will test it.
+
+![alt text](image/48.png)
+
+![alt text](image/49.png)
+
+![alt text](image/50.png)
+
+It said that it is offline. Perfect!
+
+**Monitorization**
+
+It's also important to check the monitor section of the page, to check how many times this lambda functions have been executed, how much time did they took and so on.
+
+Also, AWS also provides another service called CLoudWatch to register past executions of our lambda (direct link in the CloudWatch Logs section).
+
+![alt text](image/51.png)
+
+![alt text](image/52.png)
+
+### ⚡Lambda (Part 2: Lambda as an API)
+
+We can use LAMBDA based on a URL, and thus making it be used as an API, by clicking on Function URL. Function URL and Triggers are both inside the configuration section, and are both very interesting.
+
+**Triggers:**
+
+![alt text](image/53.png)
+
+Example: Add Trigger
+
+![alt text](image/55.png)
+
+There are hundreds of possibilities because AWS is also partnered with other companies, for example when the user makes a purchase in Shopify, then it will trigger a lambda here, that will then send them an e-mail.
+
+Or, when in my S3 with my portfolio when the user clicks a button to contact me, then the lambda does something with it, etc.
+
+**Destination:**
+
+You can also add a destination, to where the result of this lambda you want to be sent.
+
+![alt text](image/56.png)
+
+About the destination. For example with the app of Fotocasa, you have a form to contact the owner that is selling a house. And what they do is to have a trigger for when that form is filled, that calls the lambda, and then the lambda has the destination, to redirect the form's information to the user.
+
+**Why use a lambda instead of a normal backend?**
+Because it's much cheaper, you only pay when it is used. So you don't need to have the server on 24/7.
+
+Another advantage is that, in a normal server with 100 services, if one of them falls, the whole server might be down. However, if you have 100 lambdas each one of them goes on their own, and the fall of one of them won't block the other 99.
+
+**LAMBDA URL**
+
+![alt text](image/54.png)
+
+When creating the Function Url, we can configure it to be accesible only by AWS users, or by anyone. So to make it public let's click NONE.
+
+![alt text](image/57.png)
+
+![alt text](image/58.png)
+
+If we click the link of function URL: `https://svs22pthetusoamgirw76jndre0knhls.lambda-url.eu-central-1.on.aws/`, it says "User not provided". We would need to send a curl or a fetch setting the body with the user, so it works. But there we have the URL accesible publicly 😊👍.
+
+![alt text](image/59.png)
