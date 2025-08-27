@@ -32,6 +32,10 @@ Example configuration of a demo for EC2
 
 ![alt text](image/1.png)
 
+Also, notice that we created a key pair in the **Key pair (login)** section. When you click on **Create new key pair** the following modal will appear. Once you create them, it's important to save it securely, because anyone that had access to it could access our ec2.
+
+![alt text](image/1.5-key-pair.png)
+
 Once the EC2 instance has been launched, we can see it if we go to the instances page:
 
 ![alt text](image/2.png)
@@ -266,7 +270,7 @@ You can also add a destination, to where the result of this lambda you want to b
 
 ![alt text](image/56.png)
 
-About the destination. For example with the app of Fotocasa, you have a form to contact the owner that is selling a house. And what they do is to have a trigger for when that form is filled, that calls the lambda, and then the lambda has the destination, to redirect the form's information to the user.
+About the destination. For example with the app of Fotocasa, you have a form to contact the owner that is selling a house. And what they do is to have a trigger for when that form is filled, that calls the lambda, and then the lambda has the destination, to redirect the form's information to the home owner.
 
 **Why use a lambda instead of a normal backend?**
 Because it's much cheaper, you only pay when it is used. So you don't need to have the server on 24/7.
@@ -286,3 +290,6 @@ When creating the Function Url, we can configure it to be accesible only by AWS 
 If we click the link of function URL: `https://svs22pthetusoamgirw76jndre0knhls.lambda-url.eu-central-1.on.aws/`, it says "User not provided". We would need to send a curl or a fetch setting the body with the user, so it works. But there we have the URL accesible publicly 😊👍.
 
 ![alt text](image/59.png)
+
+### ⭐ Connect RDS to Lambda 
+.
