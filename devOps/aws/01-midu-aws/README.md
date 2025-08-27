@@ -86,6 +86,52 @@ MemoryDB is a Redis-compatible in-memory database service that stores data in RA
 
 ![alt text](image/7.png)
 
+RDS takes a while to be ready. Once we are done it's important to delete it, because DBMS are pricy.
+
+![alt text](image/7.1.png)
+
+![alt text](image/7.2.png)
+
+As we can see in the image, the endpoint and port are:  `database-cosme.cvcgko0gk8r1.eu-central-1.rds.amazonaws.com` and `3306`.
+
+**Connecting to the database:**
+
+However, if we try it straight away, it won't work:
+
+![alt text](image/7.3.png)
+
+We also need to configure permissions for it to work. The problem is that the Security Group of the network (VPC), doesn't allow access to it through the port 3306.
+
+![alt text](image/7.4.png)
+
+![alt text](image/7.5.png)
+
+![alt text](image/7.6.png)
+
+We have to click in **Edit inbound Rules** to allow our security group access to the database.
+
+![alt text](image/7.7.png)
+
+Add a new rule to allow traffic for the database Mysql from anywhere with ipV4. I also added another rule for ipV6 just in case. For this example, giving access to anyone is enough, but the correct thing to do here, is to grant the access just to who is going to edit it.
+
+![alt text](image/7.8.png)
+
+Click save rules, and now we should be able to access to our RDS. Apparently it's necessary to add also the user. So you need the host (-h), the user (-u), the port (-P), and the password (-p). Like this: `sudo mysql -h database-cosme.cvcgko0gk8r1.eu-central-1.rds.amazonaws.com -u admin -P 3306 -p`.
+
+![alt text](image/7.9.png)
+
+![alt text](image/7.10.png)
+
+And like this we have access to our RDS 🥳!
+
+**Prune unused service:**
+
+Remember to delete the database if you are not going to use it!
+
+![alt text](image/7.11.png)
+
+![alt text](image/7.12.png)
+
 ### 🪣 S3 (Simple Storage Service)
 
 S3 inspired MinIO. Both of them are based on buckets and objects. Objects are static files like images, videos, documents, etc.
@@ -291,5 +337,6 @@ If we click the link of function URL: `https://svs22pthetusoamgirw76jndre0knhls.
 
 ![alt text](image/59.png)
 
-### ⭐ Connect RDS to Lambda 
-.
+---
+
+🤠 Happy exploring AWS with EC2, S3, RDS, Lambda Functinos and other services!
