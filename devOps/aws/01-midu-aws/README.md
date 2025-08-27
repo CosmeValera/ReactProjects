@@ -339,4 +339,4 @@ If we click the link of function URL: `https://svs22pthetusoamgirw76jndre0knhls.
 
 ---
 
-🤠 Happy exploring AWS with EC2, S3, RDS, Lambda Functinos and other services!
+🤠 Happy exploring AWS with EC2, S3, RDS, Lambda Functions and other services!
