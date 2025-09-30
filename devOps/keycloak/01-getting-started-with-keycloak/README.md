@@ -50,7 +50,53 @@ docker run --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMI
 | **User federation** | Connect to external user directories like LDAP or Active Directory to sync users |
 
 ## 🏰 Create a Keycloak realm
-.
+Go to the lateral menu:
+- Click Manage realms
+- Click Create realm
+- Add the name of realm
+- Click create
+
+> The `master` realm is not recommended to be used for authentication or authorization, it's just for configuring your keycloak server. That's why we create another realm.
+
+![alt text](image.png)
+![alt text](image-2.png)
+![alt text](image-4.png)
+![alt text](image-3.png)
+
+## 👤 Creating user
+Go to the lateral menu:
+- Click Users
+- Click Create new user
+- Fill the user information
+- Save it
+- Now go to credentials
+- Add as password <b>123</b>
+- Save the user
+
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
+![alt text](image-9.png)
+
+Now the user is saved!.
+
+**Log In with the user:**
+
+Go to the URL: `http://localhost:8080/realms/cosme/account`. Change `cosme` for the name of your realm.
+
+Add username `cosme` and password `123`, as we configured it.
+
+![alt text](image-11.png)
+![alt text](image-12.png)
+
+Here we can make some configurations about the user.
+
+## 🔌 Creating OAuth Client
+
+Let's see how to create a client. A client represents an application that can request authentication on behalf of a user. This application could be a web user interface, or a backend API.
+
+
 
 <!-- ## 👤 Creating user
 ## 🔌 Creating OAuth Client
