@@ -90,13 +90,64 @@ Add username `cosme` and password `123`, as we configured it.
 ![alt text](image-11.png)
 ![alt text](image-12.png)
 
-Here we can make some configurations about the user.
+Here we can manage some general configurations about the user.
 
 ## 🔌 Creating OAuth Client
 
 Let's see how to create a client. A client represents an application that can request authentication on behalf of a user. This application could be a web user interface, or a backend API.
 
+> [!IMPORTANT]
+> There is a distinction between public clients and confidential clients.
+> - Public clients represent an application that cannot securely store a client secret. For example a web user interface.
+> - Confidential clients represent an application that can securely store a client secret. It is more appropriate for server to server communication.
 
+
+Let's create a public client:
+- Click Clients
+- Click Create client
+- Client type -> OpenId Connect (the other options is SAML)
+- Client ID -> e.g., <i>public-client</i>
+- Click Next
+- Client Authentication -> OFF (we are creating a public client)
+- Check on Direct access grants
+- Click Next
+- Valid redirect URIs -> https://keycloak.org/app/*
+- Web origins -> https://keycloak.org
+- Click Save
+
+![alt text](image-13.png)
+![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+![alt text](image-17.png)
+
+## 🔄 Demo: Authorization code flow
+
+We are going to test the client in the test application on the keycloak website.
+
+Go to `https://www.keycloak.org/app/`.
+
+Fill the fields with the realm name and the client ID. In this case: `cosme` and `public-client`. Click save.
+
+![alt text](image-18.png)
+
+It is not authenticated, so we need first to click Sign in
+
+![alt text](image-19.png)
+![alt text](image-21.png)
+
+As you can see in the network tab, the client sent a redirect 200 command to our keycloak instance.
+
+> [!TIP]
+> If the redirect fails, and you have a Redirect URI Mismatch (`Invalid parameter: redirect_uri`). Check that you have the correct Valid redirect URIs and valid web origins in your client `public-client`.
+> ![alt text](image-22.png)
+
+And once we sign in, it should tell you something like this, but with your username.
+
+![alt text](image-24.png)
+
+## 🔒 Creating a confidential client
+.
 
 <!-- ## 👤 Creating user
 ## 🔌 Creating OAuth Client
