@@ -7,6 +7,9 @@ Keycloak is an open-source identity and access management server that provides t
 
 ## Installation
 Let's install it in a `docker` container:
+
 ```sh
 docker run --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak start-dev
 ```
+
+And login with user `admin` and password `admin`.
