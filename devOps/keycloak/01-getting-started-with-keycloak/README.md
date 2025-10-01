@@ -105,12 +105,13 @@ Let's see how to create a client. A client represents an application that can re
 Let's create a public client:
 - Click Clients
 - Click Create client
+- **General Settings**
 - Client type -> OpenId Connect (the other options is SAML)
 - Client ID -> e.g., <i>public-client</i>
-- Click Next
-- Client Authentication -> OFF (we are creating a public client)
+- Next -> **Capability Config**
+- Set Client Authentication: OFF (we are creating a public client)
 - Check on Direct access grants
-- Click Next
+- Next -> **Login settings**
 - Valid redirect URIs -> https://keycloak.org/app/*
 - Web origins -> https://keycloak.org
 - Click Save
@@ -147,7 +148,25 @@ And once we sign in, it should tell you something like this, but with your usern
 ![alt text](image-24.png)
 
 ## 🔒 Creating a confidential client
-.
+
+Let's create a confidential client:
+- Click Clients
+- Click Create client
+- **General Settings**
+- Client type -> OpenId Connect (the other options is SAML)
+- Client ID -> e.g., <i>confidential-client</i>
+- Next -> **Capability Config**
+- Set Client Authentication: ON (we are creating a confidential client)
+- Check on Direct access grants
+- Check on Service accounts roles
+- Next -> **Login settings**
+- No need to add anything
+- Click Save
+
+![alt text](image-25.png)
+![alt text](image-26.png)
+![alt text](image-27.png)
+
 
 <!-- ## 👤 Creating user
 ## 🔌 Creating OAuth Client
