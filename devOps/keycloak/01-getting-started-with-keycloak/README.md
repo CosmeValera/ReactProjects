@@ -179,3 +179,39 @@ We will use this Client secret when requesting an access token in our backend th
 
 Let's generate **access tokens** and **refresh tokens** using the **Client Secret**.
 
+For that we can use the terminal or **Postman**.
+
+We need to make a POST call to `http://localhost:8080/realms/cosme/protocol/openid-connect/token`
+
+And add some values to the body of the call, such as: `grant_type`, `client_id`, `scope`, `username` and `password`.
+
+This way we receive an **access_token** and a **refresh_token**.
+- **Access token:** What you send with every API request to prove you're authenticated. When it expires, you can't access anything anymore.
+- **Refresh token:** When your access token expires, instead of logging in again with username/password, you send the refresh token to get a fresh access token (and a new refresh token). This way you stay logged in without re-entering credentials.
+
+![alt text](image-29.png)
+![alt text](image-30.png)
+
+### Access token content:
+
+Visit `https://www.jwt.io/` and paste the **access_token**.
+
+![alt text](image-31.png)
+
+As we can see in the **Payload**:
+- azp (**client_name**)
+- sub (**user_id**)
+- allowed_origins
+- User details
+  - Name
+  - email
+
+We can use these values in the backend to validate the acces_token.
+
+### Use refresh token
+
+We need to make a POST call to `http://localhost:8080/realms/cosme/protocol/openid-connect/token`.
+
+Important to add the `refresh_token` (in total, the values to the body of the call are `grant_type`, `client_id`, `refresh_token`).
+
+![alt text](image-32.png)
