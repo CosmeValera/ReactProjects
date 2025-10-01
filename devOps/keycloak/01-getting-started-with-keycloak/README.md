@@ -167,9 +167,15 @@ Let's create a confidential client:
 ![alt text](image-26.png)
 ![alt text](image-27.png)
 
+Now in our client `confidential-client` we have an extra section called **Credentials**, from where we can see the **Client Secret**.
 
-<!-- ## 👤 Creating user
-## 🔌 Creating OAuth Client
-## 🔄 Demo: Authorization code flow
-## 🔒 Creating a confidential client
-## 🎫 Access tokens, refresh tokens -->
+We will use this Client secret when requesting an access token in our backend that will be associated with this client instance.
+
+![alt text](image-28.png)
+
+> Click **regenerate** if you want to change the client secret
+
+## 🎫 Access tokens, refresh tokens
+
+Let's generate **access tokens** and **refresh tokens** using the **Client Secret**.
+
