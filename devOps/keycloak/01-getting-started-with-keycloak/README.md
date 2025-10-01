@@ -214,4 +214,14 @@ We need to make a POST call to `http://localhost:8080/realms/cosme/protocol/open
 
 Important to add the `refresh_token` (in total, the values to the body of the call are `grant_type`, `client_id`, `refresh_token`).
 
-![alt text](image-32.png)
+So, to sum up.
+
+**LOGIN CALL:**
+
+![alt text](image-33.png)
+
+**Refresh token CALL:**
+
+![alt text](image-34.png)
+
+> To make the Refresh token call we have used the refresh_token fom the **LOGIN CALL**.
