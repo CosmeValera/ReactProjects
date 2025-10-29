@@ -52,7 +52,7 @@ pipeline {
 }
 ```
 
-I create a new Pipeline called *My Pipeline* with the script of my Jenkinsfile, and click play. Each stage corresponds a stage in the visualization (test, build...).
+I create a new Pipeline called *My Pipeline* with the script of my Jenkinsfile, and click play. Each stage corresponds with a stage in the visualization (test, build...).
 
 ![Image-4](./img/4.png)
 ![Image-5](./img/5.png)
