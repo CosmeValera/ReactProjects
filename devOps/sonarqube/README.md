@@ -33,7 +33,7 @@ Access at [localhost:9000](http://localhost:9000/) with credentials:
 ## 😊 Example with The Calculator project
 The Calculator project is a simple JS project using Node + Vite, to practice testing and SonarQube.
 
-### Test coverage
+### Test coverage: Run
 To see the **test coverage** execute:
 ```sh
 npm run test -- --coverage
@@ -51,13 +51,18 @@ All files      |     100 |      100 |     100 |     100 |
 ---------------|---------|----------|---------|---------|-------------------
 ```
 
-### Test Coverage HTML
+### Test Coverage: Launch HTML
 A `coverage` folder must have been created in your project. 
 
 To see the HTML execute:
 ```sh
 start coverage/index.html
 ```
+
+> Or if you have a reporter in your `vitest.config.js`, the HTML will be nested in the reporter name, e.g: if reporter = 'lcov': 
+> ```sh
+> start coverage/lcov-report/index.html
+> ```
 
 ### SonarQube
 **SonarQube steps:**
@@ -76,7 +81,7 @@ start coverage/index.html
 **Project steps:**
 - Install sonar in npm:
   - `npm install -g @sonar/scan`
-- Execute the sonar analysis:
+- Execute the sonar analysis with the token:
   - `sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_e861f193e51fe3ae0a225217f5a164ba6175e4f2 -Dsonar.projectKey=my-node-project`
 
 A `.scannerwork` folder must have been created in your project. And in your terminal it will tell you something like this:
