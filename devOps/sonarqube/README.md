@@ -60,4 +60,32 @@ start coverage/index.html
 ```
 
 ### SonarQube
-.
+**SonarQube steps:**
+- Go to SonarQube: http://localhost:9000/
+- Click "**Create a local project**"
+- Enter:
+  - **Display name**: My Node Project
+  - **Project key**: my-node-project
+  - **Branch**: master
+- Click "**Set Up**"
+- Choose "**Locally**"
+- **Generate a token** (give it a name like "local-token")
+- **Copy the token** - you'll need it!
+- Select "**JS/TS & Web**" for your build tool
+
+**Project steps:**
+- Install sonar in npm:
+  - `npm install -g @sonar/scan`
+- Execute the sonar analysis:
+  - `sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_e861f193e51fe3ae0a225217f5a164ba6175e4f2 -Dsonar.projectKey=my-node-project`
+
+A `.scannerwork` folder must have been created in your project. And in your terminal it will tell you something like this:
+```
+[INFO]  ScannerEngine: ANALYSIS SUCCESSFUL, you can find the results at: http://localhost:9000/dashboard?id=my-node-project
+[INFO]  ScannerEngine: Analysis total time: 1:03.925 s
+[INFO]  ScannerEngine: SonarScanner Engine completed successfully
+```
+
+You can see the different metrics and analysis of your code security in Sonar.
+
+🥳 Happy securing! 
