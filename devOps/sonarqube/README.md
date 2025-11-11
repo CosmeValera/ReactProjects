@@ -29,3 +29,35 @@ Access at [localhost:9000](http://localhost:9000/) with credentials:
 - **Security Hotspots**: Security-sensitive code needing review (HTTP, cookies, etc.)
 - **Code Smells**: Maintainability issues (duplicated code, complexity)
 - **Coverage**: Test coverage metrics
+
+## 😊 Example with The Calculator project
+The Calculator project is a simple JS project using Node + Vite, to practice testing and SonarQube.
+
+### Test coverage
+To see the **test coverage** execute:
+```sh
+npm run test -- --coverage
+```
+
+```sh
+Output:
+
+ % Coverage report from v8
+---------------|---------|----------|---------|---------|-------------------
+File           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+---------------|---------|----------|---------|---------|-------------------
+All files      |     100 |      100 |     100 |     100 |                   
+ calculator.js |     100 |      100 |     100 |     100 |                  
+---------------|---------|----------|---------|---------|-------------------
+```
+
+### Test Coverage HTML
+A `coverage` folder must have been created in your project. 
+
+To see the HTML execute:
+```sh
+start coverage/index.html
+```
+
+### SonarQube
+.
