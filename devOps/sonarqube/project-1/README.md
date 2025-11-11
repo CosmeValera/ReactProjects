@@ -12,13 +12,17 @@ Access at [localhost:9000](http://localhost:9000/) with credentials:
 - **User**: `admin`
 - **Password**: `admin`
 
-You'll be prompted to change the password on first login. To automate this:
-```sh
-curl -u admin:admin -X POST \
-  'http://localhost:9000/api/users/change_password?login=admin&previousPassword=admin&password=$Admin1$Admin1'
-  ```
+> You'll be prompted to change the password on first login. Use these new credentials:
+> - **User**: `admin`
+> - **Password**: `$Admin1$Admin1`
+> 
+> Fill the *Update password* page manually, or automate it with:
+> ```sh
+> curl -u admin:admin -X POST \
+>   'http://localhost:9000/api/users/change_password?login=admin&previousPassword=admin&password=$Admin1$Admin1'
+>   ```
 
-## What It Analyzes
+## 🔍 What It Analyzes
 
 - **Bugs**: Code errors that could cause runtime issues
 - **Vulnerabilities**: Confirmed security flaws (SQL injection, XSS, etc.)
