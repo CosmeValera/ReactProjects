@@ -31,7 +31,7 @@ Access at [localhost:9000](http://localhost:9000/) with credentials:
 - **Coverage**: Test coverage metrics
 
 ## 😊 Example with The Calculator project
-The Calculator project is a simple JS project using Node + Vite, to practice testing and SonarQube.
+The Calculator project is a simple JS project using Node + Vitest, to practice testing and SonarQube.
 
 ### Test coverage: Run
 To see the **test coverage** execute:
@@ -43,13 +43,29 @@ npm run test -- --coverage
 Output:
 
  % Coverage report from v8
----------------|---------|----------|---------|---------|-------------------
-File           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
----------------|---------|----------|---------|---------|-------------------
+---------------|---------|----------|---------|---------|
+File           | % Stmts | % Branch | % Funcs | % Lines |
+---------------|---------|----------|---------|---------|
 All files      |     100 |      100 |     100 |     100 |                   
  calculator.js |     100 |      100 |     100 |     100 |                  
----------------|---------|----------|---------|---------|-------------------
+---------------|---------|----------|---------|---------|
 ```
+
+### Understanding Test Coverage Metrics
+
+The coverage report shows four metrics that measure how thoroughly your tests examine your code:
+
+- **% Statements**: Percentage of executable statements that were run during tests. A statement is any single instruction in your code (variable assignments, function calls, return statements, etc.).
+
+- **% Branches**: Percentage of decision paths tested in conditional statements. For example, in `if (x > 5)`, there are two branches: one when the condition is true and one when false. 100% branch coverage means both paths were tested.
+
+- **% Functions**: Percentage of defined functions that were called at least once during tests. If you have 10 functions and tests call 8 of them, you have 80% function coverage.
+
+- **% Lines**: Percentage of code lines that were executed during tests. Similar to statement coverage but counts physical lines rather than individual statements.
+
+**Example**: If a function has an `if/else` statement but your tests only check the `if` path, you might have 100% function coverage (the function was called) but only 50% branch coverage (only one of two branches tested).
+
+**Example 2**: The difference between statements and lines is subtle, for example a line can have several statements, like: `const x = 5; const y = 10; const z = x + y;` , this is 1 line but 3 statements. In practice, most developers pay more attention to the **statement coverage**.
 
 ### Test Coverage: Launch HTML
 A `coverage` folder must have been created in your project. 
