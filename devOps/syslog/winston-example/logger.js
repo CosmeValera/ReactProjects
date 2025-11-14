@@ -1,4 +1,3 @@
-// logger.js - Winston configuration
 const winston = require('winston');
 const path = require('path');
 const fs = require('fs');
@@ -8,7 +7,7 @@ if (!fs.existsSync('logs')) {
   fs.mkdirSync('logs');
 }
 
-// Define log format
+// Define log format -> 2025-11-14 14:21:11 [info]: User login
 const logFormat = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   winston.format.errors({ stack: true }),
@@ -17,7 +16,8 @@ const logFormat = winston.format.combine(
   })
 );
 
-// Create the logger
+// Create the logger with transports.
+// i.e: the logs will be written to the console and the files 'logs/combined.log' and 'logs/error.log'.
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: logFormat,
