@@ -24,22 +24,3 @@ divideNumbers(10, 2);  // Works fine
 divideNumbers(10, 0);  // Logs error but continues gracefully
 
 logger.info('Application completed successfully');
-
-// ============================================
-// ALTERNATIVE: If you need to throw errors
-// ============================================
-
-function divideNumbersWithThrow(a, b) {
-  try {
-    if (b === 0) {
-      throw new Error('Division by zero');
-    }
-    const result = a / b;
-    logger.info(`Division result: ${a} / ${b} = ${result}`);
-    return result;
-  } catch (error) {
-    logger.error('Error in divideNumbers:', error);
-    // Don't re-throw, just return null or handle it
-    return null;
-  }
-}
