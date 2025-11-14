@@ -12,6 +12,8 @@ Syslog is a standard protocol for message logging. It defines a structured forma
 2024-10-08 12:01:00 [ERROR]: An error occurred while connecting to the database
 ```
 
+> Click here to see one simple [Logger](./winston-example/logger.js) implementation
+
 ### Syslog Severity Levels
 
 Syslog defines **8 priority levels** (from highest to lowest):
