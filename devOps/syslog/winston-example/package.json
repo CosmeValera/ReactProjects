@@ -1,0 +1,23 @@
+{
+  "name": "winston-example",
+  "version": "1.0.0",
+  "description": "Simple Winston logging project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "winston",
+    "logging",
+    "node"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "winston": "^3.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

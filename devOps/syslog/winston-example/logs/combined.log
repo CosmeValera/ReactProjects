@@ -1,0 +1,7 @@
+2025-11-14 13:48:57 [INFO]: Application started
+2025-11-14 13:48:57 [WARN]: This is a warning message
+2025-11-14 13:48:57 [ERROR]: This is an error message
+2025-11-14 13:48:57 [INFO]: User login
+2025-11-14 13:48:57 [INFO]: Division result: 10 / 2 = 5
+2025-11-14 13:48:57 [ERROR]: Cannot divide 10 by zero
+2025-11-14 13:48:57 [INFO]: Application completed successfully
