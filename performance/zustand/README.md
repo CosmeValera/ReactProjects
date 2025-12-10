@@ -64,4 +64,10 @@ function Counter() {
 **Key differences:** Zustand has no Provider, no dispatch, no actions; just create a store and use it. Redux Toolkit is cleaner than classic Redux but still requires more setup.
 
 ## 🍓 Creating Zustand project
+Let's create a project with Vite:
+```sh
+npm create vite@latest
+```
+> **Name:** javascript-quizz . **Tech:** React + TS + SWC
+
 .
