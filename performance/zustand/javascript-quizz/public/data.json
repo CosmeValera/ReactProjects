@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "¿Cuál es el valor de x después de ejecutar este código?",
+    "code": "let x = 5;\nx += 3;\nconsole.log(x);",
+    "answers": [
+      "5",
+      "3",
+      "8",
+      "undefined"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 2,
+    "question": "¿Qué imprime este código en la consola?",
+    "code": "console.log(typeof null);",
+    "answers": [
+      "'object'",
+      "'null'",
+      "'undefined'",
+      "'number'"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 3,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "const arr = [1, 2, 3];\narr.push(4);\nconsole.log(arr);",
+    "answers": [
+      "[1, 2, 3]",
+      "[1, 2, 3, 4]",
+      "[4]",
+      "Error"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 4,
+    "question": "¿Qué devuelve este código?",
+    "code": "const a = [1, 2, 3];\nconst b = a.map(n => n * 2);\nconsole.log(b);",
+    "answers": [
+      "[1, 2, 3]",
+      "[2, 4, 6]",
+      "[1, 4, 9]",
+      "[2, 3, 4]"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 5,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "console.log(0.1 + 0.2 === 0.3);",
+    "answers": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 6,
+    "question": "¿Qué imprime este código?",
+    "code": "let a;\nconsole.log(a ?? 'default');",
+    "answers": [
+      "undefined",
+      "'default'",
+      "null",
+      "Error"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 7,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "const arr = [1, 2, 3];\nconst result = arr.filter(n => n > 1);\nconsole.log(result);",
+    "answers": [
+      "[1, 2, 3]",
+      "[2, 3]",
+      "[1]",
+      "[]"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 8,
+    "question": "¿Qué imprime este código?",
+    "code": "console.log('5' - 2);",
+    "answers": [
+      "3",
+      "'3'",
+      "'52'",
+      "Error"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 9,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "console.log('5' + 2);",
+    "answers": [
+      "7",
+      "'7'",
+      "'52'",
+      "Error"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 10,
+    "question": "¿Qué imprime este código?",
+    "code": "console.log(Boolean(''))",
+    "answers": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 11,
+    "question": "¿Qué imprime este código?",
+    "code": "const obj = {a: 1};\nconsole.log('a' in obj);",
+    "answers": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 12,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "console.log([1,2] === [1,2]);",
+    "answers": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 13,
+    "question": "¿Qué imprime este código?",
+    "code": "let x = 0;\nfor(let i = 0; i < 3; i++) {\n  x += i;\n}\nconsole.log(x);",
+    "answers": [
+      "0",
+      "1",
+      "3",
+      "6"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 14,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "function test() {\n  return\n  {\n    a: 1\n  };\n}\nconsole.log(test());",
+    "answers": [
+      "{a:1}",
+      "undefined",
+      "Error",
+      "null"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 15,
+    "question": "¿Qué imprime este código?",
+    "code": "console.log([...'abc']);",
+    "answers": [
+      "['abc']",
+      "['a','b','c']",
+      "['a','b','c','']",
+      "Error"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 16,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "const a = [1,2];\nconst b = [...a,3,4];\nconsole.log(b);",
+    "answers": [
+      "[1,2,3,4]",
+      "[[1,2],3,4]",
+      "[1,2]",
+      "[3,4]"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 17,
+    "question": "¿Qué imprime este código?",
+    "code": "const obj = {a:1, b:2};\nconst {a, ...rest} = obj;\nconsole.log(rest);",
+    "answers": [
+      "{a:1}",
+      "{b:2}",
+      "{a:1, b:2}",
+      "{}"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 18,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "console.log(!!0);",
+    "answers": [
+      "true",
+      "false",
+      "0",
+      "undefined"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 19,
+    "question": "¿Qué imprime este código?",
+    "code": "let a = [1,2,3];\nlet b = a;\nb.push(4);\nconsole.log(a);",
+    "answers": [
+      "[1,2,3]",
+      "[1,2,3,4]",
+      "[4]",
+      "Error"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 20,
+    "question": "¿Cuál es la salida de este código?",
+    "code": "console.log(typeof NaN);",
+    "answers": [
+      "'number'",
+      "'NaN'",
+      "'undefined'",
+      "'object'"
+    ],
+    "correctAnswer": 0
+  }
+]

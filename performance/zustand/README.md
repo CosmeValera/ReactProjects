@@ -70,4 +70,7 @@ npm create vite@latest
 ```
 > **Name:** javascript-quizz . **Tech:** React + TS + SWC
 
-.
+Let's install zustand:
+```sh
+npm install zustand -E
+```
