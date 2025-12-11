@@ -7,23 +7,9 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
   globalIgnores(['dist']),
-  // Rules for JS files (including this config file)
+  // Rules for JS and TS files (including this config file)
   {
-    files: ['**/*.{js,jsx}'],
-    extends: [js.configs.recommended],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-    rules: {
-      'semi': ['error', 'always'],
-      'no-extra-semi': 'error',
-      'quotes': ['error', 'single'],
-    }
-  },
-  // Rules for TS files
-  {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
@@ -35,10 +21,12 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      'semi': ['error', 'always'],
-      'no-extra-semi': 'error',
-      'quotes': ['error', 'single'],
-      'no-unused-vars': 'warn',
+      'semi': 'off', // 0 or 1 semicolon
+      // "semi": ["error", "never"], // this is for only 0 semicolon
+      // "semi": ["error", "always"], // this is for only 1 semicolon
+      'no-extra-semi': 'error', // Disallow 2 or more semicolons
+      'quotes': ['error', 'single'], // Single quotes
+      'no-unused-vars': 'warn', // Warn unused vars
     }
   },
 ])
