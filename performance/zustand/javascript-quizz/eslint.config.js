@@ -26,8 +26,8 @@ export default defineConfig([
       // "semi": ["error", "always"], // this is for only 1 semicolon
       'no-extra-semi': 'error', // Disallow 2 or more semicolons
       'quotes': ['error', 'single'], // Single quotes
-      'no-unused-vars': 'warn', // Warn unused vars
       'indent': ['warn', 2], // 2 space indentation 
+      '@typescript-eslint/no-unused-vars': 'warn', // Warn unused vars, but not for ts interfaces...
     }
   },
 ])

@@ -3,10 +3,11 @@ import './App.css'
 import { Container, Stack, Typography } from '@mui/material'
 import { JavaScriptLogo } from './JavaScriptLogo'
 import { Start } from './Start'
-import { useQuestionsStore } from './store/questions';
+import { useQuestionsStore } from './store/questionsStore';
+import { Game } from './Game';
 
 function App() {
-  const questions = useQuestionsStore(state => state.questions);
+  const questions = useQuestionsStore(state => state.questions)
   console.log(questions)
   
   return (
@@ -18,8 +19,10 @@ function App() {
             JavaScript Quizz
           </Typography>
         </Stack>
+        
+        { questions.length === 0 && <Start />}
+        { questions.length > 0 && <Game />}
 
-        <Start />
       </Container>
     </main>
   )
