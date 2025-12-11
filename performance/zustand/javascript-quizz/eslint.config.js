@@ -27,6 +27,7 @@ export default defineConfig([
       'no-extra-semi': 'error', // Disallow 2 or more semicolons
       'quotes': ['error', 'single'], // Single quotes
       'no-unused-vars': 'warn', // Warn unused vars
+      'indent': ['warn', 2], // 2 space indentation 
     }
   },
 ])
