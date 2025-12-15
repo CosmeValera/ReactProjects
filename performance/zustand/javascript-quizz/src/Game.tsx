@@ -12,6 +12,21 @@ const Question = ({ info } : { info: QuestionType }) => {
     selectAnswer(info.id, answerIndex)
   }
 
+  const getBackgroundColor = (index: number): string => {
+    const { userSelectedAnswer, correctAnswer } = info;
+
+    // User not select anything
+    if (userSelectedAnswer == null) return 'transparent';
+    // User selected but answer is wrong
+    if (index !== correctAnswer && index !== userSelectedAnswer) return 'transparent';
+    // If this is the correct solution
+    if (index === correctAnswer) return 'green'
+    // If this is the user selection but it's wrong
+    if (index === userSelectedAnswer) return 'red'
+    // Otherwise
+    return 'transparent';
+  }
+
   return (
     <Card variant='outlined' sx={{ bgcolor: '#222', p: '2rem', textAlign: 'left', mt: 4}}>
       <Typography variant='h5'>
@@ -25,7 +40,12 @@ const Question = ({ info } : { info: QuestionType }) => {
       <List sx={{bgcolor: '#333'}} disablePadding>
         {info.answers.map((answer, index)=> (
           <ListItem key={index} disablePadding divider >
-            <ListItemButton onClick={createHandleClick(index)}>
+            <ListItemButton 
+              disabled={info.userSelectedAnswer != null}
+              onClick={createHandleClick(index)}
+              sx={{
+                backgroundColor: getBackgroundColor(index)
+              }}>
               <ListItemText primary={answer} sx={{textAlign: 'center'}} />
             </ListItemButton>
           </ListItem>
