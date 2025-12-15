@@ -16,16 +16,19 @@
     "@fontsource/roboto": "5.2.9",
     "@mui/icons-material": "7.3.6",
     "@mui/material": "^7.3.6",
+    "canvas-confetti": "1.9.4",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "zustand": "5.0.9",
-    "react-syntax-highlighter": "16.1.0"
+    "react-syntax-highlighter": "16.1.0",
+    "zustand": "5.0.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -33,7 +36,6 @@
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4",
-    "@types/react-syntax-highlighter": "^15.5.13"
+    "vite": "^7.2.4"
   }
 }
