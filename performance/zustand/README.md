@@ -1,6 +1,6 @@
 # 🐻 Zustand
 
-🐻 [Zustand](https://zustand-demo.pmnd.rs/) is a lightweight and intuitive global state manager for React, widely used as a simpler alternative to Redux. It offers a tiny API, zero boilerplate, and fast performance, making it ideal for managing state cleanly without the complexity of larger libraries.
+🐻 [Zustand](https://zustand-demo.pmnd.rs/) is a lightweight and intuitive **global state manager** for React, widely used as a simpler alternative to Redux. It offers a tiny API, zero boilerplate, and fast performance, making it ideal for managing state cleanly without the complexity of larger libraries.
 
 ##  🤔 Redux vs Zustand
 | Redux | **Zustand** | React Context |
@@ -72,5 +72,23 @@ npm create vite@latest
 
 Let's install zustand:
 ```sh
-npm install zustand -E
+npm install zustand
 ```
+
+### How the app looks
+
+![JavaScript Quizz](./javascript-quizz.png)
+
+### Zustand store
+Interesting file to check: **[Zustand Questions Store](./javascript-quizz/src/store/questionsStore.ts)**
+
+**Key ideas from that file:**
+- `questions` and `currentQuestions` can be understood as useState functions, but gobally. This way you don't have to pass props everywhere throughout the project.
+
+- The **Zustand methods** (`fetchQuestions` and `selectAnswer`) are used to **change the values** of the `questions` array, and so on with the other methods. **And the React components** is what is used to interpret that `questions` array and **present the information** with CSS (background red when the answer is wrong...).
+
+- You can add persistence, just by adding the Zustand middleware `persist` wrapping all the Zustand store. By default, Zustand will persist the information in LocalStorage, and that's how it's done in the code (all the Zustand's store goes to the object in localStorage called `questions`). Zustand provides versatility in the persistence, you can change it to persist to SessionStorage, IndexedDB, Firebase, a custom MySQL Database...
+
+- For the reset button it's very easy, you just need to remove the information of `currentQuestions` and `questions`, like this: `set({ currentQuestion: 0, questions: []})`.
+
+- If you want to access one value of the store, do it like this: ✅ `const questions = useQuestionsStore(state => state.questions)`✅ to avoid unnecesary rerenders. Avoid doing it like this: ❌`const { questions } = useQuestionsStore(state => state)`❌. More information in the **[custom hook file](./javascript-quizz/src/hooks/useQuestionsData.tsx)** 
