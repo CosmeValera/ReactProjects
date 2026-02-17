@@ -2,6 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const deps = require("./package.json").dependencies;
+
 module.exports = (_, argv) => ({
   output: {
     publicPath: "http://localhost:7023/",
@@ -21,9 +22,7 @@ module.exports = (_, argv) => ({
       {
         test: /\.m?js/,
         type: "javascript/auto",
-        resolve: {
-          fullySpecified: false,
-        },
+        resolve: { fullySpecified: false },
       },
       {
         test: /\.(css|s[ac]ss)$/i,
@@ -32,9 +31,7 @@ module.exports = (_, argv) => ({
       {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+        use: { loader: "babel-loader" },
       },
     ],
   },
@@ -48,15 +45,13 @@ module.exports = (_, argv) => ({
       },
       exposes: {},
       shared: {
-        ...deps,
-        react: {
-          singleton: true,
-          requiredVersion: deps.react,
-        },
-        "react-dom": {
-          singleton: true,
-          requiredVersion: deps["react-dom"],
-        },
+        // Share everything EXCEPT react and react-dom
+        ...Object.fromEntries(
+          Object.entries(deps).filter(
+            ([key]) => key !== "react" && key !== "react-dom"
+          )
+        ),
+        // Do NOT share react/react-dom — host keeps its own React 19
       },
     }),
     new HtmlWebPackPlugin({

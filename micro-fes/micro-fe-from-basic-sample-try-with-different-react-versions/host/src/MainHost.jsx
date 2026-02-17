@@ -7,6 +7,7 @@ export default function MainHost() {
             <div>Framework: react</div>
             <div>Language: JavaScript</div>
             <div>CSS: Empty CSS</div>
+            <div><b>React version: 19</b></div>
         </>
     );
 }

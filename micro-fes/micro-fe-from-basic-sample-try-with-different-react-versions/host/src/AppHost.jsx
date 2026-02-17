@@ -1,18 +1,17 @@
 import React from "react";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
 import "./index.css";
 
 import MainHost from "./MainHost";
-import RemoteApp from "remote/MainRemote";
+import RemoteWrapper from "./RemoteWrapper";
 
 const AppHost = () => (
   <div className="container">
     <MainHost />
-    <RemoteApp />
+    <RemoteWrapper />
   </div>
 );
 
-const container = document.getElementById('app');
-const root = createRoot(container);
+const root = createRoot(document.getElementById("app"));
 root.render(<AppHost />);
