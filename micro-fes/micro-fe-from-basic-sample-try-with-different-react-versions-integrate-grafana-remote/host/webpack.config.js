@@ -42,6 +42,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         remote: "remote@http://localhost:7024/remoteEntry.js",
+        grafana_remote: "grafana_mfe@http://localhost:3001/remoteEntry.js",
       },
       exposes: {},
       shared: {

@@ -101,18 +101,16 @@ module.exports = () => ({
         "./GrafanaRemote": "./src/components/GrafanaRemote.jsx",
         './GrafanaRefresh': './src/components/GrafanaRefresh.jsx',
         './GrafanaTimeRange': './src/components/GrafanaTimeRange.jsx',
+        "./GrafanaApp": "./src/Main.jsx",
       },
       shared: {
-        ...deps,
         react: {
           singleton: true,
           requiredVersion: deps.react,
-          eager: true,
         },
         "react-dom": {
           singleton: true,
           requiredVersion: deps["react-dom"],
-          eager: true,
         },
       },
     }),

@@ -1,17 +1,11 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-
-import "./index.css";
-
-import MainHost from "./MainHost";
-import RemoteWrapper from "./RemoteWrapper";
+import GrafanaWrapper from "./GrafanaWrapper";
 
 const AppHost = () => (
-  <div className="container">
-    <MainHost />
-    <RemoteWrapper />
+  <div>
+    <h1>My Host App (React 19)</h1>
+    <GrafanaWrapper />
   </div>
 );
 
-const root = createRoot(document.getElementById("app"));
-root.render(<AppHost />);
+export default AppHost;

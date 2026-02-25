@@ -31,6 +31,7 @@ const GrafanaPanels = () => {
             height="100%" 
             name="Grafana Panel One" 
             currentView={currentView} 
+            panelId={1}
           />
         </div>
       </div>
@@ -50,17 +51,23 @@ const GrafanaPanels = () => {
   );
 };
 
-const App = () => {
-  return (
-    <GrafanaProvider>
-      <GrafanaPanels />
-    </GrafanaProvider>
-  );
-};
+const App = () => (
+  <GrafanaProvider>
+    <GrafanaPanels />
+  </GrafanaProvider>
+);
 
-const container = document.getElementById("app");
-const root = createRoot(container);
-root.render(<App />);
+// ✅ Export mount for Module Federation host (React 19)
+export function mount(el) {
+  const root = createRoot(el);
+  root.render(<App />);
+  document.body.classList.add(mainStyles.body);
+  return root; // host can call root.unmount() on cleanup
+}
 
-// Apply global styles
-document.body.classList.add(mainStyles.body);
+// ✅ Keep standalone bootstrap for local dev
+if (document.getElementById("app")) {
+  mount(document.getElementById("app"));
+}
+
+export default App;
