@@ -1,0 +1,7 @@
+.grafanaHeader {
+  color: #e0e0e0;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+} 

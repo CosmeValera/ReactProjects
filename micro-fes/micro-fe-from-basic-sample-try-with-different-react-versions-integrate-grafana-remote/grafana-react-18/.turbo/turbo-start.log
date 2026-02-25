@@ -1,0 +1,59 @@
+
+> grafana-mfe@1.0.0 start
+> webpack serve --mode development --config webpack.config.local.js
+
+<i> [webpack-dev-server] Project is running at:
+<i> [webpack-dev-server] Loopback: [36mhttp://localhost:3001/[39m
+<i> [webpack-dev-server] Content not from webpack is served from '[36mC:\Users\covr\OneDrive - gmv.com\Desktop\Cosme (Local)\GMV(projects)\aggregator\apps\grafana-mfe\public[39m' directory
+<i> [webpack-dev-server] 404s will fallback to '[36m/index.html[39m'
+
+
+
+  [94mCompiling...[0m
+
+  Compiling the [1mGrafana Remote[0m in the browser.
+  [94mCompiling...[0m
+
+  [1mLocal[0m:  http://localhost:[1m3001[0m
+  [1mLocal[0m:  http://localhost:[1m3001[0m
+
+
+    
+assets by chunk 14 MiB (id hint: vendors)
+  asset [1m[32mvendors-node_modules_grafana_ui_dist_esm_index_js.js[39m[22m 11.3 MiB [1m[32m[emitted][39m[22m (id hint: vendors)
+  asset [1m[32mvendors-node_modules_react-dom_index_js.js[39m[22m 1.03 MiB [1m[32m[emitted][39m[22m (id hint: vendors)
+  asset [1m[32mvendors-node_modules_grafana_data_node_modules_moment_locale_af_js-node_modules_grafana_data_-6ea66c.js[39m[22m 751 KiB [1m[32m[emitted][39m[22m (id hint: vendors)
+  asset [1m[32mvendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-582c96.js[39m[22m 742 KiB [1m[32m[emitted][39m[22m (id hint: vendors)
+  asset [1m[32mvendors-node_modules_react_index_js.js[39m[22m 89.9 KiB [1m[32m[emitted][39m[22m (id hint: vendors)
+  asset [1m[32mreact-monaco-editor.js[39m[22m 79.3 KiB [1m[32m[emitted][39m[22m (name: react-monaco-editor) (id hint: vendors)
+  asset [1m[32mvendors-node_modules_babel_runtime_helpers_esm_slicedToArray_js-node_modules_css-loader_dist_-0258c4.js[39m[22m 64.3 KiB [1m[32m[emitted][39m[22m (id hint: vendors)
++ 10 assets
+orphan modules 2.97 MiB [1m[33m[orphan][39m[22m 1452 modules
+runtime modules 89.5 KiB 38 modules
+modules by path [1m../../node_modules/[39m[22m 10.9 MiB
+  cacheable modules 10.9 MiB 2147 modules
+  optional modules 6.47 KiB [1m[33m[optional][39m[22m 2 modules
+modules by path [1m./src/[39m[22m 37.9 KiB 16 modules
+provide-module modules 210 bytes
+  [1mprovide shared module (default) @grafana/ui@10.0.3 = ../../node_modules/@grafana...(truncated)[39m[22m 42 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  [1mprovide shared module (default) moment@2.29.4 = ../../node_modules/@grafana/data...(truncated)[39m[22m 42 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  + 3 modules
+consume-shared-module modules 210 bytes
+  modules by path [1mconsume shared module (default) moment@^2.30.1 (strict) (fallback: ../.....(truncated)[39m[22m 84 bytes 2 modules
+  + 3 modules
+[1mcontainer entry[39m[22m 42 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+webpack 5.102.1 compiled [1m[32msuccessfully[39m[22m in 11639 ms
+
+
+
+  [32mCompiled successfully![0m
+
+  You can now view [1mGrafana Remote[0m in the browser.
+  [32mCompiled successfully![0m
+
+  [1mLocal[0m:  http://localhost:[1m3001[0m
+  [1mLocal[0m:  http://localhost:[1m3001[0m
+
+
+    
+^C^C
