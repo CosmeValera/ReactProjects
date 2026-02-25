@@ -65,9 +65,9 @@ export function mount(el) {
   return root; // host can call root.unmount() on cleanup
 }
 
-// ✅ Keep standalone bootstrap for local dev
-if (document.getElementById("app")) {
-  mount(document.getElementById("app"));
-}
+// // ✅ Keep standalone bootstrap for local dev
+// if (document.getElementById("app")) {
+//   mount(document.getElementById("app"));
+// }
 
 export default App;

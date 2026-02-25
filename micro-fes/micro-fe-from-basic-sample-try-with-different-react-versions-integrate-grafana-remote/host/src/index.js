@@ -1,1 +1,1 @@
-import("./AppHost");
+import("./bootstrap.js");
