@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styles from './GrafanaRemote.module.css';
+import { createMount } from "./mountFactory.js";
 
 const GrafanaRemote = ({ src, width, height, name, currentView, panelId }) => {
   const [updatedSrc, setUpdatedSrc] = useState(src);
@@ -122,4 +123,5 @@ const GrafanaRemote = ({ src, width, height, name, currentView, panelId }) => {
   );
 };
 
+export const mount = createMount(GrafanaRemote);
 export default GrafanaRemote;

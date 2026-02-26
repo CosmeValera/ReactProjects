@@ -1,14 +1,19 @@
 import React, { useEffect, useRef } from "react";
-import { mount } from "remote/MainRemote";
 
-export default function RemoteWrapper() {
+export default function RemoteWrapper({ mount, ...props }) {
   const ref = useRef(null);
+  const instanceRef = useRef(null);
 
   useEffect(() => {
-    if (ref.current) {
-      mount(ref.current);
-    }
-  }, []);
+    if (!ref.current) return;
+    instanceRef.current = mount(ref.current, props);
+    return () => instanceRef.current?.unmount();
+  }, []); // mount only once
 
-  return <div ref={ref} />;
+  // When props change, call update() instead of remounting
+  useEffect(() => {
+    instanceRef.current?.update(props);
+  }, [JSON.stringify(props)]);
+
+  return <div ref={ref} style={{ width: "100%", height: "100%" }} />;
 }

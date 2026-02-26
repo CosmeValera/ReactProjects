@@ -3,6 +3,7 @@ import { TimeRangePicker } from '@grafana/ui';
 import { dateTime } from '@grafana/data';
 import moment from 'moment';
 import styles from './GrafanaTimeRange.module.css';
+import { createMount } from "./mountFactory.js";
 
 const GrafanaTimeRange = ({ updateCurrentView, currentView }) => {
   // Initialize with the last 24 hours as default
@@ -96,4 +97,5 @@ const GrafanaTimeRange = ({ updateCurrentView, currentView }) => {
   );
 };
 
+export const mount = createMount(GrafanaTimeRange);
 export default GrafanaTimeRange;

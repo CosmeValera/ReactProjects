@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshPicker } from '@grafana/ui'; // Import the RefreshPicker
 import styles from './GrafanaRefresh.module.css';
+import { createMount } from "./mountFactory.js";
 
 const GrafanaRefresh = ({ updateCurrentView, currentView }) => {
   const [refreshInterval, setRefreshInterval] = useState(currentView?.grafanaCommunicationValues?.refresh || 'Off');
@@ -50,4 +51,5 @@ const GrafanaRefresh = ({ updateCurrentView, currentView }) => {
   );
 };
 
+export const mount = createMount(GrafanaRefresh);
 export default GrafanaRefresh;

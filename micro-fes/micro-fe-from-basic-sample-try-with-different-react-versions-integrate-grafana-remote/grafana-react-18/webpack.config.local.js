@@ -100,8 +100,7 @@ module.exports = () => ({
       exposes: {
         "./GrafanaRemote": "./src/components/GrafanaRemote.jsx",
         './GrafanaRefresh': './src/components/GrafanaRefresh.jsx',
-        './GrafanaTimeRange': './src/components/GrafanaTimeRange.jsx',
-        "./GrafanaApp": "./src/Main.jsx",
+        './GrafanaTimeRange': './src/components/GrafanaTimeRange.jsx'
       },
       shared: {
         react: {
