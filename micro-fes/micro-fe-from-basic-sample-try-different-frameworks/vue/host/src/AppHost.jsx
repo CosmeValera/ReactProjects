@@ -3,14 +3,11 @@ import ReactDOM from "react-dom";
 
 import "./index.css";
 
-import MainHost from "./MainHost";
-import RemoteApp from "remote/MainRemote";
+import RemoteWrapper from "./RemoteWrapper"  // ✅ use the wrapper
 
 const AppHost = () => (
   <div className="container">
     <MainHost />
-    <RemoteApp />
+    <RemoteWrapper />  {/* ✅ not RemoteApp directly */}
   </div>
 );
-
-ReactDOM.render(<AppHost />, document.getElementById("app"));

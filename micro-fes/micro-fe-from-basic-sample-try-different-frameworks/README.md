@@ -5,7 +5,7 @@
 
 **Microfrontend:**
 - Angular 😔
-- Vue.js
+- Vue.js 😔
 - SolidJS
 - React v18
 

@@ -44,7 +44,15 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        remote: "remote@http://localhost:7024/remoteEntry.js",
+          vue_remote: `promise new Promise(resolve => {
+            const script = document.createElement('script');
+            script.src = 'http://localhost:3001/remoteEntry.iife.js';
+            script.onload = () => resolve({
+              get: (module) => () => window.VueRemote,
+              init: () => {}
+            });
+            document.head.appendChild(script);
+          })`,
       },
       exposes: {},
       shared: {
