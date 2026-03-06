@@ -12,11 +12,15 @@ Each one of the projects corresponds to a combination of a React 19 Host, with o
 - React v18 
 
 **Host (React 19) + Microfrontend:**
+
+> Note that most of the microfrontends are built with Vite, which outputs ESM by default and are run with `npm run serve` or `ng serve` to output the remoteEntry.js file. Unlike React, which generates the remoteEntry directly with `npm start`.
+
 - ✅ Angular 
 ![alt text](image/1.png)
 - ✅ Vue.js 
 ![alt text](image/2.png)
-- ❌ SolidJS 
+- ✅ SolidJS 
+![alt text](image/3.png)
 - ❌ React v18 
 
 ## Cross framework Module Federation

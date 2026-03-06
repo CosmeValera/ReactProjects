@@ -44,7 +44,10 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        remote: "remote@http://localhost:7024/remoteEntry.js",
+        solidjs_remote: `promise import('http://localhost:3002/assets/remoteEntry.js').then(module => ({
+          get: module.get,
+          init: module.init
+        }))`,
       },
       exposes: {},
       shared: {
