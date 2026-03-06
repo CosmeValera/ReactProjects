@@ -1,13 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
 import "./index.css";
-
-import RemoteWrapper from "./RemoteWrapper"  // ✅ use the wrapper
+import MainHost from "./MainHost";
+import RemoteWrapper from "./RemoteWrapper";
 
 const AppHost = () => (
   <div className="container">
     <MainHost />
-    <RemoteWrapper />  {/* ✅ not RemoteApp directly */}
+    <RemoteWrapper />
   </div>
 );
+
+export default AppHost;

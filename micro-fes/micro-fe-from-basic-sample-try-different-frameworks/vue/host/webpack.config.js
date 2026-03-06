@@ -44,15 +44,11 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-          vue_remote: `promise new Promise(resolve => {
-            const script = document.createElement('script');
-            script.src = 'http://localhost:3001/remoteEntry.iife.js';
-            script.onload = () => resolve({
-              get: (module) => () => window.VueRemote,
-              init: () => {}
-            });
-            document.head.appendChild(script);
-          })`,
+        // vite-plugin-federation generates ESM — must use dynamic import() not classic script injection
+        vue_remote: `promise import('http://localhost:3001/assets/remoteEntry.js').then(module => ({
+          get: module.get,
+          init: module.init
+        }))`,
       },
       exposes: {},
       shared: {
