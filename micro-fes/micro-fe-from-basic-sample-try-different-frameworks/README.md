@@ -21,7 +21,8 @@ Each one of the projects corresponds to a combination of a React 19 Host, with o
 ![alt text](image/2.png)
 - ✅ SolidJS 
 ![alt text](image/3.png)
-- ❌ React v18 
+- ✅ React v18
+![alt text](image/4.png) 
 
 ## Cross framework Module Federation
 
