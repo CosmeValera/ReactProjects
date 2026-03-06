@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 
 import "./index.css";
 
@@ -14,4 +14,5 @@ const AppHost = () => (
   </div>
 );
 
-ReactDOM.render(<AppHost />, document.getElementById("app"));
+const root = ReactDOM.createRoot(document.getElementById("app"));
+root.render(<AppHost />);

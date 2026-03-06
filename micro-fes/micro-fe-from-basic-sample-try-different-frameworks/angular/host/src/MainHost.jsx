@@ -3,10 +3,10 @@ import React from "react";
 export default function MainHost() {
     return (
         <>
-            <div>Name: host</div>
+            <div><b>Name: host</b></div>
             <div>Framework: react</div>
-            <div>Language: JavaScript</div>
-            <div>CSS: Empty CSS</div>
+            <div>Port: 7023</div>
+            <br />
         </>
     );
 }

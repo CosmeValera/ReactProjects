@@ -44,7 +44,10 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        remote: "remote@http://localhost:4200/remoteEntry.js",
+        remote: `promise import('http://localhost:4200/remoteEntry.js').then(module => ({
+          get: module.get,
+          init: module.init
+        }))`,
       },
       exposes: {},
       shared: {
