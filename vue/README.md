@@ -1,4 +1,5 @@
 <!-- Tutorial: https://www.youtube.com/watch?v=Kt2E8nblvXU -->
+<!-- Tutorial scrimba: https://scrimba.com/learn-vue-c0jrrpaasr/~05zy/s0sa5sde31/head -->
 
 # 💚 VUE
 

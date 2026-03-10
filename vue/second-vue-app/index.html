@@ -5,12 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css"/>
     <title>Vue.js Basics</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <span>😬</span>
-    <h1>404</h1>
-    <p>Oops! Looks like you’ve wandered into the digital wilderness. Don’t worry, even the best explorers get lost sometimes.</p>
-    <a href="https://www.scrimba.com" target="_blank">Go back to safety →</a>
+    <div id="app">
+        <span>{{emoji}}</span>
+        <h1>{{statusCode}}</h1>
+        <p>{{message}}</p>
+        <a href="https://www.scrimba.com" target="_blank">{{buttonMessage}}</a>
+    </div>
+    <script>
+        const {createApp, ref} = Vue;
+        createApp({
+            setup() {
+                const emoji = ref("🥳");
+                const statusCode = ref("200");
+                const message = ref("Your webpage works perfectly fine!")
+                const buttonMessage = ref("Click here to go to Scrimba →")
+
+                return {
+                    emoji, statusCode, message, buttonMessage
+                }
+            }
+        }).mount("#app")
+        
+    </script>
 </body>
 </html>
 <!--
