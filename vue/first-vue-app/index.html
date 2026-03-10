@@ -8,15 +8,26 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <header>
-        <span>👋🏻</span>
-    </header>
-    <main>
-        <h1>Hello, world!</h1>
-        <p>I'm about to learn <a href="https://vuejs.org/" target="_blank">Vue.js</a>!</p>
-    </main>
-    <footer>
-        <p>&copy; 2025</p>
-    </footer>
+    <div id="app">
+        <header>
+            <span>👋🏻</span>
+        </header>
+        <main>
+            <h1>Hello, {{name}}</h1>
+            <p>I'm about to learn <a href="https://vuejs.org/" target="_blank">Vue.js</a>!</p>
+        </main>
+        <footer>
+            <p>&copy; 2026</p>
+        </footer>
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+        createApp({
+            setup() {
+                const name = ref("Rachel")
+                return { name }
+            }
+        }).mount("#app")
+    </script>
 </body>
 </html>
