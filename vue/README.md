@@ -2,7 +2,7 @@
 
 # 💚 VUE
 
-Vue is a JS framework for building user interfaces. It's the third biggest framework after React and Angular.
+Vue is a JS framework for building user interfaces. It's a progressive framework, adaptable incrementally, from small projects to large-scale applications. It was created by Evan You who was working for AngularJS (the old version of Angular) at that time. It's one of the most popular JS frontend frameworks alongside React and Angular.
 
 ## How to create a Vue project
 
