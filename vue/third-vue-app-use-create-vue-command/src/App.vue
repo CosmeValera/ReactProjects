@@ -1,47 +1,47 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script setup>
+/*
+CHALLENGE: Make the copyright year dynamic and blue
+IN SCRIPT: Create a new ref to house a different year
+IN TEMPLATE: Change the static "2025" to render the new ref
+IN STYLE: Target the paragraph tag in the footer and make it blue 
+*/
+  import {ref} from 'vue'
+  const name = ref('Rachel')
+  const emoji = ref('✌🏻')
+  const year = ref('2026')
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+    <span>{{emoji}}</span>
   </header>
 
   <main>
-    <TheWelcome />
+    <h1>Hello, {{name}}!</h1>
+    <p>I'm about to learn <a href="https://vuejs.org/" target="_blank">Vue.js</a>!</p>
   </main>
+
+  <footer>
+    <p>&copy; {{year}}</p>
+  </footer>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  header span{
+    font-size:3rem;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
+  main h1{
+      display:block;
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  main a{
+      color: #42B883;
   }
-}
+  footer {
+      position:fixed;
+      bottom:0;
+      padding-bottom:20px;
+  }
+  footer p {
+      color: blue;
+  }
 </style>
