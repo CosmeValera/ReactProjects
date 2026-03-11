@@ -75,7 +75,7 @@ In the `<script setup>` tag you write your JS code, in the `<template>` tag you 
     <h1>Hello, {{name}}</h1>
 </template>
 
-<style>
+<style scoped>
     h1 {
         color: red;
     }
