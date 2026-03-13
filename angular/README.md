@@ -58,4 +58,49 @@ export class App { ... }
 In React, Vue, Svelte, etc, it's being lately more favored having everything in the same file, and have a separation of concerns more focused on the different components instead of in different files. However, Angular has always being typically with different files, and it's at each one preference how you want to do it. General rule: for simple components you can do inline, while for bigger components it's usuarlly more recommended to split into different files.
 
 ## Properties and Signals
+> Signals are now the recommended way to handle state in Angular!
+
+**TL:DR;** Properties are simpler but trigger broader change detection. Signals are more explicit and granular, making them better for performance and the direction Angular is heading.
+
+Properties are plain TypeScript class fields. Angular detects changes through zone.js, which patches async operations and triggers change detection for the whole component tree, simple but less efficient.
+
+Signals (introduced in Angular 16) are reactive primitives. Angular knows exactly which signal changed and updates only the parts of the template that depend on it, no zone.js needed. You call them like a function (`appName()`) to read the value, and use `.set()` / `.update()` to change it:
+
+```ts
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  template: `
+    <h1>Hola {{city}}</h1>
+    <h2>Esto es {{appName()}}</h2>
+  `,
+  styles: `h1 {color: green}`
+})
+export class App {
+  city = "Murcia";
+  appName = signal('angular-17-app');
+  // Both can have protected and readonly. Like this: `protected readonly appName = signal('angular-17-app');`
+}
+```
+
+**Extra: Difference between Signals and useState() (from React):**
+
+Both hold state and update the UI when changed, but the update model is different:
+
+- `useState` → re-renders the **whole component** top to bottom on every change
+- Signals → only the **exact DOM nodes** that read the signal update (subscription-based)
+```ts
+// React: whole component re-renders on change
+const [count, setCount] = useState(0);
+setCount(1);
+
+// Angular: only {{count()}} in the template updates
+count = signal(0);
+count.set(1);
+count.update(v => v + 1); // based on previous value
+```
+
+This is why signals are generally preferred for performance, no unnecessary re-renders, no need for `useMemo`/`useCallback` workarounds. React is solving this differently via the **React Compiler** (auto-memoization), rather than adopting signals.
+
+## Styles
 .
