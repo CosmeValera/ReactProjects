@@ -32,6 +32,58 @@ ng serve
 └── angular.json              # CLI config (build, serve, test options)
 ```
 
+## How to create components
+Command to generate a component with Angular.
+```py
+ng generate component user
+```
+```py
+# OUTPUT
+CREATE src/app/user/user.ts (189 bytes)
+CREATE src/app/user/user.html (20 bytes)
+CREATE src/app/user/user.css (0 bytes)
+CREATE src/app/user/user.spec.ts (540 bytes)
+```
+
+To use the component, 1. import it and 2. add it in the HTML part:
+```py
+import { User } from "./user/user";
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, User],
+  template: `
+    <h1>My app header</h1>
+    <app-user/>
+  `,
+  styles: `h1 {color: green}`
+})
+export class App { ... }
+```
+
+### Other `ng generate` commands:
+```bash
+# Components
+ng generate component user
+ng g c user                         # shorthand
+ng g c user --inline-template       # no separate .html file
+ng g c user --inline-style          # no separate .css file
+ng g c user --skip-tests            # no .spec.ts file
+ng g c user --dry-run               # preview without creating files
+ng g c user --flat                  # no subfolder created
+ng g c user --inline-template --inline-style --skip-tests # you can combine flags. Here: inline and no tests
+
+# Other schematics
+ng g service user                   # user.service.ts
+ng g pipe user                      # user.pipe.ts
+ng g directive user                 # user.directive.ts
+ng g guard user                     # route guard
+ng g interceptor user               # HTTP interceptor
+ng g interface user                 # TypeScript interface
+ng g enum user                      # TypeScript enum
+ng g module user                    # NgModule (legacy, less common now)
+```
+
 ## Component 
 The TS, SCSS and HTML can be set inline or in different files (this is the default):
 
@@ -102,5 +154,5 @@ count.update(v => v + 1); // based on previous value
 
 This is why signals are generally preferred for performance, no unnecessary re-renders, no need for `useMemo`/`useCallback` workarounds. React is solving this differently via the **React Compiler** (auto-memoization), rather than adopting signals.
 
-## Styles
+## Directives: if/else, for...
 .
