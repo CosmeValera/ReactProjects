@@ -113,7 +113,7 @@ In React, Vue, Svelte, etc, it's being lately more favored having everything in 
 
 **TL:DR;** Properties are simpler but trigger broader change detection. Signals are more explicit and granular, making them better for performance and the direction Angular is heading.
 
-Properties are plain TypeScript class fields. Angular detects changes through zone.js, which patches async operations and triggers change detection for the whole component tree, simple but less efficient.
+Properties are plain TypeScript class fields. Angular detects changes through zone.js, which patches async operations and triggers change detection for the whole component tree, it won't rerender everything, but it's less efficient because zone.js has to walk the tree to find what changed.
 
 Signals (introduced in Angular 16) are reactive primitives. Angular knows exactly which signal changed and updates only the parts of the template that depend on it, no zone.js needed. You call them like a function (`appName()`) to read the value, and use `.set()` / `.update()` to change it:
 
@@ -219,6 +219,35 @@ export class User {
   </ul>
 </app-games>
 ```
+
+## Change state in Angular
+To change state in Angular you modify properties or signals directly in the component class. In the template, you bind events with `()` to call methods or update signals inline:
+```html
+<section>
+  @if (isLoggedIn()) {
+    <p>Bienvenido, {{ username }}</p>
+    <img (dblclick)="greet()" alt="photo" src="https://github.com/CosmeValera.png" />
+  } @else {
+    <button (click)="isLoggedIn.set(true)">¡Iniciá sesión!</button>
+  }
+  <app-games />
+</section>
+```
+```ts
+export class User {
+  username = 'cosmecín'
+  isLoggedIn = signal(false)
+
+  greet() {
+    alert('Hola!!!')
+  }
+}
+```
+
+- `(click)="isLoggedIn.set(true)"`: updates the signal inline, no method needed
+- `(dblclick)="greet()"`: calls a class method for more complex logic when double click
+- `@if (isLoggedIn())`: reads the signal; Angular updates only this block when it changes
+
 
 ## Scoped CSS
 Angular scopes the CSS by component. This is great to avoid CSS class names conflicts.

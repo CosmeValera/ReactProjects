@@ -4,3 +4,8 @@ section {
   padding-top: 32px;
   font-size: 24px;
 }
+
+img {
+  width: 64px;
+  border-radius: 50%;
+}

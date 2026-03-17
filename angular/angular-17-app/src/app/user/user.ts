@@ -9,5 +9,9 @@ import { Games } from "../games/games";
 })
 export class User {
   username = 'cosmecín'
-  isLoggedIn = signal(true)
+  isLoggedIn = signal(false)
+
+  greet() {
+    alert('Hola!!!')
+  }
 }
