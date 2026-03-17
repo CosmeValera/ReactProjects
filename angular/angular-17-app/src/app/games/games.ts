@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-games',
   imports: [],
   template: `
+    <h3>Los juegos favoritos de {{ username }}</h3>
     <ul>
       @for (game of games; track game.id) {
         <li>{{ game.name }}</li>
@@ -13,6 +14,8 @@ import { Component } from '@angular/core';
   styles: ``,
 })
 export class Games {
+  @Input() username = ''
+
   games = [
     {
       id: 1,

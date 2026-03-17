@@ -248,6 +248,103 @@ export class User {
 - `(dblclick)="greet()"`: calls a class method for more complex logic when double click
 - `@if (isLoggedIn())`: reads the signal; Angular updates only this block when it changes
 
+## Pass state in Angular, @Input and @Output
+### Input
+
+A parent passes data **down** to a child via `@Input()`.
+```ts
+// parent file
+import { Component } from '@angular/core';
+import { Games } from "../games/games";
+
+@Component({
+  selector: 'app-user',
+  imports: [Games],
+  template: `
+    <app-games [username]="username" />
+  `,
+  styles: ``,
+})
+export class User {
+  username = 'cosmecín'
+}
+```
+```ts
+// child file
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-games',
+  imports: [],
+  template: `
+    <h3>Los juegos favoritos de {{ username }}</h3>
+  `,
+  styles: ``,
+})
+export class Games {
+  @Input() username = ''
+}
+```
+
+- `[username]="username"`: binds the parent's `username` property to the child's `@Input()`
+
+### Output
+
+A child sends events **up** to the parent via `@Output()` and `EventEmitter`.
+```ts
+// child file
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-games',
+  imports: [],
+  template: `
+    <h3>Los juegos favoritos de {{ username }}</h3>
+    <ul>
+      @for (game of games; track game.id) {
+        <li (click)="pick(game.name)">{{ game.name }}</li>
+      }
+    </ul>
+  `,
+  styles: ``,
+})
+export class Games {
+  @Input() username = ''
+  @Output() gamePicked = new EventEmitter<string>()
+
+  games = [{ id: 1, name: 'Uncharted 4' }, { id: 2, name: 'Horizon 4' }]
+
+  pick(name: string) {
+    this.gamePicked.emit(name)
+  }
+}
+```
+```ts
+// parent file
+import { Component } from '@angular/core';
+import { Games } from '../games/games';
+
+@Component({
+  selector: 'app-user',
+  imports: [Games],
+  template: `
+    <p>Picked: {{ pickedGame }}</p>
+    <app-games [username]="username" (gamePicked)="onGamePicked($event)" />
+  `,
+  styles: ``,
+})
+export class User {
+  username = 'cosmecín'
+  pickedGame = ''
+
+  onGamePicked(name: string) {
+    this.pickedGame = name
+  }
+}
+```
+
+- `gamePicked.emit(name)`: fires the event with a payload from the child
+- `(gamePicked)="onGamePicked($event)"`: parent listens and receives the payload via `$event`
 
 ## Scoped CSS
 Angular scopes the CSS by component. This is great to avoid CSS class names conflicts.
