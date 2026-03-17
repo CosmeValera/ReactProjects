@@ -13,22 +13,22 @@ ng new angular-17-app
 ng serve
 ```
 
-> Run `npm install -g @angular/cli` in case you don't have angular. Check with `ng version`.
+> Run `npm install -g @angular/cli` in case you don't have angular. Use `ng version` to check if you do.
 
 ## Important files
 
 ```py
 .
 ├── src/
+│   ├── index.html            # Base HTML: mounts <app-root>
 │   ├── main.ts               # Entry point: bootstraps the app
-│   ├── app/
-│   │   ├── app.ts            # Root component (logic)
-│   │   ├── app.html          # Root component template
-│   │   ├── app.css           # Root component styles
-│   │   ├── app.config.ts     # App-wide providers (router, HTTP client, etc.)
-│   │   └── app.routes.ts     # Route definitions
-├── index.html                # Base HTML: mounts <app-root>
-├── styles.css                # Global styles
+│   │── styles.css            # Global styles
+│   └── app/
+│       ├── app.ts            # Root component (logic)
+│       ├── app.html          # Root component template
+│       ├── app.css           # Root component styles
+│       ├── app.config.ts     # App-wide providers (router, HTTP client, etc.)
+│       └── app.routes.ts     # Route definitions
 └── angular.json              # CLI config (build, serve, test options)
 ```
 
@@ -79,30 +79,29 @@ ng g pipe user                      # user.pipe.ts
 ng g directive user                 # user.directive.ts
 ng g guard user                     # route guard
 ng g interceptor user               # HTTP interceptor
-ng g interface user                 # TypeScript interface
-ng g enum user                      # TypeScript enum
-ng g module user                    # NgModule (legacy, less common now)
+
+# Docu: https://www.tutorialspoint.com/angular_cli/angular_cli_ng_generate.htm
 ```
 
 ## Component 
-The TS, SCSS and HTML can be set inline or in different files (this is the default):
+The TS, SCSS and HTML can be set in different files or inline:
 
 ```ts
-// Inline
-@Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  template: `<h1>Hola Mundo</h1>`,
-  styles: `h1 {color: green}`
-})
-export class App { ... }
-
 // Different files
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
+})
+export class App { ... }
+
+// Inline
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  template: `<h1>Hola Mundo</h1>`,
+  styles: `h1 {color: green}`
 })
 export class App { ... }
 ```
@@ -152,7 +151,7 @@ count.set(1);
 count.update(v => v + 1); // based on previous value
 ```
 
-This is why signals are generally preferred for performance, no unnecessary re-renders, no need for `useMemo`/`useCallback` workarounds. React is solving this differently via the **React Compiler** (auto-memoization), rather than adopting signals.
+This is why signals are generally preferred for performance, no unnecessary re-renders, no need for `useMemo`/`useCallback` workarounds. <i>React is solving this differently via the **React Compiler** (auto-memoization), rather than adopting signals.</i>
 
 ## Directives: if/else, for...
 .
