@@ -154,4 +154,25 @@ count.update(v => v + 1); // based on previous value
 This is why signals are generally preferred for performance, no unnecessary re-renders, no need for `useMemo`/`useCallback` workarounds. <i>React is solving this differently via the **React Compiler** (auto-memoization), rather than adopting signals.</i>
 
 ## Directives: if/else, for...
-.
+**If:**
+```js
+import { Component, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-user',
+  imports: [],
+  template: `
+    @if (isLoggedIn()) {
+      <p>Bienvenido, {{ username }}</p>
+    } @else {
+      <p>¡Iniciá sesión!</p>
+    }
+  `,
+  styleUrl: './user.css',
+})
+export class User {
+  username = 'midudev'
+  isLoggedIn = signal(true)
+}
+```
+> I'm using signals and properties for variables indiscriminately

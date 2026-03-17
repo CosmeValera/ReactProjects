@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { User } from './user/user'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, User],
   template: `
-    <h1>Hola {{city}}</h1>
-    <h2>Esto es {{appName()}}</h2>
+    <app-user />
   `,
   styles: `h1 {color: green}`
 })
