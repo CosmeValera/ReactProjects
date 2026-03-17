@@ -270,3 +270,38 @@ As you can see, Angular has a particular scope mechanism: styles are scoped per 
 | **Class name collisions** | ✅ Avoided | ✅ Avoided | ✅ Avoided |
 
 > **Note:** React has no built-in CSS scoping mechanism. Scoping depends entirely on what you add to your project; common options are CSS Modules (supported out of the box in most setups like Vite or CRA) or CSS-in-JS libraries such as styled-components or Emotion.
+
+### Example with `::ng-deep`
+```html
+<!-- app-user HTML -->
+<section>
+  <p>Section of app-user</p>
+  <app-user-inner />
+</section>
+```
+
+```html
+<!-- app-user-inner HTML -->
+<span>Hola</span>
+```
+
+```css
+/* app-user CSS */
+
+section {
+  margin: 0 auto; /* ✅ targets elements in the same component, works as expected */
+}
+
+app-user-inner {
+  padding-left: 4rem; /* ✅ Leaks to child host  */
+}
+
+section span {
+  font-size: 4rem; /* ❌ Doesn't leak inside children  */
+}
+section ::ng-deep span {
+  font-size: 4rem; /* ✅ It only leak inside children with '::ng-deep'  */
+}
+```
+
+> **Note:** `::ng-deep` is technically deprecated, but it remains the standard way to pierce component boundaries in Angular and there's no real replacement yet. Just be intentional with it, keep the selector specific (e.g. prefix it with `section`) to avoid unintentionally styling the whole app.
