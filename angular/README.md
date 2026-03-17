@@ -153,7 +153,7 @@ count.update(v => v + 1); // based on previous value
 
 This is why signals are generally preferred for performance, no unnecessary re-renders, no need for `useMemo`/`useCallback` workarounds. <i>React is solving this differently via the **React Compiler** (auto-memoization), rather than adopting signals.</i>
 
-## Directives: if/else, for...
+## Directives (if/else, for)
 **If:**
 ```js
 import { Component, signal } from '@angular/core';
@@ -176,3 +176,102 @@ export class User {
 }
 ```
 > I'm using signals and properties for variables indiscriminately
+
+**For:**
+```js
+@Component({
+  selector: 'app-user',
+  imports: [],
+  template: `
+    <ul>
+      @for (game of games; track game.id) {
+        <li>{{ game.name }}</li>
+      }
+    </ul>
+  `,
+  styleUrl: './user.css',
+})
+export class User {
+  games = [
+    {
+      id: 1,
+      name: 'Uncharted 4'
+    },
+    {
+      id: 2,
+      name: 'Horizon 4'
+    },
+    {
+      id: 3,
+      name: 'Bloodborne'
+    }
+  ]
+}   
+```
+
+```html
+<!-- Result -->
+<app-games _ngcontent-ng-c3605705329="">
+  <ul>
+    <li>Uncharted 4</li>
+    <li>Horizon 4</li>
+    <li>Bloodborne</li>
+  </ul>
+</app-games>
+```
+
+
+## Scoped CSS
+Angular scopes the CSS by component. This is great to avoid CSS class names conflicts.
+
+Example CSS and HTML:
+
+```html
+<!-- HTML  -->
+<section>
+  <p>Bienvenido, {{ username }}</p>
+</section>
+```
+```css
+/*   CSS   */
+section {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 32px;
+  font-size: 24px;
+}
+```
+
+This is what gets compiled:
+
+```html
+<!-- Inspector: Elements -->
+<section _ngcontent-ng-c3605705329="">
+  <p _ngcontent-ng-c3605705329="">Bienvenido, midudev</p>
+</section>
+```
+```css
+/*   Inspector: styles   */
+section[_ngcontent-ng-c3605705329] {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 32px;
+    font-size: 24px;
+}
+```
+As you can see Angular has a particular scope mechanism because the styles are scoped between components; however they get inherited by their children. Something similar happens in Vue (unlike CSS Modules where the styles are truly scoped). More information in the following table.
+
+### CSS Scope comparison
+
+---
+| Feature | Angular Scoped | Vue Scoped (`scoped`) | CSS Modules |
+|---|---|---|---|
+| **Mechanism** | Attribute selector (`[_ngcontent-xxx]`) | Attribute selector (`[data-v-xxx]`) | Unique class names (`.title_abc123`) |
+| **Inherited by children** | ✅ Yes | ✅ Yes | ❌ No |
+| **Leaks to children** | ✅ Yes | ✅ Yes (use `:deep()` to control) | ❌ No |
+| **Truly isolated** | ❌ No (leaks to children) | ❌ No (leaks to children) | ✅ Yes |
+| **Requires build step** | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Global styles override** | ✅ Possible | ✅ Possible | ⚠️ Harder |
+| **Class name collisions** | ✅ Avoided | ✅ Avoided | ✅ Avoided |
+
+> **Note:** React has no built-in CSS scoping mechanism. Scoping depends entirely on what you add to your project; common options are CSS Modules (supported out of the box in most setups like Vite or CRA) or CSS-in-JS libraries such as styled-components or Emotion.
