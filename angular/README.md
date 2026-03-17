@@ -220,12 +220,10 @@ export class User {
 </app-games>
 ```
 
-
 ## Scoped CSS
 Angular scopes the CSS by component. This is great to avoid CSS class names conflicts.
 
 Example CSS and HTML:
-
 ```html
 <!-- HTML  -->
 <section>
@@ -243,7 +241,6 @@ section {
 ```
 
 This is what gets compiled:
-
 ```html
 <!-- Inspector: Elements -->
 <section _ngcontent-ng-c3605705329="">
@@ -259,17 +256,15 @@ section[_ngcontent-ng-c3605705329] {
     font-size: 24px;
 }
 ```
-As you can see Angular has a particular scope mechanism because the styles are scoped between components; however they get inherited by their children. Something similar happens in Vue (unlike CSS Modules where the styles are truly scoped). More information in the following table.
-
+As you can see, Angular has a particular scope mechanism: styles are scoped per component, but parent styles can directly target the child's host element (e.g. `app-child { color: red }`) since it receives the parent's scoping attribute. However, parent styles cannot target elements *inside* the child's template (like a `span` or `div` within it), for that you need `::ng-deep`. Something similar happens in Vue (use `:deep()`). CSS Modules avoids this because styles are always tied to explicit class names, never to tag names or inherited attributes. More information in the following table.
 ### CSS Scope comparison
 
----
 | Feature | Angular Scoped | Vue Scoped (`scoped`) | CSS Modules |
 |---|---|---|---|
 | **Mechanism** | Attribute selector (`[_ngcontent-xxx]`) | Attribute selector (`[data-v-xxx]`) | Unique class names (`.title_abc123`) |
-| **Inherited by children** | ✅ Yes | ✅ Yes | ❌ No |
-| **Leaks to children** | ✅ Yes | ✅ Yes (use `:deep()` to control) | ❌ No |
-| **Truly isolated** | ❌ No (leaks to children) | ❌ No (leaks to children) | ✅ Yes |
+| **Leaks to child host element** | ✅ Yes (by tag name) | ✅ Yes (by tag name) | ❌ No |
+| **Leaks into child's internal elements** | ❌ No (use `::ng-deep`) | ❌ No (use `:deep()`) | ❌ No |
+| **Truly isolated** | ❌ No | ❌ No | ✅ Yes |
 | **Requires build step** | ✅ Yes | ✅ Yes | ✅ Yes |
 | **Global styles override** | ✅ Possible | ✅ Possible | ⚠️ Harder |
 | **Class name collisions** | ✅ Avoided | ✅ Avoided | ✅ Avoided |
