@@ -234,6 +234,7 @@ To change state in Angular you modify properties or signals directly in the comp
 </section>
 ```
 ```ts
+@Component({ ... })
 export class User {
   username = 'cosmecín'
   isLoggedIn = signal(false)
@@ -382,7 +383,7 @@ section[_ngcontent-ng-c3605705329] {
     font-size: 24px;
 }
 ```
-As you can see, Angular has a particular scope mechanism: styles are scoped per component, but parent styles can directly target the child's host element (e.g. `app-child { color: red }`) since it receives the parent's scoping attribute. However, parent styles cannot target elements *inside* the child's template (like a `span` or `div` within it), for that you need `::ng-deep`. Something similar happens in Vue (use `:deep()`). CSS Modules avoids this because styles are always tied to explicit class names, never to tag names or inherited attributes. More information in the following table.
+As you can see, Angular has a particular scope mechanism: styles are scoped per component, but parent styles can directly target the child's host element (e.g. `app-child { color: red }`) since it receives the parent's scoping attribute. However, parent styles cannot target elements *inside* the child's template (like a `span` or `div` within it), for that you need `::ng-deep`. *Something similar happens in Vue (use `:deep()`). CSS Modules avoids this because styles are always tied to explicit class names, never to tag names or inherited attributes.* More information in the following table.
 ### CSS Scope comparison
 
 | Feature | Angular Scoped | Vue Scoped (`scoped`) | CSS Modules |
@@ -390,8 +391,7 @@ As you can see, Angular has a particular scope mechanism: styles are scoped per 
 | **Mechanism** | Attribute selector (`[_ngcontent-xxx]`) | Attribute selector (`[data-v-xxx]`) | Unique class names (`.title_abc123`) |
 | **Leaks to child host element** | ✅ Yes (by tag name) | ✅ Yes (by tag name) | ❌ No |
 | **Leaks into child's internal elements** | ❌ No (use `::ng-deep`) | ❌ No (use `:deep()`) | ❌ No |
-| **Truly isolated** | ❌ No | ❌ No | ✅ Yes |
-| **Requires build step** | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Truly isolated** | ❌ No (leaks to child host element) | ❌ No (leaks to child host element) | ✅ Yes |
 | **Global styles override** | ✅ Possible | ✅ Possible | ⚠️ Harder |
 | **Class name collisions** | ✅ Avoided | ✅ Avoided | ✅ Avoided |
 
@@ -419,15 +419,17 @@ section {
 }
 
 app-user-inner {
-  padding-left: 4rem; /* ✅ Leaks to child host  */
+  padding-left: 4rem; /* ✅ it works since angular component styles leak to child host  */
 }
 
 section span {
-  font-size: 4rem; /* ❌ Doesn't leak inside children  */
+  font-size: 4rem; /* ❌ doesn't leak inside children  */
 }
 section ::ng-deep span {
-  font-size: 4rem; /* ✅ It only leak inside children with '::ng-deep'  */
+  font-size: 4rem; /* ✅ it only leaks inside children with '::ng-deep'  */
 }
 ```
 
 > **Note:** `::ng-deep` is technically deprecated, but it remains the standard way to pierce component boundaries in Angular and there's no real replacement yet. Just be intentional with it, keep the selector specific (e.g. prefix it with `section`) to avoid unintentionally styling the whole app.
+
+.
