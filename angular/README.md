@@ -432,4 +432,7 @@ section ::ng-deep span {
 
 > **Note:** `::ng-deep` is technically deprecated, but it remains the standard way to pierce component boundaries in Angular and there's no real replacement yet. Just be intentional with it, keep the selector specific (e.g. prefix it with `section`) to avoid unintentionally styling the whole app.
 
-.
+## Extra: Defer
+`defer` can be used to load things progressively...
+
+<!-- Tengo que ver: subscripción (rxjs), Guards, Routes, Directives (?), services -->
