@@ -8,5 +8,11 @@
   } @else {
     <button (click)="isLoggedIn.set(true)">¡Iniciá sesión!</button>
   }
-  <app-games username="{{ username }}"/>
+  <app-games
+    (addFavoriteEvent)="getFavorite($event)"
+    username="{{ username }}"
+  />
+  @if (favGame !== '') {
+    <p>Tu juego favorito es: {{favGame}}</p>
+  }
 </section>
