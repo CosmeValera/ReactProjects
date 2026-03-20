@@ -469,6 +469,54 @@ section ::ng-deep span {
 > **Note:** `::ng-deep` is technically deprecated, but it remains the standard way to pierce component boundaries in Angular and there's no real replacement yet. Just be intentional with it, keep the selector specific (e.g. prefix it with `section`) to avoid unintentionally styling the whole app.
 
 ## Extra: Defer
-`defer` can be used to load things progressively...
 
-<!-- Tengo que ver: subscripción (rxjs), Guards, Routes, Directives (?), services -->
+`@defer` lazy-loads a part of the template, keeping it out of the initial bundle. Useful for heavy components that aren't immediately needed.
+
+It has three optional blocks:
+- `@placeholder`: shown *before* the deferred content starts loading
+- `@loading`: shown *while* it loads
+- `@error`: shown if loading fails
+
+**Basic example:**
+```html
+@defer {
+  <heavy-component />
+}
+```
+
+**Example with placeholder:**
+```html
+@defer {
+  <heavy-component />
+} @placeholder {
+  <p>Futuros comentarios</p>
+}
+```
+
+**Full example:**
+```html
+@defer (on viewport) {
+  <heavy-component />
+} @placeholder {
+  <p>Scroll down to load...</p>
+} @loading {
+  <p>Loading...</p>
+} @error {
+  <p>Something went wrong.</p>
+}
+```
+
+**Trigger options (`on ...`):**
+
+| Trigger | Loads when... |
+|---|---|
+| `on viewport` | Element enters the viewport |
+| `on interaction` | User clicks or focuses the placeholder |
+| `on hover` | User hovers over the placeholder |
+| `on idle` | Browser is idle |
+| `on timer(2s)` | After a delay |
+| `on immediate` | As soon as possible (no user interaction needed) |
+
+> If no trigger is specified, the default is `on idle`, which means when the CPU has finished working on high priority things.
+
+<!-- Tengo que ver: subscripción (rxjs), Guards, Routes, Directives (?), services, forms -->
