@@ -153,8 +153,8 @@ count.update(v => v + 1); // based on previous value
 
 This is why signals are generally preferred for performance, no unnecessary re-renders, no need for `useMemo`/`useCallback` workarounds. <i>React is solving this differently via the **React Compiler** (auto-memoization), rather than adopting signals.</i>
 
-## Directives (if/else, for)
-**If:**
+## Directives (if/else, for, switch)
+**If** (@If, @else if, @else):
 ```js
 import { Component, signal } from '@angular/core';
 
@@ -177,7 +177,7 @@ export class User {
 ```
 > I'm using signals and properties for variables indiscriminately
 
-**For:**
+**For** (@for):
 ```js
 @Component({
   selector: 'app-user',
@@ -218,6 +218,42 @@ export class User {
     <li>Bloodborne</li>
   </ul>
 </app-games>
+```
+
+**Switch** (@switch, @case):
+```js
+import { Component, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-status',
+  imports: [],
+  template: `
+    @switch (status()) {
+      @case ('loading') {
+        <p>Cargando...</p>
+      }
+      @case ('success') {
+        <p>¡Datos cargados correctamente!</p>
+      }
+      @case ('error') {
+        <p>Ocurrió un error.</p>
+      }
+      @default {
+        <p>Estado desconocido.</p>
+      }
+    }
+  `,
+  styleUrl: './status.css',
+})
+export class Status {
+  status = signal('success')
+}
+```
+```html
+<!-- Result -->
+<app-status _ngcontent-ng-c3605705329="">
+  <p>¡Datos cargados correctamente!</p>
+</app-status>
 ```
 
 ## Change state in Angular
