@@ -543,6 +543,81 @@ It has three optional blocks:
 > If no trigger is specified, the default is `on idle`, which means when the CPU has finished working on high priority things.
 
 ## Routes and Guards
-.
 
-<!-- Tengo que ver: 1. Routes and Guards, 2. Angular lifecycle, 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
+### Routes
+
+Routes map URL paths to components. They are defined in `app.routes.ts` and rendered via `<router-outlet />`:
+```ts
+// app.routes.ts
+export const routes: Routes = [
+  { path: 'login', component: Login },
+  { path: 'user', component: User, canActivate: [authGuard] }, // protected
+  { path: '**', redirectTo: 'login' } // fallback for unknown paths
+];
+```
+```ts
+// app.ts
+@Component({
+  imports: [RouterOutlet, RouterLink],
+  template: `
+    <nav>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/user">User</a>
+    </nav>
+    <router-outlet /> <!-- 👈 renders the matched component here -->
+  `,
+})
+export class App {}
+```
+
+* `RouterOutlet`: placeholder where the matched component renders
+* `RouterLink`: used instead of `href` to navigate without a full page reload
+
+### Guards
+
+Guards protect routes. They run before a route loads and return `true` to allow access or redirect elsewhere if not.
+
+The modern way is a **functional guard** with `CanActivateFn`:
+```ts
+// auth.guard.ts
+export const authGuard: CanActivateFn = () => {
+  const authService = inject(AuthService)
+  const router = inject(Router)
+
+  if (authService.isLoggedIn()) {
+    return true
+  }
+
+  return router.parseUrl('/login') // redirect if not logged in
+
+  // return false; // When a guard returns false, Angular just cancels the navigation entirely. It's almost always better to redirect instead of 'return false'.
+}
+```
+```ts
+// auth.service.ts
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  isLoggedIn = signal(false)
+
+  login() { this.isLoggedIn.set(true) }
+  logout() { this.isLoggedIn.set(false) }
+}
+```
+
+Then attach the guard to a route with `canActivate`:
+```ts
+{ path: 'user', component: User, canActivate: [authGuard] }
+```
+
+**Other guard types:**
+
+| Guard | Runs when... |
+|---|---|
+| `canActivate` | Before entering a route |
+| `canDeactivate` | Before leaving a route (e.g. unsaved changes warning) |
+| `canActivateChild` | Before entering a child route |
+| `canMatch` | Before even matching the route |
+
+> The React equivalent of routing is **React Router**, and there is no built-in guard system. Route protection is typically done manually inside components or with wrapper components like `<PrivateRoute />`.
+
+<!-- Tengo que ver: ✅ 1. Routes and Guards, 2. Angular lifecycle, 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
