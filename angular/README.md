@@ -474,16 +474,14 @@ section ::ng-deep span {
 ```ts
 @Injectable({ providedIn: 'root' }) // 👈 one instance for the whole app
 export class GameService {
-  private games = signal([...])
-
-  getGames() { return this.games() }
+  games = signal([...])
 }
 ```
 ```ts
 // Angular injects it in a component automatically
 export class GameList {
   private gameService = inject(GameService)
-  games = this.gameService.getGames()
+  games = this.gameService.games()
 }
 ```
 

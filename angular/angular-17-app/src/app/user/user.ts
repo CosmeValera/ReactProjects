@@ -17,6 +17,6 @@ export class User {
   }
 
   greet() {
-    alert("hola" + this.username)
+    alert("hola " + this.username)
   }
 }
