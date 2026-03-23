@@ -468,6 +468,31 @@ section ::ng-deep span {
 
 > **Note:** `::ng-deep` is technically deprecated, but it remains the standard way to pierce component boundaries in Angular and there's no real replacement yet. Just be intentional with it, keep the selector specific (e.g. prefix it with `section`) to avoid unintentionally styling the whole app.
 
+## Services
+
+**Angular Services** are a first-class, built-in feature. You create a class decorated with `@Injectable` and Angular's **Dependency Injection (DI)** system handles instantiation and sharing for you:
+```ts
+@Injectable({ providedIn: 'root' }) // 👈 one instance for the whole app
+export class GameService {
+  private games = signal([...])
+
+  getGames() { return this.games() }
+}
+```
+```ts
+// Angular injects it in a component automatically
+export class GameList {
+  private gameService = inject(GameService)
+  games = this.gameService.getGames()
+}
+```
+
+`providedIn: 'root'` makes the service a singleton across the whole app. Angular also lets you scope a service to a specific component subtree.
+
+> *React has no built-in equivalent.* People approximate services using different tools depending on what the service is *for*. The key difference is *DI vs manual wiring*:
+> * Angular *provides* and *injects* services automatically. Components just declare what they need.
+> * React components must *explicitly import* and consume whatever they use (like using Zustand or Redux for shared state, React Query for server data, etc).
+
 ## Extra: Defer
 
 `@defer` lazy-loads a part of the template, keeping it out of the initial bundle. Useful for heavy components that aren't immediately needed.
@@ -519,4 +544,4 @@ It has three optional blocks:
 
 > If no trigger is specified, the default is `on idle`, which means when the CPU has finished working on high priority things.
 
-<!-- Tengo que ver: subscripción (rxjs), Guards, Routes, Directives (?), services, forms -->
+<!-- Tengo que ver: 1. Routes and Guards, 2. Angular lifecycle, 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
