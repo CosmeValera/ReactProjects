@@ -1,16 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { User } from './user/user'
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, User],
+  imports: [RouterOutlet, RouterLink],
   template: `
-    <app-user />
+    <nav>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/user">User</a>
+    </nav>
+    <router-outlet></router-outlet> <!-- 👈 renders the matched component here -->
   `,
-  styles: `h1 {color: green}`
+  styles: `
+    h1 { color: green; }
+    a { padding: 2rem; }
+  `
 })
-export class App {
-  city = "Murcia";
-  appName = signal('angular-17-app');
-}
+export class App { }

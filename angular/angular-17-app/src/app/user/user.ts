@@ -9,7 +9,7 @@ import { Games } from "../games/games";
 })
 export class User {
   username = 'cosmecín'
-  isLoggedIn = signal(false)
+  isLoggedIn = signal(true)
   favGame = '';
 
   getFavorite(gameName: string) {
