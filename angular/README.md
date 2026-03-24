@@ -902,7 +902,47 @@ imports: [HighlightDirective]
 
 Good use cases: tooltips, click-outside detection, auto-focus, permission-based visibility; anything that is reusable DOM behavior that doesn't belong in a component.
 
-## Signals: computed() and effect()
+## Angular versions: highlights from 16 onwards
+
+**Angular 16 (May 2023)**
+* `signal()`, `computed()`, `effect()` introduced as developer preview
+* Required inputs: `@Input({ required: true })`
+* `DestroyRef`: cleaner alternative to `ngOnDestroy` for teardown logic
+
+**Angular 17 (Nov 2023)**
+* New control flow syntax: `@if`, `@for`, `@switch` replace `*ngIf`, `*ngFor` etc
+* `@defer` for lazy loading template blocks
+* New application builder based on esbuild + Vite (much faster builds)
+* Signals moved closer to stable
+
+**Angular 18 (May 2024)**
+* `input()`, `output()`, `viewChild()` signal-based APIs now stable — modern replacement for `@Input()`, `@Output()`, `@ViewChild()`
+* Zoneless change detection (experimental) — Angular starts moving away from zone.js
+* `@let` template variable: `@let total = price() * tax()`
+
+**Angular 19 (Nov 2024)**
+* Zoneless change detection promoted, `provideExperimentalZonelessChangeDetection()` available
+* `linkedSignal()`: a writable signal that resets when a source signal changes
+* `resource()` API: declarative async data loading with signals
+* Standalone components are now the default (no more `NgModule` needed at all)
+* Incremental hydration for SSR
+
+**Angular 20 (May 2025)**
+* `effect()` no longer requires being inside a constructor, can be called anywhere
+* `httpResource()`: signal-based HTTP fetching, combining `HttpClient` with the `resource()` API
+* Improved SSR and hydration stability
+* Continued zoneless improvements
+
+**Angular 21 (Nov 2025)**
+* **Zoneless by default:** new projects no longer include zone.js at all, zoneless is now the standard
+* **Signal Forms (experimental):** a new forms API built entirely on signals, meant to eventually replace both template-driven and reactive forms. Simpler, no `valueChanges` subscriptions needed
+* **Vitest as default test runner:** replaces Karma/Jasmine, significantly faster especially in large projects
+* **MCP Server (`ng mcp`):** Angular's CLI now exposes tools for AI agents: `get_best_practices`, `search_documentation`, `ai_tutor`, `modernize` (helps migrate old code to modern Angular), etc
+* **Angular Aria (developer preview):** headless accessible components (accordions, tabs, menus, etc.) with ARIA, keyboard navigation and focus management built in. You bring the CSS
+
+> The overall direction since v16 is clear: **signals replacing zone.js**, **standalone replacing NgModules**, and **functional APIs replacing class decorators**. Each release moves further in that direction.
+> 
+### Signals: computed() and effect()
 
 These two are natural extensions of `signal()`, introduced in Angular 16.
 
@@ -934,4 +974,101 @@ The React equivalent is `useEffect`, again without the dependency array.
 
 > `effect()` is best for things like logging, syncing to localStorage, or analytics. For updating other signals inside an effect, prefer `computed()` instead, it's more declarative and performant.
 
-<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, ✅ 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), ✅ 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), ✅ 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
+### ViewChild and ViewChildren
+
+While `@Input` and `@Output` are for passing data between components, `@ViewChild` and `@ViewChildren` let the parent **directly access** a child component instance or DOM element from the class:
+
+**`@ViewChild`:** grabs a single element or component:
+```ts
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+
+@Component({
+  template: `<input #myInput placeholder="Focus me" />`,
+})
+export class MyComponent implements AfterViewInit {
+  @ViewChild('myInput') inputRef!: ElementRef
+
+  ngAfterViewInit() {
+    this.inputRef.nativeElement.focus() // 👈 direct DOM access
+  }
+}
+```
+
+You can also grab a child component and call its methods directly:
+```ts
+@ViewChild(GamesComponent) gamesComponent!: GamesComponent
+
+ngAfterViewInit() {
+  this.gamesComponent.reload() // 👈 call a method on the child
+}
+```
+
+**`@ViewChildren`:** grabs multiple elements as a `QueryList`:
+```ts
+import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
+
+@Component({
+  template: `
+    @for (game of games; track game.id) {
+      <p #gameItem>{{ game.name }}</p>
+    }
+  `,
+})
+export class GamesComponent {
+  @ViewChildren('gameItem') items!: QueryList<ElementRef>
+
+  logAll() {
+    this.items.forEach(item => console.log(item.nativeElement.textContent))
+  }
+}
+```
+
+> Both are only available after `ngAfterViewInit`, the DOM doesn't exist before that. Use them sparingly; reaching into children directly can make components harder to maintain.
+
+**Modern signal-based equivalents (Angular 18+):**
+```ts
+// instead of @ViewChild
+myInput = viewChild<ElementRef>('myInput')
+
+// instead of @ViewChildren
+gameItems = viewChildren<ElementRef>('gameItem')
+```
+
+### Modern input() and output()
+
+Angular 17.1+ introduced signal-based `input()` and `output()` as a cleaner alternative to `@Input()` and `@Output()` decorators:
+
+**`input()`:** replaces `@Input()`:
+```ts
+// Old way
+@Input() username = ''
+@Input({ required: true }) userId!: string
+
+// New way
+username = input('')               // optional with default
+userId = input.required<string>()  // required, no default needed
+```
+
+The key difference: `input()` returns a **signal**, so you read it with `username()` in both the template and the class:
+```ts
+export class GamesComponent {
+  username = input('')
+
+  ngOnInit() {
+    console.log(this.username()) // 👈 read like a signal
+  }
+}
+```
+
+**`output()`:** replaces `@Output()` + `EventEmitter`:
+```ts
+// Old way
+@Output() gamePicked = new EventEmitter<string>()
+this.gamePicked.emit(name)
+
+// New way
+gamePicked = output<string>()
+this.gamePicked.emit(name) // same emit API, just no EventEmitter needed
+```
+
+> Both the old decorator style and new functional style coexist and work fine. The new style is preferred for new code since it's more consistent with the signals model and more explicit about types.
