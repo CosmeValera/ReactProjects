@@ -18,6 +18,7 @@ Certificates expire after ~90 days (Let's Encrypt's choice) because:
 
 This is considered better than having eternal certificates that assume humans are reliable (revocation exists but is unreliable in practice).
 
+<!-- // Explicar aquí la parte de la encruptacion (minuto 2-4 o así del vídeo https://www.youtube.com/watch?v=D7ijCjE31GA) -->
 
 ## Cert Manager
 
@@ -39,3 +40,9 @@ annotations:
   cert-manager.io/cluster-issuer: "letsencrypt-prod"
 ```
 `cert-manager` gets the cert, stores it in a Secret, and renews it automatically before expiry.
+
+<!-- // Oye que buen vídeo este con Kubernetes, Let's Encrypt y cert-manager-> https://www.youtube.com/watch?v=D7ijCjE31GA -->
+
+
+## Resources:
+- https://www.youtube.com/watch?v=D7ijCjE31GA (18 min video -> k8s, Let's Encrypt, cert-manager)
