@@ -793,7 +793,115 @@ Key difference vs a regular Observable: BehaviorSubject always has a value, and 
 
 > RxJS has a huge API surface (`switchMap`, `mergeMap`, `debounceTime`, `combineLatest`, etc). For most Angular use cases you only need the basics above. It's a whole rabbit hole.
 
+## Forms and Directives
+
+### Forms
+
+Angular has two approaches to forms:
+
+**Template-driven (via `ngModel`):** simple, less boilerplate, good for basic forms. Import `FormsModule`:
+```ts
+imports: [FormsModule]
+```
+```html
+<input [(ngModel)]="username" placeholder="Enter username" />
+<p>Hello, {{ username }}</p>
+```
+`[(ngModel)]` is two-way binding: the input updates the variable and the variable updates the input.
+
+**Reactive forms:** more powerful, validation-friendly, better for complex forms. Import `ReactiveFormsModule`:
+```ts
+imports: [ReactiveFormsModule]
+
+form = new FormBuilder().group({
+  email: ['', [Validators.required, Validators.email]],
+  password: ['', [Validators.required, Validators.minLength(6)]]
+})
+
+onSubmit() {
+  if (this.form.valid) console.log(this.form.value)
+}
+```
+```html
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="email" placeholder="Email" />
+
+  @if (form.get('email')?.invalid && form.get('email')?.touched) {
+    <p>Valid email is required</p>
+  }
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
+```
+
+**Which to use:**
+
+| | Template-driven | Reactive |
+|---|---|---|
+| Setup | `FormsModule` | `ReactiveFormsModule` |
+| Form logic lives in | Template | Component class |
+| Validation | HTML attributes | `Validators` array |
+| Good for | Simple forms | Complex forms, dynamic fields |
+
+### Directives
+
+Directives add behavior or modify the appearance of existing elements without changing the DOM structure. Angular ships with several built-in ones, the most commonly used are `ngModel`, `ngClass` and `ngStyle`:
+
+
+**`ngClass`:** conditionally adds/removes CSS classes:
+```html
+<p [ngClass]="{ active: isActive(), highlight: isActive() }">Hello</p>
+```
+```ts
+// Import in component
+imports: [NgClass]
+```
+
+**`ngStyle`:** applies inline styles dynamically:
+```html
+<p [ngStyle]="{ color: isRed() ? 'red' : 'blue', fontSize: '1.2rem' }">Hello</p>
+```
+```ts
+imports: [NgStyle]
+```
+
+> Prefer `ngClass` over `ngStyle` when possible. Keeping styles in CSS classes is cleaner and easier to maintain than inline styles.
+
+**What about `*ngIf` and `*ngFor`?** They still work but are now discouraged in favour of `@if` and `@for` (introduced in Angular 17). The new syntax is cleaner, requires no imports, and has better performance:
+```html
+<!-- Old way (still works) -->
+<p *ngIf="isLoggedIn">Bienvenido</p>
+<li *ngFor="let game of games">{{ game.name }}</li>
+
+<!-- New way (preferred) -->
+@if (isLoggedIn) {
+  <p>Bienvenido</p>
+}
+@for (game of games; track game.id) {
+  <li>{{ game.name }}</li>
+}
+```
+
+**Custom directives:** you can also build your own with `ng g directive` to encapsulate reusable DOM behavior:
+```ts
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(private el: ElementRef) {
+    el.nativeElement.style.backgroundColor = 'yellow'
+  }
+}
+```
+```html
+<p appHighlight>This will have a yellow background</p>
+```
+```ts
+imports: [HighlightDirective]
+```
+
+Good use cases: tooltips, click-outside detection, auto-focus, permission-based visibility; anything that is reusable DOM behavior that doesn't belong in a component.
 
 
 
-<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, ✅ 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
+<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, ✅ 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), ✅ 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
