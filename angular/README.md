@@ -620,4 +620,72 @@ Then attach the guard to a route with `canActivate`:
 
 > The React equivalent of routing is **React Router**, and there is no built-in guard system. Route protection is typically done manually inside components or with wrapper components like `<PrivateRoute />`.
 
-<!-- Tengo que ver: ✅ 1. Routes and Guards, 2. Angular lifecycle, 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
+## Lifecycle Hooks
+
+> **TL:DR;** Important hooks in order:
+> 
+> | Hook | When it runs |
+> |---|---|
+> | `ngOnChanges` | Before `ngOnInit`, and on every `@Input()` change |
+> | `ngOnInit` | Once, after first `ngOnChanges` |
+> | `ngAfterContentInit` | Once, after projected content (`ng-content`) is initialized |
+> | `ngAfterViewInit` | Once, after the component's template is rendered |
+> | `ngOnDestroy` | Just before the component is destroyed |
+> 
+> See all hooks here: https://angular.dev/guide/components/lifecycle
+
+<img src="./image/1.png" width="450px"></img>
+
+Angular calls lifecycle hooks at specific moments of a component's life. To access them implement the desired interfaces and add the methods:
+```ts
+export class Games implements OnInit, OnDestroy {
+  ngOnInit() { ... }
+  ngOnDestroy() { ... }
+}
+```
+
+**The most used hooks:**
+
+**`ngOnInit`:** runs once after the component is initialized and inputs are set. The go-to place for initial data fetching:
+```ts
+ngOnInit() {
+  console.log('component ready, username:', this.username)
+}
+```
+
+**`ngOnChanges`:** runs every time an `@Input()` value changes. Receives a `SimpleChanges` object with previous and current values:
+```ts
+ngOnChanges(changes: SimpleChanges) {
+  console.log('previous:', changes.username.previousValue)
+  console.log('current:', changes.username.currentValue)
+}
+```
+
+Example `lifecycleUsername: SimpleChange`: 
+```json
+{
+    "lifecycleUsername": {
+        "previousValue": "lifecycle-cosme",
+        "currentValue": "lifecycle-cosm",
+        "firstChange": false
+    }
+}
+```
+
+**`ngAfterViewInit`:** runs once after the template is fully rendered. Useful when you need to access the DOM:
+```ts
+ngAfterViewInit() {
+  console.log('DOM is ready')
+}
+```
+
+**`ngOnDestroy`:** runs just before the component is removed from the DOM. The right place to clean up (unsubscribe, clear timers, etc):
+```ts
+ngOnDestroy() {
+  clearInterval(this.timer)
+  this.subscription.unsubscribe()
+}
+```
+
+
+<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->

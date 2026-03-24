@@ -8,6 +8,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
     <nav>
       <a routerLink="/login">Login</a>
       <a routerLink="/user">User</a>
+      <a routerLink="/lifecycle">Lifecycle</a>
     </nav>
     <router-outlet></router-outlet> <!-- 👈 renders the matched component here -->
   `,
