@@ -5,6 +5,7 @@ import { Lifecycle } from './lifecycle/lifecycle';
 import { RxjsDemo } from './rxjs-demo/rxjs-demo';
 import { FormsDemo } from './forms-demo/forms-demo';
 import { SignalsDemo } from './signals-demo/signals-demo';
+import { ViewchildDemo } from './viewchild-demo/viewchild-demo';
 import { authGuard } from './auth-guard'
 
 export const routes: Routes = [
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'rxjs', component: RxjsDemo},
   { path: 'forms', component: FormsDemo },
   { path: 'signals', component: SignalsDemo },
+  { path: 'viewchild', component: ViewchildDemo },
   { path: '**', redirectTo: 'login'} // fallback
 ];
