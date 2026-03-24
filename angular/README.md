@@ -687,5 +687,113 @@ ngOnDestroy() {
 }
 ```
 
+## RxJS and Subscriptions
 
-<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
+RxJS is a library for handling async data streams. Angular uses it internally (HTTP calls, forms, router events, etc) and exposes it through **Observables**.
+
+**Observable vs Promise:**
+
+| | Promise | Observable |
+|---|---|---|
+| Emits | Once | Multiple times over time |
+| Lazy | No (runs immediately) | Yes (only runs when subscribed) |
+| Cancellable | No | Yes (unsubscribe) |
+| Angular usage | One-off async tasks | Streams, HTTP, events |
+
+**Creating an Observable in a service:**
+```ts
+import { Observable, interval, map } from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class NotificationService {
+  getNotifications(): Observable<string> {
+    return interval(2000).pipe(
+      map(n => `Notification #${n + 1}`)
+    )
+  }
+}
+```
+
+**Consuming it: two approaches:**
+
+**1. Manual `subscribe()`:** you control when to start and stop:
+```ts
+export class RxjsDemo implements OnInit, OnDestroy {
+  private subscription!: Subscription
+
+  ngOnInit() {
+    this.subscription = this.notificationService.getNotifications()
+      .subscribe(value => console.log(value))
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe() // ⚠️ forgetting this causes a memory leak
+  }
+}
+```
+
+**2. `async` pipe (recommended):** the template subscribes and unsubscribes automatically:
+```ts
+// component
+notifications$ = this.notificationService.getNotifications()
+```
+```html
+<!-- template -->
+<p>{{ notifications$ | async }}</p>
+```
+
+Prefer the `async` pipe whenever possible. It's less code and memory leaks are impossible since Angular handles cleanup when the component is destroyed.
+
+
+### Extra: `BehaviorSubject`
+`BehaviorSubject` is an Observable that holds a current value and lets you push new ones. Useful for shared state across components, like a lightweight store:
+```ts
+// service
+@Injectable({ providedIn: 'root' })
+export class CartService {
+  private cart$ = new BehaviorSubject([])
+
+  cart = this.cart$.asObservable() // 👈 expose as read-only
+
+  addItem(item: string) {
+    const current = this.cart$.getValue()
+    this.cart$.next([...current, item]) // 👈 push new state
+  }
+}
+```
+```ts
+import ...;
+
+@Component({
+  selector: 'app-rxjs-demo',
+  imports: [AsyncPipe, JsonPipe],
+  template: `
+    <p>Cart items: {{ cart$ | async | json }}</p>
+    <button (click)="addToCart('Uncharted 4')">Add Uncharted 4</button>
+    <button (click)="addToCart('Bloodborne')">Add Bloodborne</button>
+    <button (click)="clearCart()">Clear</button>
+  `,
+})
+export class RxjsDemo implements OnInit {
+  private cartService = inject(Cart)
+
+  cart$ = this.cartService.cart
+
+  addToCart(item: string) {
+    this.cartService.addItem(item)
+  }
+  clearCart() {
+    this.cartService.clear()
+  }
+}
+
+```
+
+Key difference vs a regular Observable: BehaviorSubject always has a value, and any new subscriber gets the latest one immediately.
+
+> RxJS has a huge API surface (`switchMap`, `mergeMap`, `debounceTime`, `combineLatest`, etc). For most Angular use cases you only need the basics above. It's a whole rabbit hole.
+
+
+
+
+<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, ✅ 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->

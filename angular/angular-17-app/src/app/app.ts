@@ -9,6 +9,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
       <a routerLink="/login">Login</a>
       <a routerLink="/user">User</a>
       <a routerLink="/lifecycle">Lifecycle</a>
+      <a routerLink="/rxjs">Rxjs</a>
     </nav>
     <router-outlet></router-outlet> <!-- 👈 renders the matched component here -->
   `,
