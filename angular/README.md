@@ -902,6 +902,36 @@ imports: [HighlightDirective]
 
 Good use cases: tooltips, click-outside detection, auto-focus, permission-based visibility; anything that is reusable DOM behavior that doesn't belong in a component.
 
+## Signals: computed() and effect()
 
+These two are natural extensions of `signal()`, introduced in Angular 16.
 
-<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, ✅ 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), ✅ 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->
+**`computed()`:** a signal that derives its value from other signals. Recalculates automatically when any dependency changes, no manual tracking needed:
+```ts
+price = signal(100)
+tax = signal(0.21)
+
+total = computed(() => this.price() * (1 + this.tax()))
+// 👆 updates automatically when price or tax change
+```
+```html
+<p>Total: {{ total() }}</p>
+```
+The React equivalent is `useMemo`, but without the manual dependency array. Angular figures out the dependencies by seeing which signals are read inside the function.
+
+**`effect()`:** runs a side effect whenever the signals it reads change. Must be called inside the constructor:
+```ts
+status = signal('idle')
+
+constructor() {
+  effect(() => {
+    console.log('Status changed:', this.status())
+    localStorage.setItem('status', this.status())
+  })
+}
+```
+The React equivalent is `useEffect`, again without the dependency array.
+
+> `effect()` is best for things like logging, syncing to localStorage, or analytics. For updating other signals inside an effect, prefer `computed()` instead, it's more declarative and performant.
+
+<!-- Tengo que ver: ✅ 1. Routes and Guards, ✅ 2. Angular lifecycle, ✅ 3. subscripción (rxjs) (esto meter después de los services quizás), (Observable vs Promise, subscribe() and async pipe. Keep it short, it can be a rabbit hole), ✅ 4. forms y Directives (ngModel for forms, ngClass, ngStyle. ngIf, ngFor, etc siguen existiendo pero se favorece @if y @for), ✅ 5. además de signal() -> computed() y effect() (como useMemo y useEffect respectivamente). -->

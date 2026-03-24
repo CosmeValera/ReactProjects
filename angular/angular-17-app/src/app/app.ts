@@ -11,6 +11,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
       <a routerLink="/lifecycle">Lifecycle</a>
       <a routerLink="/rxjs">Rxjs</a>
       <a routerLink="/forms">Forms</a>
+      <a routerLink="/signals">SignalsDemo</a>
     </nav>
     <router-outlet></router-outlet> <!-- 👈 renders the matched component here -->
   `,
