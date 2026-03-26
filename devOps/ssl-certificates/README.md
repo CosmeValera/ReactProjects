@@ -79,5 +79,96 @@ annotations:
 ```
 `cert-manager` gets the cert, stores it in a Secret, and renews it automatically before expiry.
 
+## Local commands for HTTPS configuration (no k8s)
+You can either do 2a to have self-signed certificates (not safe for prod), or 2b+2c to practice creating your localhost CA (more similar to what will happen with K8s).
+
+> ⚠️ **Windows (Git Bash) users:** prefix every `openssl` command that uses `-subj` with `MSYS_NO_PATHCONV=1` to avoid path conversion issues.
+
+### 2a. Self-signed certificate (quickest, browser warns you)
+```bash
+mkdir -p ssl-demo/certs && cd ssl-demo/certs
+
+# Generate a private key
+openssl genrsa -out server.key 2048
+
+# Generate a self-signed certificate (valid 365 days)
+openssl req -new -x509 -key server.key -out server.crt -days 365 \
+  -subj "/C=ES/ST=Madrid/L=Madrid/O=Dev/CN=localhost"
+```
+
+- `server.key` → private key (keep secret, never commit)
+- `server.crt` → certificate (public, sent to browsers)
+
+> The browser will show a security warning because the server is signing its own certificate, there's no third party vouching for it.
+
+---
+
+### 2b. Local CA + signed certificate (browser trusts it, recommended)
+
+This mirrors exactly what cert-manager does in Kubernetes, just manually. You create your own CA, sign the server cert with it, and then tell your OS to trust that CA.
+```bash
+mkdir -p ssl-demo/certs && cd ssl-demo/certs
+
+# Step 1: Create your own CA (Certificate Authority)
+# Generate CA private key
+openssl genrsa -out ca.key 4096
+
+# Generate CA certificate (self-signed — this is the "root" you'll trust)
+openssl req -new -x509 -key ca.key -out ca.crt -days 3650 \
+  -subj "/C=ES/ST=Madrid/O=MyLocalCA/CN=MyLocalCA"
+
+# Step 2: Create the server key and a Certificate Signing Request (CSR)
+openssl genrsa -out server.key 2048
+
+# The CSR says "I am localhost, please sign my public key"
+openssl req -new -key server.key -out server.csr \
+  -subj "/C=ES/ST=Madrid/O=Dev/CN=localhost"
+
+# Step 3: Create an extensions file (needed for modern browsers — SAN required)
+cat > server.ext << EOF
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = localhost
+IP.1 = 127.0.0.1
+EOF
+
+# Step 4: Sign the CSR with your CA → produces the server certificate
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \
+  -CAcreateserial -out server.crt -days 365 -extfile server.ext
+```
+
+- `ca.key` → CA private key (keep very safe, never commit)
+- `ca.crt` → CA certificate (this is what you import into your OS in step 2c)
+- `server.key` → server private key
+- `server.crt` → server certificate, signed by your CA
+
+### 2c. Trust the CA in your OS (removes the browser warning)
+
+**macOS:**
+```bash
+sudo security add-trusted-cert -d -r trustRoot \
+  -k /Library/Keychains/System.keychain certs/ca.crt
+```
+
+**Linux (Debian/Ubuntu):**
+```bash
+sudo cp certs/ca.crt /usr/local/share/ca-certificates/myca.crt
+sudo update-ca-certificates
+```
+
+**Windows (PowerShell as Admin):**
+```powershell
+Import-Certificate -FilePath "certs\ca.crt" -CertStoreLocation Cert:\LocalMachine\Root
+```
+
+After this, your browser will show a valid padlock for `https://localhost`, no warning. This is exactly what Let's Encrypt does at scale, except their CA is already pre-trusted by every browser in the world, so step 2c is not needed.
+
+## K8s + cert-manager
+.
+
 ## Resources:
 - https://www.youtube.com/watch?v=D7ijCjE31GA (18 min video -> k8s, Let's Encrypt, cert-manager)
