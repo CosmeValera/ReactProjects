@@ -1,16 +1,16 @@
-import https from 'https';
 import http from 'http';
-import fs from 'fs';
-import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import { initDB, Todo } from './db';
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: 'https://localhost:5173' }));  // Vite dev server
+// In k8s, the frontend and backend are on the same domain via Ingress
+// so no CORS headers needed — but keep them for local dev
+app.use(cors());
 
-// ── Routes ──────────────────────────────────────────────────────────────────
+// health check endpoint (important for k8s liveness/readiness probes)
+app.get('/healthz', (_req, res) => res.json({ status: 'ok' }));
 
 app.get('/api/todos', async (_req, res) => {
   const todos = await Todo.findAll();
@@ -38,35 +38,10 @@ app.delete('/api/todos/:id', async (req, res) => {
   res.status(204).send();
 });
 
-// ── TLS setup ────────────────────────────────────────────────────────────────
-
-async function startServer() {
+async function start() {
   await initDB();
-
-  const certsDir = path.join(__dirname, '..', '..', 'certs');
-
-  // Load certificate + private key
-  const tlsOptions = {
-    key:  fs.readFileSync(path.join(certsDir, 'server.key')),
-    cert: fs.readFileSync(path.join(certsDir, 'server.crt')),
-    // If using a CA chain (optional for clients to verify):
-    // ca: fs.readFileSync(path.join(certsDir, 'ca.crt')),
-  };
-
-  // HTTPS server on 3443
-  const httpsServer = https.createServer(tlsOptions, app);
-  httpsServer.listen(3443, () => {
-    console.log('🔒 HTTPS server running at https://localhost:3443');
-  });
-
-  // Optional: HTTP → HTTPS redirect on 3080
-  const httpApp = express();
-  httpApp.use((req, res) => {
-    res.redirect(301, `https://${req.hostname}:3443${req.url}`);
-  });
-  http.createServer(httpApp).listen(3080, () => {
-    console.log('↪️  HTTP redirect running at http://localhost:3080');
+  http.createServer(app).listen(3000, () => {
+    console.log('Backend listening on http://0.0.0.0:3000');
   });
 }
-
-startServer().catch(console.error);
+start().catch(console.error);

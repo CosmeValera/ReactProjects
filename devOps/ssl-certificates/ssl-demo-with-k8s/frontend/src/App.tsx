@@ -6,7 +6,9 @@ interface Todo {
   done: boolean
 }
 
-const API = 'https://localhost:3443/api'
+// Before (Part 1): const API = 'https://localhost:3443/api'
+// After  (Part 2): relative path — works behind any Ingress
+const API = '/api'
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
