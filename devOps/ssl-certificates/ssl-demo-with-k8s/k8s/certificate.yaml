@@ -1,0 +1,17 @@
+# k8s/certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: todo-tls
+  namespace: todo-app
+spec:
+  secretName: todo-tls-secret      # cert-manager will CREATE this Secret
+  duration: 2160h                  # 90 days
+  renewBefore: 360h                # renew 15 days before expiry (auto!)
+  
+  issuerRef:
+    name: my-ca-issuer             # use our CA (or selfsigned-issuer)
+    kind: ClusterIssuer
+  
+  dnsNames:
+    - todo.local                   # the domain this cert is valid for

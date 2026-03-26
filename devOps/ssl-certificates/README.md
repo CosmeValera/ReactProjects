@@ -56,7 +56,7 @@ Encryption alone doesn't confirm *who* you're talking to. That's where **certifi
 
 ## Cert Manager
 
-`cert-manager` is a Kubernetes add-on (installed via Helm) that **automatically creates, manages, and renews SSL certificates** for your apps. Equivalent to Certbot on a normal server, but for K8s.
+`cert-manager` is a Kubernetes engine (installed via Helm) that **automatically creates, manages, and renews SSL certificates** for your apps.
 
 It works with three concepts:
 
@@ -177,7 +177,246 @@ After this, your browser will show a valid padlock for `https://localhost`, no w
 > | You trust `ca.crt` in your OS | In k8s with a private CA, cert-manager trusts its own `Issuer` |
 
 ## K8s + cert-manager
-.
+
+**Enable an ingress controller for reverse proxy**
+```sh
+# minikube ships nginx ingress as an addon — easiest way
+minikube addons enable ingress
+
+# Wait for it to be ready
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=120s
+
+kubectl get pods -n ingress-nginx
+# ingress-nginx-controller-xxxx   1/1   Running
+```
+
+
+**Install cert-manager**
+```sh
+# Add the cert-manager Helm repo
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+
+# Install cert-manager — the CRDs flag is crucial
+# CRDs = CustomResourceDefinitions (Certificate, Issuer, ClusterIssuer, etc.)
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --set installCRDs=true \
+  --wait \
+  --timeout 5m
+
+# Wait for cert-manager to be ready
+kubectl wait --namespace cert-manager \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/instance=cert-manager \
+  --timeout=120s
+
+kubectl get pods -n cert-manager
+# cert-manager-xxxx                  1/1   Running
+# cert-manager-cainjector-xxxx       1/1   Running
+# cert-manager-webhook-xxxx          1/1   Running
+```
+
+**Create issuer (ClusterIssuer):**
+
+Option 1 (self-signed):
+```yaml
+# k8s/issuer-selfsigned.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}   # that's it — no CA needed
+```
+```sh
+kubectl apply -f k8s/issuer-selfsigned.yaml
+kubectl get clusterissuer
+# NAME                READY   AGE
+# selfsigned-issuer   True    5s
+```
+
+Option 2 (CA Issuer):
+
+```sh
+# Import your Part 1 CA into a k8s Secret
+kubectl create secret tls my-ca-secret \
+  --namespace cert-manager \
+  --cert=certs/ca.crt \
+  --key=certs/ca.key
+```
+
+```yaml
+# k8s/issuer-ca.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: my-ca-issuer
+spec:
+  ca:
+    secretName: my-ca-secret   # cert-manager reads the CA from this Secret
+```
+
+```sh
+kubectl apply -f k8s/issuer-ca.yaml
+kubectl get clusterissuer
+# NAME            READY   AGE
+# my-ca-issuer    True    5s
+```
+
+> The connection to Part 1: `my-ca-issuer` is doing programmatically exactly what you did with `openssl x509 -req -CA ca.crt -CAkey ca.key`, it signs new CSRs using your CA's private key.
+
+**Create a Certificate resource**
+```yaml
+# k8s/certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: todo-tls
+  namespace: todo-app
+spec:
+  secretName: todo-tls-secret      # cert-manager will CREATE this Secret
+  duration: 2160h                  # 90 days
+  renewBefore: 360h                # renew 15 days before expiry (auto!)
+  
+  issuerRef:
+    name: my-ca-issuer             # use our CA (or selfsigned-issuer)
+    kind: ClusterIssuer
+  
+  dnsNames:
+    - todo.local                   # the domain this cert is valid for
+```
+```sh
+kubectl apply -f k8s/certificate.yaml
+
+# Watch cert-manager work
+kubectl get certificate -n todo-app
+# NAME       READY   SECRET            AGE
+# todo-tls   True    todo-tls-secret   10s
+
+# Look at the Secret cert-manager created
+kubectl get secret todo-tls-secret -n todo-app
+# NAME               TYPE                DATA
+# todo-tls-secret    kubernetes.io/tls   2       ← tls.crt and tls.key
+```
+
+Inspect the flow with:
+```sh
+# See the intermediate CertificateRequest (like the CSR in Part 1)
+kubectl get certificaterequest -n todo-app
+
+# Describe the Certificate for detailed status + events
+kubectl describe certificate todo-tls -n todo-app
+```
+
+**Create Ingress with TLS**
+```yaml
+# k8s/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-ingress
+  namespace: todo-app
+  annotations:
+    # Tell nginx to redirect HTTP → HTTPS automatically
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    
+    # Optional: if using cert-manager to manage the cert via Ingress annotations
+    # instead of a separate Certificate resource (see note below)
+    # cert-manager.io/cluster-issuer: my-ca-issuer
+
+spec:
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - todo.local
+      secretName: todo-tls-secret    # the Secret cert-manager filled in
+
+  rules:
+    - host: todo.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 3000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 80
+```
+
+```sh
+kubectl apply -f k8s/ingress.yaml
+
+kubectl get ingress -n todo-app
+# NAME           CLASS   HOSTS        ADDRESS        PORTS     AGE
+# todo-ingress   nginx   todo.local   192.168.49.2   80, 443   5s
+```
+
+> **Bonus — the annotation shortcut:** Instead of creating a `Certificate` resource separately, you can add the annotation `cert-manager.io/cluster-issuer: my-ca-issuer` directly to the Ingress. cert-manager will detect the Ingress, automatically create a `Certificate` and fill in the Secret. The explicit `Certificate` resource gives you more control; the annotation is the quick path.
+
+**Access the App:**
+
+Step 1, let's check the ingress and certificate:
+```sh
+kubectl get ingress -n todo-app
+kubectl get certificate -n todo-app
+kubectl get secret todo-tls-secret -n todo-app
+
+# If cert is not READY=True, describe it
+kubectl describe certificate todo-tls -n todo-app
+```
+Step 2, port-forward the ingress controller (not the pod)
+```sh
+# Find the ingress-nginx-controller pod
+kubectl get pods -n ingress-nginx
+
+# Port-forward it — map local 8443→443 and 8080→80
+kubectl port-forward -n ingress-nginx \
+  service/ingress-nginx-controller 8443:443 8080:80
+```
+
+Step 3, fix the hosts file on the Windows side
+
+This is the WSL gotcha. Your browser runs on Windows, so it reads the **Windows** hosts file, not the WSL one. Open Notepad **as Administrator** and edit:
+```
+C:\Windows\System32\drivers\etc\hosts
+```
+
+Add this line (just use `127.0.0.1` since we're port-forwarding):
+```
+127.0.0.1   todo.local
+```
+
+**Step 4, access the app**
+
+Now open your browser and go to `https://todo.local:8443`
+
+If you used your local CA issuer (from Part 1), and it's trusted on Windows, you'll get the green padlock. If it's self-signed you'll get the warning, click through to verify it's working.
+
+> **Why `minikube ip` + `/etc/hosts` in WSL doesn't work from Windows:**
+> ```
+> Windows Browser
+>      │
+>      │ tries to reach todo.local
+>      │ looks in C:\Windows\System32\drivers\etc\hosts  ← Windows file
+>      │                                                    NOT /etc/hosts in WSL
+>      ▼
+>   WSL network (192.168.49.x)  ← not directly routable from Windows browser
+> ```
+`kubectl port-forward` binds to `127.0.0.1` which is shared between WSL2 and Windows, so that's the reliable path on your setup.
 
 ## Resources:
 - https://www.youtube.com/watch?v=D7ijCjE31GA (18 min video -> k8s, Let's Encrypt, cert-manager)
