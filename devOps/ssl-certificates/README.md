@@ -418,6 +418,154 @@ If you used your local CA issuer (from Part 1), and it's trusted on Windows, you
 > ```
 `kubectl port-forward` binds to `127.0.0.1` which is shared between WSL2 and Windows, so that's the reliable path on your setup.
 
+**Extra:**
+
+To see the certificate-secret change, you could try with a very short lived certificate, but cert-manager doesn't allow less than 1 hour for duration of certificates, instead we can just delete the secret, to see the new one that gets created.
+
+```sh
+kubectl delete secret <secret-name> -n todo-app
+```
+
+You can compare the difference, by looking at the SHA-256 of the Certificate and the Public Key to see that it's a new certificate, also by the *Valid From / Valid To* dates (use another browser if needed if the certificate is being cached).
+
+```sh
+kubectl get secret -n todo-app
+# NAME              TYPE                DATA   AGE
+# todo-tls-secret   kubernetes.io/tls   3      4s # <- New Secret
+```
+
+To see the content of the secret:
+
+```sh
+kubectl get secret todo-tls-secret -n todo-app -o yaml
+# apiVersion: v1
+# data:
+#   ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0F...
+#   tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0...
+#   tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVk...
+# kind: Secret
+# metadata:
+#   annotations:
+#     cert-manager.io/alt-names: todo.local
+#     cert-manager.io/certificate-name: todo-tls
+#     cert-manager.io/common-name: ""
+#     cert-manager.io/ip-sans: ""
+#     cert-manager.io/issuer-group: ""
+#     cert-manager.io/issuer-kind: ClusterIssuer
+#     cert-manager.io/issuer-name: my-ca-issuer
+#     cert-manager.io/uri-sans: ""
+#   creationTimestamp: "2026-03-26T17:24:55Z"
+#   labels:
+#     controller.cert-manager.io/fao: "true"
+#   name: todo-tls-secret
+#   namespace: todo-app
+#   resourceVersion: "318648"
+#   uid: 5c369b8f-d09e-4907-89a0-5fae10245827
+# type: kubernetes.io/tls
+```
+
+It has in data three values: `ca.crt`, `tls.crt` and `tls.key`. Every time the secret with the certificate gets renewed the data changes.
+
+**Full resource map:**
+```sh
+ClusterIssuer (my-ca-issuer)
+│  knows how to sign with ca.crt / ca.key (from Secret my-ca-secret)
+│
+└─► Certificate (todo-tls)
+    │  requests a cert for todo.local, to be stored in todo-tls-secret
+    │
+    └─► CertificateRequest  [auto-created by cert-manager]
+        │  the actual CSR — equivalent to your openssl req in Part 1
+        │
+        └─► Secret (todo-tls-secret)  [auto-created + auto-renewed]
+            │  ca.crt  (the Certificate Authority certificate)
+            │  tls.crt  (the signed certificate)
+            │  tls.key  (the private key)
+            │
+            └─► Ingress (todo-ingress)
+                   reads the Secret → terminates TLS
+                   routes traffic to frontend-service and backend-service
+```
+
+**Bonus: Let's Encrypt (AACME), for a real domain**
+
+When you have a real domain (not localhost), replace your CA issuer with an ACME issuer that talks to Let's Encrypt.
+
+> **cert-manager** = the robot watching your cluster. It doesn't sign anything itself.
+> 
+> **Issuer** = the strategy. This is where you choose ca: vs acme:. Swapping this one block is all it takes to go from local dev to production Let's Encrypt.
+> 
+> **CA** = the actual authority that puts its signature on the cert. In your current setup that's your local ca.crt/ca.key. In production it's Let's Encrypt's servers.
+
+```yaml
+# k8s/issuer-letsencrypt.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    # Let's Encrypt's ACME server
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: you@yourdomain.com    # for expiry notifications
+    
+    # Where cert-manager stores the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-prod-account-key
+    
+    solvers:
+      # HTTP-01 challenge: LE will call http://yourdomain.com/.well-known/acme-challenge/...
+      # Your Ingress must be publicly reachable for this to work
+      - http01:
+          ingress:
+            ingressClassName: nginx
+```
+```yaml
+# Then reference it in your Certificate:
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+```
+
+**Useful kubcetl commands cheatsheet:**
+```sh
+# All cert-manager resources in one shot
+kubectl get certificate,certificaterequest,clusterissuer,issuer -A
+
+# Describe a failing cert (most useful for debugging)
+kubectl describe certificate <name> -n <namespace>
+
+# Decode and inspect the certificate inside a Secret
+kubectl get secret todo-tls-secret -n todo-app \
+  -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text -noout
+
+# Check cert expiry
+kubectl get secret todo-tls-secret -n todo-app \
+  -o jsonpath='{.data.tls\.crt}' | base64 -d | \
+  openssl x509 -noout -dates
+
+# Trigger a manual renewal (for testing)
+kubectl annotate certificate todo-tls -n todo-app \
+  cert-manager.io/issueAnce-time="$(date -u +%Y-%m-%dT%H:%M:%SZ)" --overwrite
+
+# cert-manager controller logs (your first stop when debugging)
+kubectl logs -n cert-manager deploy/cert-manager -f
+```
+
+**Summary of Part 1 vs Part 2:**
+
+| | Part 1 (manual) | Part 2 (cert-manager) |
+|---|---|---|
+| Key generation | `openssl genrsa` | cert-manager generates, stores in `Secret` |
+| CSR | `openssl req` | `CertificateRequest` resource |
+| Signing | `openssl x509 -req -CA …` | `Issuer` / `ClusterIssuer` |
+| Cert storage | files on disk | Kubernetes `Secret` (tls type) |
+| App reads cert | `fs.readFileSync` | mounted volume or Ingress reads it |
+| TLS termination | inside Node.js | nginx Ingress controller |
+| Renewal | you, manually, before expiry | cert-manager, automatically |
+| Public CA | not covered | ACME / Let's Encrypt (`ClusterIssuer`) |
+
 ## Resources:
 - https://www.youtube.com/watch?v=D7ijCjE31GA (18 min video -> k8s, Let's Encrypt, cert-manager)
 
