@@ -167,8 +167,19 @@ Import-Certificate -FilePath "certs\ca.crt" -CertStoreLocation Cert:\LocalMachin
 
 After this, your browser will show a valid padlock for `https://localhost`, no warning. This is exactly what Let's Encrypt does at scale, except their CA is already pre-trusted by every browser in the world, so step 2c is not needed.
 
+> | Manual step (what you did) | cert-manager equivalent |
+> |---|---|
+> | `openssl genrsa` → generate `server.key` | cert-manager creates a `Secret` with the private key |
+> | `openssl req` → create a CSR | cert-manager generates a `CertificateRequest` resource |
+> | CA signs the CSR → `server.crt` | `Issuer` / `ClusterIssuer` (Let's Encrypt or your own CA) signs it |
+> | You copy `server.crt` + `server.key` to the app | cert-manager populates a Kubernetes `Secret`, mounted into pods |
+> | You renew manually before expiry | cert-manager watches expiry and **auto-renews** |
+> | You trust `ca.crt` in your OS | In k8s with a private CA, cert-manager trusts its own `Issuer` |
+
 ## K8s + cert-manager
 .
 
 ## Resources:
 - https://www.youtube.com/watch?v=D7ijCjE31GA (18 min video -> k8s, Let's Encrypt, cert-manager)
+
+<!-- Claude conversation: https://claude.ai/chat/85c78a33-a954-4ed7-ba68-238ad09407c3 -->
