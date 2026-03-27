@@ -1,5 +1,4 @@
-<!-- Tutorial: https://www.youtube.com/watch?v=Kt2E8nblvXU -->
-<!-- Tutorial scrimba: https://scrimba.com/learn-vue-c0jrrpaasr/~05zy/s0sa5sde31/head -->
+<!-- Tutorial scrimba: https://scrimba.com/learn-vue-c0jrrpaasr (this is the yt video, tho scrimba is better: https://www.youtube.com/watch?v=Kt2E8nblvXU)-->
 
 # 💚 VUE
 
@@ -68,6 +67,7 @@ In the `<script setup>` tag you write your JS code, in the `<template>` tag you 
 
 ```html
 <script setup>
+    import { ref } from 'vue'
     const name = ref("Rachel")
 </script>
 
@@ -81,3 +81,40 @@ In the `<script setup>` tag you write your JS code, in the `<template>` tag you 
     }
 </style>
 ```
+
+### Importing Components
+
+Import in `<script setup>` and use directly in the template:
+```html
+<!-- App.vue -->
+<script setup>
+  import Header from '@/components/Header.vue'
+</script>
+
+<template>
+  <Header />
+  <!-- Other components like <Main /> or <Footer /> -->
+</template>
+```
+
+```html
+<!-- Header.vue -->
+<script setup>
+  import { ref } from 'vue'
+  const emoji = ref('✌🏻')
+</script>
+
+<template>
+  <header>
+    <span>Hello! {{emoji}}</span>
+  </header>
+</template>
+
+<style scoped>
+  header span {
+    font-size:3rem;
+  }
+</style>
+```
+
+> `@` is an alias for `src/`
