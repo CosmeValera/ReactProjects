@@ -11,35 +11,31 @@ That's why HTTPS = HTTP + SSL Certificate. HTTPS in reality just means two thing
 
 > SSL, TLS and HTTPS are often used as synonyms. Technically TLS is the modern version of SSL, and HTTPS is just HTTP + TLS. But "SSL certificate" stuck as the common term.
 
-In order to have HTTPS, you need an SSL Certificate that expires usually every 90 days, and it needs to be renewed. Doing this manually is a pain.
-
-> Certificates expire after ~90 days (Let's Encrypt's choice) because:
-> 1. If compromised, limits the damage window
-> 2. Forces automation, which reduces human error
-> 
-> This is considered better than having eternal certificates that assume humans are reliable (revocation exists but is unreliable in practice).
-
 ### How the Encryption works (The Handshake)
 ```m
-Client                                 Server
-  |                                      |
-  |--- "I want to talk HTTPS" ---------->|
-  |                                      |
-  |<-- "Here is my public key" ----------|
-  |                                      |
-  | [Client generates a session key]     |
-  | [Encrypts it with the public key]    |
-  |                                      |
-  |--- Encrypted session key ----------->|
-  |                                      |
-  |        [Server decrypts it           |
-  |         using its private key]       |
-  |                                      |
-  |<====== Encrypted communication =====>|
+  Client                                      Server
+  |                                            |
+  |--- "I want to talk HTTPS" ---------------> |
+  |                                            |
+  |<-- Certificate (which contains             |
+  |    the public key + identity + CA sig) ----|
+  |                                            |
+  | [Client verifies the CA signature]         |
+  | [Extracts the public key from the cert]    |
+  |                                            |
+  | [Client generates a session key]           |
+  | [Encrypts it with the public key]          |
+  |                                            |
+  |--- Encrypted session key ----------------> |
+  |                                            |
+  |           [Server decrypts it              |
+  |            using its private key]          |
+  |                                            |
+  |<========= Encrypted communication ========>|
 ```
 
 1. The client requests an HTTPS connection.
-2. The server responds with its **public key,** this can be shared freely with anyone.
+2. The server responds with its **certificate** (which contains its **public key**), this can be shared freely with anyone.
 3. The client generates a **session key** (used to encrypt all subsequent traffic), encrypts it with the server's public key, and sends it over.
 4. Only the server, which holds the **private key,** can decrypt the session key. The private key never leaves the server.
 5. Both parties now share the same session key, and all further communication is encrypted with it.
@@ -48,11 +44,22 @@ Client                                 Server
 
 Encryption alone doesn't confirm *who* you're talking to. That's where **certificates** come in:
 
-- When the server sends its public key, it includes a **certificate**.
-- The client contacts a trusted **Certificate Authority (CA)** to verify that the public key genuinely belongs to the claimed domain.
-- If the CA confirms it, the client proceeds with the encrypted session knowing it has reached the correct server.
+- When the server sends its **certificate**, it contains its public key, the domain it claims to be, validity period, and a **CA signature** (a digital signature from a Certificate Authority (CA)).
+- The client verifies this signature **locally**, using a list of trusted CA certificates 
+  pre-installed in your OS and browser (you can see them in your browser's trust store). 
+  No network call to the CA happens at this point.
+- If the signature is valid, the client knows the public key genuinely belongs to the claimed 
+  domain, and proceeds with the encrypted session.
 
-> ⚠️ **Never use self-signed certificates in production.** For local development and practice they are perfectly fine. But for production clients have no way to trust them without already having the certificate beforehand, which defeats the purpose. Always sign certificates through a trusted CA (e.g., Let's Encrypt).
+> ⚠️ **Never use self-signed certificates in production.** For local development and practice they are perfectly fine. But in production, clients have no way to trust them without already having the certificate in their trusted list beforehand, which defeats the purpose. Always sign certificates through a trusted CA (e.g., Let's Encrypt).
+
+In order to have HTTPS, you need an SSL Certificate that expires usually every 90 days, and it needs to be renewed. Doing this manually is a pain.
+
+> Certificates expire after ~90 days (Let's Encrypt's choice) because:
+> 1. If compromised, limits the damage window
+> 2. Forces automation, which reduces human error
+> 
+> This is considered better than having eternal certificates that assume humans are reliable (revocation exists but is unreliable in practice).
 
 ## Cert Manager
 
@@ -72,13 +79,6 @@ cert-manager  ── requests cert from ──▶  Let's Encrypt (CA)
              └── Ingress uses it for HTTPS
 ```
 
-In practice, just one annotation on your Ingress triggers the whole flow:
-```yaml
-annotations:
-  cert-manager.io/cluster-issuer: "letsencrypt-prod"
-```
-`cert-manager` gets the cert, stores it in a Secret, and renews it automatically before expiry.
-
 ## Local commands for HTTPS configuration (no k8s)
 You can either do 2a to have self-signed certificates (not safe for prod), or 2b+2c to practice creating your localhost CA (more similar to what will happen with K8s).
 
@@ -97,7 +97,19 @@ openssl req -new -x509 -key server.key -out server.crt -days 365 \
 ```
 
 - `server.key` → private key (keep secret, never commit)
-- `server.crt` → certificate (public, sent to browsers)
+- `server.crt` → certificate (public, sent to browsers, contains public key)
+
+You can see the content of the certificate (which contains the public key, identity, validity period, CA signature if it has) with these commands:
+
+```bash
+# Extract the public key out of your certificate
+openssl x509 -in certs/server.crt -pubkey -noout
+# prints: -----BEGIN PUBLIC KEY----- ...
+
+# See everything inside the cert, including the public key
+openssl x509 -in certs/server.crt -text -noout
+# look for "Subject Public Key Info" section
+```
 
 > The browser will show a security warning because the server is signing its own certificate, there's no third party vouching for it.
 
@@ -141,10 +153,15 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \
   -CAcreateserial -out server.crt -days 365 -extfile server.ext
 ```
 
-- `ca.key` → CA private key (keep very safe, never commit)
-- `ca.crt` → CA certificate (this is what you import into your OS in step 2c)
-- `server.key` → server private key
-- `server.crt` → server certificate, signed by your CA
+- **`ca.key`** → CA private key (keep very safe, never commit)
+- **`ca.crt`** → CA certificate (this is what you import into your OS in step 2c)
+- **`server.key`** → server private key
+- **`server.crt`** → server certificate, signed by your CA
+> Temporary files:
+> - <small>`ca.srl` (CA serial number tracker (auto-managed by openssl, ignore it) )</small>
+> - <small>`server.csr`(signing request (temporary, discarded after step 4) )</small>
+> - <small>`server.ext` (certificate extensions config (temporary, discarded after step 4) )</small>
+
 
 ### 2c. Trust the CA in your OS (removes the browser warning)
 
@@ -166,6 +183,9 @@ Import-Certificate -FilePath "certs\ca.crt" -CertStoreLocation Cert:\LocalMachin
 ```
 
 After this, your browser will show a valid padlock for `https://localhost`, no warning. This is exactly what Let's Encrypt does at scale, except their CA is already pre-trusted by every browser in the world, so step 2c is not needed.
+
+This is why self-signed certs trigger a browser warning: the client can't verify the signature because the CA that signed it (you) is not in its trusted list. And it's also why importing `ca.crt` into your OS fixed the warning: you manually added your CA to that trusted list.
+
 
 > | Manual step (what you did) | cert-manager equivalent |
 > |---|---|
@@ -487,13 +507,15 @@ ClusterIssuer (my-ca-issuer)
                    routes traffic to frontend-service and backend-service
 ```
 
-**Bonus: Let's Encrypt (AACME), for a real domain**
+**Bonus: Let's Encrypt (ACME), for a real domain**
 
 When you have a real domain (not localhost), replace your CA issuer with an ACME issuer that talks to Let's Encrypt.
 
 > **cert-manager** = the robot watching your cluster. It doesn't sign anything itself.
 > 
-> **Issuer** = the strategy. This is where you choose ca: vs acme:. Swapping this one block is all it takes to go from local dev to production Let's Encrypt.
+> **Issuer** = the strategy. Specifically, *how* cert-manager obtains certificates: this is where you choose `ca:` vs `acme:` (swapping this one block is all it takes to go from local dev to production Let's Encrypt): 
+> - `ca` → signs certs itself using a CA key you provide (good for local dev)
+> - `acme` → requests certs from an external CA (e.g. Let's Encrypt) via the ACME protocol (production). ACME is a protocol (RFC 8555) for automating the process of requesting and renewing certificates from a CA
 > 
 > **CA** = the actual authority that puts its signature on the cert. In your current setup that's your local ca.crt/ca.key. In production it's Let's Encrypt's servers.
 
