@@ -549,3 +549,89 @@ For multiple injection points:
 ```
 
 > `#header` is shorthand for `v-slot:header`, same shorthand pattern as `:` for `v-bind` and `@` for `v-on`.
+
+---
+
+### "Slots" in React (`children` prop)
+
+```jsx
+// Card.jsx
+function Card({ children }) {
+  return <div className="card">{children}</div>
+}
+
+// Parent
+<Card>
+  <p>This is the content</p>
+</Card>
+```
+
+For multiple "slots" in React you just pass extra props:
+
+```jsx
+function Card({ header, children, footer }) {
+  return (
+    <div className="card">
+      <header>{header}</header>
+      <main>{children}</main>
+      <footer>{footer}</footer>
+    </div>
+  )
+}
+
+// Parent
+<Card
+  header={<h2>Title</h2>}
+  footer={<small>Footer</small>}
+>
+  <p>Body content</p>
+</Card>
+```
+
+---
+
+### "Slots" in Angular (`ng-content`)
+
+```html
+<!-- card.component.html -->
+<div class="card">
+  <ng-content />  <!-- equivalent to Vue's default <slot /> -->
+</div>
+```
+
+```html
+<!-- Parent template -->
+<app-card>
+  <p>This is the content</p>
+</app-card>
+```
+
+Named slots in Angular use the `select` attribute, which targets elements by CSS selector:
+
+```html
+<!-- card.component.html -->
+<div class="card">
+  <header>
+    <ng-content select="[slot=header]" />
+  </header>
+  <main>
+    <ng-content />
+  </main>
+  <footer>
+    <ng-content select="[slot=footer]" />
+  </footer>
+</div>
+```
+
+```html
+<!-- Parent template -->
+<app-card>
+  <h2 slot="header">Title</h2>
+  <p>Body content</p>
+  <small slot="footer">Footer</small>
+</app-card>
+```
+
+---
+
+> The key difference is that Vue and React have a clean dedicated syntax for this, while Angular's `select` approach is more manual, you're targeting child elements by attribute or tag name like a CSS selector. Vue's named slots with `#slotName` are generally considered the most ergonomic of the three.

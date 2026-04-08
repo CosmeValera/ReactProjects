@@ -1,0 +1,261 @@
+/* ── Reset & Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #0f1117;
+  color: #e2e8f0;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.app-header {
+  text-align: center;
+  padding: 2.5rem 1rem 1.5rem;
+}
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #42d392, #647eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.app-header p {
+  color: #94a3b8;
+  margin-top: 0.4rem;
+}
+
+/* ── Cards ────────────────────────────────────────────────────────────────── */
+.card {
+  background: #1a1d27;
+  border: 1px solid #2d3148;
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.card-note {
+  border-color: #3b4a6b;
+  background: #161b2e;
+}
+.card-note p {
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+/* ── Section headings ─────────────────────────────────────────────────────── */
+.card h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.card h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #42d392, #647eff);
+  color: #0f1117;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 0.15rem 0.5rem;
+  min-width: 1.6rem;
+}
+
+/* ── Hint text ────────────────────────────────────────────────────────────── */
+.hint {
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+.hint code, .card-note code {
+  background: #2d3148;
+  color: #42d392;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+.muted { color: #64748b; font-size: 0.875rem; }
+
+/* ── Inputs ───────────────────────────────────────────────────────────────── */
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+input {
+  background: #0f1117;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  color: #e2e8f0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+input:focus { border-color: #42d392; }
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+button {
+  background: #2d3148;
+  border: 1px solid #3d4264;
+  color: #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s;
+}
+button:hover { background: #3d4264; border-color: #647eff; }
+
+/* ── Row & Result ─────────────────────────────────────────────────────────── */
+.row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.result {
+  background: #0f1117;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #e2e8f0; /* ← add this */
+}
+.result strong { color: #42d392; }
+
+/* ── Log boxes ────────────────────────────────────────────────────────────── */
+.log-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 600px) { .log-row { grid-template-columns: 1fr; } }
+
+.log-box {
+  background: #0f1117;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.log-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.log-box li {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #1a1d27;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ── Game list ────────────────────────────────────────────────────────────── */
+.game-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.game-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f1117;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  transition: opacity 0.2s;
+  color: #e2e8f0; /* ← add this */
+}
+.game-list li.inactive { opacity: 0.4; }
+.game-name { cursor: pointer; display: flex; align-items: center; gap: 0.6rem; }
+.badge {
+  font-size: 0.7rem;
+  padding: 0.1em 0.5em;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.badge-on { background: #14532d; color: #42d392; }
+.badge-off { background: #2d1515; color: #f87171; }
+.btn-remove {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.4rem;
+}
+.btn-remove:hover { color: #f87171; background: transparent; }
+
+/* ── v-if / v-show ────────────────────────────────────────────────────────── */
+.demo-box {
+  background: #0f1117;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  min-height: 2.5rem;
+}
+.success { color: #42d392; font-size: 0.9rem; }
+
+/* ── Modifier grid ────────────────────────────────────────────────────────── */
+.modifier-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 600px) { .modifier-grid { grid-template-columns: 1fr; } }
+
+.modifier-item {
+  background: #0f1117;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.modifier-item code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: #647eff;
+}
+.self-wrapper {
+  background: #1a1d27;
+  border: 1px dashed #3d4264;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
