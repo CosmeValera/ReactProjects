@@ -213,3 +213,6 @@ It also works for booleans:
 <!-- Shortest way -->
 <a :href></a
 ```
+
+### Images
+Three options: *1- Absolute path to /public folder, 2- Relative path to /assets folder, 3- Import asset into component.*
