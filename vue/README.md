@@ -151,9 +151,7 @@ This is wrong `<a href="{{ href }}">`, since it would literrally transform to th
 ```html
 <script setup>
   import {ref} from 'vue'
-  const year = ref("2025")
   const href = ref("https://scrimba.com")
-
   year.value = "2014"
 </script>
 
@@ -168,10 +166,8 @@ In order to do it correctly we use the `v-bind`:
 ```html
 <script setup>
   import {ref} from 'vue'
-  const year = ref("2025")
   const href = ref("https://scrimba.com")
-
-  year.value = "2014"
+  year.value = "2014" // change reactively
 </script>
 
 <template>
@@ -179,4 +175,41 @@ In order to do it correctly we use the `v-bind`:
       Created by <a v-bind:href="href"><span>Professor Pickle</span></a> &copy; {{year}}
   </footer>
 </template>
+```
+
+It also works for booleans:
+```html
+<script setup>
+    import {ref} from 'vue';
+    const isBtnDisabled = ref(true)
+</script>
+
+<template>
+  <button v-bind:disabled="isBtnDisabled">Share</button>
+</template>
+```
+
+### Vue Shorthands
+**Shorthand 1:** you can use a shorthand to get rid of the first part, in this case from `v-bind:disabled` to just `:disabled`. Like this:
+```html
+<script setup>
+    import {ref} from 'vue';
+    const isBtnDisabled = ref(true)
+</script>
+
+<template>
+  <button :disabled="isBtnDisabled">Share</button>
+</template>
+```
+
+**Shortand 2:** if the attribute and the value is the same, you can get rid of the value too. From tihs `:href="href` to just `:href`.
+```html
+<!-- Longest option -->
+<a v-bind:href=":href"></a
+
+<!-- Shorthand v-bind -->
+<a :href=":href"></a
+
+<!-- Shortest way -->
+<a :href></a
 ```

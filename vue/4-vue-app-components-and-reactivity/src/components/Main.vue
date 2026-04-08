@@ -2,15 +2,18 @@
     import {ref} from 'vue';
     const quote = ref("First, solve the problem. Then write the code.")
     const author = ref("John Johnson")
+    const href = ref("https://en.wikipedia.org/wiki/Undocumented_feature")
+    const isBtnDisabled = ref(true)
 </script>
 
 <template>
     <main>
         <section>
             <p>{{ quote }}</p>
-            <span>{{ author}}</span>
+            <a target="_blank" :href><span>{{ author}}</span></a>
         </section>
-        <button>Another!</button>
+        <button v-bind:disabled="!isBtnDisabled">Another!</button>
+        <button :disabled="isBtnDisabled">Share</button>
     </main>
 </template>
 
@@ -73,6 +76,12 @@ main button {
 }
 main button:hover{
     transform: scale(1.05);
+}
+
+button:disabled {
+  background:grey;
+  cursor: not-allowed;
+  opacity:0.5;
 }
 /**********/
 </style>
