@@ -118,3 +118,33 @@ Import in `<script setup>` and use directly in the template:
 ```
 
 > `@` is an alias for `src/`
+
+### Reactive variables in Vue
+To create reactive variables we use `ref()`. Reactive variables mean that if you change the value of it, it will also change in the Interface dynamically. Code example:
+
+```html
+<script setup>
+    import {ref} from 'vue';
+    const quote = ref("First, solve the problem. Then write the code.")
+    const author = ref("John Johnson")
+</script>
+
+<template>
+    <main>
+        <section>
+            <p>{{ quote }}</p>
+            <span>{{ author}}</span>
+        </section>
+        <button>Another!</button>
+    </main>
+</template>
+
+<style scoped>
+main {
+    background: #CCD6D9;
+}
+</style>
+```
+
+### Attribute binding `v-bind`
+.
