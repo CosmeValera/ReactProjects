@@ -147,4 +147,36 @@ main {
 ```
 
 ### Attribute binding `v-bind`
-.
+This is wrong `<a href="{{ href }}">`, since it would literrally transform to the value `{{ href }}>` instead of `https://scrimba.com` which is the objective:
+```html
+<script setup>
+  import {ref} from 'vue'
+  const year = ref("2025")
+  const href = ref("https://scrimba.com")
+
+  year.value = "2014"
+</script>
+
+<template>
+  <footer>
+      Created by <a href="{{ href }}"><span>Professor Pickle</span></a> &copy; {{year}}
+  </footer>
+</template>
+```
+
+In order to do it correctly we use the `v-bind`:
+```html
+<script setup>
+  import {ref} from 'vue'
+  const year = ref("2025")
+  const href = ref("https://scrimba.com")
+
+  year.value = "2014"
+</script>
+
+<template>
+  <footer>
+      Created by <a v-bind:href="href"><span>Professor Pickle</span></a> &copy; {{year}}
+  </footer>
+</template>
+```
