@@ -215,4 +215,51 @@ It also works for booleans:
 ```
 
 ### Images
-Three options: *1- Absolute path to /public folder, 2- Relative path to /assets folder, 3- Import asset into component.*
+Three options: *1- Absolute path to /public folder, 2- Relative path to /assets folder, 3- Import asset into component.* Examples:
+
+```html
+<script setup>
+  import catmeme3_a from '@/assets/images/catmeme3_a.png'
+  import src from '@/assets/images/catmeme3_b.png'
+</script>
+
+<template>
+  <section>
+    <!-- 1-Absolute path to /public folder -->
+    <img src="/images/catmeme1_a.png" alt=""/>
+    <img src="/images/catmeme1_b.png" alt=""/>
+  </section>
+  
+  <section>
+    <!-- 2-Relative path to /public folder -->
+    <img src="@/assets/images/catmeme2_a.png" alt=""/>
+    <img src="@/assets/images/catmeme2_b.png" alt=""/>
+  </section>
+  
+  <section>
+    <!-- 3-Import path to /public folder -->
+    <img v-bind:src="catmeme3_a" alt=""/>    
+    <img :src alt=""/>  <!-- Applying both shorthands for catmeme3_b-->
+  </section>
+</template>
+
+<style scoped>
+  section {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    padding:10px;
+    background:white;
+    border-radius:10px;
+  }
+  img{
+    width:100%;
+  }
+</style>
+```
+
+<img src="./5-vue-app-images-and-assets/src/assets/images/result.png" width="400"/>
+
+> **Pros and cons:**
+>  - **1- Absolute path to /public folder**: No vite optimization, harder to organise, useful for large or static assets that don't need optimization.
+>  - **2- Relative path to /assets folder**: No vite optimization, useful for small or static assets (like a logo).
+>  - **3- Import asset into component**: More verbose, but optimized by vite, conditional loading, useful for dynamic images (like product photos).

@@ -1,19 +1,25 @@
-<script setup></script>
+<script setup>
+  import catmeme3_a from '@/assets/images/catmeme3_a.png'
+  import src from '@/assets/images/catmeme3_b.png'
+</script>
 
 <template>
   <section>
     <!-- Absolute path to /public folder -->
-    <p>Absolute path to /public folder</p>
+    <img src="/images/catmeme1_a.png" alt=""/>
+    <img src="/images/catmeme1_b.png" alt=""/>
   </section>
   
   <section>
     <!-- Relative path to /public folder -->
-    <p>Relative path to /public folder</p>
+    <img src="@/assets/images/catmeme2_a.png" alt=""/>
+    <img src="@/assets/images/catmeme2_b.png" alt=""/>
   </section>
   
   <section>
     <!-- Import path to /public folder -->
-    <p>Import path to /public folder</p>
+    <img v-bind:src="catmeme3_a" alt=""/>    
+    <img :src alt=""/>  <!-- Applying both shorthands for catmeme3_b-->
   </section>
 </template>
 
