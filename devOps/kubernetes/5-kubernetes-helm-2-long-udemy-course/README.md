@@ -6,6 +6,8 @@ Helm is a package manager for kubernetes like apt or zypper. Install Helm: [Clic
 ## 📋 Main Helm commands
 ![Main Helm Commands](./main-helm-commands.png)
 
+## 🏗️ Helm folders structure
+![Helm folders structure](./helm-folders-structure.png)
 
 ## 📦 Helm get and 📋 Helm Show
 The `helm get` command allows you to retrieve information about a deployed release. 
