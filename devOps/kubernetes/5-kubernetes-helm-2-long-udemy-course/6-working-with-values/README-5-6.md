@@ -1,6 +1,6 @@
 # Order of values
 1. `values.yaml`
-2. `values.yaml` passed tot the chart with `install` or `upgrade` with the `-f` flag (or `--values`, it's the same)
+2. `values.yaml` passed to the chart with `install` or `upgrade` with the `-f` flag (or `--values`, it's the same)
 3. Parametres pased with `--set`
 
 Regarding this, let's see 2 examples:

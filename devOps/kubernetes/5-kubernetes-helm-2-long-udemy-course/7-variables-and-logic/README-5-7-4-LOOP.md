@@ -1,4 +1,7 @@
 ## Loop
+### WITH
+
+`WITH` is used to iterate over a list of values. It defines a new scope for the variables.
 
 **Template:**
 ```yaml
@@ -51,6 +54,38 @@ data:
   sales: New York
   TI: Texas
   Marketing: Florida
+```
+
+### Range
+Use `range` for maps, or lists without keys:
+
+**Template:**
+```yaml
+data:
+  departamentos: |-
+    {{- range .Values.departamentos }}
+    - {{ . }}
+    {{- end }}
+```
+
+**Values:**
+```yaml
+departamentos:
+  rrhh: California
+  sales: New York
+  TI: Texas
+  Marketing: Florida
+```
+
+Output:
+
+```
+data:
+  departamentos:
+    - rrhh
+    - sales
+    - TI
+    - Marketing
 ```
 
 
