@@ -506,6 +506,37 @@ onUnmounted(() => {
 
 > Unlike Angular, there's no `ngOnChanges` equivalent for watching prop changes. Use `watch(() => props.username, callback)` instead.
 
+## Composables
+Composables are functions that encapsulate and reuse stateful logic across components. They are Vue's equivalent of React's custom hooks, same `use` prefix convention, same idea.
+
+Think of them as a way to extract `ref`, `computed`, `watch`, and lifecycle hooks out of a component and into a reusable function:
+
+```ts
+// useCounter.ts
+import { ref, computed } from 'vue'
+
+export function useCounter() {
+  const count = ref(0)
+  const double = computed(() => count.value * 2)
+  const increment = () => count.value++
+  return { count, double, increment }
+}
+```
+
+```html
+<!-- Any component -->
+<script setup>
+import { useCounter } from '@/composables/useCounter'
+const { count, double, increment } = useCounter()
+</script>
+
+<template>
+  <p>Count: {{ count }} — Double: {{ double }}</p>
+  <button @click="increment">+1</button>
+</template>
+```
+> Composables are the idiomatic Vue solution before reaching for Pinia. If logic is reused across 2+ components, extract it into a composable. Convention is to place them in `src/composables/` and always prefix with `use`.
+
 ## Slots
 Vue's equivalent of React's `children` prop or Angular's `ng-content`. Lets a parent inject content into a child component.
 
