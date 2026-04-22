@@ -537,6 +537,35 @@ const { count, double, increment } = useCounter()
 ```
 > Composables are the idiomatic Vue solution before reaching for Pinia. If logic is reused across 2+ components, extract it into a composable. Convention is to place them in `src/composables/` and always prefix with `use`.
 
+## Splitting a Vue Component (and why you usually shouldn't)
+
+Vue technically allows splitting a Single File Component (SFC) into separate files using `src` attributes:
+
+```html
+<!-- MyComponent.vue -->
+<script setup src="./MyComponent.ts" />
+<template src="./MyComponent.html" />
+<style src="./MyComponent.css" />
+```
+
+This mirrors Angular's file-per-concern structure, but it's **generally discouraged** in Vue for a few reasons:
+
+- SFCs (`.vue` files) are designed around colocation: keeping template, logic, and styles together is a feature, not a limitation
+- Tooling (Volar, Vite, DevTools) works best with standard SFCs
+- IDE support for the `src` split pattern is inconsistent
+- It adds file-system overhead without real benefit
+
+**When it might make sense:**
+- Sharing the same template or styles across multiple components
+- Extremely large files where the template alone is hundreds of lines (though this usually signals the component should be broken into smaller components instead)
+
+**The idiomatic Vue alternatives:**
+- Extract JS/TS logic → **composable** (`useMyLogic.ts`)
+- Extract repeated markup → **child component**
+- Extract repeated styles → a shared CSS file imported with `@import` inside `<style>`
+
+In short: if you're reaching for `src` splitting, ask yourself if a composable or a component split would solve the same problem more cleanly.
+
 ## Slots
 Vue's equivalent of React's `children` prop or Angular's `ng-content`. Lets a parent inject content into a child component.
 
