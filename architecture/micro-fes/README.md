@@ -24,4 +24,4 @@ npm i primereact primeicons primeflex sass sass-loader
 
 ---
 
-🔗 To find more information go to the Readme of micro-fe-2-react: https://github.com/CosmeValera/ReactProjects/tree/master/micro-fes/micro-fe-2-react
+🔗 To find more information go to the Readme of [micro-fe-2-react](./micro-fe-2-react/readme.md)
