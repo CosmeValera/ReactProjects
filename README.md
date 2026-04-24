@@ -9,14 +9,14 @@ This repository started as a place to learn React, and the name stayed. At this 
 > These entry points are not complete and might not be updated. Browse the actual folders to be sure
 
 ### Frontend
-- [Astro](./frontend/astro/README.md)
 - [React](./frontend/react/README.md)
-- [Next.js](./frontend/next-js/README.md)
 - [Vue](./frontend/vue/README.md)
 - [Angular](./frontend/angular/README.md)
+- [Next.js](./frontend/next-js/README.md)
+- [Astro](./frontend/astro/README.md)
 
 ### Architecture
-- [Microfrontends](./architecture/micro-fes/README.md)
+- [Microfrontends](./architecture/micro-fes/micro-fe-2-react/readme.md)
 - [Monorepos](./architecture/monorepos/README.md)
 
 ### Database / API
@@ -26,7 +26,7 @@ This repository started as a place to learn React, and the name stayed. At this 
 ### DevOps
 - [Kubernetes and Helm](./devops/kubernetes/README.md)
 - [SSL Certificates and cert-manager](./devops/ssl-certificates/README.md)
-- [AWS](./devops/aws/README.md)
+- [AWS](./devops/aws/01-midu-aws/README.md)
 - [SonarQube](./devops/sonarqube/README.md)
 - [Syslog](./devops/syslog/README.md)
 
