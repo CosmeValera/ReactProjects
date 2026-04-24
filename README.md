@@ -17,7 +17,7 @@ This repository started as a place to learn React, and the name stayed. At this 
 
 ### Architecture
 - [Microfrontends](./architecture/micro-fes/micro-fe-2-react/readme.md)
-- [Monorepos](./architecture/monorepos/README.md)
+- [Monorepos](./architecture/monorepos/turborepo/2-turboapp/README.md)
 
 ### Database / API
 - [GraphQL](./db/GraphQL/README.md)
