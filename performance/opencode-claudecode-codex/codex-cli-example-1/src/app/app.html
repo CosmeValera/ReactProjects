@@ -1,0 +1,161 @@
+<div class="shell">
+  <main class="workspace">
+    <section class="hero">
+      <p class="eyebrow">Angular 21 / standalone / signals</p>
+      <h1>Todo app</h1>
+      <p class="intro">
+        A compact planning board with local persistence, live progress, and no
+        backend setup.
+      </p>
+
+      <div class="hero__stats">
+        <article class="meter">
+          <div
+            class="meter__ring"
+            [style.--progress]="completionPercent() + '%'"
+          >
+            <span>{{ completionPercent() }}%</span>
+            <small>done</small>
+          </div>
+
+          <div class="meter__copy">
+            <p class="meter__label">Completion</p>
+            <strong>{{ completedCount() }} of {{ totalCount() }} wrapped</strong>
+            <p>
+              {{ remainingCount() }} task{{ remainingCount() === 1 ? '' : 's' }}
+              still in motion.
+            </p>
+          </div>
+        </article>
+
+        <div class="stat-grid">
+          <article class="stat-card">
+            <p class="stat-card__label">Active</p>
+            <strong>{{ remainingCount() }}</strong>
+            <span>Tasks waiting on you</span>
+          </article>
+
+          <article class="stat-card stat-card--accent">
+            <p class="stat-card__label">Completed</p>
+            <strong>{{ completedCount() }}</strong>
+            <span>Tasks already closed</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <button
+          type="button"
+          class="ghost"
+          (click)="markAllDone()"
+          [disabled]="!remainingCount()"
+        >
+          Finish active tasks
+        </button>
+
+        <button
+          type="button"
+          class="ghost ghost--alert"
+          (click)="clearCompleted()"
+          [disabled]="!hasCompletedTodos()"
+        >
+          Clear completed
+        </button>
+      </div>
+    </section>
+
+    <section class="board">
+      <form class="composer" (ngSubmit)="addTodo()">
+        <label class="composer__label" for="todo-input">Add something real</label>
+
+        <div class="composer__row">
+          <input
+            id="todo-input"
+            name="todo-input"
+            [ngModel]="draft()"
+            (ngModelChange)="draft.set($event)"
+            autocomplete="off"
+            placeholder="Ship the Angular todo app"
+          />
+
+          <button type="submit" [disabled]="!draft().trim()">Add task</button>
+        </div>
+      </form>
+
+      <div class="filters" aria-label="Todo filters">
+        @for (view of filters; track view) {
+          <button
+            type="button"
+            class="filter-chip"
+            [class.filter-chip--active]="filter() === view"
+            [attr.aria-pressed]="filter() === view"
+            (click)="setFilter(view)"
+          >
+            <span>{{ filterLabels[view] }}</span>
+            <strong>{{ filterCount(view) }}</strong>
+          </button>
+        }
+      </div>
+
+      <section class="todo-list" aria-live="polite">
+        @if (visibleTodos().length) {
+          <ul>
+            @for (todo of visibleTodos(); track todo.id; let index = $index) {
+              <li
+                class="todo-card"
+                [class.todo-card--done]="todo.completed"
+                [style.--order]="index"
+              >
+                <button
+                  type="button"
+                  class="todo-card__toggle"
+                  [attr.aria-label]="
+                    todo.completed ? 'Mark task as active' : 'Mark task as complete'
+                  "
+                  (click)="toggleTodo(todo.id)"
+                >
+                  <span aria-hidden="true"></span>
+                </button>
+
+                <div class="todo-card__content">
+                  <p class="todo-card__text">{{ todo.text }}</p>
+                  <p class="todo-card__meta">
+                    {{ todo.completed ? 'Completed' : 'Open' }} / Added
+                    {{ formatCreatedAt(todo.createdAt) }}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  class="todo-card__remove"
+                  (click)="removeTodo(todo.id)"
+                >
+                  Remove
+                </button>
+              </li>
+            }
+          </ul>
+        } @else {
+          <div class="empty-state">
+            @if (hasTodos()) {
+              <p class="empty-state__eyebrow">Nothing in this view</p>
+              <h2>{{ filterLabels[filter()] }} is clear</h2>
+              <p>Switch filters or add a fresh task to keep moving.</p>
+            } @else {
+              <p class="empty-state__eyebrow">Fresh board</p>
+              <h2>No tasks yet</h2>
+              <p>
+                Add your first task above. Everything is stored in local
+                browser storage, so refresh is safe.
+              </p>
+            }
+          </div>
+        }
+      </section>
+
+      <p class="board__note">
+        Stored locally in your browser with Angular signals.
+      </p>
+    </section>
+  </main>
+</div>
