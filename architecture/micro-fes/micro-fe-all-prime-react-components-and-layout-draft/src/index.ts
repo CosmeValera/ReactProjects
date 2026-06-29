@@ -1,1 +1,1 @@
-import("./DraftLayout");
+import("./App");
