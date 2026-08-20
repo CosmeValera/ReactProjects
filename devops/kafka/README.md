@@ -11,7 +11,7 @@
 - orders
 - users
 
-When a user makes a payment then we need a dominoi effect going accross our microservices like:
+When a user makes a payment then we need a domino effect going across our microservices like:
 
 - **inventory:** update stock in database
 - **notifications:** send confirmation to customer
@@ -57,7 +57,7 @@ Order -> Broker (Kafka) -> payment
   - When you read or write data to Kafka, you do this in the form of events
   - Example properties of an event: Event Key, Event Value, timestamp, metadata (optional)
 
-- The order service once it has emitted an event with the new order, it does not need to wait there until receives confirmation that the other sevices have read it. It can just trust the kafka middleman, so **"Fire and Forget"**
+- The order service once it has emitted an event with the new order, it does not need to wait there until receives confirmation that the other services have read it. It can just trust the kafka middleman, so **"Fire and Forget"**
 
 - The order service or any other service that emits events to kafka, are called **Producers**. Code example:
 
@@ -101,7 +101,7 @@ adminClient.createTopics(topics)
 ```
 
 - **Consumers** are those that subscribe (to read and process) the events sent by producers. Example:
-  - 3 microservices subcribed to the order service (notifications, inventory and payment)
+  - 3 microservices subscribed to the order service (notifications, inventory and payment)
     - For example the **Notification service** will: send confirmation email to customer, and send notification to department head
     - The **inventory service** will update inventory database. And it could generate a new event and add it to the Inventory topic.
     - The **payment service** will generate invoice and send it to the user
@@ -112,7 +112,7 @@ adminClient.createTopics(topics)
 
 Then, after inventory service has add a change, and thus updates the database, then why would it write a new inventory event and write it to the inventory topic?
 
-There is another usage of Kafka called **Chain of Events**. For example, when the inventory service updates the stock, then that might create a chain of events were the Alerts topic gets triggered. If the amount of stock of the inventory is below a certain threshold, then the alerts topic could write an event into the Re-Stock topic, that could trigger the Invetory Re-Stock service.
+There is another usage of Kafka called **Chain of Events**. For example, when the inventory service updates the stock, then that might create a chain of events were the Alerts topic gets triggered. If the amount of stock of the inventory is below a certain threshold, then the alerts topic could write an event into the Re-Stock topic, that could trigger the Inventory Re-Stock service.
 
 ![](10-05.png)
 
@@ -132,7 +132,7 @@ And for all those uses, Kafka uses:
 - Think of a stream as a continuous real-time flow of records (key-value pairs)
 - You don't need to explicitly request new records, you just receive them
 - Provides higher-level functions to process event streams, like transformations and stateful operations
-- Transforming the input streams into ouput streams
+- Transforming the input streams into output streams
 
 Kafka Streams API is a library you embed in your app to perform stream processing. Your Microservice <- (communicates) -> Streams App.
 
@@ -193,7 +193,7 @@ Simple, they are grouped by the `groupId` attribute when they were registered as
 
 ![](14-51.png)
 
-For example, 3 partitions to 2 consumers (maybe EU and US partition go to consumer 1), while when a new replica is added, it's 3 partitions to 3 consumers, then thanks to kafka it automactically distributes the load (EU partition to consumer 1, US partition to consumer 2). And when one replica stops working, it will take the pile and move it to another active one.
+For example, 3 partitions to 2 consumers (maybe EU and US partition go to consumer 1), while when a new replica is added, it's 3 partitions to 3 consumers, then thanks to kafka it automatically distributes the load (EU partition to consumer 1, US partition to consumer 2). And when one replica stops working, it will take the pile and move it to another active one.
 
 
 ## Kafka Brokers
@@ -202,12 +202,12 @@ Kafka information is stored between different Kafka Brokers in disk. With duplic
 
 ![Kafka broker and partition replication across a cluster](15-36.png)
 
-This is what makes Kafka different from standar Message Brokers (RabbitMQ or ActiveMQ).
+This is what makes Kafka different from standard Message Brokers (RabbitMQ or ActiveMQ).
 
 In those standard message brokers, messages are deleted after consumption.
 Kafka however, stores messages on disk for a configurable retention period.
 
-It can be used for analyzing patterns and improving servcies.
+It can be used for analyzing patterns and improving services.
 
 - This enables real time data processing.
 - Consumers can read multiple times and whenever they want
@@ -217,6 +217,6 @@ It can be used for analyzing patterns and improving servcies.
 
 ## Zookeeper and KRaft
 
-Zookeper is used to keep track of the active Kafka brokers. ZooKeeper is a centralized service for managing metadata and coordination tasks for distributed systems. It's an external dependency.
+ZooKeeper is used to keep track of the active Kafka brokers. ZooKeeper is a centralized service for managing metadata and coordination tasks for distributed systems. It's an external dependency.
 
 Newer versions of Kafka introduced **KRaft** (or Kafka Raft), that removes the dependency on ZooKeeper. Metadata is now managed natively within Kafka brokers. Raft consensus Algorithm for leader election etc.
