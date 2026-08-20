@@ -37,6 +37,7 @@ My personal code wiki. This started as a place to learn React (the original name
 - [Docker](./devops/docker/README.md)
 - [Nginx](./devops/nginx/README.md)
 - [Rundeck](./devops/rundeck/README.md)
+- [Kafka](./devops/kafka/README.md)
 
 
 ### Database / API

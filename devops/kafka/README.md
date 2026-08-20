@@ -1,0 +1,222 @@
+<!-- Tutorial from: https://www.youtube.com/watch?v=QkdkLdMBuL0 -->
+
+# KAFKA
+
+## Real life example without kafka
+
+**App:** Stream store, use microservices handling:
+
+- payments
+- inventory
+- orders
+- users
+
+When a user makes a payment then we need a dominoi effect going accross our microservices like:
+
+- **inventory:** update stock in database
+- **notifications:** send confirmation to customer
+- **billing:** generate and send invoice to customer
+- **Analytics:** update data
+- ...
+
+First step in the small startup is a simple tightly coupled architecture. But if it grows too much, it will start crashing and we will start earning less money with our e-commerce.
+
+So what's happening is (Tight coupling, Synchronous execution, Single Points of Failure and Losing Analytics Data):
+
+![](2-47.png)
+
+## With kafka (kafka event streaming solution)
+
+### What is kafka
+
+Kafka is a highly scalable system for managing event logs.
+
+> **Example:** Kafka is like the mail delivery office or the post office.
+
+### Kafka works as a Post Office
+
+**Before:**
+
+```txt
+Order -> payment
+```
+
+**After:**
+
+```txt
+Order -> Broker (Kafka) -> payment
+```
+
+### Main Concepts
+
+- The order service goes to kafka, which generates an event record on purchase and hands over to kafka
+
+- An event:
+  - An event records the fact that something happened in your business
+  - Also called "record" or "message"
+  - When you read or write data to Kafka, you do this in the form of events
+  - Example properties of an event: Event Key, Event Value, timestamp, metadata (optional)
+
+- The order service once it has emitted an event with the new order, it does not need to wait there until receives confirmation that the other sevices have read it. It can just trust the kafka middleman, so **"Fire and Forget"**
+
+- The order service or any other service that emits events to kafka, are called **Producers**. Code example:
+
+```js
+const kafka = new KafkaProducer({
+	'bootstrap.servers': 'localhost:9092'
+});
+
+async function processOrder(order) {
+	await kafka.produce({
+		topic: 'new-orders',
+		value: JSON.stringify(order)
+	});
+	
+	return 'Order received! Check your email for updates'
+}
+```
+
+- Instead of having all the events in the same queue, which could make it very big and slow, Kafka has different queues called **Topics**. A Topic:
+  - Events are organized and durably stored in topics
+  - Topics are categories or feed names to which records are published
+  - Example: Order service, will write events to Order topic. While Payment Service, will write events to Payment topic, etc.
+
+- You define your topics, just like schema for database
+
+- You decide based on your application's architecture and data flow requirements. Code example:
+
+```java
+// Define the Topics
+NewTopic ordersTopic = new NewTopic("orders", 3, (short) 1);
+NewTopic inventoryTopic = new NewTopic("inventory", 2, (short) 1);
+NewTopic notificationsTopic = new NewTopic("notifications", 4, (short) 1);
+
+// Add topics to a list
+List<NewTopic> topics = Arrays.asList(ordersTopic, inventoryTopic, notificationsTopic);
+
+// Create the topics
+adminClient.createTopics(topics)
+  .all() // ensures the operation completes
+  .get();
+```
+
+- **Consumers** are those that subscribe (to read and process) the events sent by producers. Example:
+  - 3 microservices subcribed to the order service (notifications, inventory and payment)
+    - For example the **Notification service** will: send confirmation email to customer, and send notification to department head
+    - The **inventory service** will update inventory database. And it could generate a new event and add it to the Inventory topic.
+    - The **payment service** will generate invoice and send it to the user
+
+## Is kafka a replacement of a database ?
+
+**No.**
+
+Then, after inventory service has add a change, and thus updates the database, then why would it write a new inventory event and write it to the inventory topic?
+
+There is another usage of Kafka called **Chain of Events**. For example, when the inventory service updates the stock, then that might create a chain of events were the Alerts topic gets triggered. If the amount of stock of the inventory is below a certain threshold, then the alerts topic could write an event into the Re-Stock topic, that could trigger the Invetory Re-Stock service.
+
+![](10-05.png)
+
+## Real-Time processing (streams)
+
+For example, in Uber. Where the driver's position gets sent constantly through the application. Which then updates the UI of the user to see those changes.
+
+And for all those uses, Kafka uses:
+
+- Real-Time Metrics
+- Website Activity Tracking
+- Personalized Recommendations
+- Fraud Detection
+
+**Streams:**
+
+- Think of a stream as a continuous real-time flow of records (key-value pairs)
+- You don't need to explicitly request new records, you just receive them
+- Provides higher-level functions to process event streams, like transformations and stateful operations
+- Transforming the input streams into ouput streams
+
+Kafka Streams API is a library you embed in your app to perform stream processing. Your Microservice <- (communicates) -> Streams App.
+
+Code example with streams:
+
+```js
+const builder = new StreamsBuilder();
+
+// Read from our existing orders topic
+const orders = builder.stream('new-orders');
+
+// Calculate real-time revenue by category
+const revenueByCategory = orders
+	.groupBy((key, order) => order.category)
+	.windowedBy(TimeWindows.of(Duration.ofMinutes(5)))
+	.aggregate(
+		() => 0,
+		(key, order, total) => total + order.amount
+	);
+	
+// Detect trending products
+const trendingProducts = orders
+	.groupBy((key, order) => order.productId)
+	.windowedBy(TimeWindows.of(Duration.ofHours(1)))
+	.count()
+	.filter((key, count) => count > 100);
+	
+// Output to different topics for dashboards
+revenueByCategory.to('revenue-metrics');
+trendingProducts.to('trending-products');
+```
+
+## Partitions
+
+Partitions for scalability and performance.
+
+For example, in an app like Uber, with millions of users, and millions of drivers, with their locations getting updated constantly, that's a lot of data and events that are being produced. And all consumers need to read from it.
+
+Partitions is what makes large amounts of data, easy to handle and process without compromising the performance.
+
+![Partitions for scalability and performance](12-27.png)
+
+If we remember, topics are like dividing the post office into different sections (letters, large packets, special packages). Thus, partitions would be like adding more workers for each section/topic. For example if in Christmas Santa received a lot of letters, then we would add partitions to help out with those processings, but not randomly, for example we would say Anna, will do the letters in Europe. Steve letters to US. Leo handles letters in Asia. And so on.
+
+So in Kafka, for the Orders topic, you might create partitions for the EU orders, US orders, Asia orders, etc.
+
+You would consider how to partition your topics as part of your schema design.
+
+## Consumer groups
+
+In a similar way that topics can scale thanks to partition, there is also a way for consumers for scaling.
+
+When you start additional instances of a microservice, like replicas in kubernetes. They can all consume from Kafka partitions and process events faster in parallel.
+
+How does kafka know which consumers to form a group and how to divide and which ones belong together?
+
+Simple, they are grouped by the `groupId` attribute when they were registered as consumers with kafka, so replicas with the same groupId. So those with the same groupId will know from which topic to receive from, and will automatically be grouped together. And when you start replicas, kafka distributes the load automatically by assigning partitions to consumers.
+
+![](14-51.png)
+
+For example, 3 partitions to 2 consumers (maybe EU and US partition go to consumer 1), while when a new replica is added, it's 3 partitions to 3 consumers, then thanks to kafka it automactically distributes the load (EU partition to consumer 1, US partition to consumer 2). And when one replica stops working, it will take the pile and move it to another active one.
+
+
+## Kafka Brokers
+
+Kafka information is stored between different Kafka Brokers in disk. With duplication so that even if a kafka broker is down, there is the same data in another broker.
+
+![Kafka broker and partition replication across a cluster](15-36.png)
+
+This is what makes Kafka different from standar Message Brokers (RabbitMQ or ActiveMQ).
+
+In those standard message brokers, messages are deleted after consumption.
+Kafka however, stores messages on disk for a configurable retention period.
+
+It can be used for analyzing patterns and improving servcies.
+
+- This enables real time data processing.
+- Consumers can read multiple times and whenever they want
+- Replay of messages, debugging of historical data
+
+![Kafka vs RabbitMQ and ActiveMQ retention](17-38.png)
+
+## Zookeeper and KRaft
+
+Zookeper is used to keep track of the active Kafka brokers. ZooKeeper is a centralized service for managing metadata and coordination tasks for distributed systems. It's an external dependency.
+
+Newer versions of Kafka introduced **KRaft** (or Kafka Raft), that removes the dependency on ZooKeeper. Metadata is now managed natively within Kafka brokers. Raft consensus Algorithm for leader election etc.
