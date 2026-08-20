@@ -116,6 +116,10 @@ npm install standard -D
 npm run lint
 ```
 
+### Cheatsheet for javascript array methods
+
+![](js-array-methods/js-array-methods.png)
+
 ### Deploy in Netlify
 To deploy our project we are going to build it first and then drop the /dist files in `Netlify`. Here's how:
 1. Build the project
